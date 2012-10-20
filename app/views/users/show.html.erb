@@ -10,6 +10,9 @@
   <%= @user.email %>
 </p>
 
+<ul class="pager">
+  <li><%= link_to 'Edit', edit_user_path(@user) %> </li>
+  <li><%= link_to 'Back', users_path %></li>
+</ul>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+

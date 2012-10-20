@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap
+//= require_tree  .
+
+$('.myCarousel').carousel({
+  interval: 1000
+})
+
+$('.carousel').pause();
