@@ -15,8 +15,11 @@
 //= require bootstrap
 //= require_tree  .
 
-$('.myCarousel').carousel({
-  interval: 1000
-})
-
-$('.carousel').pause();
+$(document).ready(function() {
+  // Handler for .ready() called.
+   $("li").click(function () {
+      $(this).addClass("active");
+       console.log("Click");
+    });
+});
+  

@@ -12,8 +12,8 @@
               Logged in as <a href="#" class="navbar-link">Username</a>
             </p>
             <ul class="nav">
-              <li class="active"><a href="#">Accueil</a></li>
-              <li><a href="#about">Nos valeurs</a></li>
+              <li class="active"><%= link_to "Accueil", accueil_path,:id=>"test" %></li>
+              <li><%= link_to "Nos valeurs", about_path %></li>
               <li><a href="#about">Options</a></li>
               <li><a href="#about">Suggérer un site</a></li>
               <li><a href="#contact">Promouvoir un site</a></li>
@@ -22,3 +22,6 @@
         </div>
       </div>
     </div>
+<script>
+
+</script>

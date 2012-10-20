@@ -11,15 +11,13 @@
   <body>
 
     <%= render('layouts/topbar') %>   
-    
-   
-    
+     
     <div class="container-fluid">     
     
      <div class="row-fluid">
        
     	<div class="span2 offset1">
-    		 <h3> Actualités <h3>
+    		 <h3> <%= @titre %> <h3>
 		</div>
 		<div class="span9 ">
     		<%= render('layouts/menubar')%>
@@ -32,35 +30,7 @@
 		</div><!--/span-->
 		
         <div class="span9">
-          <div class="hero-unit">
-          
-       
-          	<%= render 'layouts/caroussel' %>
-       		
-        
- 	       <ul class="thumbnails">
-            <li class="span4">
-              <a href="#" class="thumbnail">
-                 <%= image_tag("echo.jpg", :alt => "rss feed") %>
-              </a>
-            </li>
-            <li class="span4">
-              <a href="#" class="thumbnail">
-                 <%= image_tag("01net.jpg", :alt => "rss feed") %>
-              </a>
-            </li>
-            <li class="span4">
-              <a href="#" class="thumbnail">
-                <%= image_tag("parisien.jpg", :alt => "rss feed") %>
-              </a>
-            </li>
-        
-          </ul>
-
-			
-			
-			
-          </div> 
+          <%= yield %>
     	</div>      
 	</div>
 
