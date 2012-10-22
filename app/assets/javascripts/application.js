@@ -15,11 +15,11 @@
 //= require bootstrap
 //= require_tree  .
 
-$(document).ready(function() {
+//$(document).ready(function() {
   // Handler for .ready() called.
-   $("li").click(function () {
-      $(this).addClass("active");
-       console.log("Click");
-    });
-});
+ //  $("li").click(function () {
+   //   $(this).addClass("active");
+     //  console.log("Click");
+   // });
+//	});
   
