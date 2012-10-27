@@ -1,0 +1,15 @@
+--- 
+open_files: 
+  - app/controllers/pages_controller.rb
+  - config/routes.rb
+  - spec/controllers/pages_controller_spec.rb
+  - app/models/tag_app_relation.rb
+  - app/models/tag.rb
+  - app/models/web_app.rb
+  - spec/models/tag_app_relation_spec.rb
+  - spec/models/tag_spec.rb
+  - spec/models/user_spec.rb
+  - db/schema.rb
+  - db/seeds.rb
+  - app/models/user.rb
+  - spec/models/web_app_spec.rb
