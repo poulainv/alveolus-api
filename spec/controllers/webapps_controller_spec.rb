@@ -59,4 +59,20 @@ describe WebappsController do
   end
 
 
+  describe "index GET" do
+    it "shall return a success http" do
+      get 'index'
+      response.should be_success
+    end
+
+    it "shall return list of webapps" do
+      FactoryGirl.create(:webapp)
+      FactoryGirl.create(:webapp)
+      get 'index', :format => :json
+      webapps = JSON.parse(@response.body)
+      assert webapps.size == 2, "Webapp controller don't return a good number of webapp"
+
+    end
+  end
+
 end

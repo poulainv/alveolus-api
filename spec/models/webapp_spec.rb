@@ -51,7 +51,7 @@ describe Webapp do
       @webapp.addTag!(@tag)
       @webapp.addTag!(@tag)
       @webapp.addTag!("test")
-      @webapp.tags.length == 1
+      assert @webapp.tags.length == 1, "tag is not unique anymore"
     end 
     
   end
