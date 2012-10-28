@@ -3,11 +3,14 @@ class Webapp < ActiveRecord::Base
   
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
-     
+
+  url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
+  
   validates :title, :presence => true
   validates :caption, :presence => true
   validates :description, :presence => true
-  validates :url, :presence => true
+  validates :url, :presence => true,
+                  :format => {:with => url_regex }
   
   # Does this WebApp is tagged by 'tag' ?
   def taggedByTag?(tag)

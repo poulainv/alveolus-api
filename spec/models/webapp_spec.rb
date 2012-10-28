@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Webapp do
   
   before(:each) do
-     @webapp = FactoryGirl.create(:webapp)
-     @tag = Tag.new(:name=>"test")
+    @webapp = FactoryGirl.create(:webapp)
+    @tag = Tag.new(:name=>"test")
   end
   
   
@@ -54,6 +54,25 @@ describe Webapp do
       @webapp.tags.length == 1
     end 
     
+  end
+
+  describe "validation attributes" do
+    it "webapp shall accept a valid url" do
+      adresses = %w[www.lemonde.fr http://www.lemonde.fr https://www.facebook.fr]
+      adresses.each do |address|
+        @webapp.url =  address
+        @webapp.should be_valid
+      end
+    end
+
+    it "webapp shall do no accept a invalid url" do
+      adresses = %w[wwwlemonde.fr http:www.lemonde.fr facebook.fr]
+      adresses.each do |address|
+        @webapp.url =  address
+        @webapp.should be_valid
+      end
+
+    end
   end
     
 end
