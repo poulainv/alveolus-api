@@ -17,8 +17,9 @@ class WebappsController < ApplicationController
     @title = "Une nouvelle idée d'App?"
   end
   
-  def show 
+  def show
     if @webapp = Webapp.find_by_id(params[:id])
+      
     else
       flash[:error] = "La Webapp demandé n'existe pas"
       redirect_to accueil_path

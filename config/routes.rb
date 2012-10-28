@@ -8,6 +8,7 @@ EnjoyTheWeb::Application.routes.draw do
   
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'pages#actualites'
+  match '/suggestion',   :to => 'webapps#new'
 
   resources :webapps
 

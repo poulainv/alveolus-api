@@ -12,10 +12,10 @@
               Logged in as <a href="#" class="navbar-link">Username</a>
             </p>
             <ul class="nav">
-              <li class="active"><%= link_to "Accueil", accueil_path,:id=>"test" %></li>
+              <li class="active"><%= link_to "Accueil", accueil_path%></li>
               <li><%= link_to "Nos valeurs", about_path %></li>
               <li><a href="#about">Options</a></li>
-              <li><a href="#about">Suggérer un site</a></li>
+              <li><%= link_to "Suggérer un site", suggestion_path %></li>
               <li><a href="#contact">Promouvoir un site</a></li>
             </ul>
           </div><!--/.nav-collapse -->
