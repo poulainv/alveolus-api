@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20121027102519) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "web_apps", :force => true do |t|
+  create_table "webapps", :force => true do |t|
     t.string   "title"
     t.string   "caption"
     t.string   "description"

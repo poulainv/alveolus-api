@@ -1,4 +1,5 @@
 EnjoyTheWeb::Application.routes.draw do
+
   get "pages/about"
 
   get "pages/contact"
@@ -8,6 +9,7 @@ EnjoyTheWeb::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'pages#actualites'
 
+  resources :webapps
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

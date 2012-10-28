@@ -2,6 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -11,6 +13,11 @@ end
 
 module EnjoyTheWeb
   class Application < Rails::Application
+
+    #Pour changer le span des messages d'erreurs
+     #config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<div class='control-group error'>#{html_tag}</span>".html_safe }
+    #
+    #
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

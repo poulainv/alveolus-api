@@ -5,7 +5,7 @@ describe TagAppRelation do
   before(:each) do
     @tag = Tag.new(:name=>"test")
     @tag.save
-    @webapp = WebApp.new(:title=>"webapp1",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
+    @webapp = FactoryGirl.build(:webapp)
     @webapp.save
     @relationship = @tag.tagAppRelations.build(:webapp_id => @webapp.id)
   end

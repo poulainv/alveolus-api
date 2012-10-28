@@ -13,8 +13,8 @@ describe Tag do
     end
     
      it "method tagged? shall be return true if my webapp if tagged" do
-      @webapp = WebApp.new(:title=>"webapp1",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
-      @webapp2 = WebApp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
+      @webapp = FactoryGirl.build(:webapp)
+      @webapp2 = Webapp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
       @tag.save
       @webapp.save
       @webapp.addTag!(@tag)
@@ -27,7 +27,7 @@ describe Tag do
   
   describe "attibrute has_many webApps and tagAppRelations" do
     it "shall have a method called webApps" do
-      @tag.should respond_to(:webApps)
+      @tag.should respond_to(:webapps)
     end
      it "shall have a method called tagAppRelations" do
       @tag.should respond_to(:tagAppRelations)

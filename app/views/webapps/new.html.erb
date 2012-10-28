@@ -1,0 +1,28 @@
+<h2><%=@title%></h2>
+
+<%= form_for(@webapp) do |f| %>
+<%= render 'shared/error_messages' %>
+<legend>Soumettez une App</legend>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :caption %><br />
+    <%= f.text_field :caption %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :url, "URL" %><br />
+    <%= f.text_field :url %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "Ajout" %>
+  </div>
+
+
+<% end %>

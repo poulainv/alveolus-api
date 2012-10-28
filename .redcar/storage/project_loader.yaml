@@ -13,3 +13,10 @@ open_files:
   - db/seeds.rb
   - app/models/user.rb
   - spec/models/web_app_spec.rb
+  - app/controllers/web_apps_controller.rb
+  - spec/controllers/web_apps_controller_spec.rb
+  - app/views/web_apps/new.html.erb
+  - app/views/web_apps/show.html.erb
+  - app/views/layouts/application.html.erb
+  - config/application.rb
+  - Gemfile

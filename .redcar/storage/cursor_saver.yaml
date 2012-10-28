@@ -9,9 +9,6 @@ cursor_positions:
   - :path: spec/spec_helper.rb
     :cursor_offset: 0
     :timestamp: 2012-10-26 11:13:23 +02:00
-  - :path: Gemfile
-    :cursor_offset: 648
-    :timestamp: 2012-10-26 11:35:16 +02:00
   - :path: app/views/users/index.html.erb
     :cursor_offset: 118
     :timestamp: 2012-10-24 23:38:39 +02:00
@@ -88,12 +85,18 @@ cursor_positions:
   - :path: spec/controllers/users_controller_spec.rb
     :cursor_offset: 336
     :timestamp: 2012-10-26 12:12:00 +02:00
+  - :path: db/migrate/20121027102519_add_image_to_web_app.rb
+    :cursor_offset: 0
+    :timestamp: 2012-10-27 12:25:19 +02:00
+  - :path: db/migrate/20121027102223_add_new_column_to_my_table.rb
+    :cursor_offset: 98
+    :timestamp: 2012-10-27 12:22:23 +02:00
   - :path: app/controllers/pages_controller.rb
     :cursor_offset: 145
     :timestamp: 2012-10-20 20:05:12 +02:00
   - :path: config/routes.rb
-    :cursor_offset: 0
-    :timestamp: 2012-10-26 16:44:17 +02:00
+    :cursor_offset: 243
+    :timestamp: 2012-10-27 19:03:22 +02:00
   - :path: spec/controllers/pages_controller_spec.rb
     :cursor_offset: 21
     :timestamp: 2012-10-26 12:03:13 +02:00
@@ -125,12 +128,27 @@ cursor_positions:
     :cursor_offset: 0
     :timestamp: 2012-10-26 16:39:24 +02:00
   - :path: spec/models/web_app_spec.rb
-    :cursor_offset: 1369
-    :timestamp: 2012-10-27 02:57:04 +02:00
-  - :path: db/migrate/20121027102519_add_image_to_web_app.rb
-    :cursor_offset: 0
-    :timestamp: 2012-10-27 12:25:19 +02:00
-  - :path: db/migrate/20121027102223_add_new_column_to_my_table.rb
-    :cursor_offset: 98
-    :timestamp: 2012-10-27 12:22:23 +02:00
+    :cursor_offset: 679
+    :timestamp: 2012-10-27 21:07:19 +02:00
+  - :path: app/controllers/web_apps_controller.rb
+    :cursor_offset: 117
+    :timestamp: 2012-10-27 21:05:06 +02:00
+  - :path: spec/controllers/web_apps_controller_spec.rb
+    :cursor_offset: 36
+    :timestamp: 2012-10-27 19:02:51 +02:00
+  - :path: app/views/web_apps/new.html.erb
+    :cursor_offset: 19
+    :timestamp: 2012-10-27 21:04:48 +02:00
+  - :path: app/views/web_apps/show.html.erb
+    :cursor_offset: 38
+    :timestamp: 2012-10-27 18:47:38 +02:00
+  - :path: app/views/layouts/application.html.erb
+    :cursor_offset: 808
+    :timestamp: 2012-10-27 20:48:48 +02:00
+  - :path: config/application.rb
+    :cursor_offset: 417
+    :timestamp: 2012-10-27 21:00:54 +02:00
+  - :path: Gemfile
+    :cursor_offset: 707
+    :timestamp: 2012-10-27 21:20:13 +02:00
 files_to_retain: 0
