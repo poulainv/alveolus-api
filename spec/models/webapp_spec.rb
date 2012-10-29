@@ -16,8 +16,12 @@ describe Webapp do
       @webapp.should respond_to(:taggedByTag?)
     end
 
-    it "shall have method called addTag " do
+    it "shall have method called addTag! " do
       @webapp.should respond_to(:addTag!)
+    end
+
+    it "shall have method called addTags! " do
+      @webapp.should respond_to(:addTags!)
     end
 
     # Good working
@@ -26,8 +30,19 @@ describe Webapp do
       @webapp.save
       @webapp.addTag!(@tag)
       @webapp.tags.should include(@tag)
-    end  
-    
+    end
+
+
+    it "method addTags! shall be add goods tags" do
+      @tags = ["test1","test2","test2"]
+      @webapp.addTags!(@tags)
+      assert @webapp.taggedByTag?("test1")
+      assert @webapp.taggedByTag?("test2")
+   
+      assert @webapp.tags.length == 2
+    end
+
+
     it "method tagged? shall be return true if my webapp if tagged" do
       @tag2 = Tag.new(:name=>"tag2")
       @tag.save

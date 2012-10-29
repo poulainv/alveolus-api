@@ -1,4 +1,5 @@
 class Webapp < ActiveRecord::Base
+
   attr_accessible :average_rate, :caption, :description, :title, :url, :validate
   
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
@@ -10,17 +11,30 @@ class Webapp < ActiveRecord::Base
   validates :caption, :presence => true
   validates :description, :presence => true
   validates :url, :presence => true,
-                  :format => {:with => url_regex }
+    :format => {:with => url_regex }
   
   # Does this WebApp is tagged by 'tag' ?
   def taggedByTag?(tag)
-     if(tag.kind_of? Tag)
-       tags.find_by_id(tag.id)
-     elsif(tag.kind_of? String)
-        tags.find_by_name(tag)
-     end 
+    if(tag.kind_of? Tag)
+      tags.find_by_id(tag.id)
+    elsif(tag.kind_of? String)
+      tags.find_by_name(tag)
+    end
   end
-  
+
+  def addTags!(tags)
+    if (tags.kind_of? Array)
+      tags.each { |tag|
+        if tag.kind_of? Tag
+          self.addTag!(tag)
+        end
+        if tag.kind_of? String
+          self.addTag!(tag)
+        end
+      }
+    end
+  end
+
   # Pour ajouter un tag a la webapp, ne fait rien s'il la webapp est deja taggué avec
   # Accepte un objet tag ou le nom d'un tag
   # Ajoute le tag en base s'il n'existe pas
@@ -37,8 +51,8 @@ class Webapp < ActiveRecord::Base
     end
     
     if(tagToAdd == nil)
-       tagToAdd = Tag.create(:name=>nameTag)
-       tagToAdd.save
+      tagToAdd = Tag.create(:name=>nameTag)
+      tagToAdd.save
     end
     
     return tagAppRelations.create!(:tag_id => tagToAdd.id) unless taggedByTag?(tagToAdd)
