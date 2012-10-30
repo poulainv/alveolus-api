@@ -15,9 +15,8 @@
     <li><a href="#">Youporn</a></li>
     <li><a href="#">Fleex <%=@tests %> </a></li>
     <li class="nav-header"><h4>Test dynamique</h4></li>
-    <% @webrecents  = get_top_recent %><%# here I use an helper in web_appshelper%>
     <% (0..2).each do |i| %>
-    <li><%= link_to  @webrecents[i].title,  @webrecents[i].url%></li>
+    <li><%= link_to  webapps_recents[i].title, webapps_recents[i].url%></li>
     <%end%>
 
   </ul>

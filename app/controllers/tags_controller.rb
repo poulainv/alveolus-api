@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   def new
   end
 
-  def show
+  def index
     @tags = Tag.all
     respond_to do |format|
       format.html
@@ -14,9 +14,8 @@ class TagsController < ApplicationController
 
   def associated
     @tag = Tag.find_by_id(params[:id])
-    @tagsResult = @tag.tagsAssociated
+    @tagsResult = @tag.tags_associated
     respond_to do |format|
-      format.html
       format.json{
         render :json => @tagsResult.to_json
       }

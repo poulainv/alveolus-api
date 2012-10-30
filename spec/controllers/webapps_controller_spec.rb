@@ -1,31 +1,65 @@
 require 'spec_helper'
-require 'web_apps_helper'
-include WebAppsHelper
+
 
 describe WebappsController do
-  render_views
   
-  describe "GET 'new'" do
+  ## for testing we add 3 webapps in test data base
+  before(:each) do
+    (0..2).each do
+      FactoryGirl.create(:webapp)
+    end
+  end
+
+  ## Test INDEX method
+  describe "index GET" do
+    it "shall return a success http" do
+      get 'index'
+      response.should be_success
+    end
+
+    it "shall call Webapp.all method" do
+      Webapp.should_receive(:all)
+      get 'index'
+    end
+
+    it "shall return list of webapps" do
+      get 'index', :format => :json
+      webapps = JSON.parse(@response.body)
+      webapps.size.should == 3
+    end
+  end
+
+  ## Test NEW method
+  describe "GET 'new'" do 
     it "returns http success" do
       get 'new'
       response.should be_success
     end
 
-    it "shall have a good title" do
+     it "shall call Webapp.new" do
+      Webapp.should_receive(:new)
       get 'new'
-      response.should have_selector("title", :content => @title)
+    end
+
+    ## In order to find selector "title" we ask to render views 
+    context "with render_views" do
+      render_views
+      it "shall have a good title" do
+        get 'new'
+        response.should have_selector("title", :content => @title)
+      end
     end
   end
 
 
-
+  ## Test CREATE method
   describe "POST 'create'" do
 
+    ## Test the fail
     describe "fail" do
-
       before(:each) do
         @attr = { :title => "", :caption => "", :url => "",
-                  :description => "" }
+          :description => "" }
       end
 
       it "ne devrait pas creer d'utilisateur" do
@@ -40,8 +74,8 @@ describe WebappsController do
       end
     end
 
+    ## Test the success
     describe "success" do
-
       before(:each) do
         @attr = FactoryGirl.attributes_for(:webapp)
       end
@@ -56,25 +90,6 @@ describe WebappsController do
         post :create, :webapp => @attr
         response.should redirect_to(accueil_path)
       end
-    end
-    
+    end  
   end
-
-
-  describe "index GET" do
-    it "shall return a success http" do
-      get 'index'
-      response.should be_success
-    end
-
-    it "shall return list of webapps" do
-      FactoryGirl.create(:webapp)
-      FactoryGirl.create(:webapp)
-      get 'index', :format => :json
-      webapps = JSON.parse(@response.body)
-      assert webapps.size == 2, "Webapp controller don't return a good number of webapp"
-
-    end
-  end
-
 end

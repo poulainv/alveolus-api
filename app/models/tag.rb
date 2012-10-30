@@ -11,7 +11,7 @@ class Tag < ActiveRecord::Base
 
   # Return array of tags associated through their webapps
   # Note : we can probably improve complexity of this method
-  def tagsAssociated
+  def tags_associated
     @tagsResult = Array.new
     webapps.each { |webapp|
       puts webapp.title

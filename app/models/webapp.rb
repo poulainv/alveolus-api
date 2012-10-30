@@ -15,7 +15,7 @@ class Webapp < ActiveRecord::Base
   
 
   # Does this WebApp is tagged by 'tag' ?
-  def taggedByTag?(tag)
+  def tagged_by_tag?(tag)
     if(tag.kind_of? Tag)
       tags.find_by_id(tag.id)
     elsif(tag.kind_of? String)
@@ -23,14 +23,14 @@ class Webapp < ActiveRecord::Base
     end
   end
 
-  def addTags!(tags)
+  def add_tags!(tags)
     if (tags.kind_of? Array)
       tags.each { |tag|
         if tag.kind_of? Tag
-          self.addTag!(tag)
+          self.add_tag!(tag)
         end
         if tag.kind_of? String
-          self.addTag!(tag)
+          self.add_tag!(tag)
         end
       }
     end
@@ -39,7 +39,7 @@ class Webapp < ActiveRecord::Base
   # Pour ajouter un tag a la webapp, ne fait rien s'il la webapp est deja taggué avec
   # Accepte un objet tag ou le nom d'un tag
   # Ajoute le tag en base s'il n'existe pas
-  def addTag!(tag)
+  def add_tag!(tag)
     nameTag = nil
     tagToAdd = nil
     
@@ -56,6 +56,17 @@ class Webapp < ActiveRecord::Base
       tagToAdd.save
     end
     
-    return tagAppRelations.create!(:tag_id => tagToAdd.id) unless taggedByTag?(tagToAdd)
-  end 
+    return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd)
+  end
+
+    # return three latest website inserted
+  def self.top_recent
+    # Some explainations :
+    # we find in :all row
+    # select only title and url attribute
+    # by order desc
+    # ...
+    Webapp.find(:all, :select => "title, url", :order => "id desc", :limit => 3).reverse
+  end
+
 end

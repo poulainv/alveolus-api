@@ -1,5 +1,4 @@
-<!-- This file is the main html code of the web site -->
-
+<!-- This the template html used when controller WEBAPPS is called -->
 <!doctype html>
 <html>
   <head>
@@ -20,7 +19,7 @@
 
       <div class="row-fluid">
         <div class="span3">
-          <%=  render "layouts/leftmenu" %>
+          <%=  render :partial => "layouts/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
          
         </div><!--/span-->
 

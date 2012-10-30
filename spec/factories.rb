@@ -9,3 +9,10 @@ FactoryGirl.define do
     validate true
   end
 end
+
+# This will guess the WebApp class
+FactoryGirl.define do
+  factory :tag do
+    name                  "tag1"
+  end
+end
