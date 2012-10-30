@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'web_apps_helper'
+include WebAppsHelper
 
 describe WebappsController do
   render_views

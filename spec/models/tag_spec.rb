@@ -12,7 +12,7 @@ describe Tag do
       @tag.should respond_to(:tagged?)
     end
     
-     it "method tagged? shall be return true if my webapp if tagged" do
+    it "method tagged? shall be return true if my webapp if tagged" do
       @webapp = FactoryGirl.build(:webapp)
       @webapp2 = Webapp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
       @tag.save
@@ -29,9 +29,14 @@ describe Tag do
     it "shall have a method called webApps" do
       @tag.should respond_to(:webapps)
     end
-     it "shall have a method called tagAppRelations" do
+    it "shall have a method called tagAppRelations" do
       @tag.should respond_to(:tagAppRelations)
     end
   end
+
+  describe "method addTags" do
+    pending "we have to wrtie this test"
+  end
+
   
 end

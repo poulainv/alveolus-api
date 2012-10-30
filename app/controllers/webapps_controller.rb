@@ -2,6 +2,7 @@
 
 class WebappsController < ApplicationController
 
+
   def index
     @webapps = Webapp.all
     respond_to do |format|
@@ -15,6 +16,9 @@ class WebappsController < ApplicationController
   def new
     @webapp = Webapp.new
     @title = "Une nouvelle idée d'App?"
+
+    #If we want apply an other layout with this method : 
+    #render :layout => "pages"
   end
   
   def show

@@ -1,19 +1,24 @@
+<!-- HTML code for menu tabs left --> 
 
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Mon espace</li>
-              <li><a href="#">Website favoris</a></li>
-              <li><a href="#">Mon profil</a></li>
-              <li class="nav-header">Catégories</li>
-              <li class="active"><a href="#">Actualités</a></li>
-              <li><a href="#">Blogs</a></li>
-              <li><a href="#">Cinéma</a></li>
-              <li><a href="#">Collaboratif</a></li>
-              <li><a href="#">Développement durable</a></li>
-              <li><a href="#">Musique</a></li>
-              <li><a href="#">Social</a></li>
-              <li><a href="#">Santé</a></li>
-              <li><a href="#">Vidéos</a></li>
-    
-            </ul>
-	      </div><!--/.well -->
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header"><h4>Top popularité</h4></li>
+    <li><a href="#">MyMajorCompagny</a></li>
+    <li><a href="#">Coursera</a></li>
+    <li><a href="#">La machine du voisin</a></li>
+    <li class="nav-header"><h4>Les plus consultés</h4></li>
+    <li><a href="#">Ted</a></li>
+    <li><a href="#">Deways</a></li>
+    <li><a href="#">Coursera</a></li>
+    <li class="nav-header"><h4>Les mieux notés</h4></li>
+    <li><a href="#">Covoiturage.fr</a></li>
+    <li><a href="#">Youporn</a></li>
+    <li><a href="#">Fleex <%=@tests %> </a></li>
+    <li class="nav-header"><h4>Test dynamique</h4></li>
+    <% @webrecents  = get_top_recent %><%# here I use an helper in web_appshelper%>
+    <% (0..2).each do |i| %>
+    <li><%= link_to  @webrecents[i].title,  @webrecents[i].url%></li>
+    <%end%>
+
+  </ul>
+</div><!--/.well -->

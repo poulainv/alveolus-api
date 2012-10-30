@@ -13,6 +13,7 @@ class Webapp < ActiveRecord::Base
   validates :url, :presence => true,
     :format => {:with => url_regex }
   
+
   # Does this WebApp is tagged by 'tag' ?
   def taggedByTag?(tag)
     if(tag.kind_of? Tag)
