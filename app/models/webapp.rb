@@ -1,7 +1,28 @@
+# == Schema Information
+#
+# Table name: webapps
+#
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  caption          :string(255)
+#  description      :string(255)
+#  validate         :boolean
+#  url              :string(255)
+#  average_rate     :float
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  image            :string(255)
+#  nb_click_preview :integer
+#  nb_click_detail  :integer
+#  nb_click_url     :integer
+#
+
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate, :caption, :description, :title, :url, :validate
-  
+  attr_accessible :average_rate, :nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+
+  before_validation :uniform_url, :only => [:url]
+
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
 
@@ -11,8 +32,8 @@ class Webapp < ActiveRecord::Base
   validates :caption, :presence => true
   validates :description, :presence => true
   validates :url, :presence => true,
-    :format => {:with => url_regex }
-  
+    :format => {:with => url_regex },
+    :uniqueness => true
 
   # Does this WebApp is tagged by 'tag' ?
   def tagged_by_tag?(tag)
@@ -59,14 +80,46 @@ class Webapp < ActiveRecord::Base
     return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd)
   end
 
-    # return three latest website inserted
+
+
+  ## Top Methods
+  # return three latest website inserted
   def self.top_recent
     # Some explainations :
     # we find in :all row
     # select only title and url attribute
     # by order desc
     # ...
-    Webapp.find(:all, :select => "title, url", :order => "id desc", :limit => 3).reverse
+    Webapp.last(3)
+  end
+
+  # return three most consult
+  def self.top_trend
+    Webapp.find(:all, :order => "nb_click_preview desc", :limit => 3).reverse
+  end
+
+  # return three most comment
+  def self.top_comment
+    #TODO update after comment
+    Webapp.find(:all, :order => "nb_click_url desc", :limit => 3).reverse
+  end
+
+
+  ## Validate and uniform
+  ## Tres salasse à refaire
+  def uniform_url
+    if(!self.url.index("www"))
+     return self.url.gsub("http://", "http://www.").downcase if self.url.index("http://")
+     return self.url.gsub("https://","https://www.").downcase if self.url.index("https://")
+     return self.url = "http://www." << self.url else
+    end
+   if(!self.url.index("http"))
+    return self.url.gsub("www.", "http://www.")
+    end
+
+    return self.url
+   
+
   end
 
 end

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: tag_app_relations
+#
+#  id         :integer          not null, primary key
+#  tag_id     :integer
+#  webapp_id  :integer
+#  coeff      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe TagAppRelation do

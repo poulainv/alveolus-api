@@ -36,7 +36,7 @@ describe WebappsController do
       response.should be_success
     end
 
-     it "shall call Webapp.new" do
+    it "shall call Webapp.new" do
       Webapp.should_receive(:new)
       get 'new'
     end
@@ -91,5 +91,25 @@ describe WebappsController do
         response.should redirect_to(accueil_path)
       end
     end  
+  end
+
+  ## Test method tops
+  describe "method webapps top recent" do
+    it "should call 'top_recent' of Model" do
+      Webapp.should_receive(:top_recent)
+          get :index
+    end
+  end
+  describe "method webapps top comment" do
+    it "should call 'top_comment' of Model" do
+      Webapp.should_receive(:top_comment)
+          get :index
+    end
+  end
+  describe "method webapps top trend" do
+    it "should call 'top_trend' of Model" do
+      Webapp.should_receive(:top_trend)
+          get :index
+    end
   end
 end

@@ -1,32 +1,37 @@
-<h2><%=@title%></h2>
+<div class="hero-unit span10 offset1">
 
 
-<%= form_for(@webapp) do |f| %>
-<%= render 'shared/error_messages' %>
-<legend>Soumettez une App</legend>
-<div class="offset2">
-  <div class="field">
-    <%= f.label :titre %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :legende %>
-    <%= f.text_field :caption %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description, :size=> "40x12" %>
-  </div>
-  <div class="field">
-    <%= f.label :url, "URL" %>
-    <%= f.text_field :url %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "Ajout" %>
-  </div>
+  <h2><%=@title%></h2>
 
 
-<% end %>
+  <%= form_for(@webapp) do |f| %>
+    <%= render 'shared/error_messages' %>
+    <legend>Soumettez un WebSite</legend>
+    <div class="offset4">
+      <div class="field">
+        <%= f.label :titre %>
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :legende %>
+        <%= f.text_field :caption %>
+      </div>
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, :size=> "40x12" %>
+      </div>
+      <div class="field">
+        <%= f.label :url, "URL" %>
+        <%= f.text_field :url %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Ajout" %>
+      </div>
+
+
+    <% end %>
+
+  </div>
 
 </div>

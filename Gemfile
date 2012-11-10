@@ -27,6 +27,7 @@ end
 
 group :development do
   gem 'rspec-rails', '2.8.0'
+  gem 'annotate'
 end
 
 group :test do

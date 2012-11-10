@@ -1,8 +1,11 @@
 # encoding: utf-8
 
 class WebappsController < ApplicationController
- 
- before_filter :webapps_top_recent, :only => [:show, :index, :new, :create]
+
+  # To call method before some other methods
+  before_filter :webapps_top_recent, :only => [:show, :index, :new, :create]
+  before_filter :webapps_top_comment, :only => [:show, :index, :new, :create]
+  before_filter :webapps_top_trend, :only => [:show, :index, :new, :create]
 
   # GET /webapps/
   def index
@@ -18,10 +21,10 @@ class WebappsController < ApplicationController
   # GET /webapps/new
   def new
     @webapp = Webapp.new
-    @title = "Une nouvelle idée d'App?"
+    @title = "Une nouvelle idée de Website?"
 
     #If we want apply an other layout with this method : 
-    #render :layout => "pages"
+    render :layout => "pages"
   end
 
   # GET /webapps/:id
@@ -42,14 +45,25 @@ class WebappsController < ApplicationController
       flash[:success] = "Votre soumission a bien été prise en compte"
       redirect_to accueil_path
     else
-      @title = "Une nouvelle idée d'App ?"
-      render 'new'
+      @title = "Une nouvelle idée de Website ?"
+      render :layout => "pages", :action => "new"
     end
   end
-  
+
+  ## Methods TOPS
   protected
-   def webapps_top_recent
+  def webapps_top_recent
     @webapps_top_recent = Webapp.top_recent
+  end
+
+  protected
+  def webapps_top_trend
+    @webapps_top_trend = Webapp.top_trend
+  end
+
+  protected
+  def webapps_top_comment
+    @webapps_top_comment = Webapp.top_comment
   end
 
 end

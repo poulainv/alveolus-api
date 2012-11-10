@@ -3,21 +3,12 @@
 <div class="well sidebar-nav">
   <ul class="nav nav-list">
     <li class="nav-header"><h4>Top popularité</h4></li>
-    <li><a href="#">MyMajorCompagny</a></li>
-    <li><a href="#">Coursera</a></li>
-    <li><a href="#">La machine du voisin</a></li>
-    <li class="nav-header"><h4>Les plus consultés</h4></li>
-    <li><a href="#">Ted</a></li>
-    <li><a href="#">Deways</a></li>
-    <li><a href="#">Coursera</a></li>
-    <li class="nav-header"><h4>Les mieux notés</h4></li>
-    <li><a href="#">Covoiturage.fr</a></li>
-    <li><a href="#">Youporn</a></li>
-    <li><a href="#">Fleex <%=@tests %> </a></li>
-    <li class="nav-header"><h4>Test dynamique</h4></li>
-    <% (0..2).each do |i| %>
-    <li><%= link_to  webapps_recents[i].title, webapps_recents[i].url%></li>
-    <%end%>
+    <%=  render :partial => "layouts/top_websites", :collection => @webapps_top_comment, :as=> :websites %>
+    <li class="nav-header"><h4>Les plus consultés </h4></li>
+    <%=  render :partial => "layouts/top_websites", :collection => @webapps_top_trend, :as=> :websites %>
+    <li class="nav-header"><h4>Les nouveautés</h4></li>
+    <%=  render :partial => "layouts/top_websites", :collection => @webapps_top_recent, :as=> :websites %>
+
 
   </ul>
 </div><!--/.well -->

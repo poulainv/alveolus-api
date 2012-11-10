@@ -7,6 +7,7 @@ FactoryGirl.define do
     description            "Journal independant generalise"
     url      "www.rue89.fr"
     validate true
+    nb_click_preview 3
   end
 end
 

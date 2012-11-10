@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: webapps
+#
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  caption          :string(255)
+#  description      :string(255)
+#  validate         :boolean
+#  url              :string(255)
+#  average_rate     :float
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  image            :string(255)
+#  nb_click_preview :integer
+#  nb_click_detail  :integer
+#  nb_click_url     :integer
+#
+
 require 'spec_helper'
 
 describe Webapp do
@@ -6,7 +25,51 @@ describe Webapp do
     @webapp = FactoryGirl.create(:webapp)
     @tag = Tag.new(:name=>"test")
   end
-  
+
+
+  # Method top_trend
+  describe "Test method top trend" do
+    it "should exist" do
+      Webapp.should respond_to(:top_trend)
+    end
+
+    it "should return 3 top click_preview website" do
+      @webapp1 = FactoryGirl.build(:webapp)
+      @webapp1.nb_click_preview = 53 ;
+      @webapp1.save
+      @webapp2 = FactoryGirl.build(:webapp)
+      @webapp2.nb_click_preview = 52 ;
+      @webapp2.save
+      @webapp3 = FactoryGirl.build(:webapp)
+      @webapp3.nb_click_preview = 51 ;
+      @webapp3.save
+
+      webapps = Webapp.top_trend
+      webapps.should have_exactly(3).items
+      webapps.should include(@webapp1,@webapp2,@webapp3)
+      webapps.should_not include(@webapp)
+
+    end
+  end
+
+    # Method top_recent
+  describe "Test method top recent" do
+    it "should exist" do
+      Webapp.should respond_to(:top_recent)
+    end
+
+    it "should return 3 most recents website" do
+      @webapp1 = FactoryGirl.create(:webapp)
+      @webapp2 = FactoryGirl.create(:webapp)
+      @webapp3 = FactoryGirl.create(:webapp)
+
+      webapps = Webapp.top_recent
+      webapps.should have_exactly(3).items
+      webapps.should include(@webapp1,@webapp2,@webapp3)
+      webapps.should_not include(@webapp)
+
+    end
+  end
   
   # Methods test
   describe "Test methods" do
@@ -71,6 +134,7 @@ describe Webapp do
     
   end
 
+
   describe "validation attributes" do
     it "webapp shall accept a valid url" do
       adresses = %w[www.lemonde.fr http://www.lemonde.fr https://www.facebook.fr]
@@ -86,8 +150,30 @@ describe Webapp do
         @webapp.url =  address
         @webapp.should be_valid
       end
+    end
+
+    it "should be exist method 'uniform_url'" do
+      FactoryGirl.build(:webapp).should respond_to(:uniform_url)
+    end
+    
+    it "should uniform correctly an URL" do
+      
+      test = FactoryGirl.build(:webapp)
+      ## Change
+     
+      test.url = "lemonde.fr"
+      test.uniform_url.should eql("http://www.lemonde.fr")
+      test.url = "www.lemonde.fr"
+      test.uniform_url.should eql("http://www.lemonde.fr")
+      test.url = "http://lemonde.fr"
+      test.uniform_url.should eql("http://www.lemonde.fr")
+      test.url = "https://lemonde.fr"
+      test.uniform_url.should eql("https://www.lemonde.fr")
+
+      ## No change
 
     end
+
   end
     
 end
