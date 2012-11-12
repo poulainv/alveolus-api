@@ -33,15 +33,15 @@ describe Webapp do
       Webapp.should respond_to(:top_trend)
     end
 
-    it "should return 3 top click_preview website" do
+    it "should return 3 top click_detail website" do
       @webapp1 = FactoryGirl.build(:webapp)
-      @webapp1.nb_click_preview = 53 ;
+      @webapp1.nb_click_detail = 53 ;
       @webapp1.save
       @webapp2 = FactoryGirl.build(:webapp)
-      @webapp2.nb_click_preview = 52 ;
+      @webapp2.nb_click_detail = 52 ;
       @webapp2.save
       @webapp3 = FactoryGirl.build(:webapp)
-      @webapp3.nb_click_preview = 51 ;
+      @webapp3.nb_click_detail = 51 ;
       @webapp3.save
 
       webapps = Webapp.top_trend
@@ -52,7 +52,7 @@ describe Webapp do
     end
   end
 
-    # Method top_recent
+  # Method top_recent
   describe "Test method top recent" do
     it "should exist" do
       Webapp.should respond_to(:top_recent)
@@ -171,9 +171,39 @@ describe Webapp do
       test.uniform_url.should eql("https://www.lemonde.fr")
 
       ## No change
-
+      test.url = "https://www.lemonde.fr"
+      test.uniform_url.should eql("https://www.lemonde.fr")
+      test.url = "http://www.lemonde.fr"
+      test.uniform_url.should eql("http://www.lemonde.fr")
     end
 
   end
+
+  describe "method incremental nb_click" do
+    it "'increment_nb_click' should exist" do
+      @webapp.should respond_to(:increment_nb_click)
+    end
+
+    it "should increment 1 attribute nb_click_detail" do
+      ## webapp has nb_click_detail init at 3
+      old_value = @webapp.nb_click_detail
+      @webapp.increment_nb_click(:element => "detail")
+      @webapp.nb_click_detail.should eql(old_value+1)
+    end
+
+     it "should increment 1 attribute nb_click_preview" do
+      ## webapp has nb_click_detail init at 3
+      old_value = @webapp.nb_click_preview
+      @webapp.increment_nb_click(:element => "detail")
+      @webapp.nb_click_preview.should eql(old_value+1)
+    end
+
+     it "should increment 1 attribute nb_click_url" do
+      ## webapp has nb_click_detail init at 3
+      old_value = @webapp.nb_click_url
+      @webapp.increment_nb_click(:element => "url")
+      @webapp.nb_click_url.should eql(old_value+1)
+    end
     
+  end
 end

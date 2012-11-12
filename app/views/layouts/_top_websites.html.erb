@@ -4,4 +4,9 @@
 %>
 
 <!-- On a donc accès à des variables nommées d'après le modèle de la collection -->
- <li><%= link_to  websites.title, websites.url%></li>
+
+<li><a class="websitetop" websiteId="<%= websites.id %>" href="#detailWebsiteModal" data-toggle="modal">
+<%= websites_counter + 1%>.
+<%= websites.title %>
+  </a></li>
+

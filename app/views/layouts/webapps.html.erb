@@ -20,12 +20,14 @@
       <div class="row-fluid">
         <div class="span3">
           <%=  render :partial => "layouts/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
-         
+
         </div><!--/span-->
 
-        <div class="span9">
 
+        <div class="span9">
+          <%= render 'layouts/detail_popup_website' %>
           <%= render 'layouts/flash_messages' %>
+          <%= render('layouts/topbar') %>
           <%= yield %>
 
         </div>

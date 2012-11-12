@@ -19,14 +19,19 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate, :nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:tags,:nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
-
+  
+  #accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['image'].nil? }
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
+  accepts_nested_attributes_for :tags
+  has_attached_file :photo
+  validates_attachment_size :photo, :less_than => 5.megabytes
+
   
   validates :title, :presence => true
   validates :caption, :presence => true
@@ -34,6 +39,7 @@ class Webapp < ActiveRecord::Base
   validates :url, :presence => true,
     :format => {:with => url_regex },
     :uniqueness => true
+
 
   # Does this WebApp is tagged by 'tag' ?
   def tagged_by_tag?(tag)
@@ -80,31 +86,44 @@ class Webapp < ActiveRecord::Base
     return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd)
   end
 
+  def recent_tags
+    return tags
+  end
 
+  def self.tagged_with(name)
+    Tag.find_by_name!(name).webapps
+  end
 
   ## Top Methods
   # return three latest website inserted
   def self.top_recent
-    # Some explainations :
-    # we find in :all row
-    # select only title and url attribute
-    # by order desc
-    # ...
     Webapp.last(3)
   end
 
   # return three most consult
   def self.top_trend
-    Webapp.find(:all, :order => "nb_click_preview desc", :limit => 3).reverse
+    Webapp.find(:all, :order => "nb_click_detail desc", :limit => 3)
   end
 
   # return three most comment
   def self.top_comment
     #TODO update after comment
-    Webapp.find(:all, :order => "nb_click_url desc", :limit => 3).reverse
+    Webapp.find(:all, :order => "nb_click_url desc", :limit => 3)
   end
 
 
+  def increment_nb_click(hash)
+    case hash[:element]
+    when "detail"
+       old_value = self.nb_click_detail
+    when "preview"
+       old_value = self.nb_click_preview
+    when "url"
+       old_value = self.nb_click_url
+    end
+    self.update_attribute("nb_click_"+hash[:element], old_value+1)
+  end
+  
   ## Validate and uniform
   ## Tres salasse à refaire
   def uniform_url
@@ -118,8 +137,7 @@ class Webapp < ActiveRecord::Base
     end
 
     return self.url
-   
-
+  
   end
 
 end

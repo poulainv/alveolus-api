@@ -1,1 +1,5 @@
-<%= @webapp.title %> , <%= @webapp.url %> 
+
+<%= @webapp.title %> , <%= @webapp.url %>
+<%= image_tag @webapp.photo.url %>
+<br></br>
+<%= link_to 'Edit', edit_webapp_path(@webapp) %> 

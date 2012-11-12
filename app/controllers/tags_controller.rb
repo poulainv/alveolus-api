@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   def new
   end
 
-  def index
+  def show
     @tags = Tag.all
     respond_to do |format|
       format.html

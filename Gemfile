@@ -28,6 +28,8 @@ end
 group :development do
   gem 'rspec-rails', '2.8.0'
   gem 'annotate'
+  gem 'paperclip'
+
 end
 
 group :test do

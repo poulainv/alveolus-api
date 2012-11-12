@@ -34,4 +34,5 @@ EnjoyTheWeb::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+ 
 end

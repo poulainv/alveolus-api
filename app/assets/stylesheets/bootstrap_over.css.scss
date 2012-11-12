@@ -20,7 +20,19 @@ body { padding-top: 60px; }
   margin-right: 10px;
 }
 
-body {
+.modal {
+    width:80%;
+    /* Should be : -width/2 */
+    margin-left : -40%;
+}
 
+.modal-header {
+  // Close icon
+  .close { margin-top: 2px;
 
+     }
+}
+
+#detailWebsiteModalNbVues{
+    margin-right : 10%;
 }

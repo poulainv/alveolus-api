@@ -3,8 +3,9 @@
 # and open the template in the editor.
 %>
 
-<h2>webapps#index</h2>
+<h2><%= @subtitle %> </h2>
 
 <% @webapps.each do |webapp| %>
-  <%= webapp.title %><br>
+  <%= link_to webapp.title,webapp %>
+  <br></br>
 <%end%>

@@ -1,0 +1,40 @@
+
+
+  <%= form_for @webapp, :html => {:multipart => true,:class => 'full'} do |f| %>
+
+    <%= render 'shared/error_messages' %>
+    <legend>Soumettez un WebSite</legend>
+    <div class="row-fluid">
+      <div class="offset4 span12">
+        <div class="field">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+
+        <div class="field">
+          <%= f.label :caption %>
+          <%= f.text_field :caption %>
+        </div>
+
+        <div class="field">
+          <%= f.label :description %>
+          <%= f.text_area :description %>
+        </div>
+
+        <div class="field">
+
+          Validate <%= f.check_box :validate %>
+        </div>
+
+        <div class="field">
+
+          Photo <%= f.file_field :photo %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  

@@ -15,11 +15,15 @@
 //= require bootstrap
 //= require_tree  .
 
-//$(document).ready(function() {
-  // Handler for .ready() called.
- //  $("li").click(function () {
-   //   $(this).addClass("active");
-     //  console.log("Click");
-   // });
-//	});
-  
+
+function increment_nb_click(websiteId, element){
+
+     // Increment nb_click
+        $.ajax({
+            type: "GET",
+            url: "/webapps/"+websiteId+"/click/"+element
+        }).done(function( msg ) {
+            console.log("click increment : "+element)
+        });
+
+}
