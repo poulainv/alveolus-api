@@ -11,7 +11,7 @@ $(document).ready(function(){
         }).done(function( msg ) {
             initialize_website_details(msg)      
         });
-
+  
         // Increment nb_click_detail
         increment_nb_click(websiteId, "detail");
 
@@ -49,6 +49,6 @@ function initialize_website_details(website){
 
     // Listener when URL is clicked
     $(".websiteurl").click(function () {
-        increment_nb_click(websiteId, "url")
+        increment_nb_click(websiteId,"url")
     });
 }
