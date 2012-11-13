@@ -29,7 +29,7 @@ group :development do
   gem 'rspec-rails', '2.8.0'
   gem 'annotate'
   gem 'paperclip'
-
+  gem 'rmagick'
 end
 
 group :test do

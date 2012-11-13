@@ -22,13 +22,18 @@
       </div>
 
       <div class="field">
+        Validé <%= f.check_box :validate %>
+      </div>
 
-        Validate <%= f.check_box :validate %>
+      <div class="field">
+        Promotion <%= f.check_box :promoted %>
       </div>
+      
       <div>
-      <%= f.label :tag_list, "Tags (séparé par virgules)" %>
-      <%= f.text_field :tag_list %>
+        <%= f.label :tag_list, "Tags (séparé par virgules)" %>
+        <%= f.text_field :tag_list %>
       </div>
+
       <div class="field">
         Photo <%= f.file_field :photo %>
       </div>

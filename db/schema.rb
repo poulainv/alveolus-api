@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111145943) do
+ActiveRecord::Schema.define(:version => 20121113150646) do
 
   create_table "tag_app_relations", :force => true do |t|
     t.integer  "tag_id"
@@ -46,15 +46,16 @@ ActiveRecord::Schema.define(:version => 20121111145943) do
     t.string   "url"
     t.string   "image"
     t.float    "average_rate"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.integer  "nb_click_preview",               :default => 0
-    t.integer  "nb_click_detail",              :default => 0
-    t.integer  "nb_click_url",                       :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "nb_click_preview",   :default => 0
+    t.integer  "nb_click_detail",    :default => 0
+    t.integer  "nb_click_url",       :default => 0
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.boolean  "promoted"
   end
 
 end

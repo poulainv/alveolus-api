@@ -6,6 +6,7 @@ class WebappsController < ApplicationController
   before_filter :webapps_top_recent, :only => [:show, :edit, :index, :new, :create]
   before_filter :webapps_top_comment, :only => [:show,:edit,  :index, :new, :create]
   before_filter :webapps_top_trend, :only => [:show, :edit,   :index, :new, :create]
+  before_filter :webapps_promoted, :only => [:show, :edit,  :index, :new, :create]
 
   # GET /webapps/
   def index
@@ -109,6 +110,10 @@ class WebappsController < ApplicationController
   protected
   def webapps_top_comment
     @webapps_top_comment = Webapp.top_comment
+  end
+
+  def webapps_promoted
+    @webapps_promoted = Webapp.where("promoted = 1")
   end
 
 end

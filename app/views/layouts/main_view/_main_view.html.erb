@@ -1,0 +1,23 @@
+
+
+
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#list_website" data-toggle="tab">A la Une</a></li>
+    <li><a href="#browser_tag" data-toggle="tab">Naviguer dans les tags</a></li>
+     <li><a href="#surprise" data-toggle="tab">Suprenez-moi</a></li>
+  </ul>
+
+<div class="hero-unit">
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="list_website">
+
+      <%= yield %>
+
+    </div>
+    <div class="tab-pane fade" id="browser_tag">
+
+      <%=  render :partial => "layouts/main_view/browser_tag" %>
+      
+    </div>
+  </div>
+</div>

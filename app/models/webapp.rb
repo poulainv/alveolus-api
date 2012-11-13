@@ -19,7 +19,7 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :promoted,:nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
@@ -29,7 +29,7 @@ class Webapp < ActiveRecord::Base
   #accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['image'].nil? }
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
-  has_attached_file :photo
+  has_attached_file :photo, :styles => { :small => "100x100"}
   validates_attachment_size :photo, :less_than => 5.megabytes
 
   

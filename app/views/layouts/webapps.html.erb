@@ -11,25 +11,24 @@
 
     <%= render('layouts/topbar') %>
     <div class="row-fluid">
-      <div class="span6 offset3">
-        <%= render('layouts/caroussel') %>
+      <div class="span12">
+        <%= render('layouts/caroussel/caroussel') %>
       </div>
     </div>
     <div class="container-fluid">
 
       <div class="row-fluid">
         <div class="span3">
-          <%=  render :partial => "layouts/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
+          <%=  render :partial => "layouts/left_menu/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
 
         </div><!--/span-->
-
+          
 
         <div class="span9">
           <%= render 'layouts/detail_popup_website' %>
           <%= render 'layouts/flash_messages' %>
           <%= render('layouts/topbar') %>
-          <%= yield %>
-
+          <%= render('layouts/main_view/main_view') %>
         </div>
       </div>
 
