@@ -79,30 +79,33 @@ describe Webapp do
       @webapp.should respond_to(:tagged_by_tag?)
     end
 
-    it "shall have method called addTag! " do
-      @webapp.should respond_to(:add_tag!)
+    it "shall have method called addTag " do
+      @webapp.should respond_to(:add_tag)
     end
 
-    it "shall have method called addTags! " do
-      @webapp.should respond_to(:add_tags!)
+    it "shall have method called addTags " do
+      @webapp.should respond_to(:add_tags)
     end
 
     # Good working
     it "method addTag! shall be add a good tag" do
       @tag.save
       @webapp.save
-      @webapp.add_tag!(@tag)
+      @webapp.add_tag(@tag.name)
       @webapp.tags.should include(@tag)
     end
 
 
     it "method addTags! shall be add goods tags" do
       @tags = ["test1","test2","test2"]
-      @webapp.add_tags!(@tags)
+      @webapp.add_tags(@tags)
       assert @webapp.tagged_by_tag?("test1")
       assert @webapp.tagged_by_tag?("test2")
    
       assert @webapp.tags.length == 2
+
+      @webapp.add_tags("test2,test3,test3")
+      assert @webapp.tags.length == 3
     end
 
 
@@ -112,11 +115,11 @@ describe Webapp do
       @webapp.save
       
       # Tag pas encore ajouté
-      @webapp.add_tag!(@tag)
-      @webapp.tagged_by_tag?(@tag).should be_true
+      @webapp.add_tag(@tag)
+      @webapp.tagged_by_tag?(@tag.name).should be_true
      
       # Tag pas ajouté et inexistant en base
-      @webapp.add_tag!("test3")
+      @webapp.add_tag("test3")
       @webapp.tagged_by_tag?("test3").should be_true
       
       #Tag pas ajouté
@@ -126,9 +129,9 @@ describe Webapp do
     it "method addTag! shall don't add tag if this tags already exists " do
       @tag.save
       @webapp.save
-      @webapp.add_tag!(@tag)
-      @webapp.add_tag!(@tag)
-      @webapp.add_tag!("test")
+      @webapp.add_tag(@tag)
+      @webapp.add_tag(@tag)
+      @webapp.add_tag("test")
       assert @webapp.tags.length == 1, "tag is not unique anymore "
     end 
     
@@ -194,7 +197,7 @@ describe Webapp do
      it "should increment 1 attribute nb_click_preview" do
       ## webapp has nb_click_detail init at 3
       old_value = @webapp.nb_click_preview
-      @webapp.increment_nb_click(:element => "detail")
+      @webapp.increment_nb_click(:element => "preview")
       @webapp.nb_click_preview.should eql(old_value+1)
     end
 

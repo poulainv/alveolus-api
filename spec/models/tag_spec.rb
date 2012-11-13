@@ -13,7 +13,7 @@ require 'spec_helper'
 describe Tag do
   
   before(:each) do
-    @tag = Tag.new
+    @tag = Tag.new({:name => "test"})
   end
   
   
@@ -27,7 +27,7 @@ describe Tag do
       @webapp2 = Webapp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
       @tag.save
       @webapp.save
-      @webapp.add_tag!(@tag)
+      @webapp.add_tag(@tag)
       @tag.tagged?(@webapp).should be_true
       @tag.tagged?(@webapp2).should be_false
 

@@ -19,7 +19,7 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:tags,:nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
@@ -41,60 +41,59 @@ class Webapp < ActiveRecord::Base
     :uniqueness => true
 
 
+  ##################
+  ## TAGS METHODS ##
+  ##################
+
   # Does this WebApp is tagged by 'tag' ?
-  def tagged_by_tag?(tag)
-    if(tag.kind_of? Tag)
-      tags.find_by_id(tag.id)
-    elsif(tag.kind_of? String)
-      tags.find_by_name(tag)
-    end
+  def tagged_by_tag?(name)
+    tags.find_by_name(name)
   end
 
-  def add_tags!(tags)
+  def tag_list
+    tags.map(&:name).join(", ")
+  end
+
+  def add_tags(tags)
     if (tags.kind_of? Array)
       tags.each { |tag|
-        if tag.kind_of? Tag
-          self.add_tag!(tag)
-        end
-        if tag.kind_of? String
-          self.add_tag!(tag)
-        end
+        self.add_tag(tag)
       }
+    else
+      self.tags += tags.split(",").uniq.map do |n|
+        Tag.where(name: n.strip).first_or_create!
+      end
     end
   end
 
   # Pour ajouter un tag a la webapp, ne fait rien s'il la webapp est deja taggué avec
   # Accepte un objet tag ou le nom d'un tag
   # Ajoute le tag en base s'il n'existe pas
-  def add_tag!(tag)
-    nameTag = nil
-    tagToAdd = nil
-    
-    if(tag.kind_of? String)
-      nameTag = tag
-      tagToAdd = Tag.find_by_name(nameTag);
-    elsif(tag.kind_of? Tag)
-      tagToAdd = Tag.find_by_id(tag.id)
-      nameTag = tag.name
+  def add_tag(tag)
+    if(tag.kind_of?(String))
+      tagToAdd = Tag.where(name: tag.strip).first_or_create!
+    else
+      tagToAdd = Tag.where(name: tag.name.strip).first_or_create!
     end
-    
-    if(tagToAdd == nil)
-      tagToAdd = Tag.create(:name=>nameTag)
-      tagToAdd.save
-    end
-    
-    return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd)
+    return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd.name)
   end
 
-  def recent_tags
-    return tags
+  def tag_list=(names)
+    self.tags = names.split(",").map do |n|
+      Tag.where(name: n.strip).first_or_create!
+    end
   end
+
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).webapps
   end
 
-  ## Top Methods
+
+  #######################
+  ## Top sites Methods ##
+  #######################
+
   # return three latest website inserted
   def self.top_recent
     Webapp.last(3)
@@ -111,29 +110,33 @@ class Webapp < ActiveRecord::Base
     Webapp.find(:all, :order => "nb_click_url desc", :limit => 3)
   end
 
-
+  ## To increment nb_click_<element>
   def increment_nb_click(hash)
     case hash[:element]
     when "detail"
-       old_value = self.nb_click_detail
+      old_value = self.nb_click_detail
     when "preview"
-       old_value = self.nb_click_preview
+      old_value = self.nb_click_preview
     when "url"
-       old_value = self.nb_click_url
+      old_value = self.nb_click_url
     end
     self.update_attribute("nb_click_"+hash[:element], old_value+1)
   end
-  
+
+  ##############
+  # Validation #
+  ##############
+
   ## Validate and uniform
   ## Tres salasse à refaire
   def uniform_url
     if(!self.url.index("www"))
-     return self.url.gsub("http://", "http://www.").downcase if self.url.index("http://")
-     return self.url.gsub("https://","https://www.").downcase if self.url.index("https://")
-     return self.url = "http://www." << self.url else
+      return self.url.gsub("http://", "http://www.").downcase if self.url.index("http://")
+      return self.url.gsub("https://","https://www.").downcase if self.url.index("https://")
+      return self.url = "http://www." << self.url else
     end
-   if(!self.url.index("http"))
-    return self.url.gsub("www.", "http://www.")
+    if(!self.url.index("http"))
+      return self.url.gsub("www.", "http://www.")
     end
 
     return self.url

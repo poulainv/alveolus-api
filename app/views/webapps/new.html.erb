@@ -26,8 +26,13 @@
           <%= f.text_field :url %>
         </div>
 
-         <div class="field">
-    
+        <div>
+          <%= f.label :tag_list, "Tags (séparé par virgules)" %>
+          <%= f.text_field :tag_list %>
+        </div>
+
+        <div class="field">
+
           <%= f.file_field :photo %>
         </div>
 
