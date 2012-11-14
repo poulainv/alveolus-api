@@ -2,19 +2,24 @@
 #
 # Table name: webapps
 #
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  caption          :string(255)
-#  description      :string(255)
-#  validate         :boolean
-#  url              :string(255)
-#  average_rate     :float
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  image            :string(255)
-#  nb_click_preview :integer
-#  nb_click_detail  :integer
-#  nb_click_url     :integer
+#  id                 :integer          not null, primary key
+#  title              :string(255)
+#  caption            :string(255)
+#  description        :text
+#  validate           :boolean
+#  url                :string(255)
+#  image              :string(255)
+#  average_rate       :float
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  nb_click_preview   :integer          default(0)
+#  nb_click_detail    :integer          default(0)
+#  nb_click_url       :integer          default(0)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  promoted           :boolean
 #
 
 require 'spec_helper'

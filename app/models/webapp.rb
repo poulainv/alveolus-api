@@ -2,35 +2,41 @@
 #
 # Table name: webapps
 #
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  caption          :string(255)
-#  description      :string(255)
-#  validate         :boolean
-#  url              :string(255)
-#  average_rate     :float
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  image            :string(255)
-#  nb_click_preview :integer
-#  nb_click_detail  :integer
-#  nb_click_url     :integer
+#  id                 :integer          not null, primary key
+#  title              :string(255)
+#  caption            :string(255)
+#  description        :text
+#  validate           :boolean
+#  url                :string(255)
+#  image              :string(255)
+#  average_rate       :float
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  nb_click_preview   :integer          default(0)
+#  nb_click_detail    :integer          default(0)
+#  nb_click_url       :integer          default(0)
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#  promoted           :boolean
 #
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :promoted,:nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
   
-  #accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['image'].nil? }
+  
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
-  has_attached_file :photo, :styles => { :small => "100x100"}
+  has_attached_file :photo, :styles => { :caroussel => "550x350!"}
   validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_presence :photo
 
   
   validates :title, :presence => true
