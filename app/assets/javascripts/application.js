@@ -16,6 +16,8 @@
 //= require_tree  .
 
 
+
+
 function increment_nb_click(websiteId, element){
 
      // Increment nb_click

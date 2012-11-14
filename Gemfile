@@ -9,6 +9,9 @@ gem 'mysql2'
 group :production do
   gem 'thin'
   gem 'pg'
+  gem 'paperclip'
+  gem 'rmagick'
+  gem 'aws-sdk'
 end
 
 gem 'bootstrap-sass'

@@ -2,6 +2,8 @@
 
 $(document).ready(function(){
 
+
+
     // Script to excecute when open popup to update info
     $(".websitetop").click(function () {
         var websiteId = $(this).attr("websiteId");
