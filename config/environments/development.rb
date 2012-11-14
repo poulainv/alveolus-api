@@ -38,6 +38,6 @@ EnjoyTheWeb::Application.configure do
 
   ## Config paperclip on local 
   PAPERCLIP_STORAGE = {
-
+ :styles => { :caroussel => "550x350!"}
   }
 end
