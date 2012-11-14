@@ -33,6 +33,7 @@ group :development do
   gem 'annotate'
   gem 'paperclip'
   gem 'rmagick'
+  gem 'aws-sdk'
 end
 
 group :test do
