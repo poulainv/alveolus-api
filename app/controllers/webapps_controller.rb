@@ -113,7 +113,7 @@ class WebappsController < ApplicationController
   end
 
   def webapps_promoted
-    @webapps_promoted = Webapp.where("promoted = 1")
+    @webapps_promoted = Webapp.where("promoted == 1")
   end
 
 end
