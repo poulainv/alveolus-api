@@ -36,7 +36,7 @@ class Webapp < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   has_attached_file :photo, :styles => { :caroussel => "550x350!"}
   validates_attachment_size :photo, :less_than => 5.megabytes
-  validates_attachment_presence :photo
+  #validates_attachment_presence :photo
 
   
   validates :title, :presence => true
