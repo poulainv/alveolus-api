@@ -23,7 +23,7 @@ C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-e
               :validate => true,
               :nb_click_preview => 23,
               :nb_click_detail => 43,
-              :nb_click_url => 13 ).add_tags!(["microcredit","solidarite","pret"])
+              :nb_click_url => 13 ).add_tags(["microcredit","solidarite","pret"])
            
 
 
@@ -34,7 +34,7 @@ Webapp.create( :title =>'CupOfTeach',
               :validate => true,
               :nb_click_preview => 29,
               :nb_click_detail => 03,
-              :nb_click_url => 1).add_tags!(["formation","universite","atelier","partage"])
+              :nb_click_url => 1).add_tags(["formation","universite","atelier","partage"])
               
 
 
@@ -45,7 +45,7 @@ Webapp.create( :title =>'Deways',
               :validate => true,
               :nb_click_preview => 80,
               :nb_click_detail => 43,
-              :nb_click_url => 13).add_tags!(["voiture","partage","location","louer"])
+              :nb_click_url => 13).add_tags(["voiture","partage","location","louer"])
 
 
 Webapp.create( :title =>'LaMachineDuVoisin',
@@ -55,7 +55,7 @@ Webapp.create( :title =>'LaMachineDuVoisin',
               :validate => true,
               :nb_click_preview => 67,
               :nb_click_detail => 46,
-              :nb_click_url => 19).add_tags!(["pret","location","electo-menager","partage"])
+              :nb_click_url => 19).add_tags(["pret","location","electo-menager","partage"])
              
 
 
@@ -69,7 +69,7 @@ Le but : faire ainsi coïncider les besoins, partager les frais entre covoitureu
               :validate => true,
               :nb_click_preview => 93,
               :nb_click_detail => 23,
-              :nb_click_url => 53).add_tags!(["voiture","trajet","covoiturage","developpement durable"])
+              :nb_click_url => 53).add_tags(["voiture","trajet","covoiturage","developpement durable"])
              
 
 
@@ -81,7 +81,7 @@ Webapp.create( :title =>'MyMajorCompany',
               :validate => true,
               :nb_click_preview => 13,
               :nb_click_detail => 13,
-              :nb_click_url => 3).add_tags!(["musique","financement","participatif","culture"])
+              :nb_click_url => 3).add_tags(["musique","financement","participatif","culture"])
 
 
 Webapp.create( :title =>'Artilinki',
@@ -94,7 +94,7 @@ Un réseau utile, alternatif et indépendant dont le but est d\'accompagner la m
               :validate => true,
               :nb_click_preview => 23,
               :nb_click_detail => 0,
-              :nb_click_url => 0).add_tags!(["culture","resaux","art"])
+              :nb_click_url => 0).add_tags(["culture","resaux","art"])
 
 
 Webapp.create( :title =>'TED',
@@ -106,7 +106,7 @@ Partez à la découverte de plus de 1300 TEDTalks, à regarder ou à écouter (a
               :validate => true,
               :nb_click_preview => 73,
               :nb_click_detail => 13,
-              :nb_click_url => 5).add_tags!(["videos","partage","connaissance","conference","formation"])
+              :nb_click_url => 5).add_tags(["videos","partage","connaissance","conference","formation"])
 
 
 Webapp.create( :title =>'Fleex',
@@ -117,7 +117,7 @@ Grâce à fleex, apprenez l’anglais avec les vidéos que vous aimez. A partir 
               :validate => true,
               :nb_click_preview => 63,
               :nb_click_detail => 42,
-              :nb_click_url => 1).add_tags!(["formation","anglais","videos"])
+              :nb_click_url => 1).add_tags(["formation","anglais","videos"])
 
 Webapp.create( :title =>'La Ruche qui dit Oui !',
               :caption => 'La Ruche qui dit Oui ! permet de vous réunir pour acheter directement aux producteurs de votre région.',
@@ -132,7 +132,7 @@ Que fait l\'équipe de la Ruche qui dit Oui ! ?
               :nb_click_preview => 23,
               :nb_click_detail => 43,
               :nb_click_url => 13
-).add_tags!(["alimentation","developpement durable","agriculture","local"])
+).add_tags(["alimentation","developpement durable","agriculture","local"])
 
 
 
