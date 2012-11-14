@@ -34,9 +34,7 @@ class Webapp < ActiveRecord::Base
   
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
-  has_attached_file :photo, :styles => { :caroussel => "550x350!"},
-    :storage => :s3, :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path => "user/:attachment/:style/:id.:extension"
+  has_attached_file :photo, PAPERCLIP_STORAGE, :styles => { :caroussel => "550x350!"}
   validates_attachment_size :photo, :less_than => 5.megabytes
   #validates_attachment_presence :photo
 
