@@ -78,10 +78,10 @@ function initialize_website_details(website){
 
 function initialize_website_tags(tags){
 
-   $("#addTagButton").show();
+    $("#addTagButton").show();
     $("#addTagField").hide();
     $("#detailWebsiteModalTagsList").html('');
-    $("#addTagField").val('');
+    $("#newTagField").val('');
     for (x in tags)
     {
         $("<a/>", {
