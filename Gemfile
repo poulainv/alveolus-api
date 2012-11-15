@@ -34,6 +34,7 @@ group :development do
   gem 'paperclip'
   gem 'rmagick'
   gem 'aws-sdk'
+ 
 end
 
 group :test do

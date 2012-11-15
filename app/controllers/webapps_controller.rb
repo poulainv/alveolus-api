@@ -15,7 +15,7 @@ class WebappsController < ApplicationController
       @subtitle = "Websites du hashtag : #"+params[:tag].capitalize
     else
       @subtitle = "Tous les websites"
-      @webapps = Webapp.all
+      @webapps = Webapp.validated
     end
     respond_to do |format|
       format.html
@@ -38,11 +38,10 @@ class WebappsController < ApplicationController
   # GET /webapps/:id
   def show
     if @webapp = Webapp.find_by_id(params[:id])
-      @webapp.image = @webapp.photo.url
       respond_to do |format|
         format.html
         format.json{
-          render( :json => @webapp.to_json(:include => :tags))
+          render( :json => @webapp.to_json)
         }
       end
     else
@@ -76,7 +75,7 @@ class WebappsController < ApplicationController
     @webapp = Webapp.find(params[:id])
     respond_to do |format|
       if @webapp.update_attributes(params[:webapp])
-        format.html { redirect_to @webapp, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to @webapp, notice: 'Les données ont correctement été modifiées' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -85,7 +84,24 @@ class WebappsController < ApplicationController
     end
   end
 
+  def add_tag
+    @webapp = Webapp.find(params[:id])
+    if @webapp.add_tags(params[:tag])
+      render :json => @webapp.best_tags(3).to_json
+    else
+      flash[:error] = "La Webapp demandé n'existe pas"
+      redirect_to accueil_path
+    end  
+  end
 
+  def tags_list
+    if  @webapp = Webapp.find(params[:id])
+      render :json => @webapp.best_tags(3).to_json(:include => :tagAppRelations)
+    else
+      flash[:error] = "La Webapp demandé n'existe pas"
+      redirect_to accueil_path
+    end
+  end
 
   ## Method to increment nb_click...
   def click
@@ -99,12 +115,12 @@ class WebappsController < ApplicationController
   ## Methods TOPS
   protected
   def webapps_top_recent
-    @webapps_top_recent = Webapp.top_recent
+    @webapps_top_recent = Webapp.recent(3)
   end
 
   protected
   def webapps_top_trend
-    @webapps_top_trend = Webapp.top_trend
+    @webapps_top_trend = Webapp.trend(3)
   end
 
   protected
@@ -113,7 +129,7 @@ class WebappsController < ApplicationController
   end
 
   def webapps_promoted
-    @webapps_promoted = Webapp.where("webapps.promoted = '1'")
+    @webapps_promoted = Webapp.promoted
   end
 
 end

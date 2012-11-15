@@ -17,7 +17,6 @@ EnjoyTheWeb::Application.routes.draw do
   match '/suggestion',   :to => 'webapps#new'
   match '/navigationtag',   :to => 'pages#contact'
   
-  # match '/tagsAss/:tagId', :to => "tags#tagsAssociated"
   resources :tags do
     member do
       get 'associated'
@@ -30,6 +29,8 @@ EnjoyTheWeb::Application.routes.draw do
   end
 
   match '/webapps/:id/click/:element' => 'webapps#click'
+  match '/webapps/:id/addtag/:tag' => 'webapps#add_tag'
+  match '/webapps/:id/tagslist' => 'webapps#tags_list'
 
 
   # The priority is based upon order of creation:

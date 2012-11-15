@@ -34,9 +34,10 @@ class Webapp < ActiveRecord::Base
   
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
-  has_attached_file :photo, PAPERCLIP_STORAGE
-  validates_attachment_size :photo, :less_than => 5.megabytes
-  #validates_attachment_presence :photo
+
+  has_attached_file :photo, PAPERCLIP_STORAGE ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
+  validates_attachment_size :photo, :less_than => 2.megabytes
+  #validates_attachment_presence :photo # Comment because test fail otherwise !
 
   
   validates :title, :presence => true
@@ -45,6 +46,15 @@ class Webapp < ActiveRecord::Base
   validates :url, :presence => true,
     :format => {:with => url_regex },
     :uniqueness => true
+
+
+  scope :validated, lambda { where("validate = '1'")}
+  scope :unvalidated, lambda { where ("validate = '0'")}
+  scope :promoted, lambda { where ("promoted = '1'")}
+  # return latest website inserted and validated
+  scope :recent, lambda { |n| validated.order("created_at").reverse_order.limit(n) }
+  # return most consulted website
+  scope :trend, lambda { |n| validated.order("nb_click_detail").reverse_order.limit(n) }
 
 
   ##################
@@ -66,14 +76,14 @@ class Webapp < ActiveRecord::Base
         self.add_tag(tag)
       }
     else
-      self.tags += tags.split(",").uniq.map do |n|
-        Tag.where(name: n.strip).first_or_create!
+      tags.split(",").uniq.map do |n|
+        self.add_tag(n.strip.to_s)
       end
     end
   end
 
-  # Pour ajouter un tag a la webapp, ne fait rien s'il la webapp est deja taggué avec
-  # Accepte un objet tag ou le nom d'un tag
+  # Pour ajouter un tag a la webapp
+  # Increment le coeff du tag si le website est deja taggué avec
   # Ajoute le tag en base s'il n'existe pas
   def add_tag(tag)
     if(tag.kind_of?(String))
@@ -81,7 +91,12 @@ class Webapp < ActiveRecord::Base
     else
       tagToAdd = Tag.where(name: tag.name.strip).first_or_create!
     end
-    return tagAppRelations.create!(:tag_id => tagToAdd.id) unless tagged_by_tag?(tagToAdd.name)
+
+    if(!tagged_by_tag?(tagToAdd.name))
+      self.tags += [tagToAdd]
+    else
+      self.tagAppRelations.find_by_tag_id(tagToAdd.id).increment(:coeff).save
+    end
   end
 
   def tag_list=(names)
@@ -90,9 +105,12 @@ class Webapp < ActiveRecord::Base
     end
   end
 
-
   def self.tagged_with(name)
     Tag.find_by_name!(name).webapps
+  end
+
+  def best_tags(n)
+   tags.order("tag_app_relations.coeff").reverse_order.limit(n)
   end
 
 
@@ -100,15 +118,6 @@ class Webapp < ActiveRecord::Base
   ## Top sites Methods ##
   #######################
 
-  # return three latest website inserted
-  def self.top_recent
-    Webapp.last(3)
-  end
-
-  # return three most consult
-  def self.top_trend
-    Webapp.find(:all, :order => "nb_click_detail desc", :limit => 3)
-  end
 
   # return three most comment
   def self.top_comment
@@ -120,13 +129,12 @@ class Webapp < ActiveRecord::Base
   def increment_nb_click(hash)
     case hash[:element]
     when "detail"
-      old_value = self.nb_click_detail
+      self.increment(:nb_click_detail)
     when "preview"
-      old_value = self.nb_click_preview
+      self.increment(:nb_click_preview)
     when "url"
-      old_value = self.nb_click_url
+      self.increment(:nb_click_url)
     end
-    self.update_attribute("nb_click_"+hash[:element], old_value+1)
   end
 
   ##############

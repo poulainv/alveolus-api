@@ -5,6 +5,9 @@ describe WebappsController do
   
   ## for testing we add 3 webapps in test data base
   before(:each) do
+    Webapp.stub(:recent).and_return(Webapp.new)
+    Webapp.stub(:trend).and_return(Webapp.new)
+
     (0..2).each do
       FactoryGirl.create(:webapp)
     end
@@ -12,13 +15,15 @@ describe WebappsController do
 
   ## Test INDEX method
   describe "index GET" do
+
     it "shall return a success http" do
       get 'index'
       response.should be_success
     end
 
-    it "shall call Webapp.all method" do
-      Webapp.should_receive(:all)
+    it "shall call Webapp validated method" do
+
+      Webapp.should_receive(:validated)
       get 'index'
     end
 
@@ -96,20 +101,20 @@ describe WebappsController do
   ## Test method tops
   describe "method webapps top recent" do
     it "should call 'top_recent' of Model" do
-      Webapp.should_receive(:top_recent)
-          get :index
+      Webapp.should_receive(:recent).with(3)
+      get :index
     end
   end
   describe "method webapps top comment" do
     it "should call 'top_comment' of Model" do
       Webapp.should_receive(:top_comment)
-          get :index
+      get :index
     end
   end
   describe "method webapps top trend" do
     it "should call 'top_trend' of Model" do
-      Webapp.should_receive(:top_trend)
-          get :index
+      Webapp.should_receive(:trend).with(3)
+      get :index
     end
   end
 end

@@ -36,5 +36,9 @@ EnjoyTheWeb::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+   PAPERCLIP_STORAGE = {
+    :styles => { :caroussel => "550x350!"}
+  }
  
 end

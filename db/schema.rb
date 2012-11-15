@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20121113150646) do
   create_table "tag_app_relations", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "webapp_id"
-    t.integer  "coeff"
+    t.integer  "coeff",      :default => 0
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
