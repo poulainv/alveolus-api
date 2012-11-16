@@ -12,6 +12,7 @@ group :production do
   gem 'paperclip'
   gem 'rmagick'
   gem 'aws-sdk'
+  gem 'devise'
 end
 
 gem 'bootstrap-sass'
@@ -34,6 +35,7 @@ group :development do
   gem 'paperclip'
   gem 'rmagick'
   gem 'aws-sdk'
+  gem 'devise'
  
 end
 

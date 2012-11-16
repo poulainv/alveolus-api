@@ -1,28 +1,33 @@
 <!-- HTML code for the top bar -->
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">EnjoyTheWeb</a>
-          <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">Username</a>
-            </p>
-            <ul class="nav">
-              <li class="active"><%= link_to "Home", accueil_path%></li>
-              <li><%= link_to "Nos valeurs", about_path %></li>
-              <li><%= link_to "Suggérer un site", suggestion_path %></li>
-              <li><a href="#">Options</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">EnjoyTheWeb</a>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          <% if user_signed_in? %>
+            Connecté en tant que <%= current_user.email %>.
+            <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete %>
+          <% else %>
+            <%= link_to "Inscription", new_user_registration_path %> ou <%= link_to "Connexion", new_user_session_path %>
+          <% end %>
+        </p>
+        <ul class="nav">
+          <li class="active"><%= link_to "Home", accueil_path%></li>
+          <li><%= link_to "Nos valeurs", about_path %></li>
+          <li><%= link_to "Suggérer un site", suggestion_path %></li>
+          <li><a href="#">Options</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
+  </div>
+</div>
 <script>
 
 </script>

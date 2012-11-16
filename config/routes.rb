@@ -1,6 +1,8 @@
 EnjoyTheWeb::Application.routes.draw do
 
-  resources :website_images
+  devise_for :users
+
+  
 
   get "tags/new"
 
@@ -30,6 +32,7 @@ EnjoyTheWeb::Application.routes.draw do
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/webapps/:id/addtag/:tag' => 'webapps#add_tag'
 
+  root :to => "webapps#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

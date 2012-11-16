@@ -1,4 +1,4 @@
-<!-- This file is the main default html code of the web site -->
+<!-- This the template html used when controller PAGES is called -->
 
 <!doctype html>
 <html>
@@ -10,29 +10,23 @@
 
   <body>
 
-    <!--<%= render('layouts/topbar') %>-->
-    <div class="row-fluid">
-      <div class="span6 offset3">
-        <%= render('layouts/caroussel') %>
-      </div>
-    </div>
-    <div class="container-fluid">     
+    <%= render('layouts/topbar') %>
 
-      <div class="row-fluid">
-        <div class="span3">
-          <%= render('layouts/left_menu/leftmenu') %>
-        </div><!--/span-->
+    <div class="container-fluid" style="margin-top: 2%">
 
-        <div class="span9">
 
-          <%= render 'layouts/flash_messages' %>
-          <%= yield %>
+      <div class="row-fluid" >
 
+        <div class="span10 offset1">
+          <div class="hero-unit">
+            <%= yield %>
+          </div>
         </div>
       </div>
 
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
     </div><!--/.fluid-container-->
+
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
