@@ -14,7 +14,10 @@ class Tag < ActiveRecord::Base
   has_many :tagAppRelations, :foreign_key => "tag_id", :dependent => :destroy
   has_many :webapps, :through => :tagAppRelations, :source => :webapp
 
-   accepts_nested_attributes_for :tagAppRelations
+
+  scope :most_used, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.id)").group('tags.id').reverse_order.limit(n)}
+
+  accepts_nested_attributes_for :tagAppRelations
   # Does this tag tag 'webapp' ? 
   def tagged?(webapp)
     webapps.find_by_id(webapp.id)
@@ -32,6 +35,6 @@ class Tag < ActiveRecord::Base
       }
     }
     return @tagsResult
-  end
+  end 
 
 end

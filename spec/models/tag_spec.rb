@@ -44,6 +44,29 @@ describe Tag do
     end
   end
 
+  describe "scope most_used" do
+    it "shall have a method called webApps" do
+      Tag.should respond_to(:most_used)
+    end
+
+    it "shall return n tags most used" do
+      @w1 = FactoryGirl.create(:webapp)
+      @w2 = FactoryGirl.create(:webapp)
+      @w3 = FactoryGirl.create(:webapp)
+      @w1.add_tag("test1")
+      @w1.add_tag("test2")
+      @w2.add_tag("test1")
+      @w2.add_tag("test2")
+      @w3.add_tag("test1")
+      @w3.add_tag("test3")
+
+      assert Tag.most_used(2)[0].name == "test1"
+      #assert Tag.most_used(2)[0].tagAppRelations[0].coeff == 4
+      assert Tag.most_used(2)[1].name == "test2"
+      #assert Tag.most_used(2)[1].tagAppRelations[0].coeff == 2
+    end
+  end
+
   describe "method addTags" do
     pending "we have to wrtie this test"
   end

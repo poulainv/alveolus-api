@@ -1,4 +1,3 @@
 module WebAppsHelper
 
-
 end

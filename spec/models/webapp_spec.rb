@@ -115,7 +115,7 @@ describe Webapp do
       assert @webapp.tagged_by_tag?("test3")
       assert @webapp.tagged_by_tag?("test2")
       assert @webapp.tagged_by_tag?("test1")
-      print @webapp.tags.to_s
+
       assert @webapp.tags.length == 3
     end
 

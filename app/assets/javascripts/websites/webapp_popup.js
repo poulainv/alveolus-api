@@ -6,7 +6,7 @@ $(document).ready(function(){
     // Script to excecute when open popup to update info
     $(".websitetop").click(function () {
         var websiteId = $(this).attr("websiteId");
-         $("#messageTagSaved").hide();
+        $("#messageTagSaved").hide();
         // Get info website
         $.ajax({
             type: "GET",
@@ -36,7 +36,9 @@ $(document).ready(function(){
         var newTag = $('#newTagField').val();
         $.ajax({
             type: "POST",
-            data : {tag : newTag},
+            data : {
+                tag : newTag
+            },
             url: "/webapps/"+websiteId+"/tags"
         }).done(function( msg ) {
             initialize_website_tags(msg);
@@ -51,13 +53,13 @@ $(document).ready(function(){
 
 
 function ajaxGetTags(websiteId){
-        // Get list tag
-        $.ajax({
-            type: "GET",
-            url: "/webapps/"+websiteId+"/tags"
-        }).done(function( msg ) {
-            initialize_website_tags(msg);
-        });
+    // Get list tag
+    $.ajax({
+        type: "GET",
+        url: "/webapps/"+websiteId+"/tags"
+    }).done(function( msg ) {
+        initialize_website_tags(msg);
+    });
 }
 
 

@@ -13,18 +13,22 @@ class WebappsController < ApplicationController
     if (params[:tag])
       @webapps = Webapp.tagged_with(params[:tag])
       @subtitle = "Websites du hashtag : #"+params[:tag].capitalize
+      render :search , :layout => "pages"
+  
     else
       @subtitle = "Tous les websites"
       @webapps = Webapp.validated
       @webapps_suggest = Webapp.recent(6)
       @webapps_recommand = Webapp.trend(6)
+      respond_to do |format|
+        format.html
+        format.json{
+          render :json => @webapps.to_json
+        }
+      end
+    
     end
-    respond_to do |format|
-      format.html
-      format.json{
-        render :json => @webapps.to_json
-      }
-    end
+    
   end
 
 
