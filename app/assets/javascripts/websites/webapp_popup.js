@@ -96,7 +96,7 @@ function initialize_website_tags(tags){
             text: tags[x].name,
             type: "button",
             style: "color:white",
-            href: "/webapps/tag/"+tags[x].name,
+            href: "/tags/"+tags[x].id+"/webapps",
             click: function(){
                 $('#detailWebsiteModal').modal("hide");
             }

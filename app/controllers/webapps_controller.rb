@@ -10,9 +10,10 @@ class WebappsController < ApplicationController
 
   # GET /webapps/
   def index
-    if (params[:tag])
-      @webapps = Webapp.tagged_with(params[:tag])
-      @subtitle = "Websites du hashtag : #"+params[:tag].capitalize
+    if (params[:tag_id])
+      @tag = Tag.find_by_id(params[:tag_id])
+      @webapps = Webapp.tagged_with(@tag.name)
+      @subtitle = "Websites du hashtag : #"+@tag.name.capitalize
       render :search , :layout => "pages"
   
     else
