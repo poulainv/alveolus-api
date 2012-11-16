@@ -3,10 +3,10 @@
 class WebappsController < ApplicationController
 
   # To call method before some other methods
-  before_filter :webapps_top_recent, :only => [:show, :edit, :index, :new, :create]
-  before_filter :webapps_top_comment, :only => [:show,:edit,  :index, :new, :create]
-  before_filter :webapps_top_trend, :only => [:show, :edit,   :index, :new, :create]
-  before_filter :webapps_promoted, :only => [:show, :edit,  :index, :new, :create]
+  before_filter :webapps_top_recent, :only => [:show, :index]
+  before_filter :webapps_top_comment, :only =>[:show, :index]
+  before_filter :webapps_top_trend, :only => [:show, :index]
+  before_filter :webapps_promoted, :only => [:show, :index]
 
   # GET /webapps/
   def index
@@ -87,6 +87,10 @@ class WebappsController < ApplicationController
     end
   end
 
+  
+  ################
+  ## Manage TAG ##
+  ################
   def add_tag
     @webapp = Webapp.find(params[:id])
     if @webapp.add_tags(params[:tag])
