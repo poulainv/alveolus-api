@@ -5,20 +5,20 @@
   <%= render 'shared/error_messages' %>
   <legend>Soumettez un WebSite</legend>
   <div class="row-fluid">
-    <div class="offset4 span12">
+    <div class="offset3 span12">
       <div class="field">
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title ,:class => "input-xlarge"%>
       </div>
 
       <div class="field">
         <%= f.label :caption %>
-        <%= f.text_field :caption %>
+        <%= f.text_field :caption, :class => "input-xlarge" %>
       </div>
 
       <div class="field">
         <%= f.label :description %>
-        <%= f.text_area :description %>
+        <%= f.text_area :description, :class => "input-xxlarge" %>
       </div>
 
       <div class="field">
@@ -31,7 +31,7 @@
       
       <div>
         <%= f.label :tag_list, "Tags (séparé par virgules)" %>
-        <%= f.text_field :tag_list %>
+        <%= f.text_field :tag_list, :class => "input-large" %>
       </div>
 
       <div class="field">

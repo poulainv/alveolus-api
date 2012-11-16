@@ -16,6 +16,8 @@ class WebappsController < ApplicationController
     else
       @subtitle = "Tous les websites"
       @webapps = Webapp.validated
+      @webapps_suggest = Webapp.recent(6)
+      @webapps_recommand = Webapp.trend(6)
     end
     respond_to do |format|
       format.html

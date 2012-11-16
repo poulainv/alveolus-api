@@ -62,7 +62,7 @@ Webapp.create( :title =>'LaMachineDuVoisin',
 
 Webapp.create( :title =>'Covoiturage',
               :caption => 'Covoiturage : Voyagez moins cher en toute confiance - 2 Millions de conducteurs et passagers. Départs immédiats !',
-              :description => 'fsNotre ambition : rendre le covoiturage toujours plus facile, fiable et efficace en mettant simplement en relation des conducteurs effectuant un trajet, ponctuel ou régulier, et des passagers souhaitant effectuer ce même trajet.
+              :description => 'Notre ambition : rendre le covoiturage toujours plus facile, fiable et efficace en mettant simplement en relation des conducteurs effectuant un trajet, ponctuel ou régulier, et des passagers souhaitant effectuer ce même trajet.
 
 Le but : faire ainsi coïncider les besoins, partager les frais entre covoitureurs, optimiser l’utilisation des véhicules et réduire notre impact sur notre planète par une réduction de nos émissions de CO2. Tout le monde a à y gagner !',
               :url => 'http://www.covoiturage.fr/',
@@ -94,7 +94,7 @@ Un réseau utile, alternatif et indépendant dont le but est d\'accompagner la m
               :validate => true,
               :nb_click_preview => 23,
               :nb_click_detail => 0,
-              :nb_click_url => 0).add_tags(["culture","resaux","art"])
+              :nb_click_url => 0).add_tags(["culture","reseaux","art"])
 
 
 Webapp.create( :title =>'TED',
