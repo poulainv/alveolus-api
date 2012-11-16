@@ -24,7 +24,6 @@ class WebappsController < ApplicationController
       format.json{
         render :json => @webapps.to_json
       }
-
     end
   end
 
@@ -73,7 +72,7 @@ class WebappsController < ApplicationController
 
 
   # PUT /webapps/1
-  # PUT /webapps/1.json
+  # earPUT /webapps/1.json
   def update
     @webapp = Webapp.find(params[:id])
     respond_to do |format|
@@ -88,27 +87,6 @@ class WebappsController < ApplicationController
   end
 
   
-  ################
-  ## Manage TAG ##
-  ################
-  def add_tag
-    @webapp = Webapp.find(params[:id])
-    if @webapp.add_tags(params[:tag])
-      render :json => @webapp.best_tags(3).to_json
-    else
-      flash[:error] = "La Webapp demandé n'existe pas"
-      redirect_to accueil_path
-    end  
-  end
-
-  def tags_list
-    if  @webapp = Webapp.find(params[:id])
-      render :json => @webapp.best_tags(3).to_json(:include => :tagAppRelations)
-    else
-      flash[:error] = "La Webapp demandé n'existe pas"
-      redirect_to accueil_path
-    end
-  end
 
   ## Method to increment nb_click...
   def click

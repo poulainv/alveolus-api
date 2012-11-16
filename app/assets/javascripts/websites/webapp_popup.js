@@ -12,18 +12,10 @@ $(document).ready(function(){
             type: "GET",
             url: "/webapps/"+websiteId+".json"
         }).done(function( msg ) {
-            initialize_website_details(msg)
+            initialize_website_details(msg);
+            ajaxGetTags(websiteId);
         });
 
-        // Get list tag
-        $.ajax({
-            type: "GET",
-            url: "/webapps/"+websiteId+"/tagslist"
-        }).done(function( msg ) {
-            initialize_website_tags(msg)
-        });
-
-  
         // Increment nb_click_detail
         increment_nb_click(websiteId, "detail");
 
@@ -44,7 +36,8 @@ $(document).ready(function(){
         var newTag = $('#newTagField').val();
         $.ajax({
             type: "POST",
-            url: "/webapps/"+websiteId+"/addtag/"+ newTag
+            data : {tag : newTag},
+            url: "/webapps/"+websiteId+"/tags"
         }).done(function( msg ) {
             initialize_website_tags(msg);
             $("#messageTagSaved").show();
@@ -55,6 +48,17 @@ $(document).ready(function(){
 
 
 });
+
+
+function ajaxGetTags(websiteId){
+        // Get list tag
+        $.ajax({
+            type: "GET",
+            url: "/webapps/"+websiteId+"/tags"
+        }).done(function( msg ) {
+            initialize_website_tags(msg);
+        });
+}
 
 
 function initialize_website_details(website){
