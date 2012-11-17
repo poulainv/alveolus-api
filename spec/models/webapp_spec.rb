@@ -260,8 +260,9 @@ describe Webapp do
     before(:each) do
       @webapp = FactoryGirl.create(:webapp)
       @user =  FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
       @mp1 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user,:created_at => 1.day.ago)
-      @mp2 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user,:created_at => 1.hour.ago)
+      @mp2 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user2,:created_at => 1.hour.ago)
     end
 
     it "shall have an attribute 'comment'" do

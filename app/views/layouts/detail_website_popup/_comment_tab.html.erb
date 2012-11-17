@@ -1,0 +1,28 @@
+<!-- HTML for comments in detail popop => fill in by AJAX ('websites/webapp_popup.js')-->
+
+
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span7">
+
+      <h4>Commentaires : </h4>
+      <div id="detailWebsiteModalComments"></div>
+    </div>
+
+    <div class="span5">
+      <h4> Donner votre avis </h4>
+       <%= render 'layouts/flash_messages' %>
+      <textarea class="span12" id="newCommentField" rows="4"></textarea><br>
+      <% if user_signed_in? %>
+        <a class="btn" id="addCommentSendButton" type="button">Publier</a><br></br>
+        <label class="checkbox">
+          <input type="checkbox"> Publiez aussi sur Facebook
+        </label>
+      <%else%>
+        <%=render "shared/message_please_sign_in"%>
+      <%end%>
+    </div>
+
+  </div>
+</div>

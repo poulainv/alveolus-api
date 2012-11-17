@@ -11,5 +11,5 @@
   <p class="alert alert-success" id="messageTagSaved"> C'est noté ! </p>
 
 <%else%>
-  <%= link_to "Connectez-vous pour contribuer", new_user_session_path, :class=>"btn btn-small btn-link" %>
+  <%=render "shared/message_please_sign_in"%>
 <%end%>

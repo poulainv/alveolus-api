@@ -27,11 +27,12 @@ class CommentsController < ApplicationController
       @comment.webapp_id = @webapp.id
       if @comment.save
         flash[:success] = "Commentaire ajouté"
-        render :json => @webapp.comments.to_json
+        render :json => @webapp.comments.to_json({:include => :user})
       else
-        flash[:error] = "Une erreur s'est produits lors de l'ajout du commentaire"
-        render '/accueil'
+        render :status => 406,:json =>"Vous avez déjà donné votre avis".to_json
       end
+    else
+      render :nothing => true
     end
   end
 

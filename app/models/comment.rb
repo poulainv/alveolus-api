@@ -8,5 +8,7 @@ class Comment < ActiveRecord::Base
 
   validates :body, :presence => true, :length => { :maximum => 140 }
   validates :user_id, :presence => true
+  validates :webapp_id, :presence => true
+  validates_uniqueness_of :user_id, :scope => [:webapp_id]
 
 end

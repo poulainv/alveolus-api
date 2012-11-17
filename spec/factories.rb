@@ -24,7 +24,7 @@ end
 # This will guess the User
 FactoryGirl.define do
   factory :user do
-    sequence(:email){|n| "vincent.poulain{n}@lemonde.com" }
+    sequence(:email){|n| "vincent.poulain#{n}@lemonde.com" }
     password  "saluttoi"
   end
 end

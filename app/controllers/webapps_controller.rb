@@ -48,7 +48,10 @@ class WebappsController < ApplicationController
       respond_to do |format|
         format.html
         format.json{
-          render( :json => @webapp.to_json(:include=>:comments))
+          render( :json => @webapp.to_json(:include=> 
+                { :comments =>
+                  { :include => :user}
+              }))
         }
       end
     else

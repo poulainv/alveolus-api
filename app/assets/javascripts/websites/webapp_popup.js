@@ -60,8 +60,9 @@ $(document).ready(function(){
             url: "/webapps/"+websiteId+"/comments"
         }).done(function( msg ) {
             initialize_website_comments(msg);
-            $("#messageTagSaved").show();
-        });
+        }).fail(function() {
+            alert('Vous avez déjà publiez pour ce site');
+        })
 
     });
 
@@ -144,17 +145,13 @@ function initialize_website_tags(tags){
 function initialize_website_comments(comments){
 
   $("#detailWebsiteModalComments").html('')
-  console.log('++'+
-  $("#detailWebsiteModalComments").html()+'++')
   $("#newCommentField").val('');
     for (x in comments)
     {
         $("<p/>", {
             "class" : "commentText",
-            text: comments[x].body,
-            style: "color:black"
-        }).appendTo("#detailWebsiteModalComments");
-
+            text: comments[x].body
+        }).appendTo("#detailWebsiteModalComments").before('<em>'+comments[x].user.email+': </em>')
     }
     $('#commentText').after('<br></br>');
     if($("#detailWebsiteModalComments").html()==''){

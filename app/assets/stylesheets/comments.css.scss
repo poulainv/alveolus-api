@@ -1,3 +1,16 @@
-// Place all the styles related to the Comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.commentText{
+    color : black ;
+    border-bottom-style: dotted;
+    border-bottom-width: 1px;
+    border-bottom-color: green;
+    margin-bottom : 5%;
+    margin-top : 1%;
+    padding-bottom : 3%;
+}
+
+#detailWebsiteModalComments{
+
+    overflow:auto;
+    height:300px;
+}
