@@ -5,39 +5,38 @@
   <div class="row-fluid">
     <div class="span2">
 
-        <h3>Tags : </h3>
-        <%= render  "layouts/detail_website_popup/tag_popup" %>
+      <h3>Tags : </h3>
+      <%= render  "layouts/detail_website_popup/tag_popup" %>
 
     </div>
+
     <div class="span10">
-      <!-- Caption -->
-      <div class="row-fluid">
-        <div class="span10">
-          <h4 id="detailWebsiteModalCaption"></h4>
+      <ul id="detailPopupTab" class="nav nav-tabs">
+        <li class="active"><a href="#detailTab" data-toggle="tab">Détails</a></li>
+        <li><a href="#commentTab" data-toggle="tab">Avis des internautes</a></li>
+
+      </ul>
+
+    </div>
+    <!-- View for tab content -->
+    <div class="span10">
+
+      <div class="well sidebar-nav">
+        <div id="detailPopupContent" class="tab-content">
+          <div class="tab-pane fade in active" id="detailTab">
+            <%= render "layouts/detail_website_popup/detail_tab" %>
+          </div>
+          <div class="tab-pane fade" id="commentTab">
+            <!-- Commentaires -->
+            <h4>Commentaires : </h4>
+            <%= render  "layouts/detail_website_popup/comment_popup" %>
+          </div>
         </div>
-      </div>
+      </div><!--/.well-->
 
-      <!-- Row : Description and image -->
-      <div class="row-fluid">
-
-
-        <div class="span4">
-          <!-- URL -->
-          <a href="" target="_blank" id="detailWebsiteModalURL" class="websiteurl"></a>
-
-          <br></br>
-          <!-- Description -->
-          <p id="detailWebsiteModalDescription"></p>
-
-          <!-- Commentaires -->
-          <h4>Commentaires : </h4>
-          <%= render  "layouts/detail_website_popup/comment_popup" %>
-        </div><!--/span-->
-
-        <div class="span6">
-          <img alt="" id="detailWebsiteModalImage" src="" ></img>
-        </div>
-      </div>
     </div>
   </div>
 </div>
+
+
+

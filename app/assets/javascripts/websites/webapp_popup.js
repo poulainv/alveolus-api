@@ -104,7 +104,8 @@ function initialize_website_details(website){
     $("#detailWebsiteModalImage").attr("src",website.image);
     $("#detailWebsiteModalEdit").attr("href","/webapps/"+website.id+"/edit");
     $("#detailWebsiteModalTagsList").empty();
-
+    $('#favicons_website').attr("src","http://www.google.com/s2/favicons?domain="+website.url.substring(7,website.url.length-1))
+    console.log( $('#favicons_website').attr("src"))
     initialize_website_tags(website.tags);
 
     // Listener when URL is clicked
