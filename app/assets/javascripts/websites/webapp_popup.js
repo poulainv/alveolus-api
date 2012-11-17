@@ -14,7 +14,7 @@ $(document).ready(function(){
         }).done(function( msg ) {
             initialize_website_details(msg);
             ajaxGetTags(websiteId);
-            ajaxGetComments(websiteId);
+            initialize_website_comments(msg.comments);
         });
 
         // Increment nb_click_detail
@@ -92,6 +92,7 @@ function ajaxGetComments(websiteId){
 }
 
 
+// Update details website in popup detail
 function initialize_website_details(website){
     $("#detailWebsiteModalTitle").html(website.title);
     $("#detailWebsiteModalDescription").html(website.description);
@@ -112,6 +113,7 @@ function initialize_website_details(website){
     });
 }
 
+// Update tags in popup detail
 function initialize_website_tags(tags){
 
     $("#addTagButton").show();
@@ -121,7 +123,7 @@ function initialize_website_tags(tags){
     for (x in tags)
     {
         $("<a/>", {
-            "class": "btn btn-info btn-small",
+            "class": "btn btn-info btn-small tabBtn",
             text: tags[x].name,
             type: "button",
             style: "color:white",
@@ -130,24 +132,31 @@ function initialize_website_tags(tags){
                 $('#detailWebsiteModal').modal("hide");
             }
         }).appendTo("#detailWebsiteModalTagsList");
-        $("<br>").appendTo("#detailWebsiteModalTagsList");
-        $("<br>").appendTo("#detailWebsiteModalTagsList");
     }
+
+    $(".tabBtn").after('<br></br>');
+
 
 }
 
+// Update comments in popup detail
 function initialize_website_comments(comments){
 
- $("#detailWebsiteModalComments").html('');
+  $("#detailWebsiteModalComments").html('')
+  console.log('++'+
+  $("#detailWebsiteModalComments").html()+'++')
   $("#newCommentField").val('');
     for (x in comments)
     {
         $("<p/>", {
+            "class" : "commentText",
             text: comments[x].body,
             style: "color:black"
         }).appendTo("#detailWebsiteModalComments");
-        $("<br>").appendTo("#detailWebsiteModalTagsList");
-        $("<br>").appendTo("#detailWebsiteModalTagsList");
-    }
 
+    }
+    $('#commentText').after('<br></br>');
+    if($("#detailWebsiteModalComments").html()==''){
+        $("#detailWebsiteModalComments").html('Pas encore de commentaires, laissez le votre')
+    }
 }

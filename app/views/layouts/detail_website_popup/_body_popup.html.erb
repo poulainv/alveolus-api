@@ -1,0 +1,43 @@
+<!-- Body for the popup detail -->
+
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+
+        <h3>Tags : </h3>
+        <%= render  "layouts/detail_website_popup/tag_popup" %>
+
+    </div>
+    <div class="span10">
+      <!-- Caption -->
+      <div class="row-fluid">
+        <div class="span10">
+          <h4 id="detailWebsiteModalCaption"></h4>
+        </div>
+      </div>
+
+      <!-- Row : Description and image -->
+      <div class="row-fluid">
+
+
+        <div class="span4">
+          <!-- URL -->
+          <a href="" target="_blank" id="detailWebsiteModalURL" class="websiteurl"></a>
+
+          <br></br>
+          <!-- Description -->
+          <p id="detailWebsiteModalDescription"></p>
+
+          <!-- Commentaires -->
+          <h4>Commentaires : </h4>
+          <%= render  "layouts/detail_website_popup/comment_popup" %>
+        </div><!--/span-->
+
+        <div class="span6">
+          <img alt="" id="detailWebsiteModalImage" src="" ></img>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
