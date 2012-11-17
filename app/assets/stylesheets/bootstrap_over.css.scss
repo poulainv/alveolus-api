@@ -23,12 +23,18 @@ body { padding-top: 60px; }
 }
 
 .modal {
+
     width:80%;
     /* Should be : -width/2 */
     margin-left : -40%;
+
 }
 
+
+
 .modal-header {
+
+    margin-top : 0px;
   // Close icon
   .close { margin-top: 2px;
 

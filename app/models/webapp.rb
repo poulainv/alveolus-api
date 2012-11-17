@@ -24,13 +24,13 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
-  
+  has_many :comments , :dependent => :destroy
   
   url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
@@ -129,11 +129,11 @@ class Webapp < ActiveRecord::Base
   def increment_nb_click(hash)
     case hash[:element]
     when "detail"
-      self.increment(:nb_click_detail)
+      self.increment(:nb_click_detail).save
     when "preview"
-      self.increment(:nb_click_preview)
+      self.increment(:nb_click_preview).save
     when "url"
-      self.increment(:nb_click_url)
+      self.increment(:nb_click_url).save
     end
   end
 

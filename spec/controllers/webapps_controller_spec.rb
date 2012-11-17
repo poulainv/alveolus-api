@@ -51,7 +51,7 @@ describe WebappsController do
       render_views
       it "shall have a good title" do
         get 'new'
-        response.should have_selector("title", :content => @title)
+        response.should have_selector("h2", :content => @subtitle)
       end
     end
   end

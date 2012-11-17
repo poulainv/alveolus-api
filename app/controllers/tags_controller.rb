@@ -18,10 +18,15 @@ class TagsController < ApplicationController
 
 
   def index
-    if  @webapp = Webapp.find(params[:webapp_id])
-      render :json => @webapp.best_tags(3).to_json(:include => :tagAppRelations)
+    if params[:webapp_id]
+      if  @webapp = Webapp.find(params[:webapp_id])
+        render :json => @webapp.best_tags(3).to_json(:include => :tagAppRelations)
+      else
+        flash[:error] = "La Webapp demandé n'existe pas"
+        redirect_to accueil_path
+      end
     else
-      flash[:error] = "La Webapp demandé n'existe pas"
+      flash[:error] = "URL inconnue"
       redirect_to accueil_path
     end
   end

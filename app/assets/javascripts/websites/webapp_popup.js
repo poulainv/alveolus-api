@@ -14,6 +14,7 @@ $(document).ready(function(){
         }).done(function( msg ) {
             initialize_website_details(msg);
             ajaxGetTags(websiteId);
+            ajaxGetComments(websiteId);
         });
 
         // Increment nb_click_detail
@@ -31,7 +32,7 @@ $(document).ready(function(){
 
 
     $("#addTagSendButton").click(function () {
-        console.log('click add')
+        console.log('click add tag')
         var websiteId = $('#detailWebsiteModal').attr("websiteId");
         var newTag = $('#newTagField').val();
         $.ajax({
@@ -42,6 +43,23 @@ $(document).ready(function(){
             url: "/webapps/"+websiteId+"/tags"
         }).done(function( msg ) {
             initialize_website_tags(msg);
+            $("#messageTagSaved").show();
+        });
+
+    });
+
+        $("#addCommentSendButton").click(function () {
+        console.log('click add comment')
+        var websiteId = $('#detailWebsiteModal').attr("websiteId");
+        var newComment = $('#newCommentField').val();
+        $.ajax({
+            type: "POST",
+            data : {
+                comment : newComment
+            },
+            url: "/webapps/"+websiteId+"/comments"
+        }).done(function( msg ) {
+            initialize_website_comments(msg);
             $("#messageTagSaved").show();
         });
 
@@ -59,6 +77,17 @@ function ajaxGetTags(websiteId){
         url: "/webapps/"+websiteId+"/tags"
     }).done(function( msg ) {
         initialize_website_tags(msg);
+        
+    });
+}
+
+function ajaxGetComments(websiteId){
+    // Get list comment
+    $.ajax({
+        type: "GET",
+        url: "/webapps/"+websiteId+"/comments"
+    }).done(function( msg ) {
+        initialize_website_comments(msg);
     });
 }
 
@@ -101,6 +130,22 @@ function initialize_website_tags(tags){
                 $('#detailWebsiteModal').modal("hide");
             }
         }).appendTo("#detailWebsiteModalTagsList");
+        $("<br>").appendTo("#detailWebsiteModalTagsList");
+        $("<br>").appendTo("#detailWebsiteModalTagsList");
+    }
+
+}
+
+function initialize_website_comments(comments){
+
+ $("#detailWebsiteModalComments").html('');
+  $("#newCommentField").val('');
+    for (x in comments)
+    {
+        $("<p/>", {
+            text: comments[x].body,
+            style: "color:black"
+        }).appendTo("#detailWebsiteModalComments");
         $("<br>").appendTo("#detailWebsiteModalTagsList");
         $("<br>").appendTo("#detailWebsiteModalTagsList");
     }

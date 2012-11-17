@@ -27,6 +27,7 @@ EnjoyTheWeb::Application.routes.draw do
 
   resources :webapps do
     resources  :tags
+    resources :comments
   end
 
   match '/webapps/:id/click/:element' => 'webapps#click'

@@ -205,14 +205,14 @@ describe Webapp do
       @webapp.nb_click_detail.should eql(old_value+1)
     end
 
-     it "should increment 1 attribute nb_click_preview" do
+    it "should increment 1 attribute nb_click_preview" do
       ## webapp has nb_click_detail init at 3
       old_value = @webapp.nb_click_preview
       @webapp.increment_nb_click(:element => "preview")
       @webapp.nb_click_preview.should eql(old_value+1)
     end
 
-     it "should increment 1 attribute nb_click_url" do
+    it "should increment 1 attribute nb_click_url" do
       ## webapp has nb_click_detail init at 3
       old_value = @webapp.nb_click_url
       @webapp.increment_nb_click(:element => "url")
@@ -252,5 +252,34 @@ describe Webapp do
       assert @w1.best_tags(2)[1].tagAppRelations[0].coeff == 2
     end
 
+  end
+
+
+  describe " associations with comments" do
+
+    before(:each) do
+      @webapp = FactoryGirl.create(:webapp)
+      @user =  FactoryGirl.create(:user)
+      @mp1 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user,:created_at => 1.day.ago)
+      @mp2 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user,:created_at => 1.hour.ago)
+    end
+
+    it "shall have an attribute 'comment'" do
+      @webapp.should respond_to(:comments)
+
+    end
+
+    it "shall have goods comments in a good order (DESC)" do
+      @webapp.comments.should == [@mp2, @mp1]
+    end
+
+
+    it "shall destroy comment associated" do
+      @webapp.destroy
+      [@mp1, @mp2].each do |comment|
+        Comment.find_by_id(comment.id).should be_nil
+      end
+
+    end
   end
 end
