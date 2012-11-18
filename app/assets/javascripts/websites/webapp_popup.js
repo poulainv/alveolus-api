@@ -5,6 +5,17 @@ $(document).ready(function(){
 
     // Script to excecute when open popup to update info
     $(".websitetop").click(function () {
+
+        $('#star_rating_user').raty({
+            size      : 36,
+            starHalf  : 'star-half-big.png',
+            starOff   : 'star-off-big.png',
+            starOn    : 'star-on-big.png',
+            target     : '#target',
+            targetText : '--',
+            targetKeep : true
+        });
+
         var websiteId = $(this).attr("websiteId");
         $("#messageTagSaved").hide();
         // Get info website
@@ -48,14 +59,16 @@ $(document).ready(function(){
 
     });
 
-        $("#addCommentSendButton").click(function () {
+    $("#addCommentSendButton").click(function () {
         console.log('click add comment')
         var websiteId = $('#detailWebsiteModal').attr("websiteId");
         var newComment = $('#newCommentField').val();
+        var newRating = $('#star_rating_user').raty('score');
         $.ajax({
             type: "POST",
             data : {
-                comment : newComment
+                comment : newComment,
+                rating : newRating
             },
             url: "/webapps/"+websiteId+"/comments"
         }).done(function( msg ) {
@@ -106,7 +119,6 @@ function initialize_website_details(website){
     $("#detailWebsiteModalEdit").attr("href","/webapps/"+website.id+"/edit");
     $("#detailWebsiteModalTagsList").empty();
     $('#favicons_website').attr("src","http://www.google.com/s2/favicons?domain="+website.url.substring(7,website.url.length-1))
-    console.log( $('#favicons_website').attr("src"))
     initialize_website_tags(website.tags);
 
     // Listener when URL is clicked
@@ -142,19 +154,52 @@ function initialize_website_tags(tags){
 }
 
 // Update comments in popup detail
+// Ultra crade
 function initialize_website_comments(comments){
 
-  $("#detailWebsiteModalComments").html('')
-  $("#newCommentField").val('');
-    for (x in comments)
-    {
-        $("<p/>", {
-            "class" : "commentText",
-            text: comments[x].body
-        }).appendTo("#detailWebsiteModalComments").before('<em>'+comments[x].user.email+': </em>')
-    }
-    $('#commentText').after('<br></br>');
-    if($("#detailWebsiteModalComments").html()==''){
-        $("#detailWebsiteModalComments").html('Pas encore de commentaires, laissez le votre')
-    }
+    $("#detailWebsiteModalComments").html('')
+    $("#newCommentField").val('');
+     var comment ="";
+    jQuery.each(comments, function(i, val) {
+      
+      
+        comment = "<div class='row-fluid'>"+
+        "<div class='span6'><em>"+
+        val.user.email+
+        "</em> </div>"+
+        "<div class='span4'>"+
+        multiplicateString(val.rating,"<img src='img/googlestar.png'></img>")+
+        "</div>"+
+
+        "</div>"+
+
+        "<div class='row-fluid'>"+
+        "<div class='span12' style=' border-bottom:1px dotted #999999;margin-bottom:5%;padding-bottom : 3%'>"+
+        val.body
+        "</div>"+
+        "</div> "
+
+        $("#detailWebsiteModalComments").append(comment);
+
+
+    // /  $("<p/>", {
+    //    "class" : "commentText custom_inline",
+    //      text: val.body
+    //    }).appendTo("#detailWebsiteModalComments")
+    //      .before('<em>'+val.user.email+': </em>')
+    //        .after("<img src='img/googlestar.png'></img>")
+
+        
+
+    });
+
 }
+
+  function multiplicateString(n,html){
+        var res ="";
+        var i =0;
+        for(i=0;i<n;i++){
+            res+=html;
+        }
+        return res;
+    }

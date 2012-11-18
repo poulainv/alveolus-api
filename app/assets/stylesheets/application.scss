@@ -10,28 +10,47 @@
  *= require scaffolds.css
  *= require_self
  *= require_tree .
- */
+*/
 
 .content {
-  background-color: #eee;
-  padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    background-color: #eee;
+    padding: 20px;
+    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
 .field_with_errors {
-  margin-top: 10px;
-  padding: 2px;
-  background-color: white;
-  display: table;
+    margin-top: 10px;
+    padding: 2px;
+    background-color: white;
+    display: table;
 }
 
 .field_with_errors label {
-  color: #000;
+    color: #000;
+}
+
+.line-separator{
+    height:0.5px;
+    background:white;
+    border-bottom:1px solid #999999;
+
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.line-separator-dashed{
+    height:0.5px;
+    background:white;
+    border-bottom:1px dashed #999999;
+
+    margin-bottom: 3%;
+    margin-top: 3%;
+
 }
 

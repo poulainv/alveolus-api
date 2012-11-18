@@ -7,17 +7,25 @@
     <div class="span7">
 
       <h4>Commentaires : </h4>
+       <div class="line-separator-dashed"></div>
+       
       <div id="detailWebsiteModalComments"></div>
+   
     </div>
 
     <div class="span5">
-      <h4> Donner votre avis </h4>
-       <%= render 'layouts/flash_messages' %>
-      <textarea class="span12" id="newCommentField" rows="4"></textarea><br>
+      <h4> Donnez votre avis </h4>
+     <div class="line-separator"></div>
+     <div>
+      <span id="star_rating_user" class="custom_inline"></span>
+      <span id="target" class="custom_inline text-info"></span>
+     </div>
+      <div class="line-separator"></div>
+      <textarea class="span12" id="newCommentField" rows="5" placeholder="Ecrire un commentaire (optionnel)"></textarea><br>
       <% if user_signed_in? %>
         <a class="btn" id="addCommentSendButton" type="button">Publier</a><br></br>
         <label class="checkbox">
-          <input type="checkbox"> Publiez aussi sur Facebook
+          <input type="checkbox"> Publiez aussi sur Facebook </input>
         </label>
       <%else%>
         <%=render "shared/message_please_sign_in"%>

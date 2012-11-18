@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
         @comments = @webapp.comments
-        render :json => @comments
+        render :json => @comments.to_json({:include => :user})
       else
         flash[:error] = "La Webapp demandé n'existe pas"
         redirect_to accueil_path
@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
   def create
     if(params[:webapp_id])
       @webapp = Webapp.find_by_id(params[:webapp_id])
-      @comment  = current_user.comments.build(:body => params[:comment])
+      @comment  = current_user.comments.build(:rating => params[:rating],:body => params[:comment])
       @comment.webapp_id = @webapp.id
       if @comment.save
         flash[:success] = "Commentaire ajouté"

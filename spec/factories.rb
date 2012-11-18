@@ -32,6 +32,7 @@ end
 FactoryGirl.define do
   factory :comment do
   body "Foo bar"
+  rating 2
   association :user
   association :webapp
   end
