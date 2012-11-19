@@ -3,10 +3,10 @@
 class WebappsController < ApplicationController
 
   # To call method before some other methods
-  before_filter :webapps_top_recent, :only => [:show, :index]
   before_filter :webapps_top_comment, :only =>[:show, :index]
   before_filter :webapps_top_trend, :only => [:show, :index]
   before_filter :webapps_promoted, :only => [:show, :index]
+  before_filter :webapps_top_rated, :only => [:show, :index]
 
   # GET /webapps/
   def index
@@ -20,12 +20,12 @@ class WebappsController < ApplicationController
     else
       @subtitle = "Tous les websites"
       @webapps = Webapp.validated
-      @webapps_suggest = Webapp.recent(6)
-      @webapps_recommand = Webapp.trend(6)
+      @webapps_suggest = Webapp.suggested
+      @webapps_top_recent = Webapp.recent(6)
       respond_to do |format|
         format.html
         format.json{
-          render :json => @webapps.to_json
+          render :json => @webapps.to_json(:methods => %w(nb_rating))
         }
       end
     
@@ -49,10 +49,8 @@ class WebappsController < ApplicationController
       respond_to do |format|
         format.html
         format.json{
-          render( :json => @webapp.to_json(:include=> 
-                { :comments =>
-                  { :include => :user}
-              }))
+          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
+          render( :json => @webapp.to_json(:methods => ["best_tags", "reviews","nb_rating"]))
         }
       end
     else
@@ -107,20 +105,22 @@ class WebappsController < ApplicationController
 
 
   ## Methods TOPS
-  protected
-  def webapps_top_recent
-    @webapps_top_recent = Webapp.recent(3)
-  end
 
   protected
   def webapps_top_trend
-    @webapps_top_trend = Webapp.trend(3)
+    @webapps_top_trend = Webapp.trend(5)
   end
 
   protected
   def webapps_top_comment
-    @webapps_top_comment = Webapp.top_comment
+    @webapps_top_comment = Webapp.most_commented(5)
   end
+
+  protected
+  def webapps_top_rated
+    @webapps_top_rated = Webapp.best_rated(5)
+  end
+
 
   def webapps_promoted
     @webapps_promoted = Webapp.promoted

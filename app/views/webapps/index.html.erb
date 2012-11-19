@@ -7,7 +7,7 @@
 <ul class="thumbnails">
   <% 3.times do |i| %>
     <li class="span4">
-     <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
+      <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i] }%>
     </li>
   <%end%>
 </ul>
@@ -17,7 +17,7 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-     <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3] }%>
+        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
 
       </div>
     </li>
@@ -34,23 +34,27 @@
 </div>
 
 <ul class="thumbnails">
-  <% 3.times do |i| %>
+  <% 3.times do |i| 
+    if( i<@webapps_suggest.length) %>
     <li class="span4">
       <div class="thumbnail">
         <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
       </div>
     </li>
   <%end%>
+<%end%>
 </ul>
 
 
 <ul class="thumbnails">
-  <% 3.times do |i| %>
+<% 3.times do |i|
+  if(i+3<@webapps_suggest.length) %>
     <li class="span4">
       <div class="thumbnail">
-  <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
+        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
 
       </div>
     </li>
   <%end%>
+<%end%>
 </ul>

@@ -1,12 +1,12 @@
 
 
 <ul class="nav nav-list">
-  <li class="nav-header"><h4>Top popularité</h4></li>
+  <li class="nav-header"><h4>Les plus commentés</h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_comment, :as=> :websites %>
   <li class="nav-header"><h4>Les plus consultés </h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_trend, :as=> :websites %>
-  <li class="nav-header"><h4>Les nouveautés</h4></li>
-  <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_recent, :as=> :websites %>
+  <li class="nav-header"><h4>Les mieux notés</h4></li>
+  <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_rated, :as=> :websites %>
 </ul>
 
 

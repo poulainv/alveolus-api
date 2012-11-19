@@ -24,7 +24,7 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :description, :title, :url, :validate
+  attr_accessible :average_rate,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :suggested,:description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
@@ -51,10 +51,13 @@ class Webapp < ActiveRecord::Base
   scope :validated, lambda { where("validate = '1'")}
   scope :unvalidated, lambda { where ("validate = '0'")}
   scope :promoted, lambda { where ("promoted = '1'")}
+  scope :suggested, lambda { where ("suggested = '1'")}
   # return latest website inserted and validated
   scope :recent, lambda { |n| validated.order("created_at").reverse_order.limit(n) }
   # return most consulted website
   scope :trend, lambda { |n| validated.order("nb_click_detail").reverse_order.limit(n) }
+  scope :most_commented, lambda { |n| joins(:comments).order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
+  scope :best_rated, lambda { |n| joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
 
 
   ##################
@@ -109,8 +112,22 @@ class Webapp < ActiveRecord::Base
     Tag.find_by_name!(name).webapps
   end
 
-  def best_tags(n)
+  def n_best_tags(n)
    tags.order("tag_app_relations.coeff").reverse_order.limit(n)
+  end
+
+
+  ## Getter virtual attributes
+  def nb_rating
+    self.comments.all.length
+  end
+
+  def best_tags
+   n_best_tags(3)
+  end
+
+  def reviews
+    comments.commented.to_json(:include => :user)
   end
 
 

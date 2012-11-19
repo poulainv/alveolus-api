@@ -17,8 +17,8 @@ $(document).ready(function(){
         // Get info website
         websites.ajax_get_by_id(popup.current_website_id,function (msg){
             popup.initialize_website_details(msg);
-            tags.ajax_get_by_website_id(popup.current_website_id,popup.initialize_website_tags);
-            popup.initialize_website_comments(msg.comments);
+            popup.initialize_website_comments(eval(msg.reviews));
+            popup.initialize_website_tags(msg.best_tags)
         });
         // Increment nb_click_detail
         increment_nb_click(popup.current_website_id, "detail");
@@ -113,6 +113,8 @@ $(document).ready(function(){
         $("#detailWebsiteModalTagsList").empty();
         $('#favicons_website').attr("src","http://www.google.com/s2/favicons?domain="+website.url.substring(7,website.url.length-1))
         $('#detailWebsiteModalRating').html(manage_star_rating(website.average_rate,"/img/googlestar.png","/img/googlestar-off.png"));
+        $('#detailWebsiteModalRating').append("<em> ("+website.nb_rating+")</em>");
+
         // Listener when URL is clicked
         $(".websiteurl").click(function () {
             increment_nb_click(websiteId,"url")

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116233353) do
+ActiveRecord::Schema.define(:version => 20121119151508) do
 
   create_table "comments", :force => true do |t|
     t.integer  "rating"
-    t.text   "body"
+    t.text     "body"
     t.integer  "webapp_id"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -63,9 +63,9 @@ ActiveRecord::Schema.define(:version => 20121116233353) do
     t.boolean  "validate"
     t.string   "url"
     t.string   "image"
-    t.float    "average_rate", :default => 0
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.float    "average_rate",       :default => 0.0
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "nb_click_preview",   :default => 0
     t.integer  "nb_click_detail",    :default => 0
     t.integer  "nb_click_url",       :default => 0
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20121116233353) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
+    t.boolean  "suggested"
   end
 
 end

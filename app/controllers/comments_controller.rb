@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     if params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
         @comments = @webapp.comments
-        render :json => @comments.to_json({:include => :user})
+        render :json => @comments.commented.to_json({:include => :user})
       else
         flash[:error] = "La Webapp demandé n'existe pas"
         redirect_to accueil_path

@@ -31,6 +31,20 @@ describe Webapp do
     @tag = Tag.new(:name=>"test")
   end
 
+describe "virtual attribute" do
+  it "shall exist nb_rating" do
+    @webapp.should respond_to(:nb_rating)
+  end
+  
+    it" shall return a good nb rating" do
+        @webapp.nb_rating.should == 0
+      @user = FactoryGirl.create(:user)
+       @attr = { :rating => 2 , :body => "Contenu du message", :webapp => @webapp,:user => @user }
+       Comment.create!(@attr)
+       @webapp.nb_rating.should == 1
+    end
+    
+  end
 
   # Method top_trend
   describe "Test method trend" do
@@ -223,7 +237,7 @@ describe Webapp do
 
   describe "method ibest_tags" do
     it "'best_tags' should exist" do
-      @webapp.should respond_to(:best_tags)
+      @webapp.should respond_to(:n_best_tags)
     end
 
     it "should return tags with bigger coeff" do
@@ -238,18 +252,18 @@ describe Webapp do
       @w1.add_tag("test3")
       @w1.add_tag("test3")
       assert @w1.tags[0].tagAppRelations[0].coeff == 0
-      assert @w1.best_tags(2)[0].name == "test3"
-      assert @w1.best_tags(2)[0].tagAppRelations[0].coeff == 2
-      assert @w1.best_tags(2)[1].name == "test2"
-      assert @w1.best_tags(2)[1].tagAppRelations[0].coeff == 1
+      assert @w1.n_best_tags(2)[0].name == "test3"
+      assert @w1.n_best_tags(2)[0].tagAppRelations[0].coeff == 2
+      assert @w1.n_best_tags(2)[1].name == "test2"
+      assert @w1.n_best_tags(2)[1].tagAppRelations[0].coeff == 1
       @w1.add_tag("test1")
       @w1.add_tag("test1")
       @w1.add_tag("test1")
       @w1.add_tag("test1")
-      assert @w1.best_tags(2)[0].name == "test1"
-      assert @w1.best_tags(2)[0].tagAppRelations[0].coeff == 4
-      assert @w1.best_tags(2)[1].name == "test3"
-      assert @w1.best_tags(2)[1].tagAppRelations[0].coeff == 2
+      assert @w1.n_best_tags(2)[0].name == "test1"
+      assert @w1.n_best_tags(2)[0].tagAppRelations[0].coeff == 4
+      assert @w1.n_best_tags(2)[1].name == "test3"
+      assert @w1.n_best_tags(2)[1].tagAppRelations[0].coeff == 2
     end
 
   end

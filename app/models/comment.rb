@@ -3,9 +3,13 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :webapp
+  ## A comments is a rating with optional text, this scope return only comments with text field
+  scope :commented, lambda { where('body != ""').order('comments.created_at DESC') }
+  ## All comments
 
-  default_scope :order => 'comments.created_at DESC'
-
+  scope :rating, lambda {order('comments.created_at DESC') }
+  default_scope :order => "comments.created_at DESC"
+  
   after_save :update_website_add_rating
   before_destroy  :update_website_delete_rating
   validates :body, :length => { :maximum => 400 }
@@ -15,10 +19,15 @@ class Comment < ActiveRecord::Base
   validates :rating, :presence => true, :inclusion => { :in => [1,2,3,4,5]}
 
 
+
   def update_website_add_rating
     @website = Webapp.find_by_id(self.webapp_id)
+    if(@website.comments.length ==0)
+      new_rating = self.rating;
+    else
     new_rating = (@website.average_rate*(@website.comments.length-1)+self.rating)/(@website.comments.length)
-    @website.average_rate = new_rating;
+      end
+      @website.average_rate = new_rating;
     @website.save
   end
 

@@ -28,7 +28,11 @@
       <div class="field">
         Promotion <%= f.check_box :promoted %>
       </div>
-      
+
+       <div class="field">
+        Suggestion <%= f.check_box :suggested %>
+      </div>
+
       <div>
         <%= f.label :tag_list, "Tags (séparé par virgules)" %>
         <%= f.text_field :tag_list, :class => "input-large" %>
