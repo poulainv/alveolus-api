@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
   def create
     if(params[:webapp_id])
       @webapp = Webapp.find_by_id(params[:webapp_id])
-      @comment  = current_user.comments.build(:rating => params[:rating],:body => params[:comment])
+      @comment  = current_user.comments.build(:rating => params[:rating], :body => params[:comment])
       @comment.webapp_id = @webapp.id
       if @comment.save
         flash[:success] = "Commentaire ajouté"

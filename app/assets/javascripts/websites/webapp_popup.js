@@ -8,7 +8,7 @@ $(document).ready(function(){
     this.current_website_id = 0 ;
 
     // Script to excecute when open popup to update info
-    $(".websitetop").click(function () {
+    $(".websiteTitle").click(function () {
         popup.current_website_id = $(this).attr("websiteId");
         // Init star rating
         popup.init_star_rating();
@@ -84,7 +84,7 @@ $(document).ready(function(){
             val.user.email+
             "</em> </div>"+
             "<div class='span4'>"+
-            manage_star_rating(val.rating,"img/googlestar.png","img/googlestar-off.png")+
+            manage_star_rating(val.rating,"/img/googlestar.png","/img/googlestar-off.png")+
             "</div>"+
             "</div>"+
             "<div class='row-fluid'>"+
@@ -112,7 +112,7 @@ $(document).ready(function(){
         $("#detailWebsiteModalEdit").attr("href","/webapps/"+website.id+"/edit");
         $("#detailWebsiteModalTagsList").empty();
         $('#favicons_website').attr("src","http://www.google.com/s2/favicons?domain="+website.url.substring(7,website.url.length-1))
-        $('#detailWebsiteModalRating').html(manage_star_rating(website.average_rate,"img/googlestar.png","img/googlestar-off.png"));
+        $('#detailWebsiteModalRating').html(manage_star_rating(website.average_rate,"/img/googlestar.png","/img/googlestar-off.png"));
         // Listener when URL is clicked
         $(".websiteurl").click(function () {
             increment_nb_click(websiteId,"url")

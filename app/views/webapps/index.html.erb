@@ -1,13 +1,13 @@
 
 
 <div class="span12">
-  <h2 class="text-info""><strong> Nouveautés </strong></h2>
+  <h3 class="text-info">Nouveautés</h3>
 </div>
 
 <ul class="thumbnails">
   <% 3.times do |i| %>
     <li class="span4">
-     <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i] }%>
+     <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
     </li>
   <%end%>
 </ul>
@@ -17,7 +17,7 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-     <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i+3] }%>
+     <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3] }%>
 
       </div>
     </li>
@@ -29,7 +29,7 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h2 class="text-info"><strong> Suggestions </strong></h2>
+    <h3 class="text-info"><strong> Suggestions </strong></h3>
   </div>
 </div>
 
@@ -37,7 +37,7 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-        <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i] }%>
+        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
       </div>
     </li>
   <%end%>
@@ -48,7 +48,7 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-  <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i+3  ] }%>
+  <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
 
       </div>
     </li>

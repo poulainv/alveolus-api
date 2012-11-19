@@ -13,8 +13,9 @@ class WebappsController < ApplicationController
     if (params[:tag_id])
       @tag = Tag.find_by_id(params[:tag_id])
       @webapps = Webapp.tagged_with(@tag.name)
-      @subtitle = "Websites du hashtag : #"+@tag.name.capitalize
-      render :search , :layout => "pages"
+      @subtitle = "Résultat de la recherche :  #"+@tag.name
+      @nb_results = @webapps.length ;
+      render :search , :layout => "navigation"
   
     else
       @subtitle = "Tous les websites"

@@ -11,20 +11,21 @@
   <body>
 
     <%= render('layouts/topbar') %>
-    
 
+    <div class="row-fluid">
+      <div class="span7 offset2">
+        <%=  render :partial => "layouts/menubar" %>
+      </div>   
+    </div>
     <div class="container-fluid" style="margin-top: 2%">
-
-
-      <div class="row-fluid" >
-
+      <div class="row-fluid" > 
         <div class="span10 offset1">
           <div class="hero-unit">
             <%= yield %>
           </div>
         </div>
       </div>
-
+          <%= render 'layouts/detail_website_popup/popup_website' %>
     </div><!--/.fluid-container-->
 
     <%= render 'layouts/footer' %>

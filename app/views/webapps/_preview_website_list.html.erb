@@ -1,0 +1,41 @@
+<%#
+## Website preview for display on search result
+%>
+
+<div class="row-fluid">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <!--image-->
+      <div class="span2 offset1">
+        <%= image_tag(website.photo.url(:small),:class =>"img-rounded", :alt => "rss feed") %>
+      </div>
+
+      <!-- detail txt -->
+      <div class="span3">
+        <!-- title -->
+        <div class="row-fluid">
+          <div class="span12">
+            <h3 class="websiteTitle" websiteId="<%= website.id %>" href="#detailWebsiteModal" data-toggle="modal" style="cursor:pointer"><strong> <%= website.title %></strong></h3>
+          </div>
+        </div>
+
+        <!-- Star rati,g -->
+        <div class="row-fluid">
+          <div class="span12">
+            <%=  render :partial => "layouts/star_rating", :locals => { :n => website.average_rate }%>
+          </div>
+        </div>
+      </div>
+      <div class="span5">
+        <!-- Caption-->
+        <div class="row-fluid" style="margin-top:5%">
+          <div class="span12">
+            <em> <%= website.caption %></em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="line-separator"></div>
