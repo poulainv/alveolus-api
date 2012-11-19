@@ -5,7 +5,7 @@ FactoryGirl.define do
     title                  "Rue89"
     caption                 "Site d'information"
     description            "Journal independant generalise"
-   
+    average_rate 0
     sequence(:url){|n| "http://www.#{n}lemonde.com" }
     validate true
     nb_click_preview 3

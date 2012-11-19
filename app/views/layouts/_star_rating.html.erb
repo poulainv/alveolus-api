@@ -1,0 +1,12 @@
+<%#
+## To display a good number of stars according to the rating
+%>
+<div>
+<% (1..5).each do |i|
+  if (i<n) %>
+  <img class="custom_inline" src='img/googlestar.png'></img>
+<%else %>
+ <img class="custom_inline" src='img/googlestar-off.png'></img>
+ <% end%>
+  <% end%>
+</div>

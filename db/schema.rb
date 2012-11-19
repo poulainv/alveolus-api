@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20121116233353) do
 
   create_table "comments", :force => true do |t|
     t.integer  "rating"
-    t.string   "body"
+    t.text   "body"
     t.integer  "webapp_id"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20121116233353) do
     t.boolean  "validate"
     t.string   "url"
     t.string   "image"
-    t.float    "average_rate"
+    t.float    "average_rate", :default => 0
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.integer  "nb_click_preview",   :default => 0

@@ -1,16 +1,13 @@
 
 
-<div class="span6 offset4">
-  <h2><strong> Nouveautés </strong></h2>
+<div class="span12">
+  <h2 class="text-info""><strong> Nouveautés </strong></h2>
 </div>
 
 <ul class="thumbnails">
   <% 3.times do |i| %>
     <li class="span4">
-      <div class="thumbnail">
-        <%= image_tag(@webapps_suggest[i].photo.url(:caroussel),:class =>"img-rounded", :alt => "rss feed") %>
-        <%= link_to @webapps_suggest[i].title,@webapps_suggest[i+3] %>
-      </div>
+     <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i] }%>
     </li>
   <%end%>
 </ul>
@@ -20,8 +17,8 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-        <%= image_tag(@webapps_suggest[i+3].photo.url(:caroussel),:class =>"img-rounded", :alt => "rss feed") %>
-        <%= link_to @webapps_suggest[i+3].title,@webapps_suggest[i+3] %>
+     <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i+3] }%>
+
       </div>
     </li>
   <%end%>
@@ -31,8 +28,8 @@
 
 
 <div class="row-fluid">
-  <div class="span6 offset4">
-    <h2><strong> Suggestions </strong></h2>
+  <div class="span12">
+    <h2 class="text-info"><strong> Suggestions </strong></h2>
   </div>
 </div>
 
@@ -40,9 +37,8 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-        <%= image_tag(@webapps_recommand[i].photo.url(:caroussel),:class =>"img-rounded", :alt => "rss feed") %>
-        <%= link_to @webapps_recommand[i].title,@webapps_recommand[i+3] %>
-        </div>
+        <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i] }%>
+      </div>
     </li>
   <%end%>
 </ul>
@@ -52,8 +48,8 @@
   <% 3.times do |i| %>
     <li class="span4">
       <div class="thumbnail">
-        <%= image_tag(@webapps_suggest[i+3].photo.url(:caroussel),:class =>"img-rounded", :alt => "rss feed") %>
-        <%= link_to @webapps_recommand[i+3].title,@webapps_recommand[i+3] %>
+  <%=  render :partial => "webapps/preview_website", :locals => { :website => @webapps_suggest[i+3  ] }%>
+
       </div>
     </li>
   <%end%>

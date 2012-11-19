@@ -261,8 +261,8 @@ describe Webapp do
       @webapp = FactoryGirl.create(:webapp)
       @user =  FactoryGirl.create(:user)
       @user2 = FactoryGirl.create(:user)
-      @mp1 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user,:created_at => 1.day.ago)
-      @mp2 = FactoryGirl.create(:comment, :webapp => @webapp, :user => @user2,:created_at => 1.hour.ago)
+      @mp1 = FactoryGirl.create(:comment, :webapp => @webapp, :rating => 5,:user => @user,:created_at => 1.day.ago)
+      @mp2 = FactoryGirl.create(:comment, :webapp => @webapp, :rating => 2,:user => @user2,:created_at => 1.hour.ago)
     end
 
     it "shall have an attribute 'comment'" do
@@ -280,7 +280,17 @@ describe Webapp do
       [@mp1, @mp2].each do |comment|
         Comment.find_by_id(comment.id).should be_nil
       end
+    end
 
+    it "shall calculate new average rating when we add new comment" do
+      @webtest = Webapp.find_by_id(@mp1.webapp_id)
+      @webtest.average_rate.should == 3.5
+    end
+
+    it "shall calculate new average rating when we delete comment" do
+      @mp1.destroy
+      @webtest = Webapp.find_by_id(@mp1.webapp_id)
+      @webtest.average_rate.should == 2
     end
   end
 end
