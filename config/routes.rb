@@ -24,12 +24,18 @@ EnjoyTheWeb::Application.routes.draw do
     end
   end
 
+resources :comments
 
   resources :webapps do
     resources  :tags
     resources :comments
+      
+     end
+resources :users do
+  resources :webapps do
+  resources :comments
   end
-
+end
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/webapps/:id/addtag/:tag' => 'webapps#add_tag'
 

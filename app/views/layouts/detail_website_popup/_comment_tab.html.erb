@@ -20,12 +20,17 @@
       <span id="star_rating_user" class="custom_inline"></span>
       <span id="target" class="custom_inline text-info"></span>
      </div>
-      <div class="line-separator"></div>
+      <div  class="line-separator"></div>
       <textarea class="span12" id="newCommentField" rows="5" placeholder="Ecrire un commentaire (optionnel)"></textarea><br>
       <% if user_signed_in? %>
-        <a class="btn" id="addCommentSendButton" type="button">Publier</a><br></br>
+      <div>
+        <a class="btn custom_inline" id="addCommentSendButton" type="button">Publier</a>
+        <a class="btn custom_inline" id="addCommentSendButtonPut" type="button">Publier</a>
+        <a class="btn custom_inline" id="addCommentEditButton" type="button">Editer</a>
+      </div><br></br>
+        <p class="alert alert-success" id="messageCommentSaved"> C'est noté ! </p>
         <label class="checkbox">
-          <input type="checkbox"> Publiez aussi sur Facebook </input>
+          <input type="checkbox"> Publier aussi sur Facebook </input>
         </label>
       <%else%>
         <%=render "shared/message_please_sign_in"%>

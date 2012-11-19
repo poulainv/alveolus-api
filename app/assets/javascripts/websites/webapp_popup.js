@@ -6,13 +6,16 @@ $(document).ready(function(){
     var websites = new Websites();
     var tags = new Tags();
     this.current_website_id = 0 ;
+    this.current_comment_id = 0 ;
 
     // Script to excecute when open popup to update info
     $(".websiteTitle").click(function () {
+        popup.current_comment_id = 0 ;
         popup.current_website_id = $(this).attr("websiteId");
         // Init star rating
         popup.init_star_rating();
         $("#messageTagSaved").hide();
+        $("#messageCommentSaved").hide();
      
         // Get info website
         websites.ajax_get_by_id(popup.current_website_id,function (msg){
@@ -20,11 +23,17 @@ $(document).ready(function(){
             popup.initialize_website_comments(eval(msg.reviews));
             popup.initialize_website_tags(msg.best_tags)
         });
+
+        this.ajax_get_comment_for_current_user = (function(){
+            comments.ajax_get_by_website_id_for_user_sign_in(popup.current_website_id,1 ,function(msg){
+                popup.initialize_own_comment(msg);
+            });
+        })();
         // Increment nb_click_detail
         increment_nb_click(popup.current_website_id, "detail");
 
     });
-  
+    
 	
     // Si on veut faire apparaitre le caption seulement
     //  au passage de la souris sur l'image'
@@ -37,7 +46,7 @@ $(document).ready(function(){
     })();
 	
     // Send to server new Tag listener button
-    this.listeneer_send_tag = (function(){
+    this.listener_send_tag = (function(){
         $("#addTagSendButton").click(function () {
             console.log('click add tag')
             var newTag = $('#newTagField').val();
@@ -47,15 +56,44 @@ $(document).ready(function(){
             })
         });
     })();
-    
-    this.listener_send_comment = (function(){
+
+    // Send to server NEW comment
+    this.listener_send_comment_post = (function(){
         $("#addCommentSendButton").click(function () {
-            console.log('click add comment')
             var newComment = $('#newCommentField').val();
             var newRating = $('#star_rating_user').raty('score');
+            console.log('click add comment id:'+popup.current_comment_id)
             comments.ajax_post(popup.current_website_id, newRating,newComment,popup.initialize_website_comments);
+            $("#messageCommentSaved").show();
+            $('#addCommentEditButton').show();
+            $('#newCommentField').hide();
+            $(this).hide();
         });
     })();
+
+    // Send to server comment edited
+    this.listener_send_comment_put = (function(){
+        $("#addCommentSendButtonPut").click(function () {
+            console.log('click edit comment')
+            var newComment = $('#newCommentField').val();
+            var newRating = $('#star_rating_user').raty('score');
+            comments.ajax_edit(popup.current_comment_id, newRating,newComment,popup.initialize_website_comments);
+            $("#messageCommentSaved").show();
+            $('#addCommentEditButton').show();
+            $('#newCommentField').hide();
+            $(this).hide();
+        });
+    })();
+
+    // Listener to edit an old comment
+    this.listener_edit_comment = (function(){
+        $("#addCommentEditButton").click(function () {
+            $('#addCommentSendButtonPut').show();
+            $('#newCommentField').show();
+            $(this).hide();
+        });
+    })();
+
 
     // METHODS DECLARATION
 	
@@ -70,13 +108,36 @@ $(document).ready(function(){
             targetKeep : true
         });
     }
-	
+
+    this.initialize_own_comment = function(comment){
+        // If current have already commented
+        if(comment!="" && comment != null && comment != undefined){
+            console.log("already commented => init for edit");
+            popup.current_comment_id = comment.id
+            $('#addCommentSendButton').hide();
+            $('#addCommentSendButtonPut').hide();
+            $('#newCommentField').hide();
+            $('#addCommentEditButton').show();
+            $('#star_rating_user').raty('score',comment.rating);
+            $('#newCommentField').val(comment.body);
+        }
+        // If he didn't comment
+        else{
+            popup.current_comment_id = 0;
+            console.log("not commented => init for add")
+            $('#newCommentField').val('');
+            $('#addCommentSendButton').show();
+            $('#addCommentSendButtonPut').hide();
+            $('#newCommentField').show();
+            $('#addCommentEditButton').hide();
+        }
+    }
+
     // Update comments in popup detail
     // Ultra crade
     this.initialize_website_comments = function(comments){
 
         $("#detailWebsiteModalComments").html('')
-        $("#newCommentField").val('');
         var comment ="";
         jQuery.each(comments, function(i, val) {
             comment = "<div class='row-fluid'>"+
