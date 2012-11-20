@@ -13,7 +13,10 @@ group :production do
   gem 'rmagick'
   gem 'aws-sdk'
   gem 'devise'
-  gem 'omniauth'
+   gem 'omniauth'
+  gem 'omniauth-facebook'
+  gem 'certified'
+  gem 'fb_graph'
 end
 
 gem 'bootstrap-sass'

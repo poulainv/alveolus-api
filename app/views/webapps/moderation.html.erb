@@ -1,0 +1,7 @@
+
+
+
+<h4> <%=@subtitle%> </h4>
+<h5 style="margin-bottom: 5%"> <%=pluralize(@nb_results,"résultat")%>... </h5>
+
+ <%=  render :partial => "webapps/preview_website_list", :collection => @webapps, :as => :website %>
