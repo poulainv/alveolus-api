@@ -1,7 +1,17 @@
-<div class="carousel slide span12" id="myCarousel">
-  <div class="carousel-inner">
-     <%=  render :partial => "layouts/caroussel/website_promoted", :collection => @webapps_promoted, :as=> :websites %>
+<div class="container-fluid" style="margin:0%;padding: 0%">
+  <div class="span3">
+
   </div>
-  <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
-  <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
+  <div class="span6">
+    <div class="carousel slide" id="myCarousel" style="margin:0%;padding: 0%">
+      <div class="carousel-inner">
+        <%=  render :partial => "layouts/caroussel/website_promoted", :collection => @webapps_promoted, :as=> :websites %>
+      </div>
+      <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
+      <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
+    </div>
+  </div>
+  <div class="span3">
+
+  </div>
 </div>

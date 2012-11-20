@@ -11,7 +11,8 @@
 
     <%= render('layouts/topbar') %>
     <div class="row-fluid">
-      <div class="span10 offset1">
+      <div class="span12" style ="background-color:#468847 ; margin-bottom: 2%;padding:0%;">
+         <%= render 'layouts/flash_messages' %>
         <%= render('layouts/caroussel/caroussel') %>
       </div>
     </div>
@@ -26,7 +27,6 @@
         <div class="span7">
     
           <%= render 'layouts/detail_website_popup/popup_website' %>
-          <%= render 'layouts/flash_messages' %>
           <%= render('layouts/main_view/main_view') %>
         </div>
       </div>
