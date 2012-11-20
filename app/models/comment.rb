@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :webapp
   ## A comments is a rating with optional text, this scope return only comments with text field
-  scope :commented, lambda { where('body != ""').order('comments.created_at DESC') }
+  scope :commented, lambda { where("body <> ''").order('comments.created_at DESC') }
   ## All comments
 
   scope :rating, lambda {order('comments.created_at DESC') }
