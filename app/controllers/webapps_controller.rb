@@ -45,7 +45,7 @@ class WebappsController < ApplicationController
   # GET /webapps/:id
   def show
     if @webapp = Webapp.find_by_id(params[:id])
-      @webapp.image = @webapp.photo.url
+      @webapp.image = @webapp.photo.url(:caroussel)
       respond_to do |format|
         format.html
         format.json{

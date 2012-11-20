@@ -144,6 +144,9 @@ User.create( :email => "nadia.croche@hotmail.com",
   :password => "orgasme")
 User.create( :email => "francis.jimoula@gmail.com",
   :password => "nadal")
+User.create( :email => "vincent.poulain2@gmail.com",
+  :password => "vincent", :admin => true)
+
 
 
 Comment.create(:rating => 3,:webapp_id => 1, :user_id=>1,:body => "J'adore ce site")
