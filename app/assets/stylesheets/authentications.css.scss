@@ -1,0 +1,110 @@
+// Place all the styles related to the authentications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.authentications {
+  margin-bottom: 30px;
+}
+
+.authentication {
+  width: 130px;
+  float: left;
+  background-color: #EEE;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  position: relative;
+  margin-right: 10px;
+}
+
+.authentication .remove {
+  text-decoration: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: #333;
+  padding: 2px 4px;
+  font-size: 10px;
+}
+
+.authentication .remove:hover {
+  color: #CCC;
+  background-color: #777;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.authentication img {
+  float: left;
+  margin-right: 10px;
+}
+
+.authentication .provider {
+  font-weight: bold;
+}
+
+.authentication .uid {
+  color: #666;
+  font-size: 11px;
+}
+
+.auth_provider img {
+  display: block;
+}
+
+.auth_provider {
+  float: left;
+  text-decoration: none;
+  margin-right: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/*Login / Register Popovers-----------------------------------------------------------------*/
+#login {
+    cursor : pointer
+}
+
+.popover-inner #openIdProviders {
+  *zoom: 1;
+}
+.popover-inner #openIdProviders:before,
+.popover-inner #openIdProviders:after {
+  display: table;
+  content: "";
+}
+.popover-inner #openIdProviders:after {
+  clear: both;
+}
+.popover-inner #openIdProviders .openIdProvider {
+  float: left;
+  width: 33%;
+  padding-top: 70px;
+  padding-bottom: 10px;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.popover-inner #openIdProviders .openIdProvider:hover {
+  color: #EE6A4C;
+  text-decoration: none;
+  background-color: #F9EDBE!important;
+}
+.popover-inner #openIdProviders .openIdProvider#facebookLogIn {
+  background: url(/img/facebook_64.png) center 10px no-repeat;
+}
+.popover-inner #openIdProviders .openIdProvider#googleLogIn {
+  background: url(/img/google_64.png) center 10px no-repeat;
+}
+.popover-inner #openIdProviders .openIdProvider#linkedinLogIn {
+  background: url(/img/linkedin_64.png) center 10px no-repeat;
+}
+.popover-inner #openIdProviders .openIdProvider#ETWLogIn {
+  background: url(/img/openid_64.png) center 10px no-repeat;
+}
+.popover-inner #openIdProviders .openIdProvider#newAccount {
+  background: url(/img/plus.png) center 20px no-repeat;
+  width: 60%;
+}

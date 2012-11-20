@@ -1,5 +1,7 @@
 EnjoyTheWeb::Application.routes.draw do
 
+  resources :authentications
+
   devise_for :users
 
   
@@ -39,7 +41,11 @@ end
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/webapps/:id/addtag/:tag' => 'webapps#add_tag'
 
+  match '/auth/:provider/callback' => 'authentications#create'
+  
   root :to => "webapps#index"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

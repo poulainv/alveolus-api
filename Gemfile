@@ -13,6 +13,7 @@ group :production do
   gem 'rmagick'
   gem 'aws-sdk'
   gem 'devise'
+  gem 'omniauth'
 end
 
 gem 'bootstrap-sass'
@@ -36,6 +37,9 @@ group :development do
   gem 'rmagick'
   gem 'aws-sdk'
   gem 'devise'
+  gem 'omniauth'
+  gem 'omniauth-facebook'
+  gem 'certified'
  
 end
 

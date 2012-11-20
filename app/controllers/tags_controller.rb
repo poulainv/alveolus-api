@@ -38,7 +38,7 @@ class TagsController < ApplicationController
     if params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
         @webapp.add_tags(params[:tag])
-        render :json => @webapp.best_tags(3).to_json
+        render :json => @webapp.best_tags.to_json
       else
         flash[:error] = "La Webapp demandé n'existe pas"
         redirect_to accueil_path

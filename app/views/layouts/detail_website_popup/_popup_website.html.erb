@@ -9,7 +9,10 @@
   <div class="modal-body">
     <%= render "layouts/detail_website_popup/body_popup" %>
   </div>
-  <div class="modal-footer">
-    <a class="btn" id="detailWebsiteModalEdit" href="">Edit</a>
+  <%  if user_signed_in? %>
+    <div class="modal-footer">
+      <a class="btn" id="detailWebsiteModalEdit" href="">Edit</a>
+    
   </div>
+  <%  end %>
 </div>

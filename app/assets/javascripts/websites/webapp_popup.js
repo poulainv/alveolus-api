@@ -89,6 +89,7 @@ $(document).ready(function(){
     this.listener_edit_comment = (function(){
         $("#addCommentEditButton").click(function () {
             $('#addCommentSendButtonPut').show();
+             $("#messageCommentSaved").hide();
             $('#newCommentField').show();
             $(this).hide();
         });

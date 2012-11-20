@@ -123,7 +123,7 @@ class Webapp < ActiveRecord::Base
   end
 
   def best_tags
-   n_best_tags(3)
+   n_best_tags(5)
   end
 
   def reviews
