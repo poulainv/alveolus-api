@@ -31,7 +31,6 @@
               <a class="openIdProvider" id="newAccount" href="/users/sign_up/"> Créer un compte EJW </a>
             </div>
           </div>
-
         </div>
 
       <% end %>
@@ -41,7 +40,8 @@
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
         <% if current_user.try(:admin?) %>
-          <li><%= link_to "Modérer les sites", moderation_path %></li>
+          <li><%= link_to "Modérer les sites", moderation_websites_path %></li>
+          <li><%= link_to "Modérer les utilisateurs", moderation_users_path %></li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->

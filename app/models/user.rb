@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :comments,:provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
   # attr_accessible :title, :body
 
-  has_many :comments,:dependent => :destroy
+  has_many :comments, :dependent => :destroy
   has_many :authentications
 
 
@@ -26,5 +26,7 @@ class User < ActiveRecord::Base
   def facebook
     @fb_user ||= FbGraph::User.me(self.authentications.find_by_provider('facebook').token)
   end
+
+
 
 end

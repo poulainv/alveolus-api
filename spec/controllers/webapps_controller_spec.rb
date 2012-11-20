@@ -101,19 +101,19 @@ describe WebappsController do
   ## Test method tops
   describe "method webapps top recent" do
     it "should call 'top_recent' of Model" do
-      Webapp.should_receive(:recent).with(3)
+      Webapp.should_receive(:trend).with(5)
       get :index
     end
   end
   describe "method webapps top comment" do
     it "should call 'top_comment' of Model" do
-      Webapp.should_receive(:top_comment)
+      Webapp.should_receive(:most_commented).with(5)
       get :index
     end
   end
   describe "method webapps top trend" do
     it "should call 'top_trend' of Model" do
-      Webapp.should_receive(:trend).with(3)
+      Webapp.should_receive(:best_rated).with(5)
       get :index
     end
   end
