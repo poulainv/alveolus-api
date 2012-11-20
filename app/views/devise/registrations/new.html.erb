@@ -1,20 +1,42 @@
 <h2>Inscription</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-  <div class="row-fluid">
-    <div class="offset3 span12">
-      <div><%= f.label :email %><br />
-        <%= f.email_field :email %></div>
+<div class="container-fluid">
 
-      <div><%= f.label :password %><br />
-        <%= f.password_field :password %></div>
+  <div class="span5">
+    <h2><small>Créer vos propres identifiants...</small></h2>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      
+          <div><%= f.label :email %><br />
+            <%= f.email_field :email %></div>
 
-      <div><%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation %></div>
+          <div><%= f.label :password %><br />
+            <%= f.password_field :password %></div>
 
-      <div><%= f.submit "Sign up" %></div>
-    </div>
-  <% end %>
+          <div><%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation %></div>
+
+          <div><%= f.submit "Sign up" %></div>
+      
+      <% end %>
+   
+    <%= render "devise/shared/links" %>
+  </div>
+  <div class="span7">
+    <h2><small>...utiliser l'un de vos comptes existants parmi les services suivants :</small></h2>
+
+    <a href="/auth/facebook" class="auth_provider">
+      <%= image_tag "/img/facebook_128.png", :size => "128x128", :alt => "Facebook" %>
+      Facebook
+    </a>
+    <a href="/auth/facebook" class="auth_provider">
+      <%= image_tag "/img/google_128.png", :size => "128x128", :alt => "Facebook" %>
+      Google
+    </a>
+    <a href="/auth/facebook" class="auth_provider" >
+      <%= image_tag "/img/linkedin_128.png", :size => "128x128", :alt => "Facebook" %>
+      LinkedIn
+    </a>
+  </div>
+
 </div>
-<%= render "devise/shared/links" %>

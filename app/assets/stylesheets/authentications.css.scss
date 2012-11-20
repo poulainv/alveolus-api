@@ -56,11 +56,16 @@
 .auth_provider {
   float: left;
   text-decoration: none;
-  margin-right: 20px;
+  padding-right: 5%;
+  padding-left: 5%;
   text-align: center;
   margin-bottom: 10px;
+
 }
 
+.auth_provider:hover{
+    background-color :#468847;
+}
 /*Login / Register Popovers-----------------------------------------------------------------*/
 #login {
     cursor : pointer
