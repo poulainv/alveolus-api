@@ -1,5 +1,28 @@
 
 <li><a class="tagstop" tagId="<%= tags.id %>">
-    <%= link_to(tags.name, tag_webapps_path(tags.id.to_s)) %>
+   
   </a></li>
+
+
+  <%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+<!-- On a donc accès à des variables nommées d'après le modèle de la collection -->
+
+
+<div class="container-fluid">
+  <div class="span3">
+    <h4> <%= tags_counter + 1%></h4>
+  </div>
+
+  <div class="span9">
+    <div class="row-fluid">
+         <%= link_to(tags.name, tag_webapps_path(tags.id.to_s),:type=>"button",:class=>"btn btn-info btn-small") %>
+    </div>
+  
+</div>
+</div>
+<div class="line-separator-dashed"></div>
 
