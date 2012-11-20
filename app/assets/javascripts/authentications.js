@@ -5,10 +5,12 @@ $(function() {
 	//initialize login popover
 	$('#login').popover({
 		'animation': 	false,
+                    'html'     :        true,
 		'placement': 	'bottom',
 		'trigger'  : 	'manual',
 		'title'    : 	function(){ return 'Connexion' },
-		'content'  : 	function(){ return $('#loginHtml').html(); }
+                    
+		'content'  : 	function(){ return $('#loginHtml').html() }
 	})
 
 	//Show login popover when login menu item clicked

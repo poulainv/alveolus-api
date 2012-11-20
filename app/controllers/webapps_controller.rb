@@ -74,7 +74,10 @@ class WebappsController < ApplicationController
 
   # GET /webapp/1/edit
   def edit
+    if current_user.try(:admin?)
     @webapp = Webapp.find(params[:id])
+    end
+    render :layout => "navigation"
   end
 
 
@@ -100,6 +103,24 @@ class WebappsController < ApplicationController
     webapp = Webapp.find(params[:id])
     webapp.increment_nb_click(:element => params[:element])
     render :status => 200, :nothing => true
+  end
+
+  # GET /webapps/
+  def moderation
+    @title = "Modération de tous les websites"
+    @webapps = Webapp.all
+    @subtitle = "Résultat :"
+    @nb_results = @webapps.length ;
+   
+    respond_to do |format|
+      format.html{
+        render :layout => "navigation"
+      }
+      format.json{
+        render :json => @webapps.to_json(:methods => %w(nb_rating))
+      }
+    end
+
   end
 
 

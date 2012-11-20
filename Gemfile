@@ -40,6 +40,7 @@ group :development do
   gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'certified'
+  gem 'fb_graph'
  
 end
 

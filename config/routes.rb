@@ -1,5 +1,6 @@
 EnjoyTheWeb::Application.routes.draw do
 
+
   resources :authentications
 
   devise_for :users
@@ -17,6 +18,7 @@ EnjoyTheWeb::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'webapps#index'
   match '/suggestion',   :to => 'webapps#new'
+  match '/moderation',   :to => 'webapps#moderation'
   match '/navigationtag',   :to => 'pages#contact'
   
   resources :tags do

@@ -12,14 +12,17 @@
       <div class="nav-collapse collapse">
         <p class="navbar-text pull-right">
           <% if user_signed_in? %>
+            <% if current_user.try(:admin?) %>
+              <span class="label label-important">Admin</span>
+            <% end %>
             Connecté en tant que <%= current_user.email %>.
             <span class="badge">  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, :style=>"color:white;"%></span>
           <% else %>
 
             <span id="login" class="badge badge-info">Connexion</span> ou <span class="badge badge-success"><%= link_to "Inscription", new_user_registration_path ,:style=>"color:white;"%></span>
-        </p>
-        <div id="loginHtml" class="hide">
-          
+          </p>
+          <div id="loginHtml" class="hide">
+
             <div id="openIdProviders">
               <a class="openIdProvider" id="facebookLogIn" href="/auth/facebook">Facebook</a>
               <a class="openIdProvider soon" id="googleLogIn" href=""> Google </a>
@@ -27,17 +30,19 @@
               <a class="openIdProvider" id="ETWLogIn" href="/users/sign_in/"> ETW </a>
               <a class="openIdProvider" id="newAccount" href="/users/sign_up/"> Créer un compte EJW </a>
             </div>
-           </div>
+          </div>
 
         </div>
 
       <% end %>
-      
+
       <ul class="nav">
         <li class="active"><%= link_to "Home", accueil_path%></li>
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
-        <li><a href="#">Options</a></li>
+        <% if current_user.try(:admin?) %>
+          <li><%= link_to "Modérer les sites", moderation_path %></li>
+        <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

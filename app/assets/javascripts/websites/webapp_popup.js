@@ -62,10 +62,11 @@ $(document).ready(function(){
         $("#addCommentSendButton").click(function () {
             var newComment = $('#newCommentField').val();
             var newRating = $('#star_rating_user').raty('score');
-            console.log('click add comment id:'+popup.current_comment_id)
+            console.log('click add new comment')
+			if(popup.check_star_rating(newRating) == false) return;
             comments.ajax_post(popup.current_website_id, newRating,newComment,popup.initialize_website_comments);
             $("#messageCommentSaved").show();
-            $('#addCommentEditButton').show();
+           // $('#addCommentEditButton').show();
             $('#newCommentField').hide();
             $(this).hide();
         });
@@ -77,6 +78,7 @@ $(document).ready(function(){
             console.log('click edit comment')
             var newComment = $('#newCommentField').val();
             var newRating = $('#star_rating_user').raty('score');
+			if(popup.check_star_rating(newRating) == false) return;
             comments.ajax_edit(popup.current_comment_id, newRating,newComment,popup.initialize_website_comments);
             $("#messageCommentSaved").show();
             $('#addCommentEditButton').show();
@@ -108,6 +110,18 @@ $(document).ready(function(){
             targetText : '--',
             targetKeep : true
         });
+
+		// Init tooltip for error
+		$('#star_rating_user').tooltip({
+			title	: "Vous devez obligatoirement laissez une note",
+			trigger : 'manual'
+		});
+		
+		// Hide tooltip when mouse over
+		$('#star_rating_user').mouseover(function(){
+			$(this).tooltip('hide');
+		});
+	
     }
 
     this.initialize_own_comment = function(comment){
@@ -202,11 +216,20 @@ $(document).ready(function(){
                 }
             }).appendTo("#detailWebsiteModalTagsList");
         }
-
         $(".tabBtn").after('<br></br>');
-
-
     }
+	
+	this.check_star_rating = function(score){
+		if(score==null || undefined == score){
+			// Display tooltip
+			$('#star_rating_user').tooltip('show');
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 });
 
 

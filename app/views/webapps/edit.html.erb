@@ -1,9 +1,16 @@
 
-<div class="hero-unit span11">
-  <h1>Editing website</h1>
-<%= render 'form' %>
 
-<br></br>
-<%= link_to 'Show', @webapp %> |
-<%= link_to 'Back', webapps_path %>
-</div>
+  <h1>Editing website</h1>
+
+
+  <% if current_user.try(:admin?) %>
+    <%= render 'form' %>
+
+    <br></br>
+    <%= link_to 'Show', @webapp %> |
+    <%= link_to 'Back', webapps_path %>
+
+<% else %>
+  <p class="alert alert-error"> Vous devez être connecté en tant qu'administrateur pour modérer des websites... </p>
+  <%=render "shared/message_please_sign_in"%>
+<% end %>

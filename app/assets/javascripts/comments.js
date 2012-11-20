@@ -19,7 +19,7 @@
 	}
 	
 	this.ajax_post = function(websiteId, newRating, newComment, callback){
-              alert("send");		$.ajax({
+    		$.ajax({
 		            type: "POST",
 		            data : {
 		                comment : newComment,

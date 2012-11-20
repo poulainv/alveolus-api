@@ -1,7 +1,7 @@
 
-  <h2><%=@title%></h2>
+<h2><%=@title%></h2>
 
-
+<% if user_signed_in? %>
   <%= form_for @webapp, :html => {:multipart => true,:class => 'full'} do |f| %>
     <%= render 'shared/error_messages' %>
     <legend>Soumettez un WebSite</legend>
@@ -24,24 +24,32 @@
           <%= f.text_field :url %>
         </div>
 
+
         <div>
           <%= f.label :tag_list, "Tags (séparé par virgules)" %>
           <%= f.text_field :tag_list,:class => "input-large" %>
         </div>
-
-
         <div class="field">
-
           <%= f.file_field :photo %>
         </div>
-
-
+        <% if current_user.admin? %>
+          <div class="field">
+           Validation <%= f.check_box :validate %>
+          </div>
+        <% end %>
         <div class="actions">
-          <%= f.submit "Ajout" %>
+          <%= f.submit "Ajout" ,:class => "btn btn-primary btn-default" %>
         </div>
       </div>
 
     <% end %>
 
-  </div>
+
+  <% else %>
+
+    <p class="alert alert-error"> Vous devez être connecté pour suggérer des websites... </p>
+    <%=render "shared/message_please_sign_in"%>
+  <% end %>
+
+</div>
 
