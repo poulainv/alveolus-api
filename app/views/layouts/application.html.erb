@@ -4,13 +4,13 @@
 <html>
   <head>
     <title>EnjoyTheWeb - Surfer autrement !</title>
-    <%= render('layouts/headers')%>
+    <%= render('layouts/skeleton/headers')%>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
 
-    <%= render('layouts/topbar') %>
+    <%= render('layouts/skeleton/topbar') %>
 
     <div class="container-fluid" style="margin-top: 2%">
 
@@ -18,7 +18,7 @@
       <div class="row-fluid" >
    
         <div class="span10 offset1">
-           <%= render 'layouts/flash_messages' %>
+           <%= render 'shared/flash_messages' %>
           <div class="hero-unit">
             <%= yield %>
           </div>
@@ -27,7 +27,7 @@
 
     </div><!--/.fluid-container-->
 
-    <%= render 'layouts/footer' %>
+    <%= render 'layouts/skeleton/footer' %>
     <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

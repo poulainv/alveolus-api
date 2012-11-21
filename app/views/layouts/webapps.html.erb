@@ -3,15 +3,15 @@
 <html>
   <head>
     <title>EnjoyTheWeb - Surfer autrement !</title>
-    <%= render('layouts/headers')%>
+    <%= render('layouts/skeleton/headers')%>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
 
-    <%= render('layouts/topbar') %>
+    <%= render('layouts/skeleton/topbar') %>
     <div class="span11 offset1">
-      <%= render 'layouts/flash_messages' %>
+      <%= render 'shared/flash_messages' %>
     </div>
     <div class="row-fluid">
       <div class="span12" style ="background-color:#468847 ; margin-bottom: 2%;padding:0%;">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <%= render 'layouts/footer' %>
+      <%= render 'layouts/skeleton/footer' %>
       <%= debug(params) if Rails.env.development? %>
     </div><!--/.fluid-container-->
   </body>

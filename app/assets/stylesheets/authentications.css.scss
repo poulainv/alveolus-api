@@ -64,7 +64,7 @@
 }
 
 .auth_provider:hover{
-    background-color :#468847;
+    background-color :#9bd290;
 }
 /*Login / Register Popovers-----------------------------------------------------------------*/
 #login {
@@ -93,9 +93,10 @@
   border-radius: 3px;
 }
 .popover-inner #openIdProviders .openIdProvider:hover {
-  color: #EE6A4C;
+  color: black;
   text-decoration: none;
-  background-color: #F9EDBE!important;
+  background-color: #9bd290!important;
+
 }
 .popover-inner #openIdProviders .openIdProvider#facebookLogIn {
   background: url(/img/facebook_64.png) center 10px no-repeat;
@@ -103,8 +104,8 @@
 .popover-inner #openIdProviders .openIdProvider#googleLogIn {
   background: url(/img/google_64.png) center 10px no-repeat;
 }
-.popover-inner #openIdProviders .openIdProvider#linkedinLogIn {
-  background: url(/img/linkedin_64.png) center 10px no-repeat;
+.popover-inner #openIdProviders .openIdProvider#twitterLogIn {
+  background: url(/img/twitter_64.png) center 10px no-repeat;
 }
 .popover-inner #openIdProviders .openIdProvider#ETWLogIn {
   background: url(/img/openid_64.png) center 10px no-repeat;
