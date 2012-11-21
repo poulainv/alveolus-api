@@ -7,6 +7,7 @@ $(document).ready(function(){
     var tags = new Tags();
     this.current_website_id = 0 ;
     this.current_comment_id = 0 ;
+    this.website_info = null;
 
     // Script to excecute when open popup to update info
     $(".websiteTitle").click(function () {
@@ -19,6 +20,7 @@ $(document).ready(function(){
      
         // Get info website
         websites.ajax_get_by_id(popup.current_website_id,function (msg){
+            popup.website_info = msg ;
             popup.initialize_website_details(msg);
             popup.initialize_website_comments(eval(msg.reviews));
             popup.initialize_website_tags(msg.best_tags)
@@ -33,7 +35,51 @@ $(document).ready(function(){
         increment_nb_click(popup.current_website_id, "detail");
 
     });
-    
+
+
+
+    this.listenerFacebookButton = (function (){
+        console.log("sharing on facebook...")
+        $('#share_facebook').click(function(){
+            FB.ui(
+            {
+                method: 'feed',
+                name: popup.website_info.title,
+                link:  popup.website_info.url,
+                picture: popup.website_info.photo,
+                caption: popup.website_info.cpation,
+                message: "J'ai découvert ça sur EnjoyTheWeb, ça peut vous intéresser !"
+            });
+        });
+
+        // Init tooltip for Facebook
+        $('#share_facebook').tooltip({
+            title	: "Partager ce site sur Facebook",
+            placement : 'bottom'
+        });
+
+    })();
+
+
+   this.listenerGooglePlusButton = (function (){
+         // Init tooltip for Facebook
+        $('#share_google').tooltip({
+            title	: "Bientôt...",
+            placement : 'bottom'
+        });
+
+    })();
+
+
+    this.listenerTwitterButton = (function (){
+         // Init tooltip for Facebook
+        $('#share_twitter').tooltip({
+            title	: "Bientôt...",
+            placement : 'bottom'
+        });
+
+    })();
+
 	
     // Si on veut faire apparaitre le caption seulement
     //  au passage de la souris sur l'image'
