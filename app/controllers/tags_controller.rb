@@ -35,10 +35,14 @@ class TagsController < ApplicationController
   ## Manage TAG ##
   ################
   def create
-    if params[:webapp_id]
+    if params[:webapp_id] and user_signed_in?
       if  @webapp = Webapp.find(params[:webapp_id])
-        @webapp.add_tags(params[:tag])
+        if @webapp.add_tags(params[:tag],current_user)
         render :json => @webapp.best_tags.to_json
+        else
+          flash[:error] = "Vous avez déjà taggué ce site"
+           render :json => "", :status => 406
+        end
       else
         flash[:error] = "La Webapp demandé n'existe pas"
         redirect_to accueil_path

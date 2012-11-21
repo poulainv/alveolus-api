@@ -29,6 +29,7 @@ describe Webapp do
   before(:each) do
     @webapp = FactoryGirl.create(:webapp)
     @tag = Tag.new(:name=>"test")
+    @user = FactoryGirl.create(:user)
   end
 
 describe "virtual attribute" do
@@ -38,7 +39,7 @@ describe "virtual attribute" do
   
     it" shall return a good nb rating" do
         @webapp.nb_rating.should == 0
-      @user = FactoryGirl.create(:user)
+    
        @attr = { :rating => 2 , :body => "Contenu du message", :webapp => @webapp,:user => @user }
        Comment.create!(@attr)
        @webapp.nb_rating.should == 1
@@ -112,25 +113,24 @@ describe "virtual attribute" do
     it "method add_tags shall be add a good tag" do
       @tag.save
       @webapp.save
-      @webapp.add_tag(@tag.name)
+      @webapp.add_tag(@tag.name,FactoryGirl.create(:user))
       @webapp.tags.should include(@tag)
     end
 
 
     it "method add_tags shall be add goods tags" do
+      print 'METHO QUI FAIT CHIER'
       @tags = ["test1","test2","test2"]
-      @webapp.add_tags(@tags)
+      @webapp.add_tags(@tags,FactoryGirl.create(:user))
       assert @webapp.tagged_by_tag?("test1")
       assert @webapp.tagged_by_tag?("test2")
    
       assert @webapp.tags.length == 2
 
-      @webapp.add_tags("test2,test3,test3")
+      @webapp.add_tags("test2,test4,test3,test3",FactoryGirl.create(:user))
       assert @webapp.tagged_by_tag?("test3")
-      assert @webapp.tagged_by_tag?("test2")
-      assert @webapp.tagged_by_tag?("test1")
+      assert @webapp.tagged_by_tag?("test4")
 
-      assert @webapp.tags.length == 3
     end
 
 
@@ -140,24 +140,24 @@ describe "virtual attribute" do
       @webapp.save
       
       # Tag pas encore ajouté
-      @webapp.add_tag(@tag)
+      @webapp.add_tag(@tag,FactoryGirl.create(:user))
       @webapp.tagged_by_tag?(@tag.name).should be_true
      
       # Tag pas ajouté et inexistant en base
-      @webapp.add_tag("test3")
+      @webapp.add_tag("test3",FactoryGirl.create(:user))
       @webapp.tagged_by_tag?("test3").should be_true
       
       #Tag pas ajouté
       @webapp.tagged_by_tag?(@tag2).should be_false
     end  
     
-    it "method addTag! shall don't add tag if this tags already exists " do
+    it "method addTag! shall don't add tag by the same user if this tags already exists " do
       @tag.save
       @webapp.save
-      @webapp.add_tag(@tag)
-      @webapp.add_tag(@tag)
-      @webapp.add_tag("test")
-      assert @webapp.tags.length == 1, "tag is not unique anymore "
+      @webapp.add_tag(@tag,@user)
+      @webapp.add_tag(@tag,@user)
+      @webapp.add_tag("test",@user)
+      assert @webapp.tags.uniq.length == 1, "tag is not unique anymore "
     end 
     
   end
@@ -240,30 +240,22 @@ describe "virtual attribute" do
       @webapp.should respond_to(:n_best_tags)
     end
 
-    it "should return tags with bigger coeff" do
+    it "should return tags most posted" do
       ## webapp has nb_click_detail init at 3
       @w1 = FactoryGirl.create(:webapp)
-      @w2 = FactoryGirl.create(:webapp)
-      @w1.add_tag("test1")
-      @w2.add_tag("test1")
-      @w1.add_tag("test2")
-      @w1.add_tag("test2")
-      @w1.add_tag("test3")
-      @w1.add_tag("test3")
-      @w1.add_tag("test3")
-      assert @w1.tags[0].tagAppRelations[0].coeff == 0
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @user3 = FactoryGirl.create(:user)
+      @w1.add_tag("test1",@user1)
+      @w1.add_tag("test2",@user1)
+      @w1.add_tag("test3",@user1)
+      @w1.add_tag("test2",@user2)
+      @w1.add_tag("test3",@user2)
+      @w1.add_tag("test3",@user3)
+
       assert @w1.n_best_tags(2)[0].name == "test3"
-      assert @w1.n_best_tags(2)[0].tagAppRelations[0].coeff == 2
       assert @w1.n_best_tags(2)[1].name == "test2"
-      assert @w1.n_best_tags(2)[1].tagAppRelations[0].coeff == 1
-      @w1.add_tag("test1")
-      @w1.add_tag("test1")
-      @w1.add_tag("test1")
-      @w1.add_tag("test1")
-      assert @w1.n_best_tags(2)[0].name == "test1"
-      assert @w1.n_best_tags(2)[0].tagAppRelations[0].coeff == 4
-      assert @w1.n_best_tags(2)[1].name == "test3"
-      assert @w1.n_best_tags(2)[1].tagAppRelations[0].coeff == 2
+      @w1.n_best_tags(2).length.should == 2
     end
 
   end
@@ -280,7 +272,7 @@ describe "virtual attribute" do
     end
 
     it "shall have an attribute 'comment'" do
-      @webapp.should respond_to(:comments)
+     @webapp.should respond_to(:comments)
 
     end
 

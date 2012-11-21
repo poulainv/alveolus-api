@@ -73,14 +73,14 @@ class Webapp < ActiveRecord::Base
     tags.map(&:name).join(", ")
   end
 
-  def add_tags(tags)
+  def add_tags(tags,user)
     if (tags.kind_of? Array)
       tags.each { |tag|
-        self.add_tag(tag)
+        return nil unless self.add_tag(tag,user)
       }
     else
       tags.split(",").uniq.map do |n|
-        self.add_tag(n.strip.to_s)
+        return nil unless self.add_tag(n.strip.to_s,user)
       end
     end
   end
@@ -88,17 +88,17 @@ class Webapp < ActiveRecord::Base
   # Pour ajouter un tag a la webapp
   # Increment le coeff du tag si le website est deja taggué avec
   # Ajoute le tag en base s'il n'existe pas
-  def add_tag(tag)
+  def add_tag(tag,user)
     if(tag.kind_of?(String))
       tagToAdd = Tag.where(name: tag.strip).first_or_create!
     else
       tagToAdd = Tag.where(name: tag.name.strip).first_or_create!
     end
 
-    if(!tagged_by_tag?(tagToAdd.name))
-      self.tags += [tagToAdd]
+    if(!TagAppRelation.find_by_user_id_and_tag_id_and_webapp_id(user.id,tagToAdd.id,self.id))
+       TagAppRelation.create(:user_id=>user.id,:tag_id=>tagToAdd.id,:webapp_id => self.id).save
     else
-      self.tagAppRelations.find_by_tag_id(tagToAdd.id).increment(:coeff).save
+      return nil
     end
   end
 
@@ -112,8 +112,9 @@ class Webapp < ActiveRecord::Base
     Tag.find_by_name!(name).webapps
   end
 
+  ## Best tag for this web app
   def n_best_tags(n)
-   tags.order("tag_app_relations.coeff").reverse_order.limit(n)
+    tags.most_posted(n)
   end
 
 
@@ -123,7 +124,7 @@ class Webapp < ActiveRecord::Base
   end
 
   def best_tags
-   n_best_tags(5)
+    n_best_tags(5)
   end
 
   def reviews

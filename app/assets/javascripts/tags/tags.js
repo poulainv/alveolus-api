@@ -20,7 +20,9 @@ function Tags(){
         	url: "/webapps/"+websiteId+"/tags"
     	}).done(function( msg ) {
         	callBack(msg);
-    	});
+    	}).fail(function(){
+                 alert("Tag déjà enregisté pour ce website")
+              });
 	}
 }
 

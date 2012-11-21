@@ -154,15 +154,27 @@ $(document).ready(function(){
 
         $("#detailWebsiteModalComments").html('')
         var comment ="";
+        var date ;
         jQuery.each(comments, function(i, val) {
-            comment = "<div class='row-fluid'>"+
-            "<div class='span6'><em>"+
-            val.user.email+
-            "</em> </div>"+
+            date = prettyDate(val.created_at) ;
+
+            comment =
+
+
+            "<div class='row-fluid'>"+
+            "<div class='span1'>"+
+            "<img src='/img/avatar.jpg'></img>"+
+            "</div>"+
+            "<div class='span3'><strong> user"+
+            val.user.id+
+            "</strong> </div>"+
+             "<div class='span4'>"+
+            date+
+            "</div>"+
             "<div class='span4'>"+
             manage_star_rating(val.rating,"/img/googlestar.png","/img/googlestar-off.png")+
             "</div>"+
-            "</div>"+
+            "</div><br>"+
             "<div class='row-fluid'>"+
             "<div class='span12' style=' border-bottom:1px dotted #999999;margin-bottom:5%;padding-bottom : 3%'>"+
             val.body

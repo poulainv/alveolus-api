@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120133710) do
+ActiveRecord::Schema.define(:version => 20121121144225) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -34,12 +34,20 @@ ActiveRecord::Schema.define(:version => 20121120133710) do
   create_table "tag_app_relations", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "webapp_id"
-    t.integer  "coeff",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "tag_app_relations", ["tag_id", "webapp_id"], :name => "index_tag_app_relations_on_tag_id_and_webapp_id", :unique => true
+
+  create_table "tag_user_relations", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "webapp_id"
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -63,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20121120133710) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "admin",                  :default => false
+    t.string   "pseudo"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

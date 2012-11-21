@@ -1,3 +1,5 @@
+# encoding utf-8
+
 # == Schema Information
 #
 # Table name: tag_app_relations
@@ -11,11 +13,13 @@
 #
 
 class TagAppRelation < ActiveRecord::Base
-  attr_accessible :tag_id, :webapp_id
+  attr_accessible :tag_id, :webapp_id, :user_id
   
   belongs_to :tag, :class_name => "Tag"
   belongs_to :webapp, :class_name => "Webapp"
  
   validates :tag_id, :presence => true
   validates :webapp_id, :presence => true
+  validates_uniqueness_of :user_id, :scope => [:tag_id,:webapp_id]
+
 end

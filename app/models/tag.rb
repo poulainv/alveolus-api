@@ -9,16 +9,22 @@
 #
 
 class Tag < ActiveRecord::Base
-  attr_accessible :name,:tagAppRelations
+  attr_accessible :name,:tagAppRelations,:tagUserRelations
   
   has_many :tagAppRelations, :foreign_key => "tag_id", :dependent => :destroy
+  has_many :tagUserRelations, :dependent => :destroy
   has_many :webapps, :through => :tagAppRelations, :source => :webapp
 
+  ## Most used tags for all website for example
+  scope :most_used, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.webapp_id)").group('tags.id').reverse_order.limit(n)}
 
-  scope :most_used, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.id)").group('tags.id').reverse_order.limit(n)}
+  ## Most posted tags for one website 
+  scope :most_posted, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.id)").group('tags.id').reverse_order.limit(n)}
 
   accepts_nested_attributes_for :tagAppRelations
-  # Does this tag tag 'webapp' ? 
+
+
+  # Does this tag tag 'webapp' ?
   def tagged?(webapp)
     webapps.find_by_id(webapp.id)
   end

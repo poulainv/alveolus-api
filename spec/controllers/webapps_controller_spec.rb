@@ -5,6 +5,9 @@ describe WebappsController do
   
   ## for testing we add 3 webapps in test data base
   before(:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+
     Webapp.stub(:recent).and_return(Webapp.new)
     Webapp.stub(:trend).and_return(Webapp.new)
 

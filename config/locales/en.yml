@@ -3,3 +3,17 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "adresse email"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "ne peut pas etre vide"
+        tagUserRelation:
+          attributes:
+            user_id:
+              unique: "blabla"

@@ -7,13 +7,12 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
+  attr_accessible :email, :password, :password_confirmation, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
   # attr_accessible :title, :body
 
   has_many :comments, :dependent => :destroy
   has_many :authentications
-
-
+ 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'] ,:token=> omniauth['credentials']['token'])

@@ -41,7 +41,7 @@ resources :users do
   end
 end
   match '/webapps/:id/click/:element' => 'webapps#click'
-  match '/webapps/:id/addtag/:tag' => 'webapps#add_tag'
+
 
   match '/auth/:provider/callback' => 'authentications#create'
   

@@ -24,10 +24,11 @@ describe Tag do
     
     it "method tagged? shall be return true if my webapp if tagged" do
       @webapp = FactoryGirl.build(:webapp)
+        @user = FactoryGirl.create(:user)
       @webapp2 = Webapp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
       @tag.save
       @webapp.save
-      @webapp.add_tag(@tag)
+      @webapp.add_tag(@tag,@user)
       @tag.tagged?(@webapp).should be_true
       @tag.tagged?(@webapp2).should be_false
 
@@ -53,12 +54,13 @@ describe Tag do
       @w1 = FactoryGirl.create(:webapp)
       @w2 = FactoryGirl.create(:webapp)
       @w3 = FactoryGirl.create(:webapp)
-      @w1.add_tag("test1")
-      @w1.add_tag("test2")
-      @w2.add_tag("test1")
-      @w2.add_tag("test2")
-      @w3.add_tag("test1")
-      @w3.add_tag("test3")
+      @user = FactoryGirl.create(:user)
+      @w1.add_tag("test1",@user)
+      @w1.add_tag("test2",@user)
+      @w2.add_tag("test1",@user)
+      @w2.add_tag("test2",@user)
+      @w3.add_tag("test1",@user)
+      @w3.add_tag("test3",@user)
 
       assert Tag.most_used(2)[0].name == "test1"
       #assert Tag.most_used(2)[0].tagAppRelations[0].coeff == 4
