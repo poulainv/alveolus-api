@@ -1,26 +1,21 @@
 EnjoyTheWeb::Application.routes.draw do
 
-
   resources :authentications
 
   devise_for :users
   
-
-  get "tags/new"
-
   get "pages/about"
 
   get "pages/contact"
-  
-  get "pages/actualites"
+
 
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'webapps#index'
   match '/suggestion',   :to => 'webapps#new'
   match '/moderation_websites',   :to => 'webapps#moderation'
-   match '/moderation_users',   :to => 'users#index'
+  match '/moderation_users',   :to => 'users#index'
   match '/navigationtag',   :to => 'pages#contact'
-  
+
   resources :tags do
     resources :webapps
     member do
@@ -28,21 +23,21 @@ EnjoyTheWeb::Application.routes.draw do
     end
   end
 
-resources :comments
+  resources :comments
 
   resources :webapps do
     resources  :tags
     resources :comments
       
-     end
-resources :users do
-  resources :webapps do
-  resources :comments
   end
-end
+  resources :users do
+    resources :webapps do
+      resources :comments
+    end
+  end
+
   match '/webapps/:id/click/:element' => 'webapps#click'
-
-
+  match '/webapps/order/:order' => 'webapps#index'
   match '/auth/:provider/callback' => 'authentications#create'
   
   root :to => "webapps#index"

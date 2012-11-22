@@ -43,10 +43,7 @@ Webapp.create( :title =>'CupOfTeach',
   :nb_click_preview => 29,
   :nb_click_detail => 03,
   :nb_click_url => 1).add_tags(["formation","universite","atelier","partage"],User.create( :email => "francis.jimoula@gmail.com",
-  :password => "nadal")
-
-
-)
+  :password => "nadal"))
               
 
 

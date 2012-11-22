@@ -1,4 +1,5 @@
 <!-- This the template html used when controller WEBAPPS is called -->
+<!-- Template with top bar/carousel/leftmenu/mainview -->
 <!doctype html>
 <html>
   <head>
@@ -8,7 +9,6 @@
   </head>
 
   <body>
-
     <%= render('layouts/skeleton/topbar') %>
     <div class="span11 offset1">
       <%= render 'shared/flash_messages' %>
@@ -19,20 +19,15 @@
       </div>
     </div>
     <div class="container-fluid">
-
       <div class="row-fluid">
         <div class="span3 offset1">
           <%=  render :partial => "layouts/left_menu/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
-
         </div><!--/span-->
-
         <div class="span7">
-        
           <%= render 'layouts/detail_website_popup/popup_website' %>
           <%= render('layouts/main_view/main_view') %>
         </div>
       </div>
-
       <%= render 'layouts/skeleton/footer' %>
       <%= debug(params) if Rails.env.development? %>
     </div><!--/.fluid-container-->

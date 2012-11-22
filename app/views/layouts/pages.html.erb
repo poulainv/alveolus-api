@@ -1,5 +1,5 @@
 <!-- This the template html used when controller PAGES is called -->
-
+<!-- Template with just top bar/mainview -->
 <!doctype html>
 <html>
   <head>
@@ -9,15 +9,9 @@
   </head>
 
   <body>
-
     <%= render('layouts/skeleton/topbar') %>
-
-
     <div class="container-fluid" style="margin-top: 2%">
-
-
       <div class="row-fluid" >
-
         <div class="span10 offset1">
           <%= render 'shared/flash_messages' %>
           <div class="hero-unit">
@@ -25,7 +19,6 @@
           </div>
         </div>
       </div>
-
     </div><!--/.fluid-container-->
 
     <%= render 'layouts/skeleton/footer' %>

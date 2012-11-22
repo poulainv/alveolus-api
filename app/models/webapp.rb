@@ -32,7 +32,7 @@ class Webapp < ActiveRecord::Base
   has_many :tags, :through => :tagAppRelations , :source => :tag
   has_many :comments , :dependent => :destroy
   
-  url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
+ # url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
   accepts_nested_attributes_for :tags
 
   has_attached_file :photo, PAPERCLIP_STORAGE ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
@@ -44,7 +44,7 @@ class Webapp < ActiveRecord::Base
   validates :caption, :presence => true
   validates :description, :presence => true
   validates :url, :presence => true,
-    :format => {:with => url_regex },
+  #  :format => {:with => url_regex },
     :uniqueness => true
 
 
@@ -114,11 +114,15 @@ class Webapp < ActiveRecord::Base
 
   ## Best tag for this web app
   def n_best_tags(n)
+    ## It's the most_posted tags along websites's tags
     tags.most_posted(n)
   end
 
+  ###############################
+  ## Getter virtual attributes ##
+  ###############################
 
-  ## Getter virtual attributes
+  
   def nb_rating
     self.comments.all.length
   end
@@ -130,6 +134,8 @@ class Webapp < ActiveRecord::Base
   def reviews
     comments.commented.to_json(:include => :user)
   end
+
+
 
 
   #######################

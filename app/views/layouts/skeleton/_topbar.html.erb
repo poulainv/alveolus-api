@@ -8,14 +8,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">EnjoyTheWeb <small> beta</small></a>
+      <%= link_to "EnjoyTheWeb beta", accueil_path, :class=>"brand"%>
       <div class="nav-collapse collapse">
         <p class="navbar-text pull-right">
           <% if user_signed_in? %>
             <% if current_user.try(:admin?) %>
               <span class="label label-important">Admin</span>
             <% end %>
-            Connecté en tant que <%= current_user.email %>.
+            Connecté en tant que <%= current_user.pseudo %>.
             <span class="badge">  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, :style=>"color:white;"%></span>
           <% else %>
 
@@ -30,10 +30,12 @@
               <a class="openIdProvider" id="newAccount" href="/users/sign_up/"> Créer un compte EJW </a>
             </div>
           </div>
+
+             <% end %>
+
         </div>
 
-      <% end %>
-
+   
       <ul class="nav">
         <li class="active"><%= link_to "Home", accueil_path%></li>
         <li><%= link_to "Nos valeurs", about_path %></li>
@@ -46,7 +48,3 @@
     </div><!--/.nav-collapse -->
   </div>
 </div>
-</div>
-<script>
-
-</script>

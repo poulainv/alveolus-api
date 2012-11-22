@@ -39,15 +39,8 @@ ActiveRecord::Schema.define(:version => 20121121144225) do
     t.integer  "user_id"
   end
 
-  add_index "tag_app_relations", ["tag_id", "webapp_id"], :name => "index_tag_app_relations_on_tag_id_and_webapp_id", :unique => true
+  add_index "tag_app_relations", ["tag_id", "webapp_id", "user_id"], :name => "index_tag_app_relations_on_tag_id_and_webapp_id_and_user_id", :unique => true
 
-  create_table "tag_user_relations", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "webapp_id"
-  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"

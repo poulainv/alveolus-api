@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+  source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
@@ -13,13 +13,14 @@ group :production do
   gem 'rmagick'
   gem 'aws-sdk'
   gem 'devise'
-   gem 'omniauth'
+  gem 'omniauth'
   gem 'omniauth-facebook'
   gem 'certified'
   gem 'fb_graph'
 end
 
 gem 'bootstrap-sass'
+gem 'xpath'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -49,11 +50,13 @@ end
 
 group :test do
   gem 'rspec', '2.8.0'
-  gem 'webrat', '0.7.1'
+   gem 'capybara', ">= 1.1.2"
   gem 'factory_girl_rails', '4.0'
   gem 'devise'
-   gem 'omniauth'
+  gem 'omniauth'
   gem 'omniauth-facebook'
+   gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 gem 'jquery-rails'

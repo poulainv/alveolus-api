@@ -3,10 +3,11 @@
 
 class CommentsController < ApplicationController
 
+  before_filter :authenticate_user! , :only => [:create, :update]
 
-
-  before_filter :authenticate_user! , :only => [:create]
   def index
+
+    # GET Comment for user/webapp/
     if params[:webapp_id] and params[:user_id] and user_signed_in?
       if @comment = Comment.find_by_webapp_id_and_user_id( params[:webapp_id], current_user.id)
         respond_to do |format|
@@ -17,6 +18,7 @@ class CommentsController < ApplicationController
           }
         end
       else
+        ## Very important let empty => mean any comment exist for javascript
         render :json => ""
       end
     elsif params[:webapp_id]
@@ -28,7 +30,7 @@ class CommentsController < ApplicationController
         redirect_to accueil_path
       end
     else
-      flash[:error] = "URL inconnue"
+      flash[:error] = "La page demandée n'existe pas"
       redirect_to accueil_path
     end
     
@@ -44,26 +46,27 @@ class CommentsController < ApplicationController
         flash[:success] = "Commentaire ajouté"
         render :json => @webapp.comments.to_json({:include => :user})
       else
-        render :status => 406,:json =>"Vous avez déjà donné votre avis".to_json
+        flash[:error] = "Vous avez déjà commenté pour ce website"
+        redirect_to accueil_path
       end
     else
-      render :nothing => true
+      flash[:error] = "La page demandée n'existe pas"
+      redirect_to accueil_path
     end
-  end
-  
-  # GET /comments/:id
-  # GET /users/:user_id/webapps/:webapps_id/comments
-  def show
-    
   end
 
   def update
-      @comment = Comment.find(params[:id])
-      @webapp = Webapp.find_by_id(@comment.webapp_id)
+    @comment = Comment.find(params[:id])
+    if @webapp = Webapp.find_by_id(@comment.webapp_id)
       if @comment.update_attributes(:body =>params[:comment], :rating => params[:rating])
-         render :json => @webapp.comments.to_json({:include => :user})
+        render :json => @webapp.comments.to_json({:include => :user})
       else
-        render :statut => 406, :json => "erreur"
+        flash[:error] = "Impossible d'éditer correctement ce commentaire"
+        redirect_to accueil_path
+      end
+    else
+      flash[:error] = "Le commentaire à édité n'existe pas"
+      redirect_to accueil_path
     end
   end
 end

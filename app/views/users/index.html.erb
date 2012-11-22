@@ -4,25 +4,24 @@
 	  <thead>
       <tr>
           <th>ID</th>
+           <th>Surname</th>
           <th>Email</th>
           <th>Registered</th>
           <th>Nb connexion</th>
           <th>Admin</th>
-          <th></th>
+
       </tr>
   </thead>
   <tbody>
   <% @users.each do |user| %>
     <tr>
         <td><%= user.id%></td>
-        <td><%= user.email %></td>
+        <td><%= user.pseudo%></td>
+         <td><%= user.email %></td>
         <td><%= user.created_at.to_date %></td>
         <td><%= user.sign_in_count %></td>
         <td><%= user.admin %></td>
-        <td>
-          <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
-        
-        </td>
+       
         <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
     </tr>
   <% end %>

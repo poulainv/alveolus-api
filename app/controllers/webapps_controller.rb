@@ -7,16 +7,42 @@ class WebappsController < ApplicationController
   before_filter :webapps_top_trend, :only => [:show, :index]
   before_filter :webapps_promoted, :only => [:show, :index]
   before_filter :webapps_top_rated, :only => [:show, :index]
+  before_filter :authenticate_user!, :only => [:create, :edit, :update]
+
 
   # GET /webapps/
   def index
+    # GET /tags/:tag_id/webapps/
     if (params[:tag_id])
       @tag = Tag.find_by_id(params[:tag_id])
       @webapps = Webapp.tagged_with(@tag.name)
       @subtitle = "Résultat de la recherche :  #"+@tag.name
       @nb_results = @webapps.length ;
       render :search , :layout => "navigation"
-  
+
+    elsif params[:order]
+      n = 30
+      case params[:order]
+        when "recent"
+          @webapps = Webapp.recent(n)
+          @subtitle = "Nouveautés"
+        when "trend"
+          @webapps = Webapp.trend(n)
+          @subtitle = "Les plus populaires"
+        when "commented"
+          @webapps = Webapp.most_commented(n)
+          @subtitle = "Les plus commentés"
+        when "rated"
+          @webapps = Webapp.best_rated(n)
+          @subtitle = "Les mieux notés"
+        when "suggested"
+          @webapps = Webapp.suggested
+          @subtitle = "Nos suggestions"
+      end
+
+      @nb_results = @webapps.length ;
+      render :search , :layout => "navigation"
+      # GET /webapps/
     else
       @subtitle = "Tous les websites"
       @webapps = Webapp.validated
@@ -27,10 +53,8 @@ class WebappsController < ApplicationController
         format.json{
           render :json => @webapps.to_json(:methods => %w(nb_rating))
         }
-      end
-    
+      end  
     end
-    
   end
 
 
@@ -75,9 +99,12 @@ class WebappsController < ApplicationController
   # GET /webapp/1/edit
   def edit
     if current_user.try(:admin?)
-    @webapp = Webapp.find(params[:id])
+      @webapp = Webapp.find(params[:id])
+      render :layout => "navigation"
+    else
+      flash[:error] = "Vous devez être administrateur pour éditer les websites"
+      redirect_to accueil_path
     end
-    render :layout => "navigation"
   end
 
 
@@ -111,7 +138,6 @@ class WebappsController < ApplicationController
     @webapps = Webapp.all
     @subtitle = "Résultat :"
     @nb_results = @webapps.length ;
-   
     respond_to do |format|
       format.html{
         render :layout => "navigation"
