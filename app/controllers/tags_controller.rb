@@ -13,7 +13,7 @@ class TagsController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-        render :json => @tags.to_json
+        render :json => @tags.to_json(:methods => %w(poid))
       }
     end
   end
@@ -60,7 +60,7 @@ class TagsController < ApplicationController
     @tagsResult = @tag.tags_associated
     respond_to do |format|
       format.json{
-        render :json => @tagsResult.to_json
+        render :json => @tagsResult.to_json(:methods => %w(poid))
       }
     end
   end

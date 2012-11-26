@@ -43,4 +43,10 @@ class Tag < ActiveRecord::Base
     return @tagsResult
   end 
 
+
+  # Virtual attributes
+  def poid
+    self.tagAppRelations.length
+  end
+
 end

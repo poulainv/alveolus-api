@@ -12,12 +12,14 @@ $(document).ready(function(){
         for (x in tags)
         {
 
+            var coeffSize = 100+tags[x].poid*60;
+            console.log("cooef :"+coeffSize);
              // Geneate tag
-            var tagP = $("<p/>", {
+            var tagP = $("<span/>", {
                 "tagId": tags[x].id,
                 "class" : "tagCloud",
                 text: tags[x].name,
-                
+                style : "margin-right : 5%; font-size:"+coeffSize+"%;",
                 mouseover : function(){
                     $(this).children(".btn-tag").show();                  
                 },
@@ -26,12 +28,15 @@ $(document).ready(function(){
                 }
             }).appendTo(tagCloud);
 
+            if(x%3==0){
+                tagP.append("<br>");
+            }
 
              // Generate button Voir
             $("<div/>", {
-                style : 'display:none; margin-left:3%;',
-                "class" : "btn btn-small btn-tag",
-                text: 'Voir',
+                style : 'display:none; margin-left:1%;',
+                "class" : "btn btn-mini btn-tag",
+                text: 'V',
                 click : function(){
                    
                     tagElement =   $(this);
@@ -58,10 +63,12 @@ $(document).ready(function(){
                 }
             });
 
+
+            // Generate button Parcourir
             $("<div/>", {
-                style : 'display:none; margin-left:3%;',
-                "class" : "btn btn-small btn-tag",
-                text: 'Parcourir',
+                style : 'display:none; margin-left:1%;',
+                "class" : "btn btn-mini btn-tag",
+                text: 'P',
                 click : function(){
                         tag.ajax_get_tags_associated($(this).parent().attr('tagId'),cloudtags.init_tags_cloud)
                     }
@@ -87,9 +94,9 @@ $(document).ready(function(){
                         "</div>"+
                         "<div class='span6'>"+
                             "<div class='row-fluid>"+
-                                "<div class='span12'>"+
+                                "<div class='span12'><small>"+
                                 websites[x].title+
-                                "</div>"+
+                                "</small></div>"+
                             "</div>"+
 //                            "<div class='row-fluid>"+
 //                                "<div class='span12'>"+
