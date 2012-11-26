@@ -18,26 +18,33 @@ class WebappsController < ApplicationController
       @webapps = Webapp.tagged_with(@tag.name)
       @subtitle = "Résultat de la recherche :  #"+@tag.name
       @nb_results = @webapps.length ;
-      render :search , :layout => "navigation"
-
+      respond_to do |format|
+        format.html {
+          render :search , :layout => "navigation"
+        }
+        format.json{
+          render :json => @webapps.uniq.to_json(:methods => %w(nb_rating preview))
+        }
+     
+      end
     elsif params[:order]
       n = 30
       case params[:order]
-        when "recent"
-          @webapps = Webapp.recent(n)
-          @subtitle = "Nouveautés"
-        when "trend"
-          @webapps = Webapp.trend(n)
-          @subtitle = "Les plus populaires"
-        when "commented"
-          @webapps = Webapp.most_commented(n)
-          @subtitle = "Les plus commentés"
-        when "rated"
-          @webapps = Webapp.best_rated(n)
-          @subtitle = "Les mieux notés"
-        when "suggested"
-          @webapps = Webapp.suggested
-          @subtitle = "Nos suggestions"
+      when "recent"
+        @webapps = Webapp.recent(n)
+        @subtitle = "Nouveautés"
+      when "trend"
+        @webapps = Webapp.trend(n)
+        @subtitle = "Les plus populaires"
+      when "commented"
+        @webapps = Webapp.most_commented(n)
+        @subtitle = "Les plus commentés"
+      when "rated"
+        @webapps = Webapp.best_rated(n)
+        @subtitle = "Les mieux notés"
+      when "suggested"
+        @webapps = Webapp.suggested
+        @subtitle = "Nos suggestions"
       end
 
       @nb_results = @webapps.length ;

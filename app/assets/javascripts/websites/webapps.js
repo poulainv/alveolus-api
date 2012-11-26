@@ -10,4 +10,13 @@ function Websites(){
         });
     }
 
+        this.ajax_get_for_tag_id = function (tagId,callback) {
+        $.ajax({
+            type: "GET",
+            url: "/tags/"+tagId+"/webapps.json"
+        }).done(function( msg ) {
+            callback(msg);
+        });
+    }
+
 };

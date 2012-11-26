@@ -131,6 +131,11 @@ class Webapp < ActiveRecord::Base
     n_best_tags(5)
   end
 
+
+  def preview
+    self.photo.url(:small)
+  end
+
   def reviews
     comments.commented.to_json(:include => :user)
   end

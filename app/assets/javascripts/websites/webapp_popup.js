@@ -1,6 +1,10 @@
 
 
 $(document).ready(function(){
+  popupWebSite = new PopupWebSite();
+});
+
+ function PopupWebSite(){
     var popup = this
     var comments = new Comments();
     var websites = new Websites();
@@ -10,7 +14,7 @@ $(document).ready(function(){
     this.website_info = null;
  
     // Script to excecute when open popup to update info
-    $(".websiteTitle").click(function () {
+    this.listenerWebSiteTitle = function(){
 
          $('.spinner').show();
 
@@ -20,7 +24,7 @@ $(document).ready(function(){
         popup.init_star_rating();
         $("#messageTagSaved").hide();
         $("#messageCommentSaved").hide();
-     
+
         // Get info website
         websites.ajax_get_by_id(popup.current_website_id,function (msg){
             popup.website_info = msg ;
@@ -38,10 +42,7 @@ $(document).ready(function(){
         })();
         // Increment nb_click_detail
         increment_nb_click(popup.current_website_id, "detail");
-     
-    });
-
-
+    }
 
     this.listenerFacebookButton = (function (){
         console.log("sharing on facebook...")
@@ -57,8 +58,13 @@ $(document).ready(function(){
             });
         });
 
+
+      // Listener for website title click => open/show POPUP detail
+    $(".websiteTitle").click(popup.listenerWebSiteTitle);
+
+
         // Init tooltip for Facebook
-        $('#share_facebook').tooltip({
+   $('#share_facebook').tooltip({
             title	: "Partager ce site sur Facebook",
             placement : 'bottom'
         });
@@ -292,8 +298,7 @@ $(document).ready(function(){
 			return true;
 		}
 	}
-
-});
+ }
 
 
 function manage_star_rating(n,path_on,path_off){
