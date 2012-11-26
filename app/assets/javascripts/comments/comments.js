@@ -9,10 +9,11 @@
 	    });
 	}
 
+          // Actually we don't care about userID because it depends just about current user log in
           this.ajax_get_by_website_id_for_user_sign_in = function (websiteId, userId, callback){
 	    $.ajax({
 	        type: "GET",
-	        url: "users/"+userId+"/webapps/"+websiteId+"/comments.json"
+	        url: "/users/"+userId+"/webapps/"+websiteId+"/comments.json"
 	    }).done(function( msg ) {
 	        callback(msg);
 	    });
