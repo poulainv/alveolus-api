@@ -8,9 +8,12 @@ $(document).ready(function(){
     this.current_website_id = 0 ;
     this.current_comment_id = 0 ;
     this.website_info = null;
-
+ 
     // Script to excecute when open popup to update info
     $(".websiteTitle").click(function () {
+
+         $('.spinner').show();
+
         popup.current_comment_id = 0 ;
         popup.current_website_id = $(this).attr("websiteId");
         // Init star rating
@@ -23,7 +26,9 @@ $(document).ready(function(){
             popup.website_info = msg ;
             popup.initialize_website_details(msg);
             popup.initialize_website_comments(eval(msg.reviews));
-            popup.initialize_website_tags(msg.best_tags)
+            popup.initialize_website_tags(msg.best_tags);
+            $('.spinner').hide();
+            $('#detailWebsiteModal').modal('show');
         });
 
         this.ajax_get_comment_for_current_user = (function(){
@@ -33,7 +38,7 @@ $(document).ready(function(){
         })();
         // Increment nb_click_detail
         increment_nb_click(popup.current_website_id, "detail");
-
+     
     });
 
 
