@@ -1,10 +1,10 @@
 
 
 $(document).ready(function(){
-  popupWebSite = new PopupWebSite();
+    popupWebSite = new PopupWebSite();
 });
 
- function PopupWebSite(){
+function PopupWebSite(){
     var popup = this
     var comments = new Comments();
     var websites = new Websites();
@@ -16,7 +16,7 @@ $(document).ready(function(){
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
 
-         $('.spinner').show();
+        $('.spinner').show();
 
         popup.current_comment_id = 0 ;
         popup.current_website_id = $(this).attr("websiteId");
@@ -59,12 +59,12 @@ $(document).ready(function(){
         });
 
 
-      // Listener for website title click => open/show POPUP detail
-    $(".websiteTitle").click(popup.listenerWebSiteTitle);
+        // Listener for website title click => open/show POPUP detail
+        $(".websiteTitle").click(popup.listenerWebSiteTitle);
 
 
         // Init tooltip for Facebook
-   $('#share_facebook').tooltip({
+        $('#share_facebook').tooltip({
             title	: "Partager ce site sur Facebook",
             placement : 'bottom'
         });
@@ -72,8 +72,8 @@ $(document).ready(function(){
     })();
 
 
-   this.listenerGooglePlusButton = (function (){
-         // Init tooltip for Facebook
+    this.listenerGooglePlusButton = (function (){
+        // Init tooltip for Facebook
         $('#share_google').tooltip({
             title	: "Bientôt...",
             placement : 'bottom'
@@ -83,7 +83,7 @@ $(document).ready(function(){
 
 
     this.listenerTwitterButton = (function (){
-         // Init tooltip for Facebook
+        // Init tooltip for Facebook
         $('#share_twitter').tooltip({
             title	: "Bientôt...",
             placement : 'bottom'
@@ -120,10 +120,10 @@ $(document).ready(function(){
             var newComment = $('#newCommentField').val();
             var newRating = $('#star_rating_user').raty('score');
             console.log('click add new comment')
-			if(popup.check_star_rating(newRating) == false) return;
+            if(popup.check_star_rating(newRating) == false) return;
             comments.ajax_post(popup.current_website_id, newRating,newComment,popup.initialize_website_comments);
             $("#messageCommentSaved").show();
-           // $('#addCommentEditButton').show();
+            // $('#addCommentEditButton').show();
             $('#newCommentField').hide();
             $(this).hide();
         });
@@ -135,7 +135,7 @@ $(document).ready(function(){
             console.log('click edit comment')
             var newComment = $('#newCommentField').val();
             var newRating = $('#star_rating_user').raty('score');
-			if(popup.check_star_rating(newRating) == false) return;
+            if(popup.check_star_rating(newRating) == false) return;
             comments.ajax_edit(popup.current_comment_id, newRating,newComment,popup.initialize_website_comments);
             $("#messageCommentSaved").show();
             $('#addCommentEditButton').show();
@@ -148,7 +148,7 @@ $(document).ready(function(){
     this.listener_edit_comment = (function(){
         $("#addCommentEditButton").click(function () {
             $('#addCommentSendButtonPut').show();
-             $("#messageCommentSaved").hide();
+            $("#messageCommentSaved").hide();
             $('#newCommentField').show();
             $(this).hide();
         });
@@ -168,16 +168,16 @@ $(document).ready(function(){
             targetKeep : true
         });
 
-		// Init tooltip for error
-		$('#star_rating_user').tooltip({
-			title	: "Vous devez obligatoirement laissez une note",
-			trigger : 'manual'
-		});
+        // Init tooltip for error
+        $('#star_rating_user').tooltip({
+            title	: "Vous devez obligatoirement laissez une note",
+            trigger : 'manual'
+        });
 		
-		// Hide tooltip when mouse over
-		$('#star_rating_user').mouseover(function(){
-			$(this).tooltip('hide');
-		});
+        // Hide tooltip when mouse over
+        $('#star_rating_user').mouseover(function(){
+            $(this).tooltip('hide');
+        });
 	
     }
 
@@ -225,7 +225,7 @@ $(document).ready(function(){
             "<div class='span3'><strong> user"+
             val.user.id+
             "</strong> </div>"+
-             "<div class='span4'>"+
+            "<div class='span4'>"+
             date+
             "</div>"+
             "<div class='span4'>"+
@@ -288,17 +288,17 @@ $(document).ready(function(){
         $(".tabBtn").after('<br></br>');
     }
 	
-	this.check_star_rating = function(score){
-		if(score==null || undefined == score){
-			// Display tooltip
-			$('#star_rating_user').tooltip('show');
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
- }
+    this.check_star_rating = function(score){
+        if(score==null || undefined == score){
+            // Display tooltip
+            $('#star_rating_user').tooltip('show');
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}
 
 
 function manage_star_rating(n,path_on,path_off){

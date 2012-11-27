@@ -12,7 +12,7 @@ $(document).ready(function(){
         for (x in tags)
         {
 
-            var coeffSize = 100+tags[x].poid*60;
+            var coeffSize = 100+tags[x].poid*tags[x].poid*20;
             console.log("cooef :"+coeffSize);
              // Geneate tag
             var tagP = $("<span/>", {
@@ -52,7 +52,7 @@ $(document).ready(function(){
             }).appendTo(tagP)
             .popover({
                 'animation': 	false,
-                'placement': 	'bottom',
+                'placement': 	'right',
                 'html'      :         true,
                 'trigger'  : 	'manual',
                 'title'    :          'Websites associés',
@@ -89,7 +89,7 @@ $(document).ready(function(){
 
             var websitePreview =
                 "<div class='row-fluid'>"+
-                    "<div class='container-fluid'>"+
+                    "<div class='container-fluid websitePreview'>"+
                         "<div class='span6'>"+
                             "<img src='"+websites[x].preview+"'</img>"+
                         "</div>"+
@@ -111,6 +111,9 @@ $(document).ready(function(){
 
 
             websiteCloud.append(websitePreview);
+//             $("#websitesCloud:last-child").click(function(){
+//                 alert('sdf');
+//             })
         }
     })
 
