@@ -17,26 +17,23 @@ $(document).ready(function(){
              // Geneate tag
             var tagP = $("<span/>", {
                 "tagId": tags[x].id,
-               
-                html: "<span class='tagCloud'>"+tags[x].name+"</span>",
-                style : "margin : 5% 5% 5% 5%; font-size:"+coeffSize+"%; ",
+               'class':'tagCloud',
+                html: "<span class='tagName'>"+tags[x].name+"</span>",
+                style : "margin : 5% 5% 5% 5%; font-size:"+coeffSize+"%; padding-right:1%; ",
                 click : function(event){
                     $(this).children(".btn-tag").show();
-                    $(this).children('.tagCloud').hide(500);
+                    $(this).children('.tagName').hide(500);
                     buttonDisplayed = true;
                     event.stopPropagation();
                 }
                
             }).appendTo(tagCloud);
 
-            if(x%3==0){
-                tagP.append("<br>");
-            }
-
+         
              // Generate button Voir
             $("<span/>", {
                 style : 'display:none; margin-left:1%;',
-                "class" : "btn btn-mini btn-tag custom_inline",
+                "class" : "btn btn-small btn-tag custom_inline",
                 text: 'Websites',
                 click : function(){
                    
@@ -57,8 +54,8 @@ $(document).ready(function(){
                 'animation': 	false,
                 'placement': 	'bottom',
                 'html'      :         true,
-                'trigger'  : 	'manual   ',
-                'title'    :          'Les websites associés',
+                'trigger'  : 	'manual',
+                'title'    :          'Websites associés',
                 'content'  : 	function(){
                     return $('#websitesCloud').html()
                 }
@@ -68,13 +65,16 @@ $(document).ready(function(){
             // Generate button Parcourir
             $("<span/>", {
                 style : 'display:none; margin-left:1%;',
-                "class" : "btn btn-mini btn-tag custom_inline",
+                "class" : "btn btn-small btn-tag custom_inline",
                 text: 'Explorer',
                 click : function(){
                         tag.ajax_get_tags_associated($(this).parent().attr('tagId'),cloudtags.init_tags_cloud)
                     }
 
                 }).appendTo(tagP)
+   if(x%3==0){
+                tagP.append("<br>");
+            }
 
         }
     });
@@ -106,7 +106,9 @@ $(document).ready(function(){
 //                             "</div>"+
                          "</div>"+
                     "</div>"+
-             "</div>";
+             "</div>"+
+             "<div class='line-separator-dashed'> </div>";
+
 
             websiteCloud.append(websitePreview);
         }
@@ -123,8 +125,8 @@ $(document).ready(function(){
 		}
                     if(buttonDisplayed){
 
-                    $(".btn-tag").hide();
-                    $('.tagCloud').show();
+                    $(".btn-tag").hide(200);
+                    $('.tagName').show();
                         buttonDisplayed=false;
                     }
 	})
