@@ -17,15 +17,16 @@ $(document).ready(function(){
              // Geneate tag
             var tagP = $("<span/>", {
                 "tagId": tags[x].id,
-                "class" : "tagCloud",
-                text: tags[x].name,
-                style : "margin-right : 5%; font-size:"+coeffSize+"%;",
-                mouseover : function(){
-                    $(this).children(".btn-tag").show();                  
-                },
-                mouseout : function(){
-                    $(this).children(".btn-tag").hide();
+               
+                html: "<span class='tagCloud'>"+tags[x].name+"</span>",
+                style : "margin : 5% 5% 5% 5%; font-size:"+coeffSize+"%; ",
+                click : function(event){
+                    $(this).children(".btn-tag").show();
+                    $(this).children('.tagCloud').hide(500);
+                    buttonDisplayed = true;
+                    event.stopPropagation();
                 }
+               
             }).appendTo(tagCloud);
 
             if(x%3==0){
@@ -33,10 +34,10 @@ $(document).ready(function(){
             }
 
              // Generate button Voir
-            $("<div/>", {
+            $("<span/>", {
                 style : 'display:none; margin-left:1%;',
-                "class" : "btn btn-mini btn-tag",
-                text: 'V',
+                "class" : "btn btn-mini btn-tag custom_inline",
+                text: 'Websites',
                 click : function(){
                    
                     tagElement =   $(this);
@@ -65,10 +66,10 @@ $(document).ready(function(){
 
 
             // Generate button Parcourir
-            $("<div/>", {
+            $("<span/>", {
                 style : 'display:none; margin-left:1%;',
-                "class" : "btn btn-mini btn-tag",
-                text: 'P',
+                "class" : "btn btn-mini btn-tag custom_inline",
+                text: 'Explorer',
                 click : function(){
                         tag.ajax_get_tags_associated($(this).parent().attr('tagId'),cloudtags.init_tags_cloud)
                     }
@@ -94,9 +95,9 @@ $(document).ready(function(){
                         "</div>"+
                         "<div class='span6'>"+
                             "<div class='row-fluid>"+
-                                "<div class='span12'><small>"+
+                                "<div class='span12'><h5>"+
                                 websites[x].title+
-                                "</small></div>"+
+                                "</h5></div>"+
                             "</div>"+
 //                            "<div class='row-fluid>"+
 //                                "<div class='span12'>"+
@@ -115,10 +116,17 @@ $(document).ready(function(){
     tag.ajax_get_tags(this.init_tags_cloud);
 
       var popupClicked = false;
+      var buttonDisplayed = false;
         $('body').click(function(){
 		if(popupClicked){
 			$('.btn-tag').popover('hide');
 		}
+                    if(buttonDisplayed){
+
+                    $(".btn-tag").hide();
+                    $('.tagCloud').show();
+                        buttonDisplayed=false;
+                    }
 	})
 
 
