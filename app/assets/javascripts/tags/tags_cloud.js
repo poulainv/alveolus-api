@@ -68,6 +68,8 @@ $(document).ready(function(){
                 "class" : "btn btn-small btn-tag custom_inline",
                 text: 'Explorer',
                 click : function(){
+
+                        $('#tagsCloud').hide(600);
                         tag.ajax_get_tags_associated($(this).parent().attr('tagId'),cloudtags.init_tags_cloud)
                     }
 
@@ -77,6 +79,8 @@ $(document).ready(function(){
             }
 
         }
+
+        $('#tagsCloud').show(600);
     });
 
     this.init_websites_list = (function(websites){
