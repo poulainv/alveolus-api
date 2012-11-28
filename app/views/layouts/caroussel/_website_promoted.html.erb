@@ -6,7 +6,7 @@ end
     <%= image_tag(websites.photo.url(:caroussel), :alt => "rss feed") %>
 
     <div class="carousel-caption">
-      <h4><%= link_to  websites.title ,"#detailWebsiteModal",
+      <h4><%= link_to  websites.title ,"",
           :class => "websiteTitle",:websiteId=>websites.id,
           :style=>"color:white",
           :data => { :toggle => "modal" }%> </h4>
