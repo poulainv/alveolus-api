@@ -22,7 +22,7 @@ $(document).ready(function(){
                 style : "margin : 5% 5% 5% 5%; font-size:"+coeffSize+"%; padding-right:1%; ",
                 click : function(event){
                     $(this).children(".btn-tag").show();
-                    $(this).children('.tagName').hide(500);
+                    $(this).children('.tagName').hide(200);
                     buttonDisplayed = true;
                     event.stopPropagation();
                 }
