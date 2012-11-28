@@ -1,61 +1,64 @@
 <!-- Home Page, display website : NOUVEAUTE / SUGGESTION EN GRID -->
 
-<div class="span12">
-  <h3 class="text-info"><a href="/webapps/order/recent">Nouveautés</a></h3>
+<div class="offset4 span12">
+  <li class="nav-header"><h3><a href="/webapps/order/recent">Nouveautés</a></h3></li>
 </div>
 
-<ul class="thumbnails">
-  <% 3.times do |i| %>
-    <li class="span4">
-      <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i] }%>
-    </li>
-  <%end%>
-</ul>
-
-
-<ul class="thumbnails">
-  <% 3.times do |i| %>
-    <li class="span4">
-      <div class="thumbnail">
-        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
-
-      </div>
-    </li>
-  <%end%>
-</ul>
-
-
-
-<div class="line-separator"></div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <h3 class="text-info"><strong><a href="/webapps/order/suggested">Suggestions</a> </strong></h3>
-  </div>
+<div class="offset2 span8">
+  <div class="line-separator-dashed"></div>
 </div>
 
-<ul class="thumbnails">
-  <% 3.times do |i| 
-    if( i<@webapps_suggest.length) %>
-    <li class="span4">
-      <div class="thumbnail">
-        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
-      </div>
-    </li>
-  <%end%>
-<%end%>
-</ul>
+  <ul class="thumbnails">
+    <% 3.times do |i| %>
+      <li class="span4">
+        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i] }%>
+      </li>
+    <%end%>
+  </ul>
 
 
-<ul class="thumbnails">
-<% 3.times do |i|
-  if(i+3<@webapps_suggest.length) %>
-    <li class="span4">
-      <div class="thumbnail">
-        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
+  <ul class="thumbnails">
+    <% 3.times do |i| %>
+      <li class="span4">
+        <div class="thumbnail">
+          <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
 
-      </div>
-    </li>
-  <%end%>
-<%end%>
-</ul>
+        </div>
+      </li>
+    <%end%>
+  </ul>
+
+
+<div class="offset4 span12">
+  <li class="nav-header"><h3><a href="/webapps/order/suggested">Suggestions</a></h3></li>
+</div>
+<div class="span8 offset2">
+  <div class="line-separator-dashed"></div>
+</div>
+
+
+  <ul class="thumbnails">
+    <% 3.times do |i|
+      if( i<@webapps_suggest.length) %>
+        <li class="span4">
+          <div class="thumbnail">
+            <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
+          </div>
+        </li>
+      <%end%>
+    <%end%>
+  </ul>
+
+
+  <ul class="thumbnails">
+    <% 3.times do |i|
+      if(i+3<@webapps_suggest.length) %>
+        <li class="span4">
+          <div class="thumbnail">
+            <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
+
+          </div>
+        </li>
+      <%end%>
+    <%end%>
+  </ul>

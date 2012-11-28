@@ -1,13 +1,22 @@
 @import "bootstrap";
-body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
+$custom_green :  #468847;
+$custom_green_hover : #339900;
+$custom_blue_hover : #009999;
+$custom_blue : #006666;
+body {
+    padding-top: 60px;
+        background-color: #eee;
+}
 
 .footer {
     padding: 50px 0;
     margin-top: 20px;
     border-top: 4px solid #e5e5e5;
-    background-color: #f5f5f5;
+    background-color:white;
+
+    border-top-color: $custom_blue;
 }
 .footer p {
     margin-bottom: 0;
@@ -51,59 +60,49 @@ body { padding-top: 60px; }
     border : none ; 
 }
 
-
-
-
-/* To updated this version... */
-
-small {
-    font-size: 85%;
+.custom_box{
+    padding: 15px 20px 20px 20px;
+    border-top-style: inset;
+    border-top-width: 5px;
+    border-top-color: $custom_blue;
+    border-radius: 0px 20px 0 0px;
+    background-color: white;
 }
 
-strong {
+.custom_tab{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
+}
+
+
+.custom_tab a{
+    background-color:#cccccc;
+    color:snow ;
+    border-radius: 0px 0px 0px 0px;
+    
+}
+
+.custom_tab a:hover{
+    background-color:black;
+    color:white;
     font-weight: bold;
 }
 
-em {
-    font-style: italic;
+
+.custom_tab .active a{
+    background-color: $custom_blue;
+    color:white;
+    font-weight: bold;
+    border-radius: 0px 0px 0px 0px;
 }
 
-cite {
-    font-style: normal;
+.custom_tab .active a:hover{
+    background-color: $custom_blue_hover;
+    color:white;
+    font-weight: bold;
 }
 
-.muted {
-    color: #999999;
-}
-
-.text-warning {
-    color: #c09853;
-}
-
-a.text-warning:hover {
-    color: #a47e3c;
-}
-
-.text-error {
-    color: #b94a48;
-}
-
-a.text-error:hover {
-    color: #953b39;
-}
-
-.text-info {
-    color: #3a87ad;
-}
-
-a.text-info:hover {
-    color: #2d6987;
-}
-
-.text-success {
-    color: #468847;
-}
-
-a.text-success:hover {
-    color: #356635;
+a{
+    color : black;
 }
