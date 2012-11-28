@@ -14,9 +14,14 @@
       <%= yield %>
 
     </div>
-    <div class="tab-pane fade" id="browser_tag">
+   <div class="tab-pane fade" id="browser_tag">
 
       <%=  render :partial => "tags/tag_cloud" %>
+
+    </div>
+ <div class="tab-pane fade" id="surprise">
+
+      <%=  render :partial => "layouts/main_view/surprise_me" %>
 
     </div>
   </div>

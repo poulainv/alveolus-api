@@ -51,7 +51,7 @@ class WebappsController < ApplicationController
       render :search , :layout => "navigation"
       # GET /webapps/
     else
-      @subtitle = "Tous les websites"
+      @subtitle = "Tous les sites web"
       @webapps = Webapp.validated
       @webapps_suggest = Webapp.suggested
       @webapps_top_recent = Webapp.recent(6)
@@ -68,7 +68,7 @@ class WebappsController < ApplicationController
   # GET /webapps/new
   def new
     @webapp = Webapp.new
-    @title = "Une nouvelle idée de Website?"
+    @title = "Une nouvelle idée de sites web ?"
     #If we want apply an other layout with this method : 
     render :layout => "pages"
   end
@@ -85,7 +85,7 @@ class WebappsController < ApplicationController
         }
       end
     else
-      flash[:error] = "La Webapp demandé n'existe pas"
+      flash[:error] = "Le site web demandé n'existe pas"
       redirect_to accueil_path
     end
   end
