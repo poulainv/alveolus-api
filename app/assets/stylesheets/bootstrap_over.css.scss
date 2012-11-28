@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+$custom_green_light_hover : #9bd290;
 $custom_green :  #468847;
 $custom_green_hover : #339900;
 $custom_blue_hover : #009999;
@@ -50,8 +51,18 @@ body {
     .close {
     margin-top: 2px;
 
+    }
 }
+
+
+.hover_green:hover{
+    cursor : pointer ;
+      background-color :$custom_green_light_hover!important;
+      border-radius: 5px 5px 5px 5px;
+      color : black;
+
 }
+
 
 #detailWebsiteModalNbVues{
     margin-right : 10%;
