@@ -107,7 +107,7 @@ class WebappsController < ApplicationController
   def edit
     if current_user.try(:admin?)
       @webapp = Webapp.find(params[:id])
-      render :layout => "navigation"
+      render :layout => "pages"
     else
       flash[:error] = "Vous devez être administrateur pour éditer les websites"
       redirect_to accueil_path
@@ -124,7 +124,7 @@ class WebappsController < ApplicationController
         format.html { redirect_to @webapp, notice: 'Les données ont correctement été modifiées' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit",:layout =>"pages" }
         format.json { render json: @webapp.errors, status: :unprocessable_entity }
       end
     end

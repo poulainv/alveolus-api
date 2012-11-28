@@ -43,7 +43,7 @@ class Webapp < ActiveRecord::Base
   
   validates :title, :presence => true, :length => { :maximum => 25, :minimum => 2 }
   validates :caption, :presence => true, :length => { :maximum => 170, :minimum => 30 }
-  validates :description, :presence => true,:length => { :maximum => 450, :minimum => 100 }
+  validates :description, :presence => true,:length => { :maximum => 600, :minimum => 100 }
   validates :url, :presence => true,
     :format => {:with => url_regex },
     :uniqueness => true

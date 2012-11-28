@@ -14,6 +14,8 @@
           <% if user_signed_in? %>
             <% if current_user.try(:admin?) %>
               <span class="label label-important">Admin</span>
+              <% else %>
+              <span class="label label-info">Membre</span>
             <% end %>
             Connecté en tant que <%= current_user.email %>.
             <span class="badge">  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, :style=>"color:white;"%></span>

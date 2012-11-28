@@ -171,7 +171,7 @@ describe "virtual attribute" do
     end
 
        it "shall reject description too long" do
-      @webapp = FactoryGirl.build(:webapp, description: "a" * 461)
+      @webapp = FactoryGirl.build(:webapp, description: "a" * 661)
       @webapp.should_not be_valid
     end
 
