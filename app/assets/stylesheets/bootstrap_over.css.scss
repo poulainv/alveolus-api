@@ -6,9 +6,9 @@ $custom_green_hover : #339900;
 $custom_blue_hover : #009999;
 $custom_blue : #006666;
 body {
-zoom : 90%;
+    zoom : 90%;
     padding-top: 60px;
-        background-color: #eee;
+    background-color: #eee;
 }
 
 .footer {
@@ -37,7 +37,7 @@ zoom : 90%;
 }
 
 #detailWebsiteModal {
-     width:80%;
+    width:80%;
     /* Should be : -width/2 */
     margin: -330px 0 0 -570px;
 }
@@ -48,9 +48,9 @@ zoom : 90%;
     margin-top : 0px;
     /* Close icon */
     .close {
-        margin-top: 2px;
+    margin-top: 2px;
 
-     }
+}
 }
 
 #detailWebsiteModalNbVues{
@@ -68,6 +68,7 @@ zoom : 90%;
     border-top-color: $custom_blue;
     border-radius: 0px 20px 0 0px;
     background-color: white;
+    overflow-x: hidden;
 }
 
 .custom_tab{
@@ -81,13 +82,12 @@ zoom : 90%;
     background-color:#cccccc;
     color:snow ;
     border-radius: 0px 0px 0px 0px;
-    
+
 }
 
 .custom_tab a:hover{
     background-color:black;
     color:white;
-    font-weight: bold;
 }
 
 
@@ -101,7 +101,6 @@ zoom : 90%;
 .custom_tab .active a:hover{
     background-color: $custom_blue_hover;
     color:white;
-    font-weight: bold;
 }
 
 a{

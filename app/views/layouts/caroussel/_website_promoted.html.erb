@@ -3,7 +3,7 @@
 end
    %>" >
   <div class="offset1" style="margin-left:10%">
-    <%= image_tag(websites.photo.url(:caroussel), :alt => "rss feed") %>
+    <%= link_to image_tag(websites.photo.url(:caroussel), :alt => "image carousel") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
 
     <div class="carousel-caption">
       <h4><%= link_to  websites.title ,"",

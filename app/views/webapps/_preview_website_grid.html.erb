@@ -4,7 +4,7 @@
 
 <div class="thumbnail">
  
-  <%= image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "rss feed") %>
+  <%= link_to image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
   <div class="row-fluid">
     <div class="span5">
       <strong><a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"><%= website.title %></a>
