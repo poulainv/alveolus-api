@@ -121,7 +121,7 @@ class WebappsController < ApplicationController
     @webapp = Webapp.find(params[:id])
     respond_to do |format|
       if @webapp.update_attributes(params[:webapp])
-        format.html { redirect_to @webapp, notice: 'Les données ont correctement été modifiées' }
+        format.html { redirect_to accueil_path, notice: 'Les données du website ont correctement été modifiées' }
         format.json { head :no_content }
       else
         format.html { render action: "edit",:layout =>"pages" }

@@ -5,14 +5,24 @@
   <div class="span5">
     <h2><small>Via vos identifiants...</small></h2>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div><%= f.label :email %><br />
-        <%= f.email_field :email %></div>
-
-      <div><%= f.label :password %><br />
-        <%= f.password_field :password %></div>
+      <div class="control-group">
+        <label class="control-label" for="user[email]">Email</label>
+        <div class="controls">
+          <%= f.email_field :email %></div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="user[password]">Password</label>
+        <div class="controls">
+          <%= f.password_field :password %></div>
+      </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+        <div class="control-group">
+          <label class="control-label custom_inline" for="user[remember_me]">Se souvenir de moi</label>
+          <div class="controls custom_inline">
+           <%= f.check_box :remember_me %>
+          </div>
+        </div>
       <% end -%>
 
       <div><%= f.submit "Sign in" %></div>

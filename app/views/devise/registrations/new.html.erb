@@ -6,20 +6,36 @@
     <h2><small>Créer vos propres identifiants...</small></h2>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
-      
-          <div><%= f.label :email %><br />
-            <%= f.email_field :email %></div>
 
-          <div><%= f.label :password %><br />
-            <%= f.password_field :password %></div>
+      <div class="control-group">
+        <label class="control-label" for="user[email]">Email</label>
+        <div class="controls">
+          <%= f.email_field :email %>
+          <span class="help-inline " style="display:none">Doit être une adresse mail</span>
+</div>
+      </div>
 
-          <div><%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation %></div>
+      <div class="control-group">
+        <label class="control-label" for="user[password]">Password</label>
+        <div class="controls">
+          <%= f.password_field :password %>
+          <span class="help-inline " style="display:none">Au moins 6 caractères</span>
+</div>
+      </div>
 
-          <div><%= f.submit "Sign up" %></div>
-      
-      <% end %>
-   
+      <div class="control-group">
+        <label class="control-label" for="user[password_confirmation]">Confirmation password</label>
+        <div class="controls">
+          <%= f.password_field :password_confirmation %>
+         <span class="help-inline " style="display:none">Doit être identique au password</span>
+</div>
+       
+      </div>
+
+      <div><%= f.submit "Sign up" %></div>
+
+    <% end %>
+
     <%= render "devise/shared/links" %>
   </div>
   <div class="span7">
