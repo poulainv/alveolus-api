@@ -32,19 +32,20 @@ class Webapp < ActiveRecord::Base
   has_many :tags, :through => :tagAppRelations , :source => :tag
   has_many :comments , :dependent => :destroy
   
- # url_regex  = /((http:\/\/|https:\/\/)?(www.)?(([a-zA-Z0-9-]){2,}\.){1,4}([a-zA-Z]){2,6}(\/([a-zA-Z-_\/\.0-9#:?=&;,]*)?)?)/
+  url_regex  =  /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+
   accepts_nested_attributes_for :tags
 
   has_attached_file :photo, PAPERCLIP_STORAGE ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
-  validates_attachment_size :photo, :less_than => 2.megabytes
+  validates_attachment_size :photo, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
   #validates_attachment_presence :photo # Comment because test fail otherwise !
 
   
-  validates :title, :presence => true
-  validates :caption, :presence => true
-  validates :description, :presence => true
+  validates :title, :presence => true, :length => { :maximum => 25, :minimum => 2 }
+  validates :caption, :presence => true, :length => { :maximum => 170, :minimum => 30 }
+  validates :description, :presence => true,:length => { :maximum => 450, :minimum => 100 }
   validates :url, :presence => true,
-  #  :format => {:with => url_regex },
+    :format => {:with => url_regex },
     :uniqueness => true
 
 
@@ -173,17 +174,17 @@ class Webapp < ActiveRecord::Base
   ## Validate and uniform
   ## Tres salasse à refaire
   def uniform_url
-    if(!self.url.index("www"))
-      return self.url.gsub("http://", "http://www.").downcase if self.url.index("http://")
-      return self.url.gsub("https://","https://www.").downcase if self.url.index("https://")
-      return self.url = "http://www." << self.url else
-    end
-    if(!self.url.index("http"))
-      return self.url.gsub("www.", "http://www.")
-    end
-
-    return self.url
-  
+#    if(!self.url.index("www"))
+#      return self.url.gsub("http://", "http://www.").downcase if self.url.index("http://")
+#      return self.url.gsub("https://","https://www.").downcase if self.url.index("https://")
+#      return self.url = "http://www." << self.url else
+#    end
+#    if(!self.url.index("http"))
+#      return self.url.gsub("www.", "http://www.")
+#    end
+#
+#    return self.url
+#
   end
 
 end

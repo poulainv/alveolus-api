@@ -107,10 +107,14 @@ function PopupWebSite(){
         $("#addTagSendButton").click(function () {
             console.log('click add tag')
             var newTag = $('#newTagField').val();
-            tags.ajax_post(popup.current_website_id,newTag,function(msg){
-                popup.initialize_website_tags(msg);
-                $("#messageTagSaved").show();
-            })
+            if(newTag!='' || newTag.length > 30){
+                tags.ajax_post(popup.current_website_id,newTag,function(msg){
+                    popup.initialize_website_tags(msg);
+                    $("#messageTagSaved").show();
+                })
+            } else {
+                alert("Etes-vous sûr que c'est un tag correct ?")
+            }
         });
     })();
 

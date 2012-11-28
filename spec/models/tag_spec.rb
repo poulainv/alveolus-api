@@ -24,7 +24,7 @@ describe Tag do
     
     it "method tagged? shall be return true if my webapp if tagged" do
       @webapp = FactoryGirl.build(:webapp)
-        @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user)
       @webapp2 = Webapp.new(:title=>"webapp2",:caption=>"caption1",:url=>"www.tgt.fr",:validate => true,:description=> "desc1")
       @tag.save
       @webapp.save
@@ -73,5 +73,15 @@ describe Tag do
     pending "we have to wrtie this test"
   end
 
-  
+  describe "validations" do
+    it "shall reject name too long" do
+      @tag = FactoryGirl.build(:tag, name: "a" * 32)
+      @tag.should_not be_valid
+    end
+
+    it "shall reject caption name too short" do
+      @tag = FactoryGirl.build(:tag, name: "a" )
+      @tag.should_not be_valid
+    end
+  end
 end

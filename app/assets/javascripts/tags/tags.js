@@ -21,7 +21,7 @@ function Tags(){
         }).done(function( msg ) {
             callBack(msg);
         }).fail(function(){
-            alert("Tag déjà enregisté pour ce website")
+            alert("Tag déjà enregisté pour ce website ou non valide")
         });
     }
 

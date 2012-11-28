@@ -13,7 +13,7 @@ $(document).ready(function(){
         {
 
             var coeffSize = 100+tags[x].poid*tags[x].poid*20;
-            console.log("cooef :"+coeffSize);
+           // console.log("cooef :"+coeffSize);
              // Geneate tag
             var tagP = $("<span/>", {
                 "tagId": tags[x].id,

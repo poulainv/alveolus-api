@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :webapp do
     title                  "Rue89"
-    caption                 "Site d'information"
-    description            "Journal independant generalise"
+    caption                 "Site d'information"*4
+    description            "Journal independant generalise"*5
     average_rate 0
     sequence(:url){|n| "http://www.#{n}lemonde.com" }
     validate true

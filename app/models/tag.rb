@@ -20,7 +20,7 @@ class Tag < ActiveRecord::Base
 
   ## Most posted tags for one website 
   scope :most_posted, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.id)").group('tags.id').reverse_order.limit(n)}
-
+  validates :name, :presence => true,:length => { :maximum => 30, :minimum => 2 }
   accepts_nested_attributes_for :tagAppRelations
 
 
