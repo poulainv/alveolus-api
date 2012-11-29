@@ -1,24 +1,26 @@
-<h1>Feedback</h1>
-<p>Please leave us feedback, it's really appreciated.</p>
+<div id="feedback_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Feedback</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" ,:class=>""} do |f| -%>
 
-<%= form_for @feedback, :as => :feedback, :url => feedback_index_path, :html => { :id => "feedback_form" } do |f| -%>
-  <%= f.hidden_field 'page' %>
-  <% unless @error_message.blank? %>
-  <p class="error">
-    <%=h @error_message %>
-  </p>
-  <% end %>
-  <p>
-    <%= f.label 'subject' %>
-    <%= f.select 'subject', ['Problem', 'Suggestion', 'Question', 'Other'] %>
-  </p>
-  <p>
-    <%= f.label 'email' %>
-    <%= f.text_field 'email' %>
-  </p>
-  <p>
-    <%= f.label 'comment' %><br />
-    <%= f.text_area 'comment', :rows => 10, :cols => 30 %>
-  </p>
-  <p><%= f.submit 'Send' %></p>
-<% end -%>
+      <span id="statusMessage" class="custom_inline"></span>
+      <img id="img-spinner_feedback" class="hide" src="/img/ajax-loader.gif" alt="Loading"/>
+
+      <div class="field">
+        <div class="control-group">
+          <div class="controls">
+            <%= f.text_area 'comment',:autofocus=>"autofocus", :id=>"feedbackContent", :placeholder=>"Une idée, un commentaire, un bug ? Dites-nous tout !" %>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <p><%= f.submit 'Send', :class=>"btn btn-success", :id=>"sendFeedback"%></p>
+    <%end%>
+  </div>
+</div>

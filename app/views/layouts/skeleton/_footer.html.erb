@@ -1,4 +1,4 @@
-<!-- HTML code for footer : valeurs, faq, équipe, contact -->
+<!-- HTML code for footer : valeurs, faq, équipe, contact + MODAL FEEDBACK -->
 <!-- + Some script like facebook SDK / Google Analytics... -->
 
 <footer class="footer"> <!-- Css of footer in asset/stylesheets/bootstrap-over.scsss -->
@@ -34,10 +34,14 @@
 </footer>
 <div id="fb-root"></div>
 
+<!-- Feedback tab -->
+<a href="#" id="feedback_link" class="feedback_link left"></a>
 
 <div id="spinner" class="spinner" style="display:none;">
     <img id="img-spinner" src="/img/ajax-loader.gif" alt="Loading"/>
 </div>
+
+<div id="feedback_window"></div>
 
 <script>
   window.fbAsyncInit = function() {

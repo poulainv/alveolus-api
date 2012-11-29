@@ -4,15 +4,14 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <p>Dear site administrator, you've got feedback from your users:</p>
+    <p>Cher administrateur, dieu vivant. Voici un feedback d'un utilisateur :</p>
     <p>
-      Subject: <%= @feedback.subject %> <br />
-      User's email: <%= @feedback.email %> <br />
+      User : <%=  @feedback.email %> <br />
       Sent at: <%= Time.now %> <br />
       From Page: <%= @feedback.page %> <br />
     </p>
     <p>
-      Comment: <br />
+      Feedback : <br />
       <%= @feedback.comment %>
     </p>
   </body>

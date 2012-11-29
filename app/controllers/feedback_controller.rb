@@ -1,3 +1,4 @@
+# encoding: utf-8
 class FeedbackController < ApplicationController
   layout false
 
@@ -7,9 +8,11 @@ class FeedbackController < ApplicationController
 
   def create
     @feedback = Feedback.new(params[:feedback])
+    @feedback.email = current_user.email if user_signed_in?
     if @feedback.valid?
       FeedbackMailer.feedback(@feedback).deliver
-      render :status => :created, :text => '<h3>Thank you for your feedback!</h3>'
+      
+      render :status => :created, :text => '<h4>Bien reçu, merci !</h4>'
     else
       @error_message = "Please enter your #{@feedback.subject.to_s.downcase}"
 
