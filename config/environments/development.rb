@@ -43,4 +43,8 @@ EnjoyTheWeb::Application.configure do
     :styles => { :caroussel => "550x350!", :small => "222x150!"}
   }
 
+  ## Mailer
+  config.action_mailer.default_url_options = { :host => 'localhost' }
+  config.action_mailer.raise_delivery_errors = true
+
 end

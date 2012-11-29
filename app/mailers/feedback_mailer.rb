@@ -3,7 +3,7 @@ class FeedbackMailer < ActionMailer::Base
 
   def feedback(feedback)
     recipients  = 'vincent.poulain2@gmail.com'
-    subject     = "[Feedback for YourSite] #{feedback.subject}"
+    subject     = "[Feedback for EnjoyTheWeb] #{feedback.subject}"
 
     @feedback = feedback
     mail(:to => recipients, :subject => subject)
