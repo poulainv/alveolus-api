@@ -1,5 +1,7 @@
 EnjoyTheWeb::Application.routes.draw do
 
+  resources :feedback, :only => [:new, :create]
+
   resources :authentications
 
   devise_for :users
@@ -22,6 +24,7 @@ EnjoyTheWeb::Application.routes.draw do
       get 'associated'
     end
   end
+
 
   resources :comments
 

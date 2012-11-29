@@ -42,4 +42,5 @@ EnjoyTheWeb::Application.configure do
   PAPERCLIP_STORAGE = {
     :styles => { :caroussel => "550x350!", :small => "222x150!"}
   }
+
 end
