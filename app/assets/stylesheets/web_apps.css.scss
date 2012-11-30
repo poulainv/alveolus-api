@@ -18,14 +18,22 @@ margin-bottom: 1%;
     color:white;
 }
 
-legend {
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:5px;
-    text-align:center;
-    background:rgba(0, 0, 0, 0.75);
-
+#content ul#websites_grid {
+  margin: -45px -30px 100px 30px;
+}
+#content ul#websites_grid li {
+  float: left;
+  list-style: none;
+  margin-right: 1%;
+  margin-top:0%;
+  margin-bottom: 5%;
 }
 
-.media-grid a {position:relative;}
+#content ul#websites_grid li .thumbnail .show {
+  width: 220px;
+  background-size: 100%!important;
+}
+
+#content .website_preview{
+    width:23%;
+}

@@ -1,0 +1,41 @@
+
+
+<% if website_counter==0 %>
+  <h5 id="nbresult_search" style="margin-bottom: 5%"> <%=pluralize(@nb_results,"résultat")%>... </h5>
+  <div id="content">
+
+    <ul id="websites_grid">
+    <% end %>
+
+    <li class="website_preview" >
+      <div class="thumbnail" >
+        <div class="row-fluid" >
+          <div class="span11">
+            <a class="show">
+              <img src="<%=website.photo(:caroussel)%>" class="img-rounded" style="margin-bottom:0px; "></img>
+              <div class="row-fluid">
+                <div class="span7">
+                  <strong><a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"><%= tronc_caption website.title,12 %></a>
+                  </strong>
+                </div>
+                <div class="span5" style="margin-right:-50px;">
+                  <%=  render :partial => "shared/star_rating", :locals => { :n => website.average_rate }%>
+                </div>
+              </div>
+              <div class="row-fluid" >
+                <div class="span12">
+                  <small> <%= tronc_caption website.caption , 70 %> </small>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+
+    <% if website_counter==10 %>
+    </ul>
+  </div>
+<% end %>
