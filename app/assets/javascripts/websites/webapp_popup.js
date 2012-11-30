@@ -15,7 +15,7 @@ function PopupWebSite(){
  
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
-
+console.log("listener");
         $('.spinner').show();
 
         popup.current_comment_id = 0 ;

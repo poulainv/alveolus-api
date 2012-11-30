@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
  def index
     @users = User.all
-    render "users/index", :layout => "navigation"
+    render "users/index", :layout => "pages"
   end
        def show
     @user = User.find(params[:id])

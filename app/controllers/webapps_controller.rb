@@ -20,7 +20,7 @@ class WebappsController < ApplicationController
       @nb_results = @webapps.length ;
       respond_to do |format|
         format.html {
-          render :search , :layout => "navigation"
+          render :search , :layout => "pages"
         }
         format.json{
           render :json => @webapps.uniq.to_json(:methods => %w(nb_rating preview))
@@ -50,7 +50,7 @@ class WebappsController < ApplicationController
       @nb_results = @webapps.length ;
       render :search , :partial => "webapps/preview_website_list",:collection => @webapps, :as => :website if params[:layout] == "list"
       render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
-        render :search , :layout => "pages" if params[:layout] == "true"
+      render :search , :layout => "pages" if params[:layout] == "true"
 
     
     # GET /webapps/
@@ -60,9 +60,11 @@ class WebappsController < ApplicationController
     @webapps_suggest = Webapp.suggested
     @webapps_top_recent = Webapp.recent(6)
     respond_to do |format|
-        format.html
+        format.html {
+          render :layout => "home"
+        }
         format.json{
-          render :json => @webapps.to_json(:methods => %w(nb_rating))
+          render :json => @webapps.to_json(:methods => %w(nb_rating)), :layout => "home"
         }
       end  
     end
@@ -151,7 +153,7 @@ class WebappsController < ApplicationController
     @nb_results = @webapps.length ;
     respond_to do |format|
       format.html{
-        render :layout => "navigation"
+        render :layout => "pages"
       }
       format.json{
         render :json => @webapps.to_json(:methods => %w(nb_rating))

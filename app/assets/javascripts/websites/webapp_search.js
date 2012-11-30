@@ -2,7 +2,7 @@
 $(document).ready(function(){
     var nbResult = '';
     var settings = new Object();
-
+    var popupWebSite;
     settings.typeDisplay = "grid" // grid or list
     settings.windowSearch = "#search_result";
     settings.searchUrl = '/webapps/order/';
@@ -13,12 +13,18 @@ $(document).ready(function(){
     settings.resultText = " résultats...";
     settings.currentSorter = "recent";
 
+    $(settings.buttonGrid).addClass('disabled');
+
     $(settings.buttonGrid).click(function(){
+        $(settings.buttonList).removeClass('disabled');
+        $(settings.buttonGrid).addClass('disabled');
         settings.typeDisplay='grid';
         loadPage();
     });
 
     $(settings.buttonList).click(function(){
+        $(settings.buttonList).addClass('disabled');
+        $(settings.buttonGrid).removeClass('disabled');
         settings.typeDisplay='list';
          loadPage();
     });
@@ -47,7 +53,11 @@ $(document).ready(function(){
     }
 
     var loadPage = function(){
-        $(settings.windowSearch).load(settings.searchUrl+settings.currentSorter+'/'+ settings.typeDisplay);
+            delete popupWebSite;
+        $(settings.windowSearch).load(settings.searchUrl+settings.currentSorter+'/'+ settings.typeDisplay,null,function(){
+           // When we redisplay new results by ajax, we have to re-excecute js code to display popup
+           popupWebSite = new PopupWebSite();
+        });
         switch(settings.currentSorter){
             case "recent":
                 changeTitle("Les plus récents"); break;
