@@ -25,7 +25,7 @@ class WebappsController < ApplicationController
         format.json{
           render :json => @webapps.uniq.to_json(:methods => %w(nb_rating preview))
         }
-     
+
       end
     elsif params[:order]
       n = 30
@@ -48,14 +48,18 @@ class WebappsController < ApplicationController
       end
 
       @nb_results = @webapps.length ;
-      render :search , :layout => "navigation"
-      # GET /webapps/
-    else
-      @subtitle = "Tous les sites web"
-      @webapps = Webapp.validated
-      @webapps_suggest = Webapp.suggested
-      @webapps_top_recent = Webapp.recent(6)
-      respond_to do |format|
+      render :search , :partial => "webapps/preview_website_list",:collection => @webapps, :as => :website if params[:layout] == "list"
+      render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
+        render :search , :layout => "pages" if params[:layout] == "true"
+
+    
+    # GET /webapps/
+  else
+    @subtitle = "Tous les sites web"
+    @webapps = Webapp.validated
+    @webapps_suggest = Webapp.suggested
+    @webapps_top_recent = Webapp.recent(6)
+    respond_to do |format|
         format.html
         format.json{
           render :json => @webapps.to_json(:methods => %w(nb_rating))

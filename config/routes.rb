@@ -40,7 +40,7 @@ EnjoyTheWeb::Application.routes.draw do
   end
 
   match '/webapps/:id/click/:element' => 'webapps#click'
-  match '/webapps/order/:order' => 'webapps#index'
+  match '/webapps/order/:order/:layout' => 'webapps#index'
   match '/auth/:provider/callback' => 'authentications#create'
   
   root :to => "webapps#index"

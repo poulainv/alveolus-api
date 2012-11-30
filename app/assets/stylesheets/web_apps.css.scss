@@ -18,4 +18,14 @@ margin-bottom: 1%;
     color:white;
 }
 
+legend {
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:5px;
+    text-align:center;
+    background:rgba(0, 0, 0, 0.75);
 
+}
+
+.media-grid a {position:relative;}

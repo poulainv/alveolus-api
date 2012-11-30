@@ -1,6 +1,10 @@
 <%#
 ## Website preview for display on search result
 %>
+<% if website_counter==0 %>
+<h5 id="nbresult_search" style="margin-bottom: 5%"> <%=pluralize(@nb_results,"résultat")%>... </h5>
+<% end %>
+
 
 <div class="row-fluid">
   <div class="container-fluid">
