@@ -14,10 +14,18 @@
             <a class="show">
               <img src="<%=website.photo(:caroussel)%>" class="img-rounded" style="margin-bottom:0px; "></img>
               <div class="row-fluid">
-                <div class="span7">
-                  <strong><a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"><%= tronc_caption website.title,12 %></a>
-                  </strong>
+                <div class="span2">
+                  <%  if (website_counter<3)
+                    label_style= "success"
+                  else label_style="info"
+                  end %>
+                  <span class="badge badge-<%=label_style%>"> <%=  website_counter+1 %></span>
                 </div>
+                <div class="span8">
+
+                  <strong><a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"><%= tronc_caption website.title,12 %></a> </strong>
+                </div>
+
                 <div class="span5" style="margin-right:-50px;">
                   <%=  render :partial => "shared/star_rating", :locals => { :n => website.average_rate }%>
                 </div>
@@ -35,7 +43,7 @@
 
 
 
-    <% if website_counter==10 %>
+    <% if website_counter==@nb_results-1 %>
     </ul>
   </div>
 <% end %>
