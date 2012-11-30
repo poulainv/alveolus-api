@@ -4,14 +4,12 @@ end
    %>" >
   <div class="offset2 span8">
     <%= link_to image_tag(websites.photo.url(:caroussel), :alt => "image carousel") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
-
-    <div class="carousel-caption">
+    <div class="carousel-caption" style="display:inline;z-index: 9999;">
       <h4><%= link_to  websites.title ,"",
           :class => "websiteTitle",:websiteId=>websites.id,
           :style=>"color:white",
           :data => { :toggle => "modal" }%> </h4>
       <p> <%= websites.caption %></p>
-
     </div>
   </div>
 

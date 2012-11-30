@@ -4,10 +4,11 @@ $(document).ready(function(){
 //  au passage de la souris sur l'image'
         $(".carousel-caption").hide();
         $(".item").mouseover(function () {
-            $(".carousel-caption").show(0);
+            console.log("mousein");
+            $(".carousel-caption").show();
         });
         $(".item").mouseout(function () {
-            $(".carousel-caption").hide(0);
+            $(".carousel-caption").hide();
         });
 
 });
