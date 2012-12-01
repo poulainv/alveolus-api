@@ -51,8 +51,7 @@ class WebappsController < ApplicationController
       render :search , :partial => "webapps/preview_website_list",:collection => @webapps, :as => :website if params[:layout] == "list"
       render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
       render :search , :layout => "pages" if params[:layout] == "true"
-
-    
+   
     # GET /webapps/
   else
     @subtitle = "Tous les sites web"
