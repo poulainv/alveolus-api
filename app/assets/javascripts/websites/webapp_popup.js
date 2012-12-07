@@ -15,7 +15,7 @@ function PopupWebSite(){
  
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
-console.log("listener");
+        console.log("listener");
         $('.spinner').show();
 
         popup.current_comment_id = 0 ;
@@ -53,7 +53,7 @@ console.log("listener");
                 name: popup.website_info.title,
                 link:  popup.website_info.url,
                 picture: popup.website_info.photo,
-                caption: popup.website_info.cpation,
+                caption: popup.website_info.caption,
                 message: "J'ai découvert ça sur EnjoyTheWeb, ça peut vous intéresser !"
             });
         });

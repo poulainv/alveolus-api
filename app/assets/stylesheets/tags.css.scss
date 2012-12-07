@@ -3,7 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
 .tagCloud:hover{
-    background-color:#9bd290;
-    border-radius: 5px 10px 0 5px;
+/*  //  background-color:#9bd290;
+    //border-radius: 5px 10px 0 5px;*/
+    font-weight: bold;
+
+}
+
+.tagCloud{
+    cursor : pointer ;
 }

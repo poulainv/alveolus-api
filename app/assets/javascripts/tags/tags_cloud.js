@@ -3,7 +3,7 @@ $(document).ready(function(){
     var cloudtags = this
     var tag = new Tags();
     var website = new Websites();
-   
+ 
 
     this.init_tags_cloud = (function(tags){
         var tagCloud = $("#tagsCloud").html('')
@@ -99,7 +99,7 @@ $(document).ready(function(){
                         "</div>"+
                         "<div class='span6'>"+
                             "<div class='row-fluid>"+
-                                "<div class='span12'><h5>"+
+                                "<div class='span12 websiteTitle'><h5>"+
                                 websites[x].title+
                                 "</h5></div>"+
                             "</div>"+
@@ -115,9 +115,8 @@ $(document).ready(function(){
 
 
             websiteCloud.append(websitePreview);
-//             $("#websitesCloud:last-child").click(function(){
-//                 alert('sdf');
-//             })
+
+
         }
     })
 

@@ -8,14 +8,25 @@
 
 <div class="row-fluid">
   <div class="container-fluid">
-    <div class="row-fluid">
+
+
+          <div class="span1">
+              <%  if (website_counter<3)
+                    label_style= "success"
+                  else label_style="info"
+                  end %>
+                  <span class="badge badge-<%=label_style%>"> <%=  website_counter+1 %></span>
+          </div>
+
       <!--image-->
-      <div class="span2 offset1">
+      <div class="span2 ">
          <%= link_to image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
       </div>
 
       <!-- detail txt -->
       <div class="span3">
+
+
         <!-- title -->
         <div class="row-fluid">
           <div class="span12">
@@ -40,6 +51,5 @@
       </div>
     </div>
 
-  </div>
 </div>
 <div class="line-separator"></div>
