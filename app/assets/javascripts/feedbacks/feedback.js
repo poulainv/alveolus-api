@@ -13,7 +13,7 @@ $(document).ready(function(){
     settings.feedbackWindow = "#feedback_window";
     settings.spinner = "#img-spinner_feedback";
   
-    $("#feedback_link").click(function(){
+    $(".feedback_link").click(function(){
         console.log("Click feedback");
         $(settings.feedbackWindow).load(settings.formUrl,null,function(){
             $(settings.feedbackModal).modal('show');
