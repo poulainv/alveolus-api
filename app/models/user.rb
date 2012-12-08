@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
-  # attr_accessible :title, :body
+  attr_accessible   :pseudo, :avatar,:email, :password, :password_confirmation, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
+
+  has_attached_file :avatar,  :styles => { :small => "75x75#", :mini=>"50x50#"},:default_url => "/img/avatar.jpg" ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
+  validates_attachment_size :avatar, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
 
   has_many :comments, :dependent => :destroy
   has_many :authentications
@@ -27,6 +29,11 @@ class User < ActiveRecord::Base
     @fb_user ||= FbGraph::User.me(self.authentications.find_by_provider('facebook').token)
   end
 
+
+  ## virtual attributes
+  def image
+    self.avatar.url(:mini)
+  end
 
 
 end

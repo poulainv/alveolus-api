@@ -36,7 +36,7 @@ class Webapp < ActiveRecord::Base
 
   accepts_nested_attributes_for :tags
 
-  has_attached_file :photo, PAPERCLIP_STORAGE ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
+  has_attached_file :photo, PAPERCLIP_STORAGE_WEBAPP ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
   validates_attachment_size :photo, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
   #validates_attachment_presence :photo # Comment because test fail otherwise !
 

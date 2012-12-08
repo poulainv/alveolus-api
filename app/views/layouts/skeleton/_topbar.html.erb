@@ -10,19 +10,23 @@
       </a>
       <%= link_to "EnjoyTheWeb <sup>beta</sup>".html_safe, accueil_path, :class=>"brand"%>
       <div class="nav-collapse collapse">
-        <p class="navbar-text pull-right">
-          <% if user_signed_in? %>
-            <% if current_user.try(:admin?) %>
-              <span class="label label-important">Admin</span>
-            <% else %>
-              <span class="label label-info">Membre</span>
-            <% end %>
-            Connecté en tant que <%= current_user.email %>.
-            <span class="badge">  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, :style=>"color:white;"%></span>
-          <% else %>
 
+          <% if user_signed_in? %>
+             
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle btn-primary btn-small" data-toggle="dropdown" href="#">
+             <%= current_user.email %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li> <%= link_to "Options", edit_user_path(current_user) %></li>
+              <li>  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete%></li>
+            </ul>
+          </div>             
+          <% else %>
+        <div class="pull-right" style="margin-top:0.7%;">
             <span id="login" class="badge badge-info">Connexion</span> ou <span class="badge badge-success"><%= link_to "Inscription", new_user_registration_path ,:style=>"color:white;"%></span>
-          </p>
+        </div>
           <%= render :partial => "layouts/login_popover/login_popover" %>
         <% end %>
 

@@ -39,10 +39,13 @@ EnjoyTheWeb::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   ## Config paperclip on local 
-  PAPERCLIP_STORAGE = {
+  PAPERCLIP_STORAGE_WEBAPP = {
     :styles => { :caroussel => "550x350!", :small => "222x150!"}
   }
 
+   PAPERCLIP_STORAGE_AVATAR = {
+      :styles => { :small => "75x75#"}
+    }
   ## Mailer
   config.action_mailer.default_url_options = { :host => 'localhost' }
   config.action_mailer.raise_delivery_errors = true

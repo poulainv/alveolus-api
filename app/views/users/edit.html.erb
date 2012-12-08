@@ -1,0 +1,68 @@
+
+<h2>Options de votre compte</h2>
+<legend>Modifier les paramètres de votre compte</legend>
+<% if user_signed_in? and @user.id == current_user.id %>
+  <%= form_for @user, :html => {:multipart => true, :class=>"form-horizontal"} do |f| %>
+    <div class="field">
+      <div class="control-group">
+        <label class="control-label" for="user[pseudo]">Pseudo</label>
+        <div class="controls">
+          <%= f.text_field :pseudo , :class => "input-xlarge", :placeholder=>"Pseudo visible par les autres utilisateurs" %>
+          <span class="help-inline" style="display:none">Le titre doit contenir entre 2 et 25 caractères</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="field">
+      <div class="control-group">
+        <label class="control-label" for="user[email]">Email</label>
+        <div class="controls">
+          <span class="input-xlarge uneditable-input"><%=@user.email%></span>
+          <span class="help-inline" style="display:none">La légende doit contenir entre 30 et 170 caractères</span>
+
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control-group">
+        <label class="control-label" for="webapp[photo]">Avatar</label>
+        <div class="controls">
+          <%= image_tag @user.avatar.url(:small),:class=>"img img-circle" %>
+          <%= f.file_field :avatar %>
+          <span class="help-inline" >Les formats acceptés sont jpg, jpeg, gif, png (taille < 1Mo)</span>
+        </div>
+      </div>
+    </div>
+
+<div class="row-fluid">
+  <div class="span6">
+  
+  </div>
+</div>
+
+
+    <div class="field">
+      <div class="control-group">
+        <div class="controls">
+          <div class="actions">
+            <%= f.submit "Enregistrer" ,:class => "btn btn-primary btn-default" %>
+              <div class="btn"> Changer le mot de passe</div>
+          </div>
+    
+        </div>
+
+      </div>
+    </div>
+
+  <% end %>
+
+
+
+<% else %>
+
+  <p class="alert alert-error"> Vous devez être connecté pour modifier votre profil </p>
+  <%=render "shared/message_please_sign_in"%>
+<% end %>
+

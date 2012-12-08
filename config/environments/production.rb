@@ -67,8 +67,17 @@ EnjoyTheWeb::Application.configure do
 
 
   ## Config paperclip on amazon S3
-  PAPERCLIP_STORAGE = {
+  PAPERCLIP_STORAGE_WEBAPP = {
       :styles => { :caroussel => "550x350!", :small => "222x150!"},
+      :storage => :s3, :s3_credentials => {
+      :bucket => ENV['AWS_BUCKET'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
+
+   PAPERCLIP_STORAGE_AVATAR = {
+      :styles => { :small => "75x75!"},
       :storage => :s3, :s3_credentials => {
       :bucket => ENV['AWS_BUCKET'],
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],

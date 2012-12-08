@@ -10,7 +10,7 @@ end
             <%= link_to image_tag(websites.photo.url(:caroussel), :alt => "image carousel", :class=>"img-polaroid") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
 
           </div>
-          <div class="span6" style="background-color: white;margin-left:2%; padding: 5px 5px 5px 20px; height:280px; overflow: scroll">
+          <div class="span6" style="background-color: white;margin-left:2%; padding: 5px 5px 5px 20px; height:280px; overflow-y: scroll">
             <div class="row-fluid">
               <div class="span7">
                  <h2><%= websites.title %></h2>
