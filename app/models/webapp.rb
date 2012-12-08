@@ -60,7 +60,7 @@ class Webapp < ActiveRecord::Base
   scope :most_commented, lambda { |n| joins(:comments).order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
   scope :best_rated, lambda { |n| joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
-  scope :random, lambda {|n| validated.order("RAND()").limit(n) }
+  scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
 
 
   @@score_for_validation = 5
