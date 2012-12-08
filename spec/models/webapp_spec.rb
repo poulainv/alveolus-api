@@ -330,4 +330,17 @@ describe "virtual attribute" do
       @webtest.average_rate.should == 2
     end
   end
+
+  ## Reputation
+  describe "reputation system" do
+    it "shall have method add_or_update_evaluation" do
+      @webapp.should respond_to(:add_or_update_evaluation)
+    end
+
+    it "shall have method reputation_for with :vote param" do
+       @webapp.should respond_to(:reputation_for)
+    end
+  end
+
+    
 end

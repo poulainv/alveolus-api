@@ -1,4 +1,4 @@
-  source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
@@ -52,13 +52,15 @@ end
 
 group :test do
   gem 'rspec', '2.8.0'
-   gem 'capybara', ">= 1.1.2"
+  gem 'capybara', ">= 1.1.2"
   gem 'factory_girl_rails', '4.0'
   gem 'devise'
   gem 'omniauth'
   gem 'omniauth-facebook'
-   gem 'cucumber-rails'
+  gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'activerecord-reputation-system', require: 'reputation_system'
+
 end
 
 gem 'jquery-rails'

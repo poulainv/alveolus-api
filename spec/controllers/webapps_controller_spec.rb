@@ -120,4 +120,13 @@ describe WebappsController do
       get :index
     end
   end
+
+  ## Vote method
+  describe "method vote" do
+#
+#    it "should call add_or_update_evaluation" do
+#       Webapp.should_receive(:add_or_update_evaluation)
+#    end
+
+  end
 end

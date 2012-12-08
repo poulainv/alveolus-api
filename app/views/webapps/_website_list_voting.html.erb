@@ -19,11 +19,14 @@
              <span class="score_voting"> <img src="/img/smile_face_medium.png"></img> <%=  website.reputation_for(:votes).to_i %> </span>
 
         </div>
+        <% if user_signed_in?  %>
         <div class="offset2 span5">
-         
           <%= link_to "<div class='icon-thumbs-up icon-inverse'></div>".html_safe, vote_webapp_path(website, type: "up"), method: "post", :class => "btn btn-success " %>
           <%= link_to "<div class='icon-thumbs-down'></div>".html_safe, vote_webapp_path(website, type: "down"), method: "post", :class => "btn btn-warning" %>
         </div>
+        <% else %>
+        <%= render :partial=>"shared/message_please_sign_in" %>
+        <% end %>
       </div>
       
     
