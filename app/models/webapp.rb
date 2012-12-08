@@ -1,4 +1,4 @@
-# == Schema Information
+ # == Schema Information
 #
 # Table name: webapps
 #
@@ -59,7 +59,7 @@ class Webapp < ActiveRecord::Base
   scope :trend, lambda { |n| validated.order("nb_click_detail").reverse_order.limit(n) }
   scope :most_commented, lambda { |n| joins(:comments).order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
   scope :best_rated, lambda { |n| joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
-
+  scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
 
   ##################
   ## TAGS METHODS ##
@@ -164,6 +164,8 @@ class Webapp < ActiveRecord::Base
       self.increment(:nb_click_preview).save
     when "url"
       self.increment(:nb_click_url).save
+      when "shared"
+      self.increment(:nb_click_shared).save
     end
   end
 
@@ -184,7 +186,7 @@ class Webapp < ActiveRecord::Base
 #    end
 #
 #    return self.url
-#
+
   end
 
 end

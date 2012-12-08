@@ -1,12 +1,11 @@
 <!-- Home Page, display website : NOUVEAUTE / SUGGESTION EN GRID -->
 
-<div class="offset4 span12">
-  <li class="nav-header"><h3><a href="/webapps/order/recent/true">Nouveautés</a></h3></li>
-</div>
+<div class="heading">
+  <img src="/img/star-black.png" alt="" />
+  <h3><a href="/webapps/order/recent/true">Nouveautés</a></h3>
+  <img src="/img/star-black.png" alt="" /> </div>
 
-<div class="offset2 span8">
-  <div class="line-separator-dashed"></div>
-</div>
+<div class="websites">
 
   <ul class="thumbnails">
     <% 3.times do |i| %>
@@ -20,30 +19,29 @@
   <ul class="thumbnails">
     <% 3.times do |i| %>
       <li class="span4">
-        <div class="thumbnail">
-          <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
 
-        </div>
+        <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
+
+
       </li>
     <%end%>
   </ul>
 
 
-<div class="offset4 span12">
-  <li class="nav-header"><h3><a href="/webapps/order/suggested/true">Suggestions</a></h3></li>
-</div>
-<div class="span8 offset2">
-  <div class="line-separator-dashed"></div>
-</div>
+  <div class="heading">
+    <img src="/img/star-black.png" alt="" />
+    <h3><a href="/webapps/order/suggested/true">Suggestion</a></h3>
+    <img src="/img/star-black.png" alt="" /> </div>
+
 
 
   <ul class="thumbnails">
     <% 3.times do |i|
       if( i<@webapps_suggest.length) %>
         <li class="span4">
-          <div class="thumbnail">
-            <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
-          </div>
+
+          <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i] }%>
+
         </li>
       <%end%>
     <%end%>
@@ -54,11 +52,13 @@
     <% 3.times do |i|
       if(i+3<@webapps_suggest.length) %>
         <li class="span4">
-          <div class="thumbnail">
-            <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
 
-          </div>
+          <%=  render :partial => "webapps/preview_website_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
+
+
         </li>
       <%end%>
     <%end%>
   </ul>
+
+</div>  

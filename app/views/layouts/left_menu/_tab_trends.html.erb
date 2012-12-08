@@ -7,6 +7,9 @@
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_trend, :as=> :websites %>
   <li class="nav-header"><h4><a href="/webapps/order/rated/true">Les mieux notés</a></h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_rated, :as=> :websites %>
+ <li class="nav-header"><h4><a href="/webapps/order/rated/true">Les plus partagés</a></h4></li>
+  <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_shared, :as=> :websites %>
+
 </ul>
 
 

@@ -6,10 +6,12 @@ $custom_green :  #468847;
 $custom_green_hover : #339900;
 $custom_blue_hover : #009999;
 $custom_blue : #006666;
+$body_background_color : #eee;
 body {
     zoom : 90%;
     padding-top: 60px;
-    background-color: #eee;
+     background-image: url(/img/az_subtle.png);
+  // background-color: $body_background_color;
 }
 
 .footer {
@@ -67,8 +69,19 @@ body {
     margin-right : 10%;
 }
 
-.thumbnail{
-    border : none ; 
+.websites .thumbnail{
+    border-style : solid ;
+    height : 300px;
+     box-shadow: 4px 4px 10px -2px rgba(0,0,0,0.5);
+       // background-image: url(/img/az_subtle.png);
+            background-color : #efefef;
+
+}
+
+.websites .thumbnail img{
+   margin-left:1%;
+   margin-bottom: 2%;
+ //margin-right:auto;
 }
 
 .custom_box{

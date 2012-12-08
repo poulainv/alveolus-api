@@ -3,10 +3,11 @@
 class WebappsController < ApplicationController
 
   # To call method before some other methods
-  before_filter :webapps_top_comment, :only =>[:show, :index]
-  before_filter :webapps_top_trend, :only => [:show, :index]
-  before_filter :webapps_promoted, :only => [:show, :index]
-  before_filter :webapps_top_rated, :only => [:show, :index]
+  before_filter :webapps_top_comment, :only =>[:index]
+  before_filter :webapps_top_trend, :only => [:index]
+  before_filter :webapps_promoted, :only => [ :index]
+  before_filter :webapps_top_rated, :only => [:index]
+  before_filter :webapps_top_shared, :only => [ :index]
   before_filter :authenticate_user!, :only => [:create, :edit, :update]
 
 
@@ -52,13 +53,13 @@ class WebappsController < ApplicationController
       render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
       render :search , :layout => "pages" if params[:layout] == "true"
    
-    # GET /webapps/
-  else
-    @subtitle = "Tous les sites web"
-    @webapps = Webapp.validated
-    @webapps_suggest = Webapp.suggested
-    @webapps_top_recent = Webapp.recent(6)
-    respond_to do |format|
+      # GET /webapps/
+    else
+      @subtitle = "Tous les sites web"
+      @webapps = Webapp.validated
+      @webapps_suggest = Webapp.suggested
+      @webapps_top_recent = Webapp.recent(6)
+      respond_to do |format|
         format.html {
           render :layout => "home"
         }
@@ -82,6 +83,7 @@ class WebappsController < ApplicationController
   def show
     if @webapp = Webapp.find_by_id(params[:id])
       @webapp.image = @webapp.photo.url(:caroussel)
+      @webapp.increment_nb_click(:element => "detail")
       respond_to do |format|
         format.html
         format.json{
@@ -180,6 +182,10 @@ class WebappsController < ApplicationController
     @webapps_top_rated = Webapp.best_rated(5)
   end
 
+    protected
+  def webapps_top_shared
+    @webapps_top_shared = Webapp.best_shared(5)
+  end
 
   def webapps_promoted
     @webapps_promoted = Webapp.promoted

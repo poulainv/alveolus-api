@@ -38,9 +38,15 @@
     height:0.5px;
     background:white;
     border-bottom:1px solid #999999;
-
     margin-bottom: 3%;
     margin-top: 3%;
+}
+
+.line-separator-solid{
+    height:0.5px;
+    background:white;
+    border-bottom:1px solid #999999;
+
 }
 
 .line-separator-dashed{
@@ -73,3 +79,32 @@
     height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }
 
+
+.heading {
+    background: url("/img/line.jpg") repeat-x scroll 0 21px transparent;
+    text-align: center;
+    margin-bottom: 6%;
+    margin-top: 4%;
+}
+
+.heading img {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding: 0 15px;
+    position: relative;
+    top: -4px;
+}
+
+.heading h3 {
+    background-color: #FFFFFF;
+    padding: 0 3px;
+    display: inline;
+    text-transform : uppercase;
+}
+
+
+.custom_inline{
+  display : inline-block ;
+
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121144225) do
+ActiveRecord::Schema.define(:version => 20121207151555) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(:version => 20121121144225) do
 
   add_index "tag_app_relations", ["tag_id", "webapp_id", "user_id"], :name => "index_tag_app_relations_on_tag_id_and_webapp_id_and_user_id", :unique => true
 
+  create_table "tag_user_relations", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "webapp_id"
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -89,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20121121144225) do
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
     t.boolean  "suggested"
+    t.integer  "nb_click_shared", :default => 0
   end
 
 end

@@ -41,12 +41,15 @@ function PopupWebSite(){
             });
         })();
         // Increment nb_click_detail
-        increment_nb_click(popup.current_website_id, "detail");
+        // => now is automaticly increment when method show of webapp controller is called
+       // increment_nb_click(popup.current_website_id, "detail");
     }
 
     this.listenerFacebookButton = (function (){
-        console.log("sharing on facebook...")
+        console.log("sharing on facebook...");
         $('#share_facebook').click(function(){
+            // We have to change attribute's name 'preview' into 'shared' in database
+              increment_nb_click(popup.current_website_id,"shared");
             FB.ui(
             {
                 method: 'feed',

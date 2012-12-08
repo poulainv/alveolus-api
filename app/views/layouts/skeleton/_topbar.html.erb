@@ -23,29 +23,7 @@
 
             <span id="login" class="badge badge-info">Connexion</span> ou <span class="badge badge-success"><%= link_to "Inscription", new_user_registration_path ,:style=>"color:white;"%></span>
           </p>
-          <div id="loginHtml" class="hide">
-
-            <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-              <div class="control-group">
-
-                <div class="controls">
-                  <%= f.email_field :email, :placeholder=>"email",:class=>"input-medium" %></div>
-              </div>
-              <div class="control-group custom_inline" >
-                <div class="controls">
-                  <%= f.password_field :password, :placeholder=>"password",:class=>"input-medium"%></div>
-              </div>
-              <div><%= f.submit "Se connecter",:class=>"btn btn-success btn-block" %></div>
-            <% end %>
-              <div class="line-separator"></div>
-              <p> Ou connectez-vous avec : </p>
-            <div id="openIdProviders">
-              <a class="openIdProvider hover_green" id="facebookLogIn" href="/auth/facebook">Facebook</a>
-              <a class="openIdProvider soon hover_green" id="googleLogIn" href=""> Google </a>
-              <a class="openIdProvider soon hover_green" id="twitterLogIn" href="">Twitter </a>
-             </div>
-          </div>
-
+          <%= render :partial => "layouts/login_popover/login_popover" %>
         <% end %>
 
       </div>
