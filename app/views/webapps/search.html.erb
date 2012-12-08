@@ -1,28 +1,38 @@
 <!-- View for display website by list for example for a search or to display all order websites -->
 
 <div class="row-fluid">
-  <div class="offset9 span3">
-    <div class="btn-toolbar">
-
-      <div class="btn-group">
-
-        <a class="btn dropdown-toggle" data-toggle="dropdown">
-          Trier par
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a id="btn_sort_commented">Les plus commentés</a></li>
-          <li><a  id="btn_sort_rated">Les mieux notés</a></li>
-          <li><a id="btn_sort_trend">Les plus consultés</a></li>
-          <li><a id="btn_sort_recent">Les plus récents</a></li>
-        </ul>
-      </div>
+  <div class="span10">
+    <ul class="nav nav-pills" style="cursor:pointer">
+      <li><a id="btn_sort_recent" data-toggle="tab">Nouveautés</a></li>
+         <li><a  id="btn_sort_suggested" data-toggle="tab">Séléction</a></li>
+      <li ><a  id="btn_sort_commented" data-toggle="tab">Les plus commentés</a></li>
+      <li><a  id="btn_sort_rated" data-toggle="tab">Les mieux notés</a></li>
+   
+      <li><a id="btn_sort_trend" data-toggle="tab">Les plus consultés</a></li>
+      
+      <li><a id="btn_sort_random" data-toggle="tab">Aléatoire</a></li>
+    </ul>
+  </div>
+  <div class=" span2">
+   
+<%#*<div class="btn-group">%>
+<%#*<a class="btn dropdown-toggle" data-toggle="dropdown">%>
+<%#*Trier par%>
+<%#*<span class="caret"></span>%>
+<%#*</a>%>
+<%#*<ul class="dropdown-menu">%>
+<%#*<li><a id="btn_sort_commented">Les plus commentés</a></li>%>
+<%#*<li><a  id="btn_sort_rated">Les mieux notés</a></li>%>
+<%#*<li><a id="btn_sort_trend">Les plus consultés</a></li>%>
+<%#*<li><a id="btn_sort_recent">Les plus récents</a></li>%>
+<%#*</ul>%>
+<%#*</div>%>
       <div class="btn-group">
         <button type="button" id="btn_display_grid" class="btn"><i class="icon-th"></i></button>
         <button type="button" id="btn_display_list" class="btn"><i class="icon-th-list"></i></button>
       </div>
     </div>
-  </div>
+  
 </div>
 <div class="row-fluid">
   <div class="span12">
@@ -31,11 +41,11 @@
       <h2><a id="subtitle_search" href="/webapps/order/recent/true"><%=@subtitle%></a></h2>
       <img src="/img/star-black.png" alt="" /> </div>
   </div>
- 
+
 </div>
 
 <div class="row-fluid">
 
-<div id="search_result" class="websites">
-  <%=  render :partial => "webapps/preview_website_large_grid", :collection => @webapps, :as => :website %>
-</div></div>
+  <div id="search_result" class="websites">
+    <%=  render :partial => "webapps/preview_website_large_grid", :collection => @webapps, :as => :website %>
+  </div></div>

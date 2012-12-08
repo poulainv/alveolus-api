@@ -33,6 +33,16 @@ $(document).ready(function(){
        loadPage();
     });
 
+      $("#btn_sort_random").click(function(){
+      settings.currentSorter= 'random';
+       loadPage();
+    });
+
+      $("#btn_sort_suggested").click(function(){
+      settings.currentSorter= 'suggested';
+       loadPage();
+    });
+
     $("#btn_sort_rated").click(function(){
         settings.currentSorter= 'rated';
          loadPage();
@@ -60,13 +70,17 @@ $(document).ready(function(){
         });
         switch(settings.currentSorter){
             case "recent":
-                changeTitle("Les plus récents"); break;
+                changeTitle("Nouveautés"); break;
             case "commented":
                 changeTitle("Les plus commentés"); break;
             case "rated":
                 changeTitle("Les mieux notés");break;
             case "trend":
                 changeTitle("Les plus consultés"); break;
+                 case "suggested":
+                changeTitle("Notre séléction"); break;
+                 case "random":
+                changeTitle("Aléatoire"); break;
                 default : break;
         }
     }
