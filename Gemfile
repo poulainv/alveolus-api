@@ -17,6 +17,7 @@ group :production do
   gem 'omniauth-facebook'
   gem 'certified'
   gem 'fb_graph'
+  gem 'activerecord-reputation-system', require: 'reputation_system'
 end
 
 gem 'bootstrap-sass'
@@ -45,6 +46,7 @@ group :development do
   gem 'omniauth-facebook'
   gem 'certified'
   gem 'fb_graph'
+  gem 'activerecord-reputation-system', require: 'reputation_system'
  
 end
 

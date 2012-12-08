@@ -8,15 +8,13 @@ EnjoyTheWeb::Application.routes.draw do
   
   get "pages/about"
 
-  get "pages/contact"
-
+ 
 
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'webapps#index'
   match '/suggestion',   :to => 'webapps#new'
   match '/moderation_users',   :to => 'users#index'
-  match '/navigationtag',   :to => 'pages#contact'
-
+  
   resources :tags do
     resources :webapps
     member do
@@ -27,11 +25,14 @@ EnjoyTheWeb::Application.routes.draw do
 
   resources :comments
 
+
+
   resources :webapps do
     resources  :tags
     resources :comments
-      
+    member { post :vote }    
   end
+
   resources :users do
     resources :webapps do
       resources :comments
@@ -41,7 +42,6 @@ EnjoyTheWeb::Application.routes.draw do
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/webapps/order/:order/:layout' => 'webapps#index'
   match '/auth/:provider/callback' => 'authentications#create'
-  
   root :to => "webapps#index"
 
 

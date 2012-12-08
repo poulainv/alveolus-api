@@ -62,6 +62,16 @@ class Webapp < ActiveRecord::Base
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RAND()").limit(n) }
 
+
+  @@score_for_validation = 5
+  has_reputation :votes, source: :user, aggregated_by: :sum
+
+   
+  def score_for_validation
+    @@score_for_validation
+  end
+
+  
   ##################
   ## TAGS METHODS ##
   ##################
@@ -86,6 +96,7 @@ class Webapp < ActiveRecord::Base
       end
     end
   end
+
 
   # Pour ajouter un tag a la webapp
   # Increment le coeff du tag si le website est deja taggué avec
@@ -141,6 +152,8 @@ class Webapp < ActiveRecord::Base
   def reviews
     comments.commented.to_json(:include => :user)
   end
+
+ 
 
 
 

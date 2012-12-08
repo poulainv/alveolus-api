@@ -154,7 +154,20 @@ class WebappsController < ApplicationController
     end
   end
 
-  
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @webapp = Webapp.find(params[:id])
+    @webapp.add_or_update_evaluation(:votes, value, current_user)
+
+    ## Warning here there are some computation/behavior which should be in model
+    if(@webapp.reputation_for(:votes)>@webapp.score_for_validation)
+      @webapp.update_attribute("validate", "true")
+    end
+
+    redirect_to "/webapps/order/unvalidated/true", notice: "Merci pour votre vote !"
+  end
+
 
   ## Method to increment nb_click...
   def click
