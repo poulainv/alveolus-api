@@ -26,18 +26,26 @@
           <%= render :partial => "layouts/login_popover/login_popover" %>
         <% end %>
 
-      </div>
+     
 
 
       <ul class="nav">
         <li class="active"><%= link_to "Home", accueil_path%></li>
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
+        <li><%= link_to "Vote",  "/webapps/order/unvalidated/true" %></li>
+         <li><%= link_to "Aléatoire", "/webapps/order/random/true" %></li>
         <% if current_user.try(:admin?) %>
-          <li><%= link_to "Modérer les sites", "/webapps/order/moderate/true" %></li>
-          <li><%= link_to "Modérer les utilisateurs", moderation_users_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Modérer les sites", "/webapps/order/moderate/true" %></li>
+              <li><%= link_to "Modérer les utilisateurs", moderation_users_path %></li>
+            </ul>
+          </li>
         <% end %>
       </ul>
+           </div>
     </div><!--/.nav-collapse -->
   </div>
 </div>

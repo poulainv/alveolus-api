@@ -18,7 +18,6 @@ $(document).ready(function(){
         });
         $("body").keyup(function(event) {
            if(event.which==80){
-
                $(settings.radioTags).attr('checked',undefined);
                $(settings.radioWebsites).attr('checked','checked');
            }

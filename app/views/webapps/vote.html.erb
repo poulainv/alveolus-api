@@ -1,0 +1,23 @@
+<!-- View for display website by list for example for a search or to display all order websites -->
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="heading">
+      <img src="/img/star-black.png" alt="" />
+      <h2><a id="subtitle_search" href="/webapps/order/recent/true"><%=@subtitle%></a></h2>
+      <img src="/img/star-black.png" alt="" /> </div>
+  </div>
+  <div class="row-fluid">
+  </div>
+
+</div>
+
+
+
+<div class="row-fluid">
+  <div class="span11">
+    <div class="websites">
+  <%=  render :partial => "webapps/website_list_voting", :collection => @webapps, :as => :website %>
+</div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<%#
+## Website preview for voting
+%>
+
+
+<div class="row-fluid website">
+  <div class="container-fluid">
+    <!--image-->
+    <div class="span3">
+      <%= link_to image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
+    </div>
+
+    <!-- detail txt -->
+    <div class="span3">
+<dl>
+        <dt>Titre</dt>
+        <dd> <%= website.title %></dd>
+        <dt style="margin-top:5%;">Adresse</dt>
+         <span> <%= link_to website.url ,website.url,:class=>"btn btn-link btn-large" %></span>
+
+      </dl>
+      </div>
+    <div class="span5">
+
+      <dl>
+        <dt>Légende</dt>
+        <dd> <%= website.caption %></dd>
+        <dt style="margin-top:5%;">Description</dt>
+        <dd> <%= website.description %></dd>
+      </dl>
+
+    </div>
+  </div>
+
+</div>
+

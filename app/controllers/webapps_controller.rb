@@ -29,7 +29,7 @@ class WebappsController < ApplicationController
 
       end
     elsif params[:order]
-      n = 30
+      n = 12
       case params[:order]
       when "recent"
         @webapps = Webapp.recent(n)
@@ -46,6 +46,14 @@ class WebappsController < ApplicationController
       when "suggested"
         @webapps = Webapp.suggested
         @subtitle = "Nos suggestions"
+        when "random"
+        @webapps = Webapp.random(n)
+        @subtitle = "Aléatoire"
+          when "unvalidated"
+        @webapps = Webapp.unvalidated
+          @subtitle = "Votez !"
+          render :vote
+          return;
       when "moderate"
         if(current_user.try(:admin?))
           @webapps = Webapp.all
