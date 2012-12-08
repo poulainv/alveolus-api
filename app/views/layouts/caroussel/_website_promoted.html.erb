@@ -2,15 +2,53 @@
   "active"
 end
    %>" >
-  <div class="offset2 span8">
-    <%= link_to image_tag(websites.photo.url(:caroussel), :alt => "image carousel") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
-    <div class="carousel-caption" style="display:inline;z-index: 9999;">
-      <h4><%= link_to  websites.title ,"",
-          :class => "websiteTitle",:websiteId=>websites.id,
-          :style=>"color:white",
-          :data => { :toggle => "modal" }%> </h4>
-      <p> <%= websites.caption %></p>
-    </div>
-  </div>
+  <div class="container-fluid" >
+    <div class="row-fluid" >
+      <div class="offset1 span10">
+        <div class="container-fluid"style="background-color:white;border-style:solid; border-width: 1px; border-color: grey; padding: 5px 5px 5px 5px;box-shadow: 4px 4px 30px 2px rgba(0,0,0,0.5);">
+          <div class="span6" >
+            <%= link_to image_tag(websites.photo.url(:caroussel), :alt => "image carousel", :class=>"img-polaroid") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
 
+          </div>
+          <div class="span5" style="background-color: white;margin-left:2%; padding: 5px 5px 5px 20px;">
+            <div class="row-fluid">
+              <div class="span7">
+                 <h2><%= websites.title %></h2>
+              </div>
+                <div class="span5">
+                  <div class=" icon-tag"></div>
+                   <div class="label label-success"> <%= websites.tags[0].name %></div>
+                   <div class="label label-success"> <%= websites.tags[1].name %></div>
+                </div>
+             
+            </div>
+    
+            <div class="row-fluid">
+              <span class="custom_inline"> <%=  render :partial => "shared/star_rating", :locals => { :n => websites.average_rate }%></span>
+               <span class="custom_inline badge badge-info"> <%= websites.average_rate %></span>
+               <span class="custom_inline"> <%= link_to websites.url ,websites.url,:class=>"btn btn-link" %></span>
+            </div>
+ 
+            <div class="line-separator-dashed"></div>
+            <div class="row-fluid" style="margin-top:5%;">
+             
+              <p><div class="icon-eye-open"></div><%= " "+websites.caption %></p>
+            </div>
+ <div class="line-separator-dashed"></div>
+               <div class="row-fluid">
+                 <div class="icon-pencil custom_inline"></div>
+                 <h5 class="custom_inline">Dernier commentaire : </h5>
+            </div>
+
+                 <div class="row-fluid">
+             <em><%= websites.comments.last.body %></em>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
