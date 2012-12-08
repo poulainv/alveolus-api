@@ -46,6 +46,15 @@ class WebappsController < ApplicationController
       when "suggested"
         @webapps = Webapp.suggested
         @subtitle = "Nos suggestions"
+      when "moderate"
+        if(current_user.try(:admin?))
+          @webapps = Webapp.all
+          @subtitle = "Tous"
+        else
+          flash[:error] = "Les droits d'administrateurs sont nécessaires"
+          redirect_to accueil_path
+          return;
+        end
       end
 
       @nb_results = @webapps.length ;
@@ -146,25 +155,6 @@ class WebappsController < ApplicationController
     render :status => 200, :nothing => true
   end
 
-  # GET /webapps/
-  def moderation
-    @title = "Modération de tous les websites"
-    @webapps = Webapp.all
-    @subtitle = "Résultat :"
-    @nb_results = @webapps.length ;
-    respond_to do |format|
-      format.html{
-        render :layout => "pages"
-      }
-      format.json{
-        render :json => @webapps.to_json(:methods => %w(nb_rating))
-      }
-    end
-
-  end
-
-
-
   ## Methods TOPS
 
   protected
@@ -182,7 +172,7 @@ class WebappsController < ApplicationController
     @webapps_top_rated = Webapp.best_rated(5)
   end
 
-    protected
+  protected
   def webapps_top_shared
     @webapps_top_shared = Webapp.best_shared(5)
   end

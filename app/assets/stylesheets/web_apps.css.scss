@@ -7,7 +7,7 @@
 margin-bottom: 1%;
 
 }
-
+    
 .websitePreview:hover{
     background-color :#9bd290;
     color:white;
@@ -32,4 +32,20 @@ margin-bottom: 1%;
 
 #content .website_preview{
     width:23%;
+}
+
+
+.websites .thumbnail{
+    border-style : solid ;
+    height : 300px;
+     box-shadow: 4px 4px 10px -2px rgba(0,0,0,0.5);
+       // background-image: url(/img/az_subtle.png);
+            background-color : #efefef;
+
+}
+
+.websites .thumbnail img{
+   margin-left:1%;
+   margin-bottom: 2%;
+ //margin-right:auto;
 }

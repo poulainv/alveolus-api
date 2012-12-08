@@ -14,7 +14,6 @@ EnjoyTheWeb::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/accueil',   :to => 'webapps#index'
   match '/suggestion',   :to => 'webapps#new'
-  match '/moderation_websites',   :to => 'webapps#moderation'
   match '/moderation_users',   :to => 'users#index'
   match '/navigationtag',   :to => 'pages#contact'
 
