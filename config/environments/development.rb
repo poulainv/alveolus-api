@@ -44,7 +44,8 @@ EnjoyTheWeb::Application.configure do
   }
 
    PAPERCLIP_STORAGE_AVATAR = {
-      :styles => { :small => "75x75#"}
+     :styles => { :small => "75x75#", :mini=>"50x50#"},
+      :default_url => "/img/avatar.jpg",
     }
   ## Mailer
   config.action_mailer.default_url_options = { :host => 'localhost' }

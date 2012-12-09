@@ -105,7 +105,7 @@ class WebappsController < ApplicationController
         format.html
         format.json{
           ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
-          render( :json => @webapp.to_json(:methods => ["best_tags", "reviews","nb_rating"]))
+          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
         }
       end
     else

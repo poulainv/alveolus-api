@@ -29,7 +29,7 @@ function PopupWebSite(){
         websites.ajax_get_by_id(popup.current_website_id,function (msg){
             popup.website_info = msg ;
             popup.initialize_website_details(msg);
-            popup.initialize_website_comments(eval(msg.reviews));
+            popup.initialize_website_comments(popup.current_website_id);
             popup.initialize_website_tags(msg.best_tags);
             $('.spinner').hide();
             $('#detailWebsiteModal').modal('show');
@@ -214,41 +214,12 @@ function PopupWebSite(){
 
     // Update comments in popup detail
     // Ultra crade
-    this.initialize_website_comments = function(comments){
-
+    this.initialize_website_comments = function(websiteId){
+    if(websiteId==null){
+        websiteId=popup.current_website_id;
+    }
         $("#detailWebsiteModalComments").html('')
-        var comment ="";
-        var date ;
-        jQuery.each(comments, function(i, val) {
-            date = prettyDate(val.created_at) ;
-
-            comment =
-
-
-            "<div class='row-fluid'>"+
-            "<div class='span1'>"+
-            "<img src='/img/avatar.jpg'></img>"+
-            "</div>"+
-            "<div class='span3'><strong> user"+
-            val.user.id+
-            "</strong> </div>"+
-            "<div class='span4'>"+
-            date+
-            "</div>"+
-            "<div class='span4'>"+
-            manage_star_rating(val.rating,"/img/googlestar.png","/img/googlestar-off.png")+
-            "</div>"+
-            "</div><br>"+
-            "<div class='row-fluid'>"+
-            "<div class='span12' style=' border-bottom:1px dotted #999999;margin-bottom:5%;padding-bottom : 3%'>"+
-            val.body
-            "</div>"+
-            "</div> "
-
-            $("#detailWebsiteModalComments").append(comment);
-
-        });
-
+        $("#detailWebsiteModalComments").load("webapps/"+websiteId+"/comments");
     }
 
     // Update details website in popup detail

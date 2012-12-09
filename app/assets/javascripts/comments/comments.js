@@ -28,7 +28,7 @@
 		            },
 		            url: "/webapps/"+websiteId+"/comments"
 		        }).done(function( msg ) {
-		            callback(msg);
+		            callback(websiteId);
 		        }).fail(function() {
 		            alert('Vous avez déjà publiez pour ce site');
 		        });
@@ -45,7 +45,7 @@
 		            },
 		            url: "/comments/"+commentId
 		        }).done(function( msg ) {
-		            callback(msg);
+		            callback();
 		        }).fail(function() {
 		            alert('Vous avez déjà publiez pour ce site');
 		        });
