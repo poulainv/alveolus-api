@@ -11,6 +11,13 @@
         <%= f.text_field :title ,:class => "input-xlarge"%>
       </div>
 
+
+      <div class="field">
+        <%= f.label :url %>
+        <%= f.text_field :url ,:class => "input-xlarge"%>
+      </div>
+
+
       <div class="field">
         <%= f.label :caption %>
         <%= f.text_field :caption, :class => "input-xlarge" %>
@@ -20,19 +27,19 @@
         <%= f.label :description %>
         <%= f.text_area :description, :class => "input-xxlarge" %>
       </div>
-<% if current_user.try(:admin?) %>
-      <div class="field">
-         Validé <%= f.check_box :validate %>
-      </div>
+      <% if current_user.try(:admin?) %>
+        <div class="field">
+          Validé <%= f.check_box :validate %>
+        </div>
 
-      <div class="field">
-        Promotion <%= f.check_box :promoted %>
-      </div>
+        <div class="field">
+          Promotion <%= f.check_box :promoted %>
+        </div>
 
-       <div class="field">
-        Suggestion <%= f.check_box :suggested %>
-      </div>
-<% end %>
+        <div class="field">
+          Suggestion <%= f.check_box :suggested %>
+        </div>
+      <% end %>
       <div>
         <%= f.label :tag_list, "Tags (séparé par virgules)" %>
         <%= f.text_field :tag_list, :class => "input-large" %>
@@ -44,7 +51,7 @@
 
       <div class="actions">
         <%= f.submit :class => "btn btn-primary btn-default" %>
-         
+
       </div>
     </div>
   <% end %>
