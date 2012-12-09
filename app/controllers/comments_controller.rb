@@ -3,7 +3,7 @@
 
 class CommentsController < ApplicationController
 
-  before_filter :authenticate_user! , :only => [:create, :update]
+  before_filter :authenticate_user! , :only => [:create, :update, :destroy]
 
   def index
 
@@ -68,6 +68,15 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "Le commentaire à édité n'existe pas"
       redirect_to accueil_path
+    end
+  end
+
+    # DELETE /comments/1
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to user_path current_user }
     end
   end
 end

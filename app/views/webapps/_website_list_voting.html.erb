@@ -28,7 +28,15 @@
         <%= render :partial=>"shared/message_please_sign_in" %>
         <% end %>
       </div>
-      
+      <div class="row-fluid" style="margin-top:5%;">
+          
+        <% if user_signed_in? and website.user_id == current_user.id and website.validate == false%>
+        <div class="span12">
+          <%= link_to "Modifier cette suggestion" , edit_webapp_path(website)%>
+          <%= link_to "Supprimer cette suggestion" , website, :confirm => "Cette action n'est pas annulable, êtes-vous sûr ?", :method => :delete%>
+        </div>
+<% end %>
+      </div>
     
     </div>
 

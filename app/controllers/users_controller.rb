@@ -3,12 +3,18 @@
 
 class UsersController < ApplicationController
 
+    before_filter :authenticate_user!, :only => [:edit, :update, :show]
+
+
+
   def index
     @users = User.all
     render "users/index", :layout => "pages"
   end
+
   def show
     @user = User.find(params[:id])
+    redirect_to users_path, :alert => "Impossible d'accéder à cet utilisteur" if @user.id!=current_user.id
   end
 
   def update

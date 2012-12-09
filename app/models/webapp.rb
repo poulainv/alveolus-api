@@ -1,4 +1,4 @@
- # == Schema Information
+   # == Schema Information
 #
 # Table name: webapps
 #
@@ -24,13 +24,14 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :average_rate,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :suggested,:description, :title, :url, :validate
+  attr_accessible :average_rate,:user_id,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :suggested,:description, :title, :url, :validate
 
   before_validation :uniform_url, :only => [:url]
 
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
   has_many :comments , :dependent => :destroy
+  belongs_to :user
   
   url_regex  =  /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208202327) do
+ActiveRecord::Schema.define(:version => 20121209141157) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20121208202327) do
     t.boolean  "promoted"
     t.boolean  "suggested"
     t.integer  "nb_click_shared"
+    t.integer  "user_id"
   end
 
 end

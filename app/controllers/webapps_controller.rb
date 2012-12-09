@@ -8,7 +8,7 @@ class WebappsController < ApplicationController
   before_filter :webapps_promoted, :only => [ :index]
   before_filter :webapps_top_rated, :only => [:index]
   before_filter :webapps_top_shared, :only => [ :index]
-  before_filter :authenticate_user!, :only => [:create, :edit, :update]
+  before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
 
 
   # GET /webapps/
@@ -46,14 +46,14 @@ class WebappsController < ApplicationController
       when "suggested"
         @webapps = Webapp.suggested
         @subtitle = "Nos suggestions"
-        when "random"
+      when "random"
         @webapps = Webapp.random(n)
         @subtitle = "Aléatoire"
-          when "unvalidated"
+      when "unvalidated"
         @webapps = Webapp.unvalidated
-          @subtitle = "Votez !"
-          render :vote
-          return;
+        @subtitle = "Votez !"
+        render :vote
+        return;
       when "moderate"
         if(current_user.try(:admin?))
           @webapps = Webapp.all
@@ -116,7 +116,7 @@ class WebappsController < ApplicationController
   
   # POST /webapps/
   def create
-    @webapp = Webapp.new(params[:webapp])
+    @webapp  = current_user.webapps.build(params[:webapp])
     @webapp.validate = false
     if @webapp.save
       flash[:success] = "Votre soumission a bien été prise en compte"
@@ -129,11 +129,11 @@ class WebappsController < ApplicationController
 
   # GET /webapp/1/edit
   def edit
-    if current_user.try(:admin?)
-      @webapp = Webapp.find(params[:id])
+    @webapp = Webapp.find(params[:id])
+    if current_user.try(:admin?) or current_user.id == @webapp.user_id
       render :layout => "pages"
     else
-      flash[:error] = "Vous devez être administrateur pour éditer les websites"
+      flash[:error] = "Vous devez être administrateur pour éditer les websites ou bien l'utilisateur à l'initiative de cette suggestion."
       redirect_to accueil_path
     end
   end
@@ -143,14 +143,30 @@ class WebappsController < ApplicationController
   # earPUT /webapps/1.json
   def update
     @webapp = Webapp.find(params[:id])
-    respond_to do |format|
-      if @webapp.update_attributes(params[:webapp])
-        format.html { redirect_to accueil_path, notice: 'Les données du website ont correctement été modifiées' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit",:layout =>"pages" }
-        format.json { render json: @webapp.errors, status: :unprocessable_entity }
+    if current_user.try(:admin?) or (current_user.id == @webapp.user_id and @webapp.validate == false)
+      respond_to do |format|
+        if @webapp.update_attributes(params[:webapp])
+          format.html { redirect_to accueil_path, notice: 'Les données du website ont correctement été modifiées' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit",:layout =>"pages" }
+          format.json { render json: @webapp.errors, status: :unprocessable_entity }
+        end
       end
+    end
+  end
+
+  # DELETE /webapps/1
+  def destroy
+
+    @webapp = Webapp.find(params[:id])
+    if current_user.admin? or (@webapp.user_id == current_user.id and @webapp.validate == false)
+      @webapp.destroy
+      respond_to do |format|
+        format.html { redirect_to user_path current_user }
+      end
+    else
+      redirect_to accueil_ath, notice: "Action non autorisée"
     end
   end
 

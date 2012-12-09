@@ -19,7 +19,6 @@ end
                 <div class="label label-success"> <%= websites.tags[0].name if websites.tags[0] != nil %></div>
                 <div class="label label-success"> <%= websites.tags[1].name if websites.tags[1] != nil %></div>
               </div>
-
             </div>
 
             <div class="row-fluid">
@@ -38,16 +37,12 @@ end
               <div class="icon-pencil custom_inline"></div>
               <h5 class="custom_inline">Dernier commentaire : </h5>
             </div>
-
             <div class="row-fluid">
-              <em><%= websites.comments.first.body %></em>
+              <em><%= websites.comments.first.body if websites.comments.first != nil %></em>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </div>

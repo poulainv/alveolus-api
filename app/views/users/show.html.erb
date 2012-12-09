@@ -1,0 +1,42 @@
+<div class="tab-pane" id="pills-basic">
+  <div class="row-fluid">
+    <div class="span9">
+      <ul class="nav nav-pills" style="cursor:pointer">
+        <li class="active"><a id="btn_sort_recent" data-toggle="tab" href="#tab_comments">Vos commentaires</a></li>
+        <li><a  id="btn_sort_suggested" data-toggle="tab" href="#tab_suggestion">Vos suggestions</a></li>
+      </ul>
+    </div>
+    <div class="span3">
+      <%= link_to  "Paramètre du compte",edit_user_path(current_user), :class=>"btn"  %>
+    </div>
+  </div>
+
+  <h2>Mon profil</h2>
+
+
+  <div class="tab-content">
+
+    <div id="tab_comments" class="tab-pane active">
+      <legend>Mes commentaires</legend>
+      <div class="container-fluid" style="margin-top:5%;" id="tab_comments"">
+           <div class="span12">
+               <%=  render :partial => "comments/show", :collection => @user.comments, :as=> :comments %>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab_suggestion" class="tab-pane">
+      <legend>Mes suggestions</legend>
+      <div class="container-fluid" style="margin-top:5%;" id="tab_comments"">
+           <div class="span11">
+          <div class="websites">
+            <%=  render :partial => "webapps/website_list_voting", :collection => @user.webapps, :as => :website %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

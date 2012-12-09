@@ -20,7 +20,7 @@
         <%= f.label :description %>
         <%= f.text_area :description, :class => "input-xxlarge" %>
       </div>
-
+<% if current_user.try(:admin?) %>
       <div class="field">
          Validé <%= f.check_box :validate %>
       </div>
@@ -32,7 +32,7 @@
        <div class="field">
         Suggestion <%= f.check_box :suggested %>
       </div>
-
+<% end %>
       <div>
         <%= f.label :tag_list, "Tags (séparé par virgules)" %>
         <%= f.text_field :tag_list, :class => "input-large" %>
