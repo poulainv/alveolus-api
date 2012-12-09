@@ -1,5 +1,3 @@
-
-
 <div class='row-fluid'>
   <div class='span1'>
     <% if comments.user.avatar? %>
@@ -8,8 +6,16 @@
      <%= image_tag "/img/avatar.jpg", :class=>"img img-circle"%>
     <%end%>
   </div>
-  <div class='span3'><strong> user  <%=  comments.user.id %>
-    </strong> </div>
+  <div class='span3'>
+    <strong>
+       <% if comments.user.pseudo? %>
+  <%= comments.user.pseudo%>
+    <% else %>
+     user<%=  comments.user.id %>
+    <%end%>
+
+    </strong>
+  </div>
   <div class='span4'>
     <%= comments.created_at.strftime("%H:%M %d/%m/%Y") %>
   </div>
