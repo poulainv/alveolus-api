@@ -1,0 +1,35 @@
+/* 
+    Document   : carousel
+    Created on : 9 déc. 2012, 14:10:00
+    Author     : vincentpoulain
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#carousel_main{
+    margin:0%;
+    padding: 0%
+}
+
+
+#carousel_main .content_carousel{
+    background-color:white;
+    border-style:solid;
+    border-width: 1px;
+    border-color: grey;
+    padding: 5px 5px 5px 5px;
+    box-shadow: 4px 4px 30px 2px rgba(0,0,0,0.5);
+}
+
+#carousel_main .info{
+    background-color: white;
+    margin-left:2%;
+    padding: 5px 5px 5px 20px;
+    height:280px;
+    overflow-y: scroll;
+}
