@@ -233,6 +233,7 @@ function PopupWebSite(){
         $("#detailWebsiteModal").attr("websiteId",website.id);
         $("#detailWebsiteModalImage").attr("src",website.image);
         $("#detailWebsiteModalEdit").attr("href","/webapps/"+website.id+"/edit");
+       // $("#detailWebsiteModalDelete").attr("href","/webapps/"+website.id+"/destroy");
         $("#detailWebsiteModalTagsList").empty();
         $('#favicons_website').attr("src","http://www.google.com/s2/favicons?domain="+website.url.substring(7,website.url.length-1))
         $('#detailWebsiteModalRating').html(manage_star_rating(website.average_rate,"/img/googlestar.png","/img/googlestar-off.png"));
