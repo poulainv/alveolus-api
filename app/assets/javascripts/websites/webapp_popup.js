@@ -219,7 +219,7 @@ function PopupWebSite(){
         websiteId=popup.current_website_id;
     }
         $("#detailWebsiteModalComments").html('')
-        $("#detailWebsiteModalComments").load("webapps/"+websiteId+"/comments");
+        $("#detailWebsiteModalComments").load("/webapps/"+websiteId+"/comments");
     }
 
     // Update details website in popup detail
