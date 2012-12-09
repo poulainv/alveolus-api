@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible   :pseudo, :avatar,:email, :password, :password_confirmation, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
 
-  has_attached_file :avatar,  :styles => { :small => "75x75#", :mini=>"50x50#"},:default_url => "/img/avatar.jpg" ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
+  has_attached_file :avatar,  PAPERCLIP_STORAGE_AVATAR ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
   validates_attachment_size :avatar, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
 
   has_many :comments, :dependent => :destroy

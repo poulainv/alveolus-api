@@ -77,7 +77,8 @@ EnjoyTheWeb::Application.configure do
   }
 
    PAPERCLIP_STORAGE_AVATAR = {
-      :styles => { :small => "75x75!"},
+     :styles => { :small => "75x75#", :mini=>"50x50#"},
+      :default_url => "/img/avatar.jpg",
       :storage => :s3, :s3_credentials => {
       :bucket => ENV['AWS_BUCKET'],
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
