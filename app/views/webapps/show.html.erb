@@ -18,7 +18,7 @@
         <img class="custom_inline" id="share_facebook" style="cursor:pointer;"  src="/img/facebook_32.png"></img>
         <img class="custom_inline" id="share_google" style="cursor:pointer;"  src="/img/google_plus_32.png"></img>
         <img class="custom_inline" id="share_twitter" style="cursor:pointer;" src="/img/twitter_32.png"></img>
-        <% if bookmarked?(current_user,@webapp)%>
+        <% if user_signed_in? and bookmarked?(current_user,@webapp)%>
 
         <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-on-big.png"></img>
         <%else%>
@@ -90,7 +90,6 @@
   </div>
   <%  if user_signed_in? %>
     <div class="modal-footer">
-
       <a class="btn" id="detailWebsiteModalEdit" href="">Edit</a>
   <%#*<a class="btn" id="detailWebsiteModalDelete" href="">Delete</a>%>
 
