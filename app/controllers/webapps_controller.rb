@@ -201,7 +201,7 @@ class WebappsController < ApplicationController
       @webapp.update_attribute("validate", "true")
     end
 
-    redirect_to "/webapps/order/unvalidated/true", notice: "Merci pour votre vote !"
+    redirect_to webapps_path(:order=>"unvalidated", :layout=>"true"), notice: "Merci pour votre vote !"
   end
 
 
