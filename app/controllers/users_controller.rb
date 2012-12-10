@@ -3,13 +3,16 @@
 
 class UsersController < ApplicationController
 
-    before_filter :authenticate_user!, :only => [:edit, :update, :show]
+  before_filter :authenticate_user!, :only => [:edit, :update, :show , :index]
 
 
 
   def index
-    @users = User.all
-    render "users/index", :layout => "pages"
+    if (current.user.admin?)
+      @users = User.all
+      render "users/index", :layout => "pages"
+    else redirect_to accueil_path, :alert => "Vous devez être administrateur pour accéder à cette page"
+    end
   end
 
   def show
@@ -28,7 +31,7 @@ class UsersController < ApplicationController
         redirect_to users_path, :alert => "Impossible d'enregistrer les modifications"
       end
     else
-       if current_user.id == @user.id and @user.update_attributes(params[:user])
+      if current_user.id == @user.id and @user.update_attributes(params[:user])
         redirect_to edit_user_path, :notice => "Modification enregistrées"
       else
         redirect_to edit_user_path, :alert => "Impossible d'enregistrer les modifications"

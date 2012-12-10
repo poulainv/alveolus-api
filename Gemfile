@@ -46,6 +46,7 @@ group :development do
   gem 'omniauth-facebook'
   gem 'certified'
   gem 'fb_graph'
+  gem 'devise-i18n'
   gem 'activerecord-reputation-system', require: 'reputation_system'
  
 end

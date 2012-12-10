@@ -68,5 +68,8 @@ module EnjoyTheWeb
     ## To deploy Devise on Heroku... Dunno
     config.assets.initialize_on_precompile = false
 
+    ## I18n
+    config.i18n.default_locale = :fr
+
   end
 end
