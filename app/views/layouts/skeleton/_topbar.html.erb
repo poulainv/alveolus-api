@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <%= link_to "EnjoyTheWeb <sup>beta</sup>".html_safe, accueil_path, :class=>"brand"%>
+      <%= link_to "EnjoyTheWeb <sup>beta</sup>".html_safe, root_path, :class=>"brand"%>
       <div class="nav-collapse collapse">
 
           <% if user_signed_in? %>
@@ -39,11 +39,11 @@
 
 
       <ul class="nav">
-        <li class="active"><%= link_to " <i class='icon-home icon-white'></i>".html_safe, accueil_path%></li>
+        <li class="active"><%= link_to " <i class='icon-home icon-white'></i>".html_safe, root_path%></li>
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
  
-        <li><%= link_to "Vote",  "/webapps/order/unvalidated/true" %></li>
+        <li><%= link_to "Vote",  webapps_path(:layout=>"true",:order=>"unvalidated") %></li>
         <li><%= link_to "<i class='icon-random icon-white'></i> Aléatoire".html_safe, webapps_path(:layout=>"true",:order=>"random") %></li>
         <% if current_user.try(:admin?) %>
           <li class="dropdown">
