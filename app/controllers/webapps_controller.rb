@@ -72,7 +72,7 @@ class WebappsController < ApplicationController
 
     elsif params[:search]
       @search =  Webapp.search do
-         fulltext 'qui'
+         fulltext params[:search]
       end
       @webapps = @search.results
       @nb_results = @webapps.length
