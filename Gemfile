@@ -19,7 +19,7 @@ group :production do
   gem 'fb_graph'
   gem 'devise-i18n'
   gem 'activerecord-reputation-system', require: 'reputation_system'
- gem 'sunspot-client'
+   gem 'sunspot_rails'
 end
 
 gem 'bootstrap-sass'
@@ -50,7 +50,7 @@ group :development do
   gem 'fb_graph'
   gem 'devise-i18n'
   gem 'activerecord-reputation-system', require: 'reputation_system'
-  gem 'sunspot-client'
+  gem 'sunspot_rails'
 gem 'sunspot_solr'
  
 end
