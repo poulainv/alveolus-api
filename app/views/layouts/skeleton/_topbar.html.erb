@@ -31,7 +31,11 @@
           <%= render :partial => "layouts/login_popover/login_popover" %>
         <% end %>
 
-     
+
+        <%= form_tag webapps_path, :method => :get, :class=>"navbar-search pull-right" , :style=>"margin-right:5%;" do %>
+          <%= text_field_tag :search, params[:search],:class=>"search-query", :placeholder=>"Rechercher" %>
+          <%= submit_tag "Search", :name => :webapp,:class=>"hide" %>
+        <% end %>
 
 
       <ul class="nav">

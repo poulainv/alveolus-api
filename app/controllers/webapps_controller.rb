@@ -69,7 +69,21 @@ class WebappsController < ApplicationController
       render :search , :partial => "webapps/preview_website_list",:collection => @webapps, :as => :website if params[:layout] == "list"
       render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
       render :search , :layout => "pages" if params[:layout] == "true"
-   
+
+    elsif params[:search]
+      @search =  Webapp.search do
+         fulltext 'qui'
+      end
+      @webapps = @search.results
+      @nb_results = @webapps.length
+      print "pourpour"
+      print @search.results.to_s
+      @subtitle = "Résultat de la recherche : #=>"+@nb_results.to_s
+      respond_to do |format|
+        format.html {
+          render :search , :layout => "pages"
+        }
+      end
       # GET /webapps/
     else
       @subtitle = "Tous les sites web"
@@ -100,15 +114,15 @@ class WebappsController < ApplicationController
   def show
     if @webapp = Webapp.find_by_id(params[:id])
       render :layout => false
-#      @webapp.image = @webapp.photo.url(:caroussel)
+      #      @webapp.image = @webapp.photo.url(:caroussel)
       @webapp.increment_nb_click(:element => "detail")
-#      respond_to do |format|
-#        format.html
-#        format.json{
-#          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
-#          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
-#        }
-#      end
+      #      respond_to do |format|
+      #        format.html
+      #        format.json{
+      #          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
+      #          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
+      #        }
+      #      end
     else
       flash[:error] = "Le site web demandé n'existe pas"
       redirect_to accueil_path
