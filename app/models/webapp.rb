@@ -68,7 +68,7 @@ class Webapp < ActiveRecord::Base
 searchable :auto_index => true, :auto_remove => true do
     text :title, :caption
     text :tags do
-      tags.map { |tag| tag.body }
+      tags.map { |tag| tag.name }
     end
 end
 

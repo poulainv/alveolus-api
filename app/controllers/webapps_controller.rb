@@ -76,9 +76,7 @@ class WebappsController < ApplicationController
       end
       @webapps = @search.results
       @nb_results = @webapps.length
-      print "pourpour"
-      print @search.results.to_s
-      @subtitle = "Résultat de la recherche : #=>"+@nb_results.to_s
+      @subtitle = "Résultat de la recherche : #=>"+params[:search]
       respond_to do |format|
         format.html {
           render :search , :layout => "pages"
