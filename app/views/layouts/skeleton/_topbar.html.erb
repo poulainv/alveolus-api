@@ -39,16 +39,17 @@
 
 
       <ul class="nav">
-        <li class="active"><%= link_to "Home", accueil_path%></li>
+        <li class="active"><%= link_to " <i class='icon-home icon-white'></i> Home".html_safe, accueil_path%></li>
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
+ 
         <li><%= link_to "Vote",  "/webapps/order/unvalidated/true" %></li>
-         <li><%= link_to "Aléatoire", "/webapps/order/random/true" %></li>
+        <li><%= link_to "<i class='icon-random icon-white'></i> Aléatoire".html_safe, webapps_path(:layout=>"true",:order=>"random") %></li>
         <% if current_user.try(:admin?) %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admininistration<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Modérer les sites", "/webapps/order/moderate/true" %></li>
+              <li><%= link_to "Modérer les sites", webapps_path(:layout=>"true",:order=>"moderate") %></li>
               <li><%= link_to "Modérer les utilisateurs", moderation_users_path %></li>
             </ul>
           </li>
