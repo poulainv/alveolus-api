@@ -5,7 +5,7 @@ $(document).ready(function(){
     var popupWebSite;
     settings.typeDisplay = "grid" // grid or list
     settings.windowSearch = "#search_result";
-    settings.searchUrl = '/webapps/order/';
+    settings.searchUrl = '/webapps/';
     settings.subtitleSearch = "#subtitle_search";
     settings.nbResultSearch = "#nbresult_search";
     settings.buttonGrid = "#btn_display_grid";
@@ -64,7 +64,7 @@ $(document).ready(function(){
 
     var loadPage = function(){
             delete popupWebSite;
-        $(settings.windowSearch).load(settings.searchUrl+settings.currentSorter+'/'+ settings.typeDisplay,null,function(){
+        $(settings.windowSearch).load(settings.searchUrl+'?order='+settings.currentSorter+'&layout='+ settings.typeDisplay,null,function(){
            // When we redisplay new results by ajax, we have to re-excecute js code to display popup
            popupWebSite = new PopupWebSite();
         });

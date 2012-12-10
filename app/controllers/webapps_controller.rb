@@ -72,18 +72,23 @@ class WebappsController < ApplicationController
 
     elsif params[:search]
       query = params[:search]
-      @webapps = Webapp.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
-      tags = Tag.where{(name =~ "%#{query}%")}
-      tags.each do |tag|
-        @webapps += tag.webapps
-      end
-      @webapps = @webapps.uniq
-      @nb_results = @webapps.length
-      @subtitle = "Résultat de la recherche : "+params[:search]
-      respond_to do |format|
-        format.html {
-          render :search , :layout => "pages"
-        }
+      if query.length < 3
+        flash[:error] = "Veuillez entrer au moins 3 caractères"
+        redirect_to accueil_path
+      else
+        @webapps = Webapp.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
+        tags = Tag.where{(name =~ "%#{query}%")}
+        tags.each do |tag|
+          @webapps += tag.webapps
+        end
+        @webapps = @webapps.uniq
+        @nb_results = @webapps.length
+        @subtitle = "Résultat de la recherche : "+params[:search]
+        respond_to do |format|
+          format.html {
+            render :search , :layout => "pages"
+          }
+        end
       end
       # GET /webapps/
     else
@@ -174,7 +179,6 @@ class WebappsController < ApplicationController
 
   # DELETE /webapps/1
   def destroy
-
     @webapp = Webapp.find(params[:id])
     if current_user.admin? or (@webapp.user_id == current_user.id and @webapp.validate == false)
       @webapp.destroy
