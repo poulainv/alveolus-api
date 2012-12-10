@@ -51,7 +51,7 @@ class WebappsController < ApplicationController
         @subtitle = "Aléatoire"
       when "unvalidated"
         @webapps = Webapp.unvalidated
-        @subtitle = "Votez !"
+        @subtitle = "Sites Web non-validés"
         render :vote
         return;
       when "moderate"
