@@ -67,6 +67,9 @@ class Webapp < ActiveRecord::Base
 
 searchable :auto_index => true, :auto_remove => true do
     text :title, :caption
+    text :tags do
+      tags.map { |tag| tag.body }
+    end
 end
 
   @@score_for_validation = 5
