@@ -25,9 +25,10 @@ EnjoyTheWeb::Application.routes.draw do
 
   resources :comments
 
-
+  
 
   resources :webapps do
+    resources :bookmarks  
     resources  :tags
     resources :comments
     member { post :vote }    

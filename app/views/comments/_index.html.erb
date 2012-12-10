@@ -1,0 +1,31 @@
+
+  <div class='row-fluid'>
+    <div class='span1'>
+      <% if comments.user.avatar? %>
+        <%= image_tag comments.user.avatar.url(:mini), :class=>"img img-circle"%>
+      <% else %>
+        <%= image_tag "/img/avatar.jpg", :class=>"img img-circle"%>
+      <%end%>
+    </div>
+    <div class='span3'>
+      <strong>
+        <% if comments.user.pseudo? %>
+          <%= comments.user.pseudo%>
+        <% else %>
+          user<%=  comments.user.id %>
+        <%end%>
+
+      </strong>
+    </div>
+    <div class='span4'>
+      <%= comments.created_at.strftime("%H:%M %d/%m/%Y") %>
+    </div>
+    <div class='span4'>
+      <%=  render :partial => "shared/star_rating", :locals => { :n => comments.rating } %>
+    </div>
+  </div><br>
+  <div class='row-fluid'>
+    <div class='span12' style=' border-bottom:1px dotted #999999;margin-bottom:5%;padding-bottom : 3%'>
+      <%= comments.body %>
+    </div>
+  </div>

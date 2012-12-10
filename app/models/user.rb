@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :authentications
   has_many :webapps
+  has_many :bookmarks, :foreign_key => "user_id", :dependent => :destroy
+  has_many :webapps_starred, :through => :bookmarks, :source => :webapp
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     self.pseudo =  omniauth['info']['nickname'] if pseudo.blank?

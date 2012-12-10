@@ -99,15 +99,16 @@ class WebappsController < ApplicationController
   # GET /webapps/:id
   def show
     if @webapp = Webapp.find_by_id(params[:id])
-      @webapp.image = @webapp.photo.url(:caroussel)
+      render :layout => false
+#      @webapp.image = @webapp.photo.url(:caroussel)
       @webapp.increment_nb_click(:element => "detail")
-      respond_to do |format|
-        format.html
-        format.json{
-          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
-          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
-        }
-      end
+#      respond_to do |format|
+#        format.html
+#        format.json{
+#          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
+#          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
+#        }
+#      end
     else
       flash[:error] = "Le site web demandé n'existe pas"
       redirect_to accueil_path

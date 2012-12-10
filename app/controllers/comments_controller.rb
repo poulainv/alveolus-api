@@ -23,8 +23,7 @@ class CommentsController < ApplicationController
       end
     elsif params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
-        @comments = @webapp.comments
-        #render :json => @comments.commented.to_json({:include => :user})
+        @comments = @webapp.comments.commented
         render :layout => false
       else
         flash[:error] = "La Webapp demandé n'existe pas"
@@ -45,7 +44,8 @@ class CommentsController < ApplicationController
       @comment.webapp_id = @webapp.id
       if @comment.save
         flash[:success] = "Commentaire ajouté"
-        render :json => @webapp.comments.to_json({:include => :user})
+        @comments = @webapp.comments.commented
+        render "index", :layout => false 
       else
         flash[:error] = "Vous avez déjà commenté pour ce website"
         redirect_to accueil_path
@@ -60,7 +60,8 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @webapp = Webapp.find_by_id(@comment.webapp_id)
       if @comment.update_attributes(:body =>params[:comment], :rating => params[:rating])
-        render :json => @webapp.comments.to_json({:include => :user})
+        @comments = @webapp.comments.commented
+        render "index", :layout => false 
       else
         flash[:error] = "Impossible d'éditer correctement ce commentaire"
         redirect_to accueil_path

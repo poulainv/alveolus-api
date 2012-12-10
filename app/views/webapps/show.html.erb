@@ -1,5 +1,99 @@
 
-<%= @webapp.title %> , <%= @webapp.url %>
-<%= image_tag @webapp.photo.url %>
-<br></br>
-<%= link_to 'Edit', edit_webapp_path(@webapp) %> 
+<!-- Modal -->
+<div id="detailWebsiteModal" websiteId="" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="detailWebsiteModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <!-- Header for the popup detail -->
+    <div class="row-fluid">
+      <div class="span3">
+        <img id="favicons_website" src="http://www.google.com/s2/favicons?domain=<%=@webapp.url.slice(7,@webapp.url.length-8)%>" class="custom_inline" style="margin-bottom:7%;" alt="none" src=""></img>
+        <h3 id="detailWebsiteModalTitle" class="custom_inline" ><%= @webapp.title %></h3>
+        <span class="custom_inline" id="detailWebsiteModalRating">
+          <%=  render :partial => "shared/star_rating", :locals => { :n => @webapp.average_rate }%>
+        </span>
+      </div>
+      <div class="span2 offset4 ">
+        <em id="detailWebsiteModalNbVues"><%= @webapp.nb_click_detail %></em>
+      </div>
+      <div class="span2">
+        <img class="custom_inline" id="share_facebook" style="cursor:pointer;"  src="/img/facebook_32.png"></img>
+        <img class="custom_inline" id="share_google" style="cursor:pointer;"  src="/img/google_plus_32.png"></img>
+        <img class="custom_inline" id="share_twitter" style="cursor:pointer;" src="/img/twitter_32.png"></img>
+        <% if bookmarked?(current_user,@webapp)%>
+
+        <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-on-big.png"></img>
+        <%else%>
+
+         <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-off-big.png"></img>
+      
+        <%end%>
+      </div>
+
+      <div class="span1">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body">
+
+
+    <!-- Body for the popup detail -->
+
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+
+          <h3>Tags : </h3>
+          <%=  render :partial => "tags/show", :collection => @webapp.tags, :as => :tag %>
+          <% if user_signed_in? %>
+            <button id="addTagButton" class="btn btn-link btn-small" href="#"><i class="icon-plus-sign"></i> Proposer un tag </button>
+            <div id="addTagField" class="input-append">
+              <input class="span9" id="newTagField" type="text"></input>
+              <a class="btn" id="addTagSendButton" type="button">Add!</a>
+            </div>
+            <p class="alert alert-success" id="messageTagSaved"> C'est noté ! </p>
+
+          <%else%>
+
+            <%=render "shared/message_please_sign_in"%>
+          <%end%>
+        </div>
+
+
+        <div class="span10">
+          <ul id="detailPopupTab" class="nav nav-tabs custom_tab">
+            <li class="active"><a href="#detailTab" data-toggle="tab">Détails</a></li>
+            <li><a href="#commentTab" data-toggle="tab">Avis des internautes</a></li>
+          </ul>
+        </div>
+        <!-- View for tab content -->
+        <div class="span10">
+
+          <div class="well sidebar-nav custom_box">
+            <div id="detailPopupContent" class="tab-content">
+              <div class="tab-pane fade in active" id="detailTab">
+                <%= render :partial=> "layouts/website_modal/detail_tab", :locals => { :website => @webapp } %>
+              </div>
+              <div class="tab-pane fade" id="commentTab">
+                <!-- Commentaires -->
+                <%= render  :partial=>"layouts/website_modal/comment_tab", :locals => { :comments => @webapp.comments}  %>
+              </div>
+            </div>
+          </div><!--/.well-->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <%  if user_signed_in? %>
+    <div class="modal-footer">
+
+      <a class="btn" id="detailWebsiteModalEdit" href="">Edit</a>
+  <%#*<a class="btn" id="detailWebsiteModalDelete" href="">Delete</a>%>
+
+    </div>
+  <%  end %>
+</div>

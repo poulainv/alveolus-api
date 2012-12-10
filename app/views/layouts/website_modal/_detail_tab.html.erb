@@ -1,0 +1,20 @@
+<!-- Detail for website -->
+<div class="row-fluid">
+  <div class="span10">
+    <!-- Caption -->
+    <h4 id="detailWebsiteModalCaption"> <%= website.caption %></h4>
+    <!-- URL -->
+    <a href="" target="_blank" id="detailWebsiteModalURL" class="websiteurl"> <%= website.url %></a>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="span6">
+    <br></br>
+    <!-- Description -->
+    <p id="detailWebsiteModalDescription"> <%= website.description %></p>
+  </div>
+  <div class="span6">
+    <img alt="" id="detailWebsiteModalImage" src="" class="img-rounded" > <%= image_tag website.photo.url %></img>
+  </div>
+</div>

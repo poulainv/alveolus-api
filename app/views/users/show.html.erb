@@ -2,8 +2,9 @@
   <div class="row-fluid">
     <div class="span9">
       <ul class="nav nav-pills" style="cursor:pointer">
-        <li class="active"><a id="btn_sort_recent" data-toggle="tab" href="#tab_comments">Vos commentaires</a></li>
-        <li><a  id="btn_sort_suggested" data-toggle="tab" href="#tab_suggestion">Vos suggestions</a></li>
+        <li class="active"><a  data-toggle="tab" href="#tab_comments">Vos commentaires</a></li>
+        <li><a   data-toggle="tab" href="#tab_suggestion">Vos suggestions</a></li>
+         <li><a  data-toggle="tab" href="#tab_bookmark">Vos sites Web favoris</a></li>
       </ul>
     </div>
     <div class="span3">
@@ -39,6 +40,21 @@
           </div>
              <% else  %>
              Aucune suggestion enregistrée, pour proposer un site Web <%= link_to "cliquez ici", new_webapp_path %>
+             <% end %>
+        </div>
+      </div>
+    </div>
+
+     <div id="tab_bookmark" class="tab-pane">
+      <legend>Mes sites Web favoris</legend>
+      <div class="container-fluid" style="margin-top:5%;" id="tab_comments"">
+           <div class="span11">
+             <% if @user.webapps_starred.length != 0 %>
+          <div class="websites">
+            <%=  render :partial => "webapps/preview_website_large_grid", :collection => @user.webapps_starred, :as => :website %>
+          </div>
+             <% else  %>
+             Aucun sites favoris enregistré. Cliquer sur l'étoile en haut à droite de la fenêtre de détail pour mémoriser le site.
              <% end %>
         </div>
       </div>

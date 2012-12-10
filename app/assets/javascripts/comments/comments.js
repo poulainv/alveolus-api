@@ -27,8 +27,8 @@
 		                rating : newRating
 		            },
 		            url: "/webapps/"+websiteId+"/comments"
-		        }).done(function( msg ) {
-		            callback(websiteId);
+		        }).done(function(msg) {
+		            callback(msg);
 		        }).fail(function() {
 		            alert('Vous avez déjà publiez pour ce site');
 		        });
@@ -45,7 +45,7 @@
 		            },
 		            url: "/comments/"+commentId
 		        }).done(function( msg ) {
-		            callback();
+		            callback(msg);
 		        }).fail(function() {
 		            alert('Vous avez déjà publiez pour ce site');
 		        });

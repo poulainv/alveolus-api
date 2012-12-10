@@ -12,7 +12,6 @@ class Tag < ActiveRecord::Base
   attr_accessible :name,:tagAppRelations,:tagUserRelations
   
   has_many :tagAppRelations, :foreign_key => "tag_id", :dependent => :destroy
-  has_many :tagUserRelations, :dependent => :destroy
   has_many :webapps, :through => :tagAppRelations, :source => :webapp
 
   ## Most used tags for all website for example

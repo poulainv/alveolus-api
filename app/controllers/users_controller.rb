@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # Un peu laid, passé par un parametre local plz
+    @nb_results = @user.webapps_starred.length
     redirect_to users_path, :alert => "Impossible d'accéder à cet utilisteur" if @user.id!=current_user.id
   end
 

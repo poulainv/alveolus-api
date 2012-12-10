@@ -30,6 +30,8 @@ class Webapp < ActiveRecord::Base
 
   has_many :tagAppRelations, :foreign_key => "webapp_id", :dependent => :destroy
   has_many :tags, :through => :tagAppRelations , :source => :tag
+  has_many :bookmarks, :foreign_key => "webapp_id", :dependent => :destroy
+ # has_many :users, :through => :bookmarks , :source => :user
   has_many :comments , :dependent => :destroy
   belongs_to :user
   
