@@ -65,13 +65,6 @@ class Webapp < ActiveRecord::Base
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
 
-searchable :auto_index => true, :auto_remove => true do
-    text :title, :caption
-    text :tags do
-      tags.map { |tag| tag.name }
-    end
-end
-
   @@score_for_validation = 5
   has_reputation :votes, source: :user, aggregated_by: :sum
 

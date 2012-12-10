@@ -71,12 +71,15 @@ class WebappsController < ApplicationController
       render :search , :layout => "pages" if params[:layout] == "true"
 
     elsif params[:search]
-      @search =  Webapp.search do
-         fulltext params[:search]
+      query = params[:search]
+      @webapps = Webapp.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
+      tags = Tag.where{(name =~ "%#{query}%")}
+      tags.each do |tag|
+        @webapps += tag.webapps
       end
-      @webapps = @search.results
+      @webapps = @webapps.uniq
       @nb_results = @webapps.length
-      @subtitle = "Résultat de la recherche : #=>"+params[:search]
+      @subtitle = "Résultat de la recherche : "+params[:search]
       respond_to do |format|
         format.html {
           render :search , :layout => "pages"
