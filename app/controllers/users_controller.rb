@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
 
   def index
-    if (current.user.admin?)
+    if (current_user.admin?)
       @users = User.all
       render "users/index", :layout => "pages"
     else redirect_to accueil_path, :alert => "Vous devez être administrateur pour accéder à cette page"
