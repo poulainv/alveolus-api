@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tags = Tag.all
+    @tags = Tag.used
     respond_to do |format|
       format.html
       format.json{

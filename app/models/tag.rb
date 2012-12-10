@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
 
   ## Most used tags for all website for example
   scope :most_used, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.webapp_id)").group('tags.id').reverse_order.limit(n)}
-
+  scope :used, lambda { joins(:tagAppRelations).joins(:webapps).where("webapps.validate = '1'").uniq }
   ## Most posted tags for one website 
   scope :most_posted, lambda { |n| joins(:tagAppRelations).order("count(tag_app_relations.id)").group('tags.id').reverse_order.limit(n)}
   validates :name, :presence => true,:length => { :maximum => 30, :minimum => 2 }

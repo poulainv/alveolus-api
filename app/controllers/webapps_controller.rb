@@ -70,13 +70,14 @@ class WebappsController < ApplicationController
       render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
       render :search , :layout => "pages" if params[:layout] == "true"
 
+      ## SEARCH
     elsif params[:search]
       query = params[:search]
       if query.length < 3
         flash[:error] = "Veuillez entrer au moins 3 caractères"
         redirect_to accueil_path
       else
-        @webapps = Webapp.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
+        @webapps = Webapp.validated.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
         tags = Tag.where{(name =~ "%#{query}%")}
         tags.each do |tag|
           @webapps += tag.webapps
