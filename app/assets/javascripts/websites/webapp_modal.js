@@ -33,6 +33,8 @@ function PopupWebSite(){
         popup.current_website_id = $(this).attr("websiteId");
 
         $("#detailWebsiteModalTEST").load("/webapps/"+popup.current_website_id,null,function(){
+             $('.spinner').hide();
+             $(settings.modal).modal('show');
             popup.listenerWebSiteTitle();
             popup.listener_send_tag();
             popup.initialize_buttons_tags();
@@ -44,15 +46,14 @@ function PopupWebSite(){
             popup.listenerGooglePlusButton();
             popup.listenerUrl();
             popup.listener_bookmark();
-            $(settings.modal).modal('show');
-            $('.spinner').hide();
+           
+      
         })
     });
 
 
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
-        console.log("listener on websitetitle");
 
         // Init star rating
         popup.init_star_rating();
@@ -69,7 +70,6 @@ function PopupWebSite(){
 
     
     this.listenerFacebookButton = function (){
-        console.log("sharing on facebook...");
         $('#share_facebook').click(function(){
             // We have to change attribute's name 'preview' into 'shared' in database
             increment_nb_click(popup.current_website_id,"shared");
