@@ -70,16 +70,16 @@ function PopupWebSite(){
 
     
     this.listenerFacebookButton = function (){
+        console.log("lister FB");
         $('#share_facebook').click(function(){
             // We have to change attribute's name 'preview' into 'shared' in database
             increment_nb_click(popup.current_website_id,"shared");
             FB.ui(
             {
                 method: 'feed',
-                name: popup.website_info.title,
-                link:  popup.website_info.url,
-                picture: popup.website_info.photo,
-                caption: popup.website_info.caption,
+                name: $(settings.modal).data("title"),
+                link:  $(settings.modal).data("url"),
+                caption: $(settings.modal).data("caption"),
                 message: "J'ai découvert ça sur EnjoyTheWeb, ça peut vous intéresser !"
             });
         });

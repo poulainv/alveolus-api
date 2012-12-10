@@ -1,18 +1,20 @@
 
 <!-- Modal -->
-<div id="detailWebsiteModal" websiteId="" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="detailWebsiteModalLabel" aria-hidden="true">
+<div id="detailWebsiteModal" class="modal hide" tabindex="-1" role="dialog" data-title="<%=@webapp.title%>" data-url="<%=@webapp.url%>" data-caption="<%=@webapp.caption%>"  aria-hidden="true">
+
   <div class="modal-header">
     <!-- Header for the popup detail -->
     <div class="row-fluid">
       <div class="span3">
-        <img id="favicons_website" src="http://www.google.com/s2/favicons?domain=<%=@webapp.url.slice(7,@webapp.url.length-8)%>" class="custom_inline" style="margin-bottom:7%;" alt="none" src=""></img>
-        <h3 id="detailWebsiteModalTitle" class="custom_inline" ><%= @webapp.title %></h3>
-        <span class="custom_inline" id="detailWebsiteModalRating">
-          <%=  render :partial => "shared/star_rating", :locals => { :n => @webapp.average_rate }%>
-        </span>
+        <img src="http://www.google.com/s2/favicons?domain=<%=@webapp.url.slice(7,@webapp.url.length-8)%>" class="custom_inline" style="margin-bottom:7%;" alt="none" src=""></img>
+        <h3 class="custom_inline" ><%= @webapp.title %></h3>
       </div>
-      <div class="span2 offset4 ">
-        <em id="detailWebsiteModalNbVues"><%= @webapp.nb_click_detail %></em>
+      <div class="span2" style="margin-top:0.8%">
+        <span class="custom_inline">  <%=  render :partial => "shared/star_rating", :locals => { :n => @webapp.average_rate }%>  </span>
+        <span class="custom_inline badge badge-info"> <%= @webapp.average_rate.to_s.slice(0,3)%></span>
+      </div>
+      <div class="span2 offset2" style="margin-top:0.8%">
+        <em>Nombre de vues :<%=  @webapp.nb_click_detail %></em>
       </div>
       <div class="span2">
         <img class="custom_inline" id="share_facebook" style="cursor:pointer;"  src="/img/facebook_32.png"></img>
@@ -23,11 +25,9 @@
             <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-on-big.png"></img>
           <%else%>
             <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-off-big.png"></img>
-
           <%end
         end%>
       </div>
-
       <div class="span1">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
@@ -35,16 +35,13 @@
   </div>
 
 
+
+
   <div class="modal-body">
-
-
     <!-- Body for the popup detail -->
-
-
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-
           <h3>Tags : </h3>
           <%=  render :partial => "tags/show", :collection => @webapp.best_tags, :as => :tag %>
           <% if user_signed_in? %>
@@ -54,13 +51,10 @@
               <a class="btn" id="addTagSendButton" type="button">Add!</a>
             </div>
             <p class="alert alert-success" id="messageTagSaved"> C'est noté ! </p>
-
           <%else%>
-
             <%=render "shared/message_please_sign_in"%>
           <%end%>
         </div>
-
 
         <div class="span10">
           <ul id="detailPopupTab" class="nav nav-tabs custom_tab">
@@ -68,9 +62,9 @@
             <li><a href="#commentTab" data-toggle="tab">Avis des internautes</a></li>
           </ul>
         </div>
+
         <!-- View for tab content -->
         <div class="span10">
-
           <div class="well sidebar-nav custom_box">
             <div id="detailPopupContent" class="tab-content">
               <div class="tab-pane fade in active" id="detailTab">
@@ -82,7 +76,6 @@
               </div>
             </div>
           </div><!--/.well-->
-
         </div>
       </div>
     </div>
@@ -92,7 +85,6 @@
     <div class="modal-footer">
       <%= link_to "Edit", edit_webapp_path(@webapp),:class=>"btn" %>
   <%#*<a class="btn" id="detailWebsiteModalDelete" href="">Delete</a>%>
-
     </div>
   <%  end %>
 </div>
