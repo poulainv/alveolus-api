@@ -7,11 +7,15 @@ $custom_green_hover : #339900;
 $custom_blue_hover : #009999;
 $custom_blue : #006666;
 $body_background_color : #eee;
+$padding_box : 15px 20px 20px 20px;
 body {
     zoom : 90%;
     padding-top: 60px;
-     background-image: url(/img/bgnoise_lg.jpg);
-  //     background-color: $body_background_color;
+    background-image: url(/img/bgnoise_lg.jpg);
+}
+
+a{
+    color : black;
 }
 
 .footer {
@@ -21,63 +25,42 @@ body {
     background-color:white;
     border-top-color: $custom_blue;
 }
-.footer p {
-    margin-bottom: 0;
-    color: #777;
-}
-.footer-links {
-    margin: 10px 0;
-}
-.footer-links li {
-    display: inline;
-    margin-right: 10px;
-}
 
-#detailWebsiteModal .modal-body {
-    max-height: 800px;
-    min-height: 500px;
-}
+/*MODAL WEBSITE*/
 
-#detailWebsiteModal {
+#website-modal {
     width:80%;
     /* Should be : -width/2 */
     margin: -330px 0 0 -570px;
 }
 
-
-
-#detailWebsiteModal .modal-header {
-    margin-top : 0px;
-    /* Close icon */
-    .close {
-    margin-top: 2px;
-
-    }
+#website-modal .modal-body {
+    max-height: 100px;
+    min-height: 500px;
 }
 
-
 .hover_green:hover{
-    cursor : pointer ;
+     cursor : pointer ;
       background-color :$custom_green_light_hover!important;
       border-radius: 5px 5px 5px 5px;
       color : black;
-
 }
-
-
-#detailWebsiteModalNbVues{
-    margin-right : 10%;
-}
-
 
 .custom_box{
-    padding: 15px 20px 20px 20px;
+    padding: $padding_box;
     border-top-style: inset;
     border-top-width: 5px;
     border-top-color: $custom_blue;
     border-radius: 0px 20px 0 0px;
     background-color: white;
+}
 
+.custom_box_straight{
+    padding: $padding_box;
+    border-top-style: inset;
+    border-top-width: 5px;
+    border-top-color: $custom_blue;
+    background-color: white;
 }
 
 .custom_tab{
@@ -86,19 +69,16 @@ body {
     border-radius: 0px 0px 0px 0px;
 }
 
-
 .custom_tab a{
     background-color:#cccccc;
-    color:snow ;
+    color: snow ;
     border-radius: 0px 0px 0px 0px;
-
 }
 
 .custom_tab a:hover{
     background-color:black;
     color:white;
 }
-
 
 .custom_tab .active a{
     background-color: $custom_blue;
@@ -110,8 +90,4 @@ body {
 .custom_tab .active a:hover{
     background-color: $custom_blue_hover;
     color:white;
-}
-
-a{
-    color : black;
 }

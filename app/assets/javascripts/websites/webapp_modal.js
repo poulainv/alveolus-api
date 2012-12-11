@@ -14,7 +14,7 @@ function PopupWebSite(){
     settings.bookmark_star = "#bookmark";
     settings.bookmarked = false ;
     settings.bookmark_image = "/img/star-on-big"
-    settings.modal = "#detailWebsiteModal" ;
+    settings.modal = "#website-modal" ;
     settings.messageTagSaved = "#messageTagSaved";
     settings.messageCommentSaved = "#messageCommentSaved";
     settings.star_rating_user = "#star_rating_user";
