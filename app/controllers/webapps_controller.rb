@@ -45,7 +45,7 @@ class WebappsController < ApplicationController
         @subtitle = "Les mieux notés"
       when "suggested"
         @webapps = Webapp.suggested
-        @subtitle = "Nos suggestions"
+        @subtitle = "Notre sélection"
       when "random"
         @webapps = Webapp.random(n)
         @subtitle = "Aléatoire"
