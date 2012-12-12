@@ -1,6 +1,6 @@
 
 <h2><%=@title%></h2>
-<legend>Soumettez un site web</legend>
+<legend>Soumetter un site Web</legend>
 <% if user_signed_in? %>
 
   <%= form_for @webapp, :html => {:multipart => true, :class=>"form-horizontal"} do |f| %>

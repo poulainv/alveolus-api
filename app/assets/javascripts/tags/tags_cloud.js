@@ -1,4 +1,4 @@
-$(document).ready(function(){
+var Cloud = function(){
 
     var cloudtags = this
     var tag = new Tags();
@@ -137,4 +137,4 @@ $(document).ready(function(){
     })
 
 
-});
+};

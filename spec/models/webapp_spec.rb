@@ -166,7 +166,7 @@ describe "virtual attribute" do
   describe "validation attributes" do
 
     it "shall reject caption too long" do
-      @webapp = FactoryGirl.build(:webapp, caption: "a" * 171)
+      @webapp = FactoryGirl.build(:webapp, caption: "a" * 201)
       @webapp.should_not be_valid
     end
 

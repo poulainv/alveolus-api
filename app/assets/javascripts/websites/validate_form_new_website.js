@@ -8,12 +8,12 @@ $(document).ready(function(){
 	      },
                 "webapp[caption]": {
 	        minlength: 30,
-                  maxlength: 170,
+                  maxlength: 200,
 	        required: true
 	      },
                 "webapp[description]": {
 	        minlength: 100,
-                  maxlength: 450,
+                  maxlength: 600,
 	        required: true
 	      },
                 "webapp[url]": {

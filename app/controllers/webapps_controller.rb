@@ -1,4 +1,4 @@
-# encoding: utf-8
+  # encoding: utf-8
 
 class WebappsController < ApplicationController
 
@@ -112,7 +112,7 @@ class WebappsController < ApplicationController
   # GET /webapps/new
   def new
     @webapp = Webapp.new
-    @title = "Une nouvelle idée de sites web ?"
+    @title = "Un site Web a proposé ?"
     #If we want apply an other layout with this method : 
     render :layout => "pages"
   end
