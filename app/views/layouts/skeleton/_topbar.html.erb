@@ -19,9 +19,9 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-               <li> <%= link_to "Mon profil", user_path(current_user) %></li>
-              <li> <%= link_to "Options", edit_user_path(current_user) %></li>
-              <li>  <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete%></li>
+               <li> <%= link_to "<i class='icon-user'></i> Mon profil".html_safe, user_path(current_user) %></li>
+              <li> <%= link_to "<i class='icon-wrench'></i> Options".html_safe, edit_user_path(current_user) %></li>
+              <li>  <%= link_to "<i class='icon-remove'></i>  Déconnexion".html_safe, destroy_user_session_path, :method => :delete%></li>
             </ul>
           </div>             
           <% else %>
