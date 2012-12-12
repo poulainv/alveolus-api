@@ -18,5 +18,13 @@ module WebAppsHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def display_title(title)
+    if title.length>12
+      "<h4> #{title} </h4>".html_safe
+    else
+        "<h2> #{title} </h2>".html_safe
+    end
+  end
+
 
 end

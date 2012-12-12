@@ -10,6 +10,14 @@
  *= require_self
  *= require_tree .
 */
+@font-face {
+	font-family: brandolt;
+	src: url('/font/Demo_ConeriaScript.ttf');
+}
+@font-face {
+	font-family: brandoltFet;
+	src: url('/font/Demo_ConeriaScript.ttf');
+}
 
 
 /*.field_with_errors {
@@ -76,6 +84,7 @@
     text-align: center;
     margin-bottom: 6%;
     margin-top: 4%;
+    
 }
 
 .heading img {
@@ -88,17 +97,24 @@
 }
 
 .heading h2 {
+    font-family: brandolt;
     background-color: #FFFFFF;
     padding: 0 3px;
     display: inline;
-    text-transform : uppercase;
+    
+   // text-transform : uppercase;
+   
 }
 
+.heading h2 a{
+    color:#333333 ;
+}
 .heading h3 {
+    font-family: brandolt;
     background-color: #FFFFFF;
     padding: 0 3px;
     display: inline;
-    text-transform : uppercase;
+  //  text-transform : uppercase;
 }
 
 .custom_inline{
