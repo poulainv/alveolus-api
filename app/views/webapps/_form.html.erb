@@ -28,6 +28,11 @@
         <%= f.text_area :description, :class => "input-xxlarge" %>
       </div>
       <% if current_user.try(:admin?) %>
+
+        <div class="field">
+          Vidéo <%= f.text_field :video_url %>
+        </div>
+
         <div class="field">
           Validé <%= f.check_box :validate %>
         </div>

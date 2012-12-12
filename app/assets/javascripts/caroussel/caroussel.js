@@ -1,14 +1,27 @@
 $(document).ready(function(){
 
-// Si on veut faire apparaitre le caption seulement
-//  au passage de la souris sur l'image'
-        $(".carousel-caption").hide();
-        $(".item").mouseover(function () {
-            console.log("mousein");
-            $(".carousel-caption").show();
-        });
-        $(".item").mouseout(function () {
-            $(".carousel-caption").hide();
-        });
+    var settings = new Object();
+    settings.video = "#carousel-video";
+    settings.image = "#carousel-image";
+    settings.buttonVideo = ".carousel-video-button";
+    settings.carousel = "#carousel_main";
+    var websiteId;
+ 
+    $(settings.buttonVideo).click(function(){
+        websiteId = $(this).data('website');
+ 
+        if(!$(settings.video+''+websiteId).is(':visible')){
+            $(settings.image+''+websiteId).hide();
+            $(settings.video+''+websiteId).show();
+            $(settings.carousel).carousel('pause');
+        }
+//        else{
+//            $(settings.image+''+websiteId).show();
+//            $(settings.video+''+websiteId).hide();
+//            $(settings.carousel).carousel('play');
+//        }
+    });
+
+
 
 });
