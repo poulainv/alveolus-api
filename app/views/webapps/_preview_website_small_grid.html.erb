@@ -1,0 +1,45 @@
+<%#
+## Website preview for display on home
+%>
+
+<div class="thumbnail" style="height:190px;width:96%;">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span7">
+        <%= link_to image_tag(website.photo.url(:small), :style=>"margin-left:-15%;",:class =>"img-rounded", :size=>"240x100",:alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
+
+      </div>
+      <div class="span5">
+         <div class="row-fluid">
+          <div class="span12">
+            <strong><a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"><%= website.title %></a></strong>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <%=  render :partial => "shared/star_rating", :locals => { :n => website.average_rate }%>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <small style="font-size: 14px"> <%= tronc_caption website.caption %> </small>
+    </div>
+  </div>
+  <div class="row-fluid" style="margin-bottom:0%;">
+    <div class="span12">
+
+  <div class=" icon-tag" style="margin-top:2%;"></div>
+                <div class="label label-success" style="font-size:11px;"> <%= website.tags[0].name if website.tags[0] != nil %></div>
+
+                   <div class="label label-success" style="font-size:11px;"> <%= website.tags[1].name if website.tags[0] != nil %></div>
+
+    </div>
+  </div>
+</div>
