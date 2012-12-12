@@ -1,14 +1,12 @@
 <div class="tab-pane" id="pills-basic">
   <div class="row-fluid">
-    <div class="span9">
+    <div class="span12">
       <ul class="nav nav-pills" style="cursor:pointer">
         <li class="active"><a  data-toggle="tab" href="#tab_comments">Vos commentaires</a></li>
         <li><a   data-toggle="tab" href="#tab_suggestion">Vos suggestions</a></li>
          <li><a  data-toggle="tab" href="#tab_bookmark">Vos sites Web favoris</a></li>
+          <li><a  data-toggle="tab" href="#tab_option">Paramètres du compte</a></li>
       </ul>
-    </div>
-    <div class="span3">
-      <%= link_to  "Paramètre du compte",edit_user_path(current_user), :class=>"btn"  %>
     </div>
   </div>
 
@@ -45,6 +43,8 @@
       </div>
     </div>
 
+
+
      <div id="tab_bookmark" class="tab-pane">
       <legend>Mes sites Web favoris</legend>
       <div class="container-fluid" style="margin-top:5%;" id="tab_comments"">
@@ -58,6 +58,10 @@
              <% end %>
         </div>
       </div>
+    </div>
+
+     <div id="tab_option" class="tab-pane">
+      <%= render :partial => "users/edit", :locals => { :user => @user}  %>
     </div>
 
   </div>
