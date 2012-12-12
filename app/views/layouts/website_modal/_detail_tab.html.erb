@@ -6,7 +6,7 @@
   </div>
     <div class="row-fluid">
     <!-- URL -->
-    <a href="" target="_blank" id="detailWebsiteModalURL" class="websiteurl btn btn-link"> <div class="icon-ok-sign"></div> <%= website.url %></a>
+     <div class="icon-ok-sign"></div> <%= link_to  website.url, website.url ,:class=>"websiteurl", :target=>"_blank", :id=>"detailWebsiteModalURL" %>
   </div>
 </div>
 
