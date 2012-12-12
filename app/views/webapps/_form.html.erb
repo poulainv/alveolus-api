@@ -30,11 +30,11 @@
       <% if current_user.try(:admin?) %>
 
         <div class="field">
-          Vidéo <%= f.text_field :video_url %>
+          Identifiant viméo <%= f.text_field :vimeo_id, :placeholder=>"Optionnel" %>
         </div>
 
         <div class="field">
-          Validé <%= f.check_box :validate %>
+          Validation <%= f.check_box :validate %>
         </div>
 
         <div class="field">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212161243) do
+ActiveRecord::Schema.define(:version => 20121212210031) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20121212161243) do
     t.boolean  "suggested"
     t.integer  "nb_click_shared"
     t.integer  "user_id"
-    t.string   "video_url"
+    t.string   "vimeo_id"
   end
 
 end

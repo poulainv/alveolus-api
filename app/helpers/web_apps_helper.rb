@@ -26,5 +26,9 @@ module WebAppsHelper
     end
   end
 
+  def vimeo_url(id)
+    return "http://player.vimeo.com/video/#{id}"
+  end
+
 
 end

@@ -8,7 +8,7 @@ end
         <div class="container-fluid content_carousel"  style="border-radius: 5px 5px 5px 5px;">
           <div class="span6 part-image">
             <%= link_to image_tag(websites.photo.url(:caroussel),:alt => "image carousel", :id=>"carousel-image#{websites.id}",:class=>"img-polaroid") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>websites.id%>
-            <span id="carousel-video<%=websites.id%>" class="hide"><iframe  src="<%=websites.video_url%>" width="100%" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            <span id="carousel-video<%=websites.id%>" class="hide"><iframe  src="<%=vimeo_url(websites.vimeo_id)%>" width="100%" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
             </span>
 
           </div>
@@ -23,7 +23,7 @@ end
                 <div class="label label-success"> <%= websites.tags[1].name if websites.tags[1] != nil %></div>
               </div>
             </div>
-            <% if !websites.video_url.blank? %>
+            <% if !websites.vimeo_id.blank? %>
               <div class="row-fluid">
                 <div class="span12">
                 <i class="icon-play-circle custom_inline"></i><p style="cursor:pointer;"class="custom_inline carousel-video-button" data-website="<%=websites.id%>"> Lire la vidéo de présentation </p>
