@@ -93,7 +93,7 @@ class WebappsController < ApplicationController
       end
       # GET /webapps/
     else
-      @subtitle = "Tous les sites web"
+      @subtitle = "Tous les sites Web"
       @webapps = Webapp.validated
       @webapps_suggest = Webapp.suggested
       @webapps_top_recent = Webapp.recent(6)
@@ -112,7 +112,7 @@ class WebappsController < ApplicationController
   # GET /webapps/new
   def new
     @webapp = Webapp.new
-    @title = "Un site Web a proposé ?"
+    @title = "Un site Web à proposer ?"
     #If we want apply an other layout with this method : 
     render :layout => "pages"
   end
