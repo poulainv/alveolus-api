@@ -28,6 +28,8 @@ function PopupWebSite(){
     // Listener for website title click => open/show POPUP detail
     $(settings.websiteTitle).click(function(){
         $('.spinner').show();
+     
+      
         // Get website ID
         popup.current_comment_id = 0 ;
         popup.current_website_id = $(this).attr("websiteId");
