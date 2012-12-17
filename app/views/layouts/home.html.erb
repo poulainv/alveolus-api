@@ -10,21 +10,21 @@
 
   <body>
     <div style="background: url('/img/background-front.png') repeat; margin-bottom:2%;">
-    <%= render('layouts/skeleton/topbar') %>
-    <div class="span12 offset1" style="margin-top:2%;">
-      <%= render 'shared/flash_messages' %>
-    </div>
-    <div class="row-fluid main-title" style="margin-top:-1.5%;padding-top:1.5%;">
-      <div class="offset1 span10">
-        <h2>  Découvrez et partagez les projets innovants et créatifs du Web !
-        </h2>
+      <%= render('layouts/skeleton/topbar') %>
+      <div class="span12 offset1" style="margin-top:2%;">
+        <%= render 'shared/flash_messages' %>
       </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span10 offset1" style="/*background-image:url(/img/pattern_152.gif) ;  box-shadow: 4px 4px 10px 1px rgba(0,0,0,0.6);  margin-bottom: 0%;padding:0%;*/">
-        <%= render('layouts/caroussel/caroussel') %>
+      <div class="row-fluid main-title" style="margin-top:-1.5%;padding-top:1.5%;">
+        <div class="offset1 span10">
+          <h2>  Découvrez et partagez les projets innovants et créatifs du Web !
+          </h2>
+        </div>
       </div>
-    </div>
+      <div class="row-fluid">
+        <div class="span10 offset1" style="/*background-image:url(/img/pattern_152.gif) ;  box-shadow: 4px 4px 10px 1px rgba(0,0,0,0.6);  margin-bottom: 0%;padding:0%;*/">
+          <%= render('layouts/caroussel/caroussel') %>
+        </div>
+      </div>
     </div>
     <div class="container-fluid">
       <div class="row-fluid">
@@ -35,35 +35,34 @@
           <%= render('layouts/main_view/main_view') %>
           <div class="hero-unit custom_box_straight" style="margin-top:-2%;border:none">
             <div class="row-fluid">
-            <div class="span4">
-              <h2 style="text-align:center;">Construire</h2>
+              <div class="span4">
+                <h2 style="text-align:center;">Construire</h2>
 
-              <p>  Construisez EnjoyTheWeb en choisissant parmi les sites proposés ceux que vous souhaitez valider.</p>
-              <p><a href="/webapps?layout=true&order=unvalidated" class="btn btn-block btn-primary">Voter</a></p>
-            </div>
+                <p>  Construisez EnjoyTheWeb en choisissant parmi les sites proposés ceux que vous souhaitez valider.</p>
+                <p><a href="/webapps?layout=true&order=unvalidated" class="btn btn-block btn-primary">Voter</a></p>
+              </div>
 
 
-            <div class="span4">
-              <h2 style="text-align:center;">Partager</h2>
+              <div class="span4">
+                <h2 style="text-align:center;">Partager</h2>
+                <p>   Vous connaissez un site génial innovant ou créatif ? Proposez-le à la comunnauté et faites-le faire découvrir aux autres internautes.</p>
+                <p><a href="/suggestion" class="btn btn-block btn-primary">Suggérer</a></p>
+              </div>
 
-              <p>   Vous connaissez un site génial innovant ou créatif ? Proposez-le à la comunnauté et faites-le faire découvrir aux autres internautes.</p>
-              <p><a href="/suggestion" class="btn btn-block btn-primary">Suggérer</a></p>
-            </div>
+              <div class="span4">
+                <h2 style="text-align:center;">Nos valeurs</h2>
 
-                  <div class="span4">
-              <h2 style="text-align:center;">Nos valeurs</h2>
-
-              <p>  Pour en savoir plus sur le projet EnjoyTheWeb </p>
-              <p><a href="/about" class="btn btn-block btn-primary">En savoir plus</a></p>
-            </div>
+                <p>  Pour en savoir plus sur le projet EnjoyTheWeb </p>
+                <p><a href="/about" class="btn btn-block btn-primary">En savoir plus</a></p>
+              </div>
 
             </div>
           </div>
         </div>
       </div>
-       </div><!--/.fluid-container-->
-      <%= render 'layouts/skeleton/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+    </div><!--/.fluid-container-->
+    <%= render 'layouts/skeleton/footer' %>
+    <%= debug(params) if Rails.env.development? %>
 
   </body>
 </html>

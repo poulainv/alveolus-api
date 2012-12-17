@@ -122,7 +122,7 @@ class WebappsController < ApplicationController
     if @webapp = Webapp.find_by_id(params[:id])
       render :layout => false
       #      @webapp.image = @webapp.photo.url(:caroussel)
-      @webapp.increment_nb_click(:element => "detail")
+#      @webapp.increment_nb_click(:element => "detail")
       #      respond_to do |format|
       #        format.html
       #        format.json{
