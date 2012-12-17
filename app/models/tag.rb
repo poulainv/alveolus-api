@@ -10,9 +10,7 @@
 
 class Tag < ActiveRecord::Base
   attr_accessible :name,:tagAppRelations,:tagUserRelations
-
-  before_save  :lowcase_and_singularize
-
+  
   has_many :tagAppRelations, :foreign_key => "tag_id", :dependent => :destroy
   has_many :webapps, :through => :tagAppRelations, :source => :webapp
 
@@ -50,8 +48,4 @@ class Tag < ActiveRecord::Base
     self.tagAppRelations.length
   end
 
-
-  def lowcase_and_singularize
-    self.name = self.name.singularize.downcase
-  end
 end

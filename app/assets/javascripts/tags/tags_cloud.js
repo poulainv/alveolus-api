@@ -7,6 +7,7 @@ var Cloud = function(){
     settings.behaviorSelected = "websites";
     settings.radioWebsites = "#optionWeb";
     settings.radioTags = "#optionTag";
+
     this.keycuts_manager = (function(){
         $("body").keydown(function(event) {
            // alert(event.which);
@@ -49,9 +50,9 @@ var Cloud = function(){
             }).appendTo(tagCloud).popover({
                 'animation': 	false,
                 'placement': 	'right',
-                'html'      : true,
+                'html'      :         true,
                 'trigger'  : 	'manual',
-                'title'    :  'Sites Web associés',
+                'title'    :          'Websites associés',
                 'content'  : 	function(){
                     return $('#websitesCloud').html()
                 }
@@ -71,9 +72,7 @@ var Cloud = function(){
         tagElement =   $(tag);
         website.ajax_get_for_tag_id($(tag).attr('tagId'),function(msg){
             cloudtags.init_websites_list(msg);
-            
             tagElement.popover('show');
-            popupWebSite.main();
             popupClicked = true;
         });
     }
@@ -85,19 +84,21 @@ var Cloud = function(){
 
     this.init_websites_list = (function(websites){
 
-        var websiteCloud = $("#websitesCloud").html('');
-      for (x in websites)
+        var websiteCloud = $("#websitesCloud").html('')
+        console.log('Init websites cloud...');
+
+        for (x in websites)
         {
 
             var websitePreview =
-            "<div class='row-fluid  websiteTitle' websiteId='"+websites[x].id+"'>"+
-
-            "<div class='span5'>"+
-            "<img  src='"+websites[x].preview+"'</img>"+
+            "<div class='row-fluid'>"+
+            "<div class='container-fluid websitePreview'>"+
+            "<div class='span6'>"+
+            "<img src='"+websites[x].preview+"'</img>"+
             "</div>"+
-
-
-            "<div class='span7'><h5 class='btn btn-link'>"+
+            "<div class='span6'>"+
+            "<div class='row-fluid>"+
+            "<div class='span12 websiteTitle'><h5>"+
             websites[x].title+
             "</h5></div>"+
             "</div>"+
@@ -107,16 +108,15 @@ var Cloud = function(){
             //                                "</div>"+
             //                             "</div>"+
             "</div>"+
-
- 
+            "</div>"+
+            "</div>"+
             "<div class='line-separator-dashed'> </div>";
 
 
             websiteCloud.append(websitePreview);
-//  var popupWebSite = new PopupWebSite();
+
 
         }
-
     })
 
 
@@ -126,7 +126,6 @@ var Cloud = function(){
     var buttonDisplayed = false;
     $('body').click(function(){
         if(popupClicked){
-            delete popupWebSite ;
             $('.tagCloud').popover('hide');
         }
         if(buttonDisplayed){

@@ -1,5 +1,5 @@
 
-var popupWebSite;
+
 $(document).ready(function(){
     popupWebSite = new PopupWebSite();
 });
@@ -21,14 +21,14 @@ function PopupWebSite(){
     settings.star_rating_user = "#star_rating_user";
     settings.websiteTitle = ".websiteTitle";
     settings.facebook_like = "#nb-fb-like"
-    settings.facebookId = "";
+  
 
     this.current_website_id = 0 ;
     this.current_comment_id = 0 ;
     this.website_info = null;
-    
+
     // Listener for website title click => open/show POPUP detail
-    this.main = function(){$(settings.websiteTitle).click(function(){
+    $(settings.websiteTitle).click(function(){
         $('.spinner').show();
      
       
@@ -56,7 +56,7 @@ function PopupWebSite(){
         })
     });
 
-    };
+
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
 
@@ -115,11 +115,11 @@ function PopupWebSite(){
     };
 
     this.displayLikeFaceBook = function (){
-        settings.facebookId = $(settings.facebook_like).data('facebook-id');
-        if(settings.facebookId!=""){
-            facebookApi.ajax_get_for_name(settings.facebookId, function(msg){
-                $(settings.facebook_like).html(JSON.parse(msg.responseText).likes);
-            })}
+        facebookApi.ajax_get_for_name($(settings.facebook_like).data('facebook-id'), function(msg){
+        $(settings.facebook_like).html(JSON.parse(msg.responseText).likes);
+   //     $("#favicon-modal").attr('src',JSON.parse(msg.responseText).cover.source);
+
+            })
     };
 
     this.listener_bookmark = function (){
@@ -292,9 +292,6 @@ function PopupWebSite(){
         }
     }
 
-
-    this.main();
-    
 }
 
 
