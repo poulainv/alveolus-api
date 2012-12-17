@@ -43,6 +43,8 @@ a{
     min-height: 500px;
 }
 
+.modal-backdrop {background: #cccccc;}
+
 .hover_green:hover{
      cursor : pointer ;
       background-color :$custom_green_light_hover!important;
