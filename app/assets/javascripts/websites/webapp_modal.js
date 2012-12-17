@@ -10,7 +10,8 @@ function PopupWebSite(){
     var bookmarks = new Bookmarks();
     var tags = new Tags();
     var settings = new Object();
-    
+    var facebookApi = new Facebook_API();
+
     settings.bookmark_star = "#bookmark";
     settings.bookmarked = false ;
     settings.bookmark_image = "/img/star-on-big"
@@ -19,7 +20,8 @@ function PopupWebSite(){
     settings.messageCommentSaved = "#messageCommentSaved";
     settings.star_rating_user = "#star_rating_user";
     settings.websiteTitle = ".websiteTitle";
-
+    settings.facebook_like = "#nb-fb-like"
+  
 
     this.current_website_id = 0 ;
     this.current_comment_id = 0 ;
@@ -48,6 +50,7 @@ function PopupWebSite(){
             popup.listenerGooglePlusButton();
             popup.listenerUrl();
             popup.listener_bookmark();
+            popup.displayLikeFaceBook();
            
       
         })
@@ -111,7 +114,13 @@ function PopupWebSite(){
 
     };
 
+    this.displayLikeFaceBook = function (){
+        facebookApi.ajax_get_for_name($(settings.facebook_like).data('facebook-id'), function(msg){
+        $(settings.facebook_like).html(JSON.parse(msg.responseText).likes);
+   //     $("#favicon-modal").attr('src',JSON.parse(msg.responseText).cover.source);
 
+            })
+    };
 
     this.listener_bookmark = function (){
         //  Listener

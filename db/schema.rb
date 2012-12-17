@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212210031) do
+ActiveRecord::Schema.define(:version => 20121217142918) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -154,6 +154,9 @@ ActiveRecord::Schema.define(:version => 20121212210031) do
     t.integer  "nb_click_shared"
     t.integer  "user_id"
     t.string   "vimeo_id"
+    t.string   "facebook_id"
+    t.string   "twitter_id"
+    t.string   "gplus_id"
   end
 
 end

@@ -6,25 +6,34 @@
     <!-- Header for the popup detail -->
     <div class="row-fluid">
       <div class="span4">
-        <img src="http://www.google.com/s2/favicons?domain=<%=@webapp.url.slice(7,@webapp.url.length-8)%>" class="custom_inline" style="margin-bottom:7%;" alt="none" src=""></img>
-        <h3 class="custom_inline" ><%= @webapp.title %></h3>
-      </div> 
-      <div class="span2" style="margin-top:0.8%">
-        <span class="custom_inline">  <%=  render :partial => "shared/star_rating", :locals => { :n => @webapp.average_rate }%>  </span>
-        <span class="custom_inline badge badge-info"> <%= @webapp.average_rate.to_s.slice(0,3)%></span>
+        <% if @webapp.facebook_id.blank? %>
+          <% url_image =  "http://www.google.com/s2/favicons?domain#{@webapp.url.slice(7,@webapp.url.length-8)}"
+          size=20%>
+        <% else  %>
+          <% url_image = "https://graph.facebook.com/#{@webapp.facebook_id}/picture"
+          size=30%>
+        <% end %>
+        <img style="border-style:solid;" width="<%=size%>"  src="<%=url_image%>" class="custom_inline" style="margin-bottom:7%;" alt="none" src=""></img>
+
+        <h3 class="custom_inline" style="margin-left:6%;margin-bottom:-10%;" ><%= @webapp.title %></h3>
       </div>
-      <div class="span2 offset1" style="margin-top:0.8%">
-        <em>Nombre de vues :<%=  @webapp.nb_click_detail %></em>
+      <div class="span3" style="margin-top:0.8%">
+           <div class="icon-ok-sign"></div> <%= link_to  @webapp.url, @webapp.url ,:class=>"websiteurl", :target=>"_blank", :id=>"detailWebsiteModalURL" %>
+ 
       </div>
-      <div class="span2">
+      
+      <div class="offset1 span2">
         <img class="custom_inline" id="share_facebook" style="cursor:pointer;"  src="/img/facebook_32.png"></img>
         <img class="custom_inline" id="share_google" style="cursor:pointer;"  src="/img/google_plus_32.png"></img>
         <img class="custom_inline" id="share_twitter" style="cursor:pointer;" src="/img/twitter_32.png"></img>
-        <% if user_signed_in?
+       
+      </div>
+      <div class="span1">
+         <% if user_signed_in?
           if bookmarked?(current_user,@webapp)%>
-            <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-on-big.png"></img>
+            <img class="custom_inline" id="bookmark" style="cursor:pointer; " src="/img/star-on-big.png"></img>
           <%else%>
-            <img class="custom_inline" id="bookmark" style="cursor:pointer; margin-left: 2%;" src="/img/star-off-big.png"></img>
+            <img class="custom_inline" id="bookmark" style="cursor:pointer; " src="/img/star-off-big.png"></img>
           <%end
         end%>
       </div>
@@ -42,8 +51,32 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
+          <h5><i class=" icon-heart" style="margin-top:1%;" ></i>   Réseaux sociaux</h5>
+          <div class="row-fluid">
+            <img src="/img/fb-thumb.png" width="20"></img>  <span  id="nb-fb-like" data-facebook-id="<%=@webapp.facebook_id%>">Oops</span>
+          </div>
+          <div class="row-fluid">
+            <img src="/img/twitter-bird.png" width="35" style="margin-left:-6%;"></img><em>Bientôt...</em><span  id="nb-twitter-follow" data-twitter-id="<%=@webapp.twitter_id%>"></span>
+          </div>
+          <div class="row-fluid">
+            <img src="/img/gplus-red.png" width="20" ></img> <em> Bientôt...</em><span  id="nb-gplus-like" data-gplus-id="<%=@webapp.gplus_id%>"></span>
+          </div>
+          <div class="row-fluid" style="margin-top:6%;margin-bottom:6%;">
+            <div class="line-separator-dashed"></div></div>
+          <h5><i class=" icon-signal" style="margin-top:1%;" ></i>  Statistiques</h5>
+              <div class="row-fluid">
+             <span class="custom_inline"> <i class="icon icon-comment" title="Nombre de commentaires"></i> <%= @webapp.comments.length%>  <i class="icon icon-bookmark" title="Nombre de fois ajoutés en favoris"></i> <%= @webapp.nb_click_shared%></span>
+          </div>
+      
+          <div class="row-fluid">
+            <span class="custom_inline">  <%=  render :partial => "shared/star_rating", :locals => { :n => @webapp.average_rate }%>  </span>
+            <span class="custom_inline badge badge-info"> <%= @webapp.average_rate.to_s.slice(0,3)%></span>
+          </div>
 
-          <h3>  <span class="icon-tags" style="margin-top:5%;"></span> tags : </h3>
+          <div class="row-fluid" style="margin-top:6%;margin-bottom:6%;">
+            <div class="line-separator-dashed"></div></div>
+
+          <h5>  <span class="icon-tags" style="margin-top:2%;"></span> Tags  </h5>
           <%=  render :partial => "tags/show", :collection => @webapp.best_tags, :as => :tag %>
           <% if user_signed_in? %>
             <button id="addTagButton" class="btn btn-link btn-small" href="#"><i class="icon-plus-sign"></i> Proposer un tag </button>

@@ -4,19 +4,20 @@
     <!-- Caption -->
     <legend><h4 id="detailWebsiteModalCaption"><i class="icon-eye-open" style="margin-top: 0.5%"></i> <%= website.caption %></h4></legend>
   </div>
+  <div class="container-fluid">
     <div class="row-fluid">
-    <!-- URL -->
-     <div class="icon-ok-sign"></div> <%= link_to  website.url, website.url ,:class=>"websiteurl", :target=>"_blank", :id=>"detailWebsiteModalURL" %>
+      <div class="span6">
+      <h4>Description</h4>
+          <!-- Description -->
+    <p id="detailWebsiteModalDescription"> <%= website.description %></p>
+      </div>
+      <div class="span6">
+         <%= image_tag website.photo.url %>
+      </div>
+
+   </div>
+
   </div>
+    
 </div>
 
-<div class="container-fluid">
-  <div class="span6">
-    <br></br>
-    <!-- Description -->
-    <p id="detailWebsiteModalDescription"> <%= website.description %></p>
-  </div>
-  <div class="span6">
-    <%= image_tag website.photo.url %>
-  </div>
-</div>

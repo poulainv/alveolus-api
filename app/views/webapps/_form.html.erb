@@ -30,7 +30,19 @@
       <% if current_user.try(:admin?) %>
 
         <div class="field">
-          Identifiant viméo <%= f.text_field :vimeo_id, :placeholder=>"Optionnel" %>
+          Identifiant Vimeo <%= f.text_field :vimeo_id, :placeholder=>"Optionnel" %>
+        </div>
+
+       <div class="field">
+          Identifiant Facebook <%= f.text_field :facebook_id, :placeholder=>"Optionnel" %>
+        </div>
+
+       <div class="field">
+          Identifiant G+ <%= f.text_field :twitter_id, :placeholder=>"Optionnel" %>
+        </div>
+
+       <div class="field">
+          Identifiant Twitter <%= f.text_field :gplus_id, :placeholder=>"Optionnel" %>
         </div>
 
         <div class="field">
