@@ -1,3 +1,4 @@
+var popupWebSite;
 
 
 $(document).ready(function(){
@@ -28,34 +29,42 @@ function PopupWebSite(){
     this.website_info = null;
 
     // Listener for website title click => open/show POPUP detail
-    $(settings.websiteTitle).click(function(){
-        $('.spinner').show();
+    this.initialize = function(objectToListen){
+        if(objectToListen!=null){
+            settings.websiteTitle = objectToListen;
+        }
      
-      
-        // Get website ID
-        popup.current_comment_id = 0 ;
-        popup.current_website_id = $(this).attr("websiteId");
+        $(settings.websiteTitle).click(function(){
+        
+            console.log("ini");
+            $('.spinner').show();
 
-        $("#detailWebsiteModalTEST").load("/webapps/"+popup.current_website_id,null,function(){
-             $('.spinner').hide();
-             $(settings.modal).modal('show');
-            popup.listenerWebSiteTitle();
-            popup.listener_send_tag();
-            popup.initialize_buttons_tags();
-            popup.listener_edit_comment();
-            popup.listener_send_comment_put();
-            popup.listener_send_comment_post();
-            popup.listenerTwitterButton();
-            popup.listenerFacebookButton();
-            popup.listenerGooglePlusButton();
-            popup.listenerUrl();
-            popup.listener_bookmark();
-            popup.displayLikeFaceBook();
+    
+      
+            // Get website ID
+            popup.current_comment_id = 0 ;
+            popup.current_website_id = $(this).attr("websiteId");
+
+            $("#detailWebsiteModalTEST").load("/webapps/"+popup.current_website_id,null,function(){
+                $('.spinner').hide();
+                $(settings.modal).modal('show');
+                popup.listenerWebSiteTitle();
+                popup.listener_send_tag();
+                popup.initialize_buttons_tags();
+                popup.listener_edit_comment();
+                popup.listener_send_comment_put();
+                popup.listener_send_comment_post();
+                popup.listenerTwitterButton();
+                popup.listenerFacebookButton();
+                popup.listenerGooglePlusButton();
+                popup.listenerUrl();
+                popup.listener_bookmark();
+                popup.displayLikeFaceBook();
            
       
-        })
-    });
-
+            })
+        });
+    };
 
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
@@ -116,10 +125,10 @@ function PopupWebSite(){
 
     this.displayLikeFaceBook = function (){
         facebookApi.ajax_get_for_name($(settings.facebook_like).data('facebook-id'), function(msg){
-        $(settings.facebook_like).html(JSON.parse(msg.responseText).likes);
-   //     $("#favicon-modal").attr('src',JSON.parse(msg.responseText).cover.source);
+            $(settings.facebook_like).html(JSON.parse(msg.responseText).likes);
+        //     $("#favicon-modal").attr('src',JSON.parse(msg.responseText).cover.source);
 
-            })
+        })
     };
 
     this.listener_bookmark = function (){
@@ -291,6 +300,7 @@ function PopupWebSite(){
             return true;
         }
     }
+    this.initialize();
 
 }
 

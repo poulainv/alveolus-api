@@ -71,8 +71,10 @@ var Cloud = function(){
     this.displayWebsites = function(tag){
         tagElement =   $(tag);
         website.ajax_get_for_tag_id($(tag).attr('tagId'),function(msg){
+           
             cloudtags.init_websites_list(msg);
             tagElement.popover('show');
+             popupWebSite.initialize(".websitePr");
             popupClicked = true;
         });
     }
@@ -91,14 +93,13 @@ var Cloud = function(){
         {
 
             var websitePreview =
-            "<div class='row-fluid'>"+
-            "<div class='container-fluid websitePreview'>"+
+            "<div class='row-fluid websitePr' websiteId='"+websites[x].id+"'>"+
+
             "<div class='span6'>"+
             "<img src='"+websites[x].preview+"'</img>"+
             "</div>"+
             "<div class='span6'>"+
-            "<div class='row-fluid>"+
-            "<div class='span12 websiteTitle'><h5>"+
+            "<h5 class='btn btn-link'>"+
             websites[x].title+
             "</h5></div>"+
             "</div>"+
@@ -107,9 +108,7 @@ var Cloud = function(){
             //                                websites[x].caption+
             //                                "</div>"+
             //                             "</div>"+
-            "</div>"+
-            "</div>"+
-            "</div>"+
+
             "<div class='line-separator-dashed'> </div>";
 
 
