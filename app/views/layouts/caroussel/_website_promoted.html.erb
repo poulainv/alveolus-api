@@ -19,8 +19,8 @@ end
               </div>
               <div class="span5">
                 <div class=" icon-tag"></div>
-                <div class="label label-success"> <%= websites.tags[0].name if websites.tags[0] != nil %></div>
-                <div class="label label-success"> <%= websites.tags[1].name if websites.tags[1] != nil %></div>
+                <span class="label-tag"> <%= link_to websites.tags[0].name, tag_webapps_path(websites.tags[0]) if websites.tags[0] != nil %></span>
+                <span class="label-tag"> <%= link_to websites.tags[1].name, tag_webapps_path(websites.tags[1]) if websites.tags[1] != nil %></span>
               </div>
             </div>
             <% if !websites.vimeo_id.blank? %>

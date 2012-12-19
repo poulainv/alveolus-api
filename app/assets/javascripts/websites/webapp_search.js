@@ -26,36 +26,36 @@ $(document).ready(function(){
         $(settings.buttonList).addClass('disabled');
         $(settings.buttonGrid).removeClass('disabled');
         settings.typeDisplay='list';
-         loadPage();
+        loadPage();
     });
     $("#btn_sort_commented").click(function(){
-      settings.currentSorter= 'commented';
-       loadPage();
+        settings.currentSorter= 'commented';
+        loadPage();
     });
 
-      $("#btn_sort_random").click(function(){
-      settings.currentSorter= 'random';
-       loadPage();
+    $("#btn_sort_random").click(function(){
+        settings.currentSorter= 'random';
+        loadPage();
     });
 
-      $("#btn_sort_suggested").click(function(){
-      settings.currentSorter= 'suggested';
-       loadPage();
+    $("#btn_sort_suggested").click(function(){
+        settings.currentSorter= 'suggested';
+        loadPage();
     });
 
     $("#btn_sort_rated").click(function(){
         settings.currentSorter= 'rated';
-         loadPage();
+        loadPage();
     });
 
     $("#btn_sort_recent").click(function(){
-       settings.currentSorter= 'recent';
+        settings.currentSorter= 'recent';
         loadPage();
     });
 
     $("#btn_sort_trend").click(function(){
         settings.currentSorter= 'trend';
-         loadPage();
+        loadPage();
     });
 
     var changeTitle = function(txt){
@@ -63,25 +63,32 @@ $(document).ready(function(){
     }
 
     var loadPage = function(){
-            delete popupWebSite;
+        delete popupWebSite;
         $(settings.windowSearch).load(settings.searchUrl+'?order='+settings.currentSorter+'&layout='+ settings.typeDisplay,null,function(){
-           // When we redisplay new results by ajax, we have to re-excecute js code to display popup
-           popupWebSite = new PopupWebSite();
+            // When we redisplay new results by ajax, we have to re-excecute js code to display popup
+            popupWebSite = new PopupWebSite();
         });
         switch(settings.currentSorter){
             case "recent":
-                changeTitle("Nouveautés"); break;
+                changeTitle("Nouveautés");
+                break;
             case "commented":
-                changeTitle("Les plus commentés"); break;
+                changeTitle("Les plus commentés");
+                break;
             case "rated":
-                changeTitle("Les mieux notés");break;
+                changeTitle("Les mieux notés");
+                break;
             case "trend":
-                changeTitle("Les plus consultés"); break;
-                 case "suggested":
-                changeTitle("Notre séléction"); break;
-                 case "random":
-                changeTitle("Aléatoire"); break;
-                default : break;
+                changeTitle("Les plus consultés");
+                break;
+            case "suggested":
+                changeTitle("Notre séléction");
+                break;
+            case "random":
+                changeTitle("Aléatoire");
+                break;
+            default :
+                break;
         }
     }
 });

@@ -1,13 +1,13 @@
 
 
 <ul class="nav nav-list">
-  <li c><h4> <%= link_to "Les plus commentés", webapps_path(:order => "commented", :layout => "true") %></h4></li>
+  <li><h4> <%= link_to "Les plus commentés", webapps_path(:order => "commented", :layout => "true") %></h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_comment, :as=> :websites %>
   <%= link_to "Voir plus ", webapps_path(:order => "commented", :layout => "true") ,:class=>"offset7",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
-  <li c><h4> <%= link_to "Les plus consultés", webapps_path(:order => "trend", :layout => "true") %></h4></li>
+  <li><h4> <%= link_to "Les plus consultés", webapps_path(:order => "trend", :layout => "true") %></h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_trend, :as=> :websites %>
   <%= link_to "Voir plus ", webapps_path(:order => "trend", :layout => "true") ,:class=>"offset7", :style=>"color:#777777;"%><i class="icon-chevron-right"></i>
-  <li ><h4> <%= link_to "Les mieux notés", webapps_path(:order => "rated", :layout => "true") %></h4></li>
+  <li><h4> <%= link_to "Les mieux notés", webapps_path(:order => "rated", :layout => "true") %></h4></li>
   <%=  render :partial => "layouts/left_menu/top_websites", :collection => @webapps_top_rated, :as=> :websites %>
    <%= link_to "Voir plus ", webapps_path(:order => "rated", :layout => "true") ,:class=>"offset7",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
   <li ><h4><a href="">Les plus partagés</a></h4></li>

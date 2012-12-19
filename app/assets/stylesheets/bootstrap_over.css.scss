@@ -48,7 +48,7 @@ a{
 .hover_green:hover{
      cursor : pointer ;
       background-color :$custom_green_light_hover!important;
-      border-radius: 5px 5px 5px 5px;
+/*      border-radius: 5px 5px 5px 5px;*/
       color : black;
 }
 
@@ -58,6 +58,7 @@ a{
     border-top-width: 5px;
     border-top-color: $custom_blue;
     border-radius: 0px 20px 0 0px;
+    min-height: 500px;
     background-color: white;
 }
 
@@ -67,6 +68,7 @@ a{
     border-top-width: 5px;
     border-top-color: $custom_blue;
     background-color: white;
+    
 }
 
 .custom_tab{
@@ -101,4 +103,39 @@ a{
 .custom_tab .active a:hover{
     background-color: $custom_blue_hover;
     color:white;
+}
+
+.label-tag{
+  color:black;
+  background-color: #d5edca;
+  border-bottom:1px solid grey;
+  border-right:1px solid grey;
+  padding:3px 4px 3px 4px;
+  margin:2px 2px 2px 0;
+  text-decoration:none;
+  font-size:90%;
+  line-height:2.4;
+  white-space:nowrap;
+}
+
+.label-tag:hover{
+    background-color:#3E6D8E;
+    a{color:white;};
+    border-bottom:1px solid #37607D;
+    border-right:1px solid #37607D;
+    text-decoration:none;
+}
+
+
+.label-tag.small{
+      font-size:70%;
+}
+.label-tag.big{
+      font-size:110%;
+
+}
+
+.label-tag:hover{
+  text-decoration:none;
+        color:white;
 }

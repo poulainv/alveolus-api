@@ -2,8 +2,8 @@
 
 <% if website_counter==0 %>
   <h5 id="nbresult_search" style="margin-bottom: 5%"> <%=pluralize(@nb_results,"résultat")%>... </h5>
+  <hr>
   <div id="content">
-
     <ul id="websites_grid">
     <% end %>
 
@@ -32,7 +32,7 @@
               </div>
               <div class="row-fluid" >
                 <div class="span12">
-                  <small> <%= tronc_caption website.caption , 50 %> </small>
+                  <small> <%= tronc_caption website.caption , 80 %> </small>
                 </div>
               </div>
             </a>
@@ -44,8 +44,8 @@
 
 
     <% if website_counter==@nb_results-1 %>
-  
+
     </ul>
-  </div>
-  
+    </div>
+
 <% end %>
