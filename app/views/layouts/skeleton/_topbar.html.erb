@@ -43,7 +43,7 @@
         <li><%= link_to "Nos valeurs", about_path %></li>
         <li><%= link_to "Suggérer un site", suggestion_path %></li>
  
-        <li><%= link_to "Vote",  webapps_path(:layout=>"true",:order=>"unvalidated") %></li>
+        <li><%= link_to "Vote", vote_path %></li>
         <li><%= link_to "<i class='icon-random '></i> Aléatoire".html_safe, webapps_path(:layout=>"true",:order=>"random") %></li>
         <% if current_user.try(:admin?) %>
           <li class="dropdown">
