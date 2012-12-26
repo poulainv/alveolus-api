@@ -3,8 +3,8 @@
 %>
 
 
-<div class="row-fluid website">
-  <div class="container-fluid">
+<div class="row-fluid website" data-id="<%= website.id %>">
+
     <!--image-->
     <div class="span3">
       <div class="row-fluid">
@@ -15,18 +15,10 @@
 
       </div>
       <div class="row-fluid" style="margin-top:5%;">
-        <div class=" span5">
-          <span class="score_voting"> <img src="/img/smile_face_medium.png"></img> <%=  website.reputation_for(:votes).to_i %> </span>
-
+        <div class="offset2 span10">
+          <img src="/img/smile_face_medium.png"></img><span class="score_voting_up">  <%=  website.count_positive%> </span>
+          <img src="/img/sad_face_medium.png"></img><span class="score_voting_down">  <%=  website.count_negative%> </span>
         </div>
-        <% if user_signed_in?  %>
-          <div class="offset2 span5">
-            <%= link_to "<div class='icon-thumbs-up icon-inverse'></div>".html_safe, vote_webapp_path(website, type: "up"), method: "post", :class => "btn btn-success " %>
-            <%= link_to "<div class='icon-thumbs-down'></div>".html_safe, vote_webapp_path(website, type: "down"), method: "post", :class => "btn btn-warning" %>
-          </div>
-        <% else %>
-          <%= render :partial=>"shared/message_please_sign_in" %>
-        <% end %>
       </div>
       <div class="row-fluid" style="margin-top:5%;">
 
@@ -40,17 +32,17 @@
             <dl>
               <dt>Proposé par :</dt>
               <dd>
-              <% if website.user.avatar? %>
-                <%= image_tag website.user.avatar.url(:mini), :class=>"img img-circle", :size=>"35x35" %>
-              <% else %>
-                <%= image_tag "/img/avatar.jpg", :class=>"img img-circle", :size=>"35x35" %>
-              <%end%>
-              <% if website.user.pseudo? %>
-                <%= website.user.pseudo%>
-              <% else %>
-                user<%=  website.user.id %>
-              <%end%> </dd>
-              </dl>
+                <% if website.user.avatar? %>
+                  <%= image_tag website.user.avatar.url(:mini), :class=>"img img-circle", :size=>"35x35" %>
+                <% else %>
+                  <%= image_tag "/img/avatar.jpg", :class=>"img img-circle", :size=>"35x35" %>
+                <%end%>
+                <% if website.user.pseudo? %>
+                  <%= website.user.pseudo%>
+                <% else %>
+                  user<%=  website.user.id %>
+                <%end%> </dd>
+            </dl>
           </div>
         <% end %>
       </div>
@@ -64,8 +56,15 @@
         <dd> <%= website.title %></dd>
         <dt style="margin-top:5%;">Adresse</dt>
         <span> <%= link_to website.url ,website.url,:class=>"btn btn-link btn-large" %></span>
-
       </dl>
+
+        <% if user_signed_in?  %>
+            <%= link_to "<div class='icon-thumbs-up icon-inverse'></div>".html_safe, vote_webapp_path(website, type: "up"), method: "post", :class => "btn btn-success ajax_trigger btn-up #{manage_button_up_vote(website)}", :remote => true %>
+            <%= link_to "<div class='icon-thumbs-down'></div>".html_safe, vote_webapp_path(website, type: "down"), method: "post", :class => "btn btn-warning ajax_trigger btn-down #{manage_button_down_vote(website)}", :remote => true %>
+        <% else %>
+          <%= render :partial=>"shared/message_please_sign_in" %>
+        <% end %>
+      <span class="msg-voting hide">C'est noté</span>
     </div>
     <div class="span5">
 
@@ -75,9 +74,8 @@
         <dt style="margin-top:5%;">Description</dt>
         <dd> <%= website.description %></dd>
       </dl>
-
+      
     </div>
   </div>
 
-</div>
 

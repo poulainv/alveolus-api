@@ -68,7 +68,6 @@ class Webapp < ActiveRecord::Base
   @@score_for_validation = 5
   has_reputation :votes, source: :user, aggregated_by: :sum
 
-   
   def score_for_validation
     @@score_for_validation
   end
@@ -137,6 +136,18 @@ class Webapp < ActiveRecord::Base
   ## Getter virtual attributes ##
   ###############################
 
+  def count_positive
+    self.evaluations.where{(value == "1") }.length
+  end
+
+  def count_negative
+    self.evaluations.where{(value == "-1") }.length
+  end
+
+  def vote_user(user)
+    return "up" if evaluations.where{(source_id == 2) }.first.value == 1
+    return "down"
+  end
   
   def nb_rating
     self.comments.all.length
@@ -146,7 +157,6 @@ class Webapp < ActiveRecord::Base
     n_best_tags(5)
   end
 
-
   def preview
     self.photo.url(:small)
   end
@@ -154,11 +164,6 @@ class Webapp < ActiveRecord::Base
   def reviews
     comments.commented.to_json(:include => :user)
   end
-
- 
-
-
-
 
   #######################
   ## Top sites Methods ##

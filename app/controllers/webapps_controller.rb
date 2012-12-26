@@ -201,7 +201,7 @@ class WebappsController < ApplicationController
     if(@webapp.reputation_for(:votes)>@webapp.score_for_validation)
       @webapp.update_attribute("validate", "true")
     end
-    redirect_to webapps_path(:order=>"unvalidated", :layout=>"true"), notice: "Merci pour votre vote !"
+     render :json => @webapp.to_json(:methods => %w(count_negative count_positive))
   end
 
 
