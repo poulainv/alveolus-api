@@ -12,6 +12,9 @@ body {
     zoom : 90%;
     padding-top: 60px;
     background-image: url(/img/bgnoise_lg.jpg);
+    max-width : 1450px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 a{
@@ -35,12 +38,23 @@ a{
 #website-modal {
     width:80%;
     /* Should be : -width/2 */
-    margin: -330px 0 0 -570px;
+    margin: -45% 0 0 -40%;
+
+    
 }
+
+
+@media screen and (max-width: 1200px) {
+       .hidden-small-screen{
+        display:none;
+}
+}
+
 
 #website-modal .modal-body {
     max-height: 100px;
     min-height: 500px;
+
 }
 
 .modal-backdrop {background: #cccccc;}

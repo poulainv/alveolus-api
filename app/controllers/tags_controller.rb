@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tags = Tag.used
+    @tags = Tag.most_used(30)
     respond_to do |format|
       format.html
       format.json{

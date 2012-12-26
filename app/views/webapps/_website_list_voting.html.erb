@@ -8,7 +8,7 @@
     <!--image-->
     <div class="span3">
       <div class="row-fluid">
-        <%= link_to image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
+        <%= link_to image_tag(website.photo.url(:small), :class =>"img-rounded", :alt => "image site"),"#", :target=>"_blank"%>
       </div>
 
       <div class="row-fluid" style="margin-top:5%;">
@@ -55,7 +55,7 @@
         <dt>Titre</dt>
         <dd> <%= website.title %></dd>
         <dt style="margin-top:5%;">Adresse</dt>
-        <span> <%= link_to website.url ,website.url,:class=>"btn btn-link btn-large" %></span>
+        <span> <%= link_to website.url ,website.url,:class=>"btn btn-link btn-large", :target=>"_blank" %></span>
       </dl>
 
         <% if user_signed_in?  %>
@@ -64,7 +64,9 @@
         <% else %>
           <%= render :partial=>"shared/message_please_sign_in" %>
         <% end %>
-      <span class="msg-voting hide">C'est noté</span>
+     
+        <img class="img-spinner" style="display:none;" src="/img/ajax-loader.gif" alt="Loading"/>
+      <span class="msg-voting hide">C'est noté !</span>
     </div>
     <div class="span5">
 

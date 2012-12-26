@@ -123,7 +123,7 @@ class Webapp < ActiveRecord::Base
   end
 
   def self.tagged_with(name)
-    Tag.find_by_name!(name).webapps
+    Tag.find_by_name!(name).webapps.validated
   end
 
   ## Best tag for this web app

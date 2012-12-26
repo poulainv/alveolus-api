@@ -39,12 +39,12 @@
 
 
       <ul class="nav">
-        <li class="active"><%= link_to " <i class='icon-home'></i>".html_safe, root_path%></li>
-        <li><%= link_to "Nos valeurs", about_path %></li>
-        <li><%= link_to "Suggérer un site", suggestion_path %></li>
+        <li id="top-home" class="active"><%= link_to " <i class='icon-home'></i>".html_safe, root_path%></li>
+        <li id="top-valeurs"><%= link_to "Nos valeurs", about_path%></li>
+        <li id="top-suggestion" ><%= link_to "Suggérer un site", suggestion_path %></li>
  
-        <li><%= link_to "Vote", vote_path %></li>
-        <li><%= link_to "<i class='icon-random '></i> Aléatoire".html_safe, webapps_path(:layout=>"true",:order=>"random") %></li>
+        <li id="top-vote"><%= link_to "Vote", vote_path %></li>
+        <li id="top-aleatoire" class="hidden-small-screen"><%= link_to "<i class='icon-random '></i> Aléatoire".html_safe, webapps_path(:layout=>"true",:order=>"random") %></li>
         <% if current_user.try(:admin?) %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admininistration<b class="caret"></b></a>

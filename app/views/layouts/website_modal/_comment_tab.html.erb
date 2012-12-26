@@ -3,7 +3,7 @@
   <div class="row-fluid">
     <div class="span7">
 
-      <h4> <div class="icon-comment" style="margin-top:1%"></div>  Commentaires : </h4>
+      <h4> <div class="icon-comment" style="margin-top:1%"></div> Commentaires (<%=comments.length%>) </h4>
       <div class="line-separator-dashed"></div>
       <div id="detailWebsiteModalComments">
         <%=  render :partial => "comments/index", :collection => comments, :as => :comments %>
