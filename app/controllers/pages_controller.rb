@@ -3,6 +3,10 @@ class PagesController < ApplicationController
   	@titre = "A propos"
   end
 
+  def contact
+    
+  end
+
   def faq
   	@titre = "FAQ"
   end

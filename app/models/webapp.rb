@@ -145,7 +145,7 @@ class Webapp < ActiveRecord::Base
   end
 
   def vote_user(user)
-    return "up" if evaluations.where{(source_id == 2) }.first.value == 1
+    return "up" if evaluations.where{(source_id == user.id) }.first.try(:value) == 1
     return "down"
   end
   

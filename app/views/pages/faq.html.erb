@@ -1,0 +1,38 @@
+
+<h1>F.A.Q</h1><br>
+
+<legend> Quels sites Web EnjoyTheWeb veut référencer ? </legend>
+La vocation d'EnjoyTheWeb est d'être le catalogue des sites internet innovants, dont les services
+favorisent de près ou de loin :
+<ul>
+  <li>
+    Le partage et la collaboration entre individus
+  </li>
+  <li>
+    Le transfert et le partage des connaissances et des données (Open Data)
+  </li>
+  <li>
+    Le développement durable
+  </li>
+</ul>
+
+<legend>De quelle façon puis-je contribuer ?</legend>
+En vous inscrivant vous pourrez :
+<ul>
+  <li>
+    Noter, commenter, partager sur vos réseaux sociaux et bookmarker tous les sites Web disponibles
+  </li>
+  <li>
+    Proposer de nouveau sites Web via la page : <%= link_to "Suggérer un site", suggestion_path, :style=>"btn btn-link" %>
+  </li>
+  <li>
+    Modérer les suggestions des autres utilisateurs en votant via la page : <%= link_to "Vote", vote_path, :style=>"btn btn-link" %>
+  </li>
+</ul>
+
+<legend>Comment insérer une vidéo de présentation à mon site Web ?</legend>
+Pour l'instant, la vidéo doit être hébergée par Vimeo. Lors de la suggestion du site Web, fournissez l'identifiant
+Vimeo de votre vidéo (vous pouvez aisément la retrouver dans l'URL du navigateur).
+
+<legend>Comment me désinscrire ?</legend>
+Vous pouvez vous désinscrire dans la page <%= link_to "Mon profil", user_path(current_user) %>, puis dans l'onglet <em>Paramètre du compte</em>

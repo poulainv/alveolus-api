@@ -5,18 +5,18 @@
   <div class="container">
     <div class="row-fluid">
       <div class="span3 offset2">
-        <h4> Qui sommes-nous ? </h4>
+        <h4> Présentation </h4>
         <ul>
           <li> <%= link_to "Nos valeurs", pages_about_path %> </li>
           <li> L'équipe </li>
-          <li> F.A.Q </li>
+          <li> <%= link_to "F.A.Q", faq_path %> </li>
         </ul>
 
       </div><!--/span-->
       <div class="span3">
         <h4> Contactez-nous </h4>
         <ul>
-          <li> Promouvoir votre site </li>
+          <li> <%= link_to "Contact", contact_path %> </li>
           <li><a class="feedback_link" href="#"> Signaler un bug </a></li>
           <li><a class="feedback_link" href="#"> Un commentaire ? </a></li>
         </ul>
