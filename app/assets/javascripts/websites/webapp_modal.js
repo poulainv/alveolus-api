@@ -3,6 +3,7 @@ var popupWebSite;
 
 $(document).ready(function(){
     popupWebSite = new PopupWebSite();
+    
 });
 
 function PopupWebSite(){
@@ -22,7 +23,7 @@ function PopupWebSite(){
     settings.star_rating_user = "#star_rating_user";
     settings.websiteTitle = ".websiteTitle";
     settings.facebook_like = "#nb-fb-like"
-  
+
 
     this.current_website_id = 0 ;
     this.current_comment_id = 0 ;
@@ -33,48 +34,63 @@ function PopupWebSite(){
         if(objectToListen!=null){
             settings.websiteTitle = objectToListen;
         }
-     
-        $(settings.websiteTitle).click(function(){
-        
-            console.log("ini");
-            $('.spinner').show();
 
-    
-      
-            // Get website ID
+        $(settings.websiteTitle).click(function(){
             popup.current_comment_id = 0 ;
             popup.current_website_id = $(this).attr("websiteId");
-
-            $("#detailWebsiteModalTEST").load("/webapps/"+popup.current_website_id,null,function(){
-                $('.spinner').hide();
-                $(settings.modal).modal('show');
-                popup.listenerWebSiteTitle();
-                popup.listener_send_tag();
-                popup.initialize_buttons_tags();
-                popup.listener_edit_comment();
-                popup.listener_send_comment_put();
-                popup.listener_send_comment_post();
-                popup.listenerTwitterButton();
-                popup.listenerFacebookButton();
-                popup.listenerGooglePlusButton();
-                popup.listenerUrl();
-                popup.listener_bookmark();
-                popup.displayLikeFaceBook();
-           
-      
-            })
+            popup.start();
         });
+        
+      
     };
 
+
+    this.start = function(){
+        console.log("init");
+        $('.spinner').show();
+        // Get website ID
+        $("#detailWebsiteModalTEST").load("/webapps/"+popup.current_website_id,null,function(){
+            $('.spinner').hide();
+            $(settings.modal).modal('show');
+            popup.listenerWebSiteTitle();
+            popup.listener_send_tag();
+            popup.initialize_buttons_tags();
+            popup.listener_edit_comment();
+            popup.listener_send_comment_put();
+            popup.listener_send_comment_post();
+            popup.listenerTwitterButton();
+            popup.listenerFacebookButton();
+            popup.listenerGooglePlusButton();
+            popup.listenerUrl();
+            popup.listener_bookmark();
+            popup.displayLikeFaceBook();
+        })
+    }
+
+    this.trigger_url = function(){
+        // Trigger to access popup directly with url
+        // like http://localhost:3000/webapps?title=Duolingo
+        var url = "/webapps?title=";
+        var href = window.location.href;
+        var index = href.indexOf(url);
+        if(index!=-1){
+            var websites = new Websites();
+            var title = href.slice(index+url.length, href.length);
+            websites.ajax_get_by_title(title,function(msg){
+
+                popup.current_comment_id = 0 ;
+                popup.current_website_id = msg[0].id;
+                popup.start();
+            })
+        }
+    }
     // Script to excecute when open popup to update info
     this.listenerWebSiteTitle = function(){
 
         // Init star rating
         popup.init_star_rating();
-        
         $(settings.messageTagSaved).hide();
         $(settings.messageCommentSaved).hide();
-
         this.ajax_get_comment_for_current_user = (function(){
             comments.ajax_get_by_website_id_for_user_sign_in(popup.current_website_id,1 ,function(msg){
                 popup.initialize_own_comment(msg);
@@ -82,7 +98,7 @@ function PopupWebSite(){
         })();
     }
 
-    
+
     this.listenerFacebookButton = function (){
         console.log("lister FB");
         $('#share_facebook').click(function(){
@@ -171,7 +187,7 @@ function PopupWebSite(){
                 alert("Etes-vous sûr que c'est un tag correct ?")
             }
         });
-        
+
         $("#addTagButton").mouseover(function () {
             $("#addTagField").show();
             $("#addTagButton").hide();
@@ -187,7 +203,7 @@ function PopupWebSite(){
             console.log('click add new comment')
             if(popup.check_star_rating(newRating) == false) return;
             comments.ajax_post(popup.current_website_id, newRating,newComment,function(msg){
-      
+
                 $("#detailWebsiteModalComments").html(msg)
             });
             $("#messageCommentSaved").show();
@@ -301,6 +317,7 @@ function PopupWebSite(){
         }
     }
     this.initialize();
+    this.trigger_url();
 
 }
 

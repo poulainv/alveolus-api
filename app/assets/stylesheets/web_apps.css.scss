@@ -36,10 +36,14 @@ margin-bottom: 1%;
 
 .websites .thumbnail{
     height : 300px;
+    border-style: solid;
+    border-color: #9bd290;
+    border-width: 3px;
 /*    border-style: none;*/
      box-shadow: 4px 4px 10px -2px rgba(0,0,0,0.5);
        // background-image: url(/img/az_subtle.png);
             background-color : #f6faf5;
+   
 }
 
 .websites .thumbnail img{

@@ -40,14 +40,14 @@ a{
     /* Should be : -width/2 */
     margin: -45% 0 0 -40%;
 
-    
+
 }
 
 
 @media screen and (max-width: 1200px) {
-       .hidden-small-screen{
+    .hidden-small-screen{
         display:none;
-}
+    }
 }
 
 
@@ -60,10 +60,10 @@ a{
 .modal-backdrop {background: #cccccc;}
 
 .hover_green:hover{
-     cursor : pointer ;
-      background-color :$custom_green_light_hover!important;
-/*      border-radius: 5px 5px 5px 5px;*/
-      color : black;
+    cursor : pointer ;
+    background-color :$custom_green_light_hover!important;
+    /*      border-radius: 5px 5px 5px 5px;*/
+    color : black;
 }
 
 .custom_box{
@@ -82,7 +82,7 @@ a{
     border-top-width: 5px;
     border-top-color: $custom_blue;
     background-color: white;
-    
+
 }
 
 .custom_tab{
@@ -99,7 +99,7 @@ a{
     border-radius: 0px 0px 0px 0px;
     height:18px;
 
-    
+
 }
 
 .custom_tab a:hover{
@@ -120,36 +120,38 @@ a{
 }
 
 .label-tag{
-  color:black;
-  background-color: #d5e4f4;
-  border-bottom:1px solid grey;
-  border-right:1px solid grey;
-  padding:3px 4px 3px 4px;
-  margin:2px 2px 2px 0;
-  text-decoration:none;
-  font-size:90%;
-  line-height:2.4;
-  white-space:nowrap;
+    color:black;
+    background-color: #d5e4f4;
+    border-bottom:1px solid grey;
+    border-right:1px solid grey;
+    padding:3px 4px 3px 4px;
+    margin:2px 2px 2px 0;
+    text-decoration:none;
+    font-style:italic;
+    font-size:90%;
+    line-height:2.4;
+    white-space:nowrap;
 }
 
 .label-tag:hover{
     background-color:#3E6D8E;
     a{color:white;};
-    border-bottom:1px solid #37607D;
-    border-right:1px solid #37607D;
-    text-decoration:none;
+border-bottom:1px solid #37607D;
+border-right:1px solid #37607D;
+text-decoration:none;
 }
 
 
 .label-tag.small{
-      font-size:70%;
+    font-size:70%;
 }
 .label-tag.big{
-      font-size:110%;
+    font-size:110%;
+    font-weight:lighter;
 
 }
 
 .label-tag:hover{
-  text-decoration:none;
-        color:white;
+    text-decoration:none;
+    color:white;
 }
