@@ -126,7 +126,8 @@
   <%  if user_signed_in? %>
     <div class="modal-footer">
       <%= link_to "Edit", edit_webapp_path(@webapp),:class=>"btn" %>
-  <%#*<a class="btn" id="detailWebsiteModalDelete" href="">Delete</a>%>
-    </div>
+  <%= link_to "Delete", webapp_path(@webapp),:data => { :confirm => "Are you sure?" }, :method => :delete,:class=>"btn" %>
+    </div> 
+
   <%  end %>
 </div>

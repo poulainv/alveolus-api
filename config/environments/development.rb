@@ -40,7 +40,7 @@ EnjoyTheWeb::Application.configure do
 
   ## Config paperclip on local 
   PAPERCLIP_STORAGE_WEBAPP = {
-    :styles => { :caroussel => "550x350!", :small => "222x150!"}
+    :styles => { :caroussel => "550x350!", :small => "240x160!"}
   }
 
    PAPERCLIP_STORAGE_AVATAR = {

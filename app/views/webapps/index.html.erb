@@ -3,21 +3,21 @@
 <div class="heading">
 <h3> <%= link_to "Nouveautés", webapps_path(:order => "recent", :layout => "true") %></h3>
   </div>
-<div class="websites">
+<div class="websites-box">
 
   <ul class="thumbnails">
-    <% 3.times do |i| %>
-      <li class="span4">
-        <%=  render :partial => "webapps/preview_website_small_grid", :locals => { :website => @webapps_top_recent[i] }%>
+    <% 2.times do |i| %>
+      <li class="span6">
+        <%=  render :partial => "webapps/preview_website_box", :locals => { :website => @webapps_top_recent[i] }%>
       </li>
     <%end%>
   </ul>
 
 
   <ul class="thumbnails">
-    <% 3.times do |i| %>
-      <li class="span4">
-        <%=  render :partial => "webapps/preview_website_small_grid", :locals => { :website => @webapps_top_recent[i+3] }%>
+    <% 2.times do |i| %>
+      <li class="span6">
+        <%=  render :partial => "webapps/preview_website_box", :locals => { :website => @webapps_top_recent[i+3] }%>
       </li>
     <%end%>
   </ul>

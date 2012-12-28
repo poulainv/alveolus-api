@@ -15,22 +15,15 @@ Webapp.delete_all
 Tag.delete_all
 TagAppRelation.delete_all
 
-User.create( :email => "roger.federer@gmail.com",
- :password => "nadal90")
-User.create( :email => "roger.federer@gmail.com",
- :password => "nadal90")
-User.create( :email => "roger.federer@gmail.com",
- :password => "nadal90")
-
 Webapp.create( :title =>'Babyloan',
-  :caption => 'Le site des microcrédits solidaires',
+  :caption => 'Le site des microcrédits solidaires. C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-entrepreneurs de sortir de la précarité grâce au fruit de leur travail.',
   :description => 'Babyloan est le premier site Européen de microcrédits solidaires
 C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-entrepreneurs de sortir de la précarité grâce au fruit de leur travail.',
   :url => 'http://www.babyloan.org/',
   :validate => true,
   :nb_click_preview => 23,
   :nb_click_detail => 43,
-  :nb_click_url => 13 ).add_tags(["microcredit","solidarite","pret"],User.create( :email => "vincent.poulain2@gmail.com",
+  :nb_click_url => 13 ).add_tags(["microcredit","solidarite","pret","financement"],User.create( :email => "vincent.poulain2@gmail.com",
   :password => "vincent", :admin => true))
            
 

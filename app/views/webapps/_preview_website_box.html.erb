@@ -1,0 +1,48 @@
+<div class="thumbnail" style="height:235px;width:96%;">
+
+  <div class="row-fluid">
+    <div class="span6">
+      <%= link_to image_tag(website.photo.url(:small), :style=>"margin-left:0;",:class =>"img", :size=>"240x100",:alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
+    </div>
+
+    <div class="span6" style="margin-left:2%;">
+      <div class="row-fluid">
+        <div class="span12">
+          <a class="websiteTitle" websiteId="<%= website.id %>" href="" data-toggle="modal"> <%=display_title(website.title,true)%></a>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <span class="custom_inline"> <%=  render :partial => "shared/star_rating", :locals => { :n => website.average_rate }%></span>
+          <span class="custom_inline badge badge-info"> <%= website.average_rate.to_s.slice(0,3)%></span>
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <small><i class="icon-comment" style="margin-top:2%;"></i> <%= website.comments.length %></small>
+          <% if !website.vimeo_id.blank? %>
+            <div class="icon-video" title="Vidéo de présentation disponible" style="margin-top:2%;">  <i class="icon-camera"></i></div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption" style="height:52%;width:95%;">
+    <div class="row-fluid">
+      <div class="span12">
+        <p style="font-size: 80%;">    <i class=" icon-eye-open"></i> <%= website.caption %> </p>
+      </div>
+    </div>
+
+    <div class="row-fluid" style="margin-bottom:0%;">
+      <div class="span12">
+        <div class=" icon-tag" style="margin-top:2%;"></div>
+        <span class="label-tag small"> <%= link_to website.tags[0].name, tag_webapps_path(website.tags[0]), :title=>website.tags[0].name if website.tags[0] != nil %></span>
+        <span class="label-tag small"> <%= link_to website.tags[1].name, tag_webapps_path(website.tags[1]), :title=>website.tags[1].name if website.tags[0] != nil %></span>
+      </div>
+
+    </div>
+  </div>
+</div>
