@@ -1,9 +1,8 @@
 <!-- Home Page, display website : NOUVEAUTE / SUGGESTION EN GRID -->
 
-
-<h3 style="font-weight: lighter;background-color:   #669900;margin-bottom: 3%; text-align:center;"> <%= link_to "Nouveautés", webapps_path(:order => "recent", :layout => "true"),:style=>"color:black;" %></h3>
-  <%#*cccc00%>
-
+<div class="heading">
+<h3> <%= link_to "Nouveautés", webapps_path(:order => "recent", :layout => "true") %></h3>
+  </div>
 <div class="websites">
 
   <ul class="thumbnails">
@@ -25,9 +24,10 @@
 
   <%= link_to "Voir plus ", webapps_path(:order => "recent", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
 
-
-     <h3 style="background-color: #cccc00; margin-bottom: 3%;text-align:center;"><%= link_to "Sélection", webapps_path(:order => "suggested", :layout => "true") %>
-      </h3> 
+  <div class="heading">
+     <h3><%= link_to "Sélection", webapps_path(:order => "suggested", :layout => "true") %>
+      </h3>
+    </div>
   <ul class="thumbnails">
     <% 3.times do |i|
       if( i<@webapps_suggest.length) %>

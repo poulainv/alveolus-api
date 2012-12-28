@@ -106,23 +106,27 @@
 }
 
 .heading h2 {
-    font-family: brandolt;
-    background-color: #FFFFFF;
-    padding: 0 3px;
-    display: inline;
-
-   
+  font-weight:  lighter;
+  background-color:#7fc04c;
+  margin-bottom: 3%;
+  text-align:center;
 }
 
 .heading h2 a{
     color:#333333 ;
 }
 .heading h3 {
-    font-family: brandolt;
+/*    font-family: brandolt;
     background-color: #FFFFFF;
     padding: 0 3px;
-    display: inline;
+    display: inline;*/
   //  text-transform : uppercase;
+  font-weight:  lighter;
+  background-color:#7fc04c;
+  margin-bottom: 3%;
+  text-align:center;
+   box-shadow: 4px 4px 2px -2px rgba(0,0,0,0.5);
+  
 }
 
 .custom_inline{
