@@ -1,0 +1,17 @@
+<div class="heading">
+<h3 style="background-color:#cb6262"> <%= link_to "Nouveautés", webapps_path(:order => "recent", :layout => "true") %></h3>
+  </div>
+<div class="websites-box">
+  <% index = -1%>
+<%  5.times do |i|  %>
+  <ul class="thumbnails">
+    <% 2.times do |j| %>
+      <li class="span6">
+        <%=  render :partial => "webapps/preview_website_box", :locals => { :website => @webapps_top_recent[index=index+1] }%>
+      </li>
+    <%end%>
+  </ul>
+
+    <%end%>
+
+</div>

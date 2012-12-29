@@ -50,4 +50,14 @@ module WebAppsHelper
       return "disabled"
     end
   end
+
+  def websites_by_tag(tag)
+    webapps = []
+    tags = Tag.where{(name =~ "%#{tag}%")}
+    tags.each do |tag|
+      webapps += tag.webapps
+    end
+    return webapps = webapps.uniq.sort! { |a,b| b.average_rate  <=> a.average_rate}
+
+  end
 end

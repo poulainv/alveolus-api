@@ -102,7 +102,7 @@ class WebappsController < ApplicationController
     @subtitle = "Tous les sites Web"
     @webapps = Webapp.validated
     @webapps_suggest = Webapp.suggested
-    @webapps_top_recent = Webapp.recent(6)
+    @webapps_top_recent = Webapp.recent(10)
     respond_to do |format|
       format.html {
         render :layout => "home"
@@ -127,15 +127,6 @@ end
 def show
   if @webapp = Webapp.find_by_id(params[:id])
     render :layout => false
-    #      @webapp.image = @webapp.photo.url(:caroussel)
-    #      @webapp.increment_nb_click(:element => "detail")
-    #      respond_to do |format|
-    #        format.html
-    #        format.json{
-    #          ## Warning here review already return A JSON TEXT so use js method eval() to convert reviews into jsonobject
-    #          render( :json => @webapp.to_json(:methods => ["best_tags","nb_rating"]))
-    #        }
-    #      end
   else
     flash[:error] = "Le site web demandé n'existe pas"
     redirect_to accueil_path
@@ -243,5 +234,7 @@ end
 def webapps_promoted
   @webapps_promoted = Webapp.promoted
 end
+
+
 
 end

@@ -1,54 +1,63 @@
 <!-- Home Page, display website : NOUVEAUTE / SUGGESTION EN GRID -->
-
-<div class="heading">
-<h3> <%= link_to "Nouveautés", webapps_path(:order => "recent", :layout => "true") %></h3>
-  </div>
 <div class="websites-box">
 
-  <ul class="thumbnails">
-    <% 2.times do |i| %>
-      <li class="span6">
-        <%=  render :partial => "webapps/preview_website_box", :locals => { :website => @webapps_top_recent[i] }%>
-      </li>
-    <%end%>
-  </ul>
+  <div class="heading">
+    <h3 style="background-color:#7fc04c;"><%= link_to "Sélection", webapps_path(:search => "e-learning", :layout => "true") %>
+    </h3>
+  </div>
 
-
-  <ul class="thumbnails">
-    <% 2.times do |i| %>
-      <li class="span6">
-        <%=  render :partial => "webapps/preview_website_box", :locals => { :website => @webapps_top_recent[i+3] }%>
-      </li>
-    <%end%>
-  </ul>
-
-  <%= link_to "Voir plus ", webapps_path(:order => "recent", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+  <% index = -1%>
+  <% 1.times do |i|%>
+    <ul class="thumbnails">
+      <% 3.times do |j|%>
+        <%if( index+1<@webapps_suggest.length) %>
+          <li class="span4">
+            <%=  render :partial => "webapps/preview_website_small_grid", :locals => { :website => @webapps_suggest[index = index+1] }%>
+          </li>
+        <%end%>
+      <%end%>
+    </ul>
+  <%end%>
+  <%= link_to "Voir plus ", webapps_path(:order => "suggest", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
 
   <div class="heading">
-     <h3><%= link_to "Sélection", webapps_path(:order => "suggested", :layout => "true") %>
-      </h3>
-    </div>
-  <ul class="thumbnails">
-    <% 3.times do |i|
-      if( i<@webapps_suggest.length) %>
-        <li class="span4">
-          <%=  render :partial => "webapps/preview_website_small_grid", :locals => { :website => @webapps_suggest[i] }%>
-        </li>
-      <%end%>
-    <%end%>
-  </ul>
+    <h3 style="background-color:#cb6262"><%= link_to "e-learning", webapps_path(:order => "suggested", :layout => "true") %>
+    </h3>
+  </div>
 
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "e-learning+partage" , :size=>5} %>
 
-  <ul class="thumbnails">
-    <% 3.times do |i|
-      if(i+3<@webapps_suggest.length) %>
-        <li class="span4">
-          <%=  render :partial => "webapps/preview_website_small_grid", :locals => { :website => @webapps_suggest[i+3  ] }%>
-        </li>
-      <%end%>
-    <%end%>
-  </ul>
-  
   <%= link_to "Voir plus ", webapps_path(:order => "suggest", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+
+
+   <div class="heading">
+     <h3 style="background-color:#6194d4"><%= link_to "Logements et alimentation", webapps_path(:order => "suggested", :layout => "true") %>
+    </h3>
+  </div>
+
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "e", :size=>5} %>
+
+  <%= link_to "Voir plus ", webapps_path(:order => "suggest", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+
+
+   <div class="heading">
+     <h3 style="background-color:#ebd52b"><%= link_to "Voyages et transport", webapps_path(:order => "suggested", :layout => "true") %>
+    </h3>
+  </div>
+
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "a", :size=>3} %>
+
+  <%= link_to "Voir plus ", webapps_path(:order => "suggest", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+
+
+   <div class="heading">
+     <h3 style="background-color:#93e0e9"><%= link_to "Job", webapps_path(:order => "suggested", :layout => "true") %>
+    </h3>
+  </div>
+
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "p", :size=>2} %>
+
+  <%= link_to "Voir plus ", webapps_path(:order => "suggest", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+
 
 </div>  

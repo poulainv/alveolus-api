@@ -6,7 +6,8 @@
     <div class="span10">
       <ul class="nav nav-pills" style="cursor:pointer">
         <li class="active"><a href="#list_website" data-toggle="tab">A la Une</a></li>
-        <li><a href="#browser_tag" data-toggle="tab">Naviguer dans les tags</a></li>
+        <li><a href="#news" data-toggle="tab">Nouveautés</a></li>
+         <li><a href="#browser_tag" data-toggle="tab">Naviguer dans les tags</a></li>
         <li><a href="#surprise" data-toggle="tab">Surprenez-moi</a></li>
       </ul>
     </div>
@@ -32,6 +33,10 @@
 
       <%=  render :partial => "layouts/main_view/surprise_me" %>
 
+    </div>
+
+    <div class="tab-pane fade" id="news">
+      <%=  render :partial => "webapps/news" %>
     </div>
   </div>
 </div>
