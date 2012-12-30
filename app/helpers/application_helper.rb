@@ -10,19 +10,19 @@ module ApplicationHelper
   end
 
   def total_website
-    Webapp.validated.length
+    Webapp.validated.try(:length)
   end
 
   def total_comment
-    Comment.all.length
+    Comment.all.try(:length)
   end
 
   def total_unvalidated
-    Webapp.unvalidated.length
+    Webapp.unvalidated.try(:length)
   end
 
   def total_user
-    User.all.length
+    User.all.try(:length)
   end
 
   def total_sharing
