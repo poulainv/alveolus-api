@@ -26,7 +26,8 @@ module ApplicationHelper
   end
 
   def total_sharing
-    Webapp.validated.inject(0){ |sum,n| sum+n.nb_click_shared}
+   # Webapp.validated.inject(0){ |sum,n| sum+n.nb_click_shared}
+102
   end
 
 end
