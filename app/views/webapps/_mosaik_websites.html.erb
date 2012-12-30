@@ -5,6 +5,7 @@ websites = []
 tags.each { |tag|
   websites += websites_by_tag(tag)
 }
+websites = websites.uniq
 
 %>
 <%if size==2%>
