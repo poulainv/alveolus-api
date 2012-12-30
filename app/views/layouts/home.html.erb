@@ -28,11 +28,11 @@
     </div>
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3 offset1">
+        <div id="main-menu" class="span3 offset1">
           <%=  render :partial => "layouts/left_menu/leftmenu", :locals => { :webapps_recents  => @webapps_top_recent} %>
        
         </div><!--/span-->
-        <div id="main-view" class="span7" style="margin-left:0.5%;margin-right: 0%;width:60%;">
+        <div id="main-view" class="span7" style="">
           <%= render('layouts/main_view/main_view') %>
           <div class="hero-unit sub_custom_box_straight">
             <div class="row-fluid">

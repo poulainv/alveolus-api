@@ -43,12 +43,25 @@ a{
 
 }
 
-
+/*GESTION DIFFERENTES RESOLUTIONS*/
+#main-view{
+    width: 60%;
+    margin-left:0.5%;
+    margin-right: 0%;
+}
 @media screen and (max-width: 1200px) {
     .hidden-small-screen{
         display:none;
     }
+    #main-view{
+        width:75%;
+    }
+       #main-menu{
+        margin-left:0%;
+    }
 }
+
+
 
 
 #website-modal .modal-body {
