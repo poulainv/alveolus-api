@@ -36,7 +36,7 @@
 
       <div class=" icon-tag" style="margin-top:2%;"></div>
       <span class="label-tag small"> <%= link_to tronc_caption(website.tags[0].name, 15), tag_webapps_path(website.tags[0]), :title=>website.tags[0].name if website.tags[0] != nil %></span>
-      <span class="label-tag small"> <%= link_to tronc_caption(website.tags[1].name, 15), tag_webapps_path(website.tags[1]), :title=>website.tags[1].name if website.tags[0] != nil %></span>
+      <span class="label-tag small"> <%= link_to tronc_caption(website.tags[1].name, 15), tag_webapps_path(website.tags[1]), :title=>website.tags[1].name if website.tags[1] != nil %></span>
        <%if !website.vimeo_id.blank?%>
       <div class="icon-video" title="Vidéo de présentation disponible" style="margin-top:2%;">  <i class="icon-camera"></i></div>
       <%end%>
