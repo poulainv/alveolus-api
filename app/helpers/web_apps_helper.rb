@@ -53,9 +53,9 @@ module WebAppsHelper
 
   def websites_by_tag(tag)
     webapps = []
-    tags = Tag.used.where{(name =~ "%#{tag}%")}
+    tags = Tag.where{(name =~ "%#{tag}%")}
     tags.each do |tag|
-      webapps += tag.webapps
+      webapps += tag.webapps if tag.webapps.validate == true
     end
     return webapps = webapps.uniq.sort! { |a,b| b.average_rate  <=> a.average_rate}
 
