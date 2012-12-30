@@ -136,7 +136,7 @@ end
 # POST /webapps/
 def create
   @webapp  = current_user.webapps.build(params[:webapp])
-  @webapp.validate = false
+  
   if @webapp.save
     flash[:success] = "Votre soumission a bien été prise en compte"
     redirect_to accueil_path
