@@ -1,0 +1,65 @@
+
+#content ul#websites_grid {
+    margin: -45px -30px 100px 30px;
+}
+#content ul#websites_grid li {
+    float: left;
+    list-style: none;
+    margin-right: 1%;
+    margin-top:0%;  
+    margin-bottom: 5%;
+}
+
+#content ul#websites_grid li .thumbnail .show {
+    width: 220px;
+    margin-bottom: -2%;
+    background-size: 100%!important;
+
+}
+
+#content .website_preview{
+    width : 23%;
+}
+
+
+.websites .thumbnail{
+    height : 350px;
+    border-style: solid;
+    border-color : gainsboro;
+    border-radius: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    /*    border-width: 1px;*/
+    /*    border-color: #9bd290;*/
+    border-width: 2px;
+    /*    border-style: none;*/
+    box-shadow: 4px 4px 2px -2px rgba(0,0,0,0.5);
+    // background-image: url(/img/az_subtle.png);
+    background-color : #f6faf5;
+
+}
+
+
+.websites-box .thumbnail{
+    height : 350px;
+    border-style: solid;
+    border-color : gainsboro;
+    border-radius: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+    border-width: 2px;
+
+    box-shadow: 4px 4px 2px -2px rgba(0,0,0,0.5);
+    background-color : #f6faf5;
+
+}
+
+
+.websites .website {
+    margin-right : 2%;
+    margin-bottom: 2%;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 4%;
+    box-shadow: 4px 4px 10px -2px rgba(0,0,0,0.5);
+    background-color : #efefef;
+}
