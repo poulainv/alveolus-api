@@ -31,33 +31,33 @@
 
 
    <div class="heading">
-     <h3 style="background-color:#6194d4"><%= link_to "Logements et alimentation", webapps_path(:search => "alimentation", :layout => "true") %>
+     <h3 style="background-color:#6194d4"><%= link_to "Alimentation", webapps_path(:search => "alimentation", :layout => "true") %>
     </h3>
   </div>
 
-  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "logement+alimentation", :size=>5} %>
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "alimentation", :size=>5} %>
 
   <%= link_to "Voir plus ", webapps_path(:search => "alimentation", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
 
 
    <div class="heading">
-     <h3 style="background-color:#ebd52b"><%= link_to "Voyages et transport", webapps_path(:search => "transport", :layout => "true") %>
+     <h3 style="background-color:#ebd52b"><%= link_to "Voyage et logement", webapps_path(:search => "voyage+logement", :layout => "true") %>
     </h3>
   </div>
 
-  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "voyage+transport", :size=>3} %>
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "voyage+logement", :size=>4} %>
 
-  <%= link_to "Voir plus ", webapps_path(:search => "transport", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+  <%= link_to "Voir plus ", webapps_path(:search => "voyage", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
 
 
    <div class="heading">
-     <h3 style="background-color:#93e0e9"><%= link_to "Job", webapps_path(:search => "job", :layout => "true") %>
+     <h3 style="background-color:#93e0e9"><%= link_to "Transport", webapps_path(:search => "transport", :layout => "true") %>
     </h3>
   </div>
 
-  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "job", :size=>2} %>
+  <%= render :partial => "webapps/mosaik_websites", :locals => { :type => "transport", :size=>2} %>
 
-  <%= link_to "Voir plus ", webapps_path(:search => "job", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
+  <%= link_to "Voir plus ", webapps_path(:search => "transport", :layout => "true") ,:class=>"offset10",:style=>"color:#777777;"%><i class="icon-chevron-right"></i>
 
 
 </div>  
