@@ -2,5 +2,5 @@
 
 <p>Vous pouvez confirmmer votre inscription en cliquant sur le lien ci-dessous :</p>
 
-<p<% adress = confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
+<% adress = confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
 <%= adress.slice(7,adress.length) %>
