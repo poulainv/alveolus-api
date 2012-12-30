@@ -57,7 +57,7 @@ module WebAppsHelper
     tags.each do |tag|
       webapps += tag.webapps
     end
-    return webapps = webapps.uniq.select!{|w| w.validate==true}.sort! { |a,b| b.average_rate  <=> a.average_rate}
-
+    webapps = webapps.uniq.sort!{ |a,b| b.average_rate  <=> a.average_rate}
+    return  webapps.find_all{|item| item.validate == true }
   end
 end
