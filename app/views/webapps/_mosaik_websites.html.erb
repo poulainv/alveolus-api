@@ -7,7 +7,7 @@ tags.each { |tag|
 }
 
 %>
-<%if size<3%>
+<%if size==2%>
   <ul class="thumbnails">
     <% 2.times do |i|%>
       <% if (index+1<websites.length) %>
@@ -18,7 +18,7 @@ tags.each { |tag|
 
     <%end%>
   </ul>
-<%elsif size<4%>
+<%elsif size==3%>
   <ul class="thumbnails">
     <% 3.times do |i|%>
       <% if (index+1<websites.length) %>
@@ -28,7 +28,7 @@ tags.each { |tag|
       <%end%>
     <%end%>
   </ul>
-<%elsif size<5%>
+<%elsif size==4%>
   <ul class="thumbnails">
     <% 2.times do |i|%>
       <% if (index+1<websites.length) %>
@@ -48,7 +48,7 @@ tags.each { |tag|
       <%end%>
     <%end%>
   </ul>
-<%elsif size<6%>
+<%elsif size==5%>
   <ul class="thumbnails">
     <% 2.times do |i|%>
       <% if (index+1<websites.length) %>
