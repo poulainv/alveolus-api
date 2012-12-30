@@ -9,7 +9,7 @@
 
     <li class="website_preview" >
       <div class="thumbnail">
-        <%= link_to image_tag(website.photo.url(:small),:alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
+        <%= link_to image_tag(website.photo.url(:small),:size=>"500x500",:alt => "image site") , "#", :class=>"websiteTitle" , :data=>{:toggle=>"modal"}, :websiteId=>website.id%>
         <div class="caption">
           <div class="row-fluid">
             <div class="span2">

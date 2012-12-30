@@ -27,7 +27,7 @@ EnjoyTheWeb::Application.configure do
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
+  config.active_record.auto_explain_threshold_in_seconds = 0.2
 
   # Do not compress assets
   config.assets.compress = false
@@ -38,15 +38,20 @@ EnjoyTheWeb::Application.configure do
   ## Config Devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-  ## Config paperclip on local 
+  ## Config paperclip on local
   PAPERCLIP_STORAGE_WEBAPP = {
-    :styles => { :caroussel => "550x350!", :small => "240x160!"}
+    :styles => { :caroussel => "550x350!",:medium => "500x300>", :small => "240x160!"},
+     :convert_options => {
+      :caroussel => "-quality 75 -strip", :small => "-quality 75 -strip",:medium => "-quality 75 -strip" }
   }
 
    PAPERCLIP_STORAGE_AVATAR = {
      :styles => { :small => "75x75#", :mini=>"50x50#"},
       :default_url => "/img/avatar.jpg",
-    }
+      :convert_options => {
+      :small => "-quality 75 -strip", :mini= => "-quality 75 -strip" }
+  }
+    
   ## Mailer
   config.action_mailer.default_url_options = { :host => 'localhost' }
   config.action_mailer.raise_delivery_errors = true

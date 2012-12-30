@@ -82,7 +82,13 @@ a{
     border-top-width: 5px;
     border-top-color: $custom_blue;
     background-color: white;
+}
 
+.sub_custom_box_straight{
+    margin-top:-2%;
+    border:none;
+    background-color: white;
+    padding: $padding_box;
 }
 
 .custom_tab{

@@ -16,7 +16,7 @@ class WebappsController < ApplicationController
     # GET /tags/:tag_id/webapps/
     if (params[:tag_id])
       @tag = Tag.find_by_id(params[:tag_id])
-      @webapps = Webapp.tagged_with(@tag.name)
+      @webapps = Webapp.tagged_with(@tag.name).uniq
       @subtitle = "Résultat de la recherche :  #"+@tag.name
       @nb_results = @webapps.length ;
       respond_to do |format|
