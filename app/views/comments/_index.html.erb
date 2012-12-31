@@ -1,11 +1,7 @@
 
   <div class='row-fluid'>
     <div class='span1'>
-      <% if comments.user.avatar? %>
-        <%= image_tag comments.user.avatar.url(:mini), :class=>"img img-circle"%>
-      <% else %>
-        <%= image_tag "/img/avatar.jpg", :class=>"img img-circle"%>
-      <%end%>
+           <%= image_tag photo_url(comments.user), :class=>"img img-circle"%>
     </div>
     <div class='span3'>
       <strong>

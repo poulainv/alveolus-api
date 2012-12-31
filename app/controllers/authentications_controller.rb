@@ -26,15 +26,10 @@ class AuthenticationsController < ApplicationController
     else
       user = User.new
       user.apply_omniauth(omniauth)
-      print "VINCENTTTT"+ user.email.to_s
-      print "VINCENTTTT"+ user.id.to_s
-      print "VINCENTTTT er"+ user.errors.full_messages.to_sentence
       if user.save
-        print "je passe"
         flash[:notice] = "Vous vous êtes correctement enregistré"
         sign_in_and_redirect(:user, user)
       else
-         print "VINCENTTTT err"+ user.errors.full_messages.to_sentence
         session[:omniauth] = omniauth.except('extra')
         redirect_to new_user_registration_url
       end
