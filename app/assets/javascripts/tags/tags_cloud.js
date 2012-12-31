@@ -10,17 +10,17 @@ var Cloud = function(){
 
     this.keycuts_manager = (function(){
         $("body").keydown(function(event) {
-           // alert(event.which);
-           if(event.which==80){
-               $(settings.radioWebsites).attr('checked',undefined);
-               $(settings.radioTags).attr('checked','checked');
-           }
+            // alert(event.which);
+            if(event.which==80){
+                $(settings.radioWebsites).attr('checked',undefined);
+                $(settings.radioTags).attr('checked','checked');
+            }
         });
         $("body").keyup(function(event) {
-           if(event.which==80){
-               $(settings.radioTags).attr('checked',undefined);
-               $(settings.radioWebsites).attr('checked','checked');
-           }
+            if(event.which==80){
+                $(settings.radioTags).attr('checked',undefined);
+                $(settings.radioWebsites).attr('checked','checked');
+            }
         });
     })();
 
@@ -28,10 +28,13 @@ var Cloud = function(){
         var tagCloud = $("#tagsCloud").html('')
         var tagElement;
         console.log('Init cloud...');
+        fisherYates(tags);
+        var temp = 0 ;
         for (x in tags)
         {
 
             var coeffSize = 100+tags[x].poid*tags[x].poid*20;
+          
             // Geneate tag
             var tagP = $("<span/>", {
                 "tagId": tags[x].id,
@@ -58,10 +61,18 @@ var Cloud = function(){
                 }
             });
 
-
             if(x%3==0){
                 tagP.append("<br>");
             }
+            else if(tags[x-1] != undefined && tags[x-1] != null){
+               //  console.log("sum :"+coeffSize+temp);
+                if(coeffSize+temp>550){
+                    console.log("tag too big");
+                    tagP.append("<br>");
+                }
+            }
+           
+            temp = coeffSize;
 
         }
 
@@ -74,7 +85,7 @@ var Cloud = function(){
            
             cloudtags.init_websites_list(msg);
             tagElement.popover('show');
-             popupWebSite.initialize(".websitePr");
+            popupWebSite.initialize(".websitePr");
             popupClicked = true;
         });
     }
@@ -135,5 +146,15 @@ var Cloud = function(){
         }
     })
 
-
+    function fisherYates ( myArray ) {
+        var i = myArray.length;
+        if ( i == 0 ) return false;
+        while ( --i ) {
+            var j = Math.floor( Math.random() * ( i + 1 ) );
+            var tempi = myArray[i];
+            var tempj = myArray[j];
+            myArray[i] = tempj;
+            myArray[j] = tempi;
+        }
+    }
 };
