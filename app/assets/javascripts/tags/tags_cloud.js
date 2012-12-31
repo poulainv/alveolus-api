@@ -34,7 +34,9 @@ var Cloud = function(){
         {
 
             var coeffSize = 100+tags[x].poid*tags[x].poid*20;
-          
+           if(coeffSize>480){
+               coeffSize=480;
+           }
             // Geneate tag
             var tagP = $("<span/>", {
                 "tagId": tags[x].id,
@@ -63,16 +65,21 @@ var Cloud = function(){
 
             if(x%3==0){
                 tagP.append("<br>");
+                 temp = 0;
             }
             else if(tags[x-1] != undefined && tags[x-1] != null){
                //  console.log("sum :"+coeffSize+temp);
                 if(coeffSize+temp>550){
                     console.log("tag too big");
                     tagP.append("<br>");
+                   
+                }
+                else{
+                    temp = coeffSize;
                 }
             }
            
-            temp = coeffSize;
+            
 
         }
 
