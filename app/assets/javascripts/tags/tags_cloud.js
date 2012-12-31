@@ -34,8 +34,8 @@ var Cloud = function(){
         {
 
             var coeffSize = 100+tags[x].poid*tags[x].poid*20;
-           if(coeffSize>480){
-               coeffSize=480;
+           if(coeffSize>300){
+               coeffSize=300;
            }
             // Geneate tag
             var tagP = $("<span/>", {
