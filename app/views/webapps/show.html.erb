@@ -123,7 +123,7 @@
     </div>
 
   </div>
-  <%  if user_signed_in? %>
+  <%  if user_signed_in? and current_user.try(:admin?)%>
     <div class="modal-footer">
       <%= link_to "Edit", edit_webapp_path(@webapp),:class=>"btn" %>
   <%= link_to "Delete", webapp_path(@webapp),:data => { :confirm => "Are you sure?" }, :method => :delete,:class=>"btn" %>
