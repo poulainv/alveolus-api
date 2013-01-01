@@ -149,11 +149,12 @@ function PopupWebSite(){
 
     this.listener_bookmark = function (){
         //  Listener
-        if($(settings.bookmark_star).attr('src')== settings.bookmark_image){
-            settings.bookmark = true;
+        if($(settings.bookmark_star).attr('src') == settings.bookmark_image){
+            settings.bookmarked = true;
         }else {
-            settings.bookmark=false;
+            settings.bookmarked=false;
         }
+        console.log("flag bookmark : "+settings.bookmarked);
         $(settings.bookmark_star).click(function(){
             console.log("bookmarked");
             if(settings.bookmarked == false){
