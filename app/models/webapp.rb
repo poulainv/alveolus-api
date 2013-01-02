@@ -60,7 +60,7 @@ class Webapp < ActiveRecord::Base
   scope :recent, lambda { |n| validated.order("created_at").reverse_order.limit(n) }
   # return most consulted website
   scope :trend, lambda { |n| validated.order("nb_click_detail").reverse_order.limit(n) }
-  scope :most_commented, lambda { |n| joins(:comments).order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
+  scope :most_commented, lambda { |n| joins(:comments).where("comments.body != ''").order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
   scope :best_rated, lambda { |n| joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
   scope :best_shared, lambda {|n| validated.select("id,title,average_rate").order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
