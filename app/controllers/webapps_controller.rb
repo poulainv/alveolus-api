@@ -136,7 +136,7 @@ end
 # POST /webapps/
 def create
   @webapp  = current_user.webapps.build(params[:webapp])
-  
+  @webapp.nb_click_shared = 0;
   if @webapp.save
     flash[:success] = "Votre soumission a bien été prise en compte"
     redirect_to accueil_path
