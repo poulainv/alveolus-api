@@ -26,6 +26,7 @@ class AuthenticationsController < ApplicationController
     else
       user = User.new
       user.apply_omniauth(omniauth)
+      redirect_to accueil_path
       if user.save
         flash[:notice] = "Vous vous êtes correctement enregistré"
         redirect_to accueil_path
