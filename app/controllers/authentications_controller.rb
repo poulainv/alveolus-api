@@ -26,6 +26,7 @@ class AuthenticationsController < ApplicationController
     else
       user = User.new
       user.apply_omniauth(omniauth)
+      user.skip_confirmation!
       if user.save
         flash[:notice] = "Vous vous êtes correctement enregistré"
         sign_in_and_redirect(:user, user)
