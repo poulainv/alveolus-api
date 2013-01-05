@@ -20,8 +20,6 @@ class User < ActiveRecord::Base
     self.email = omniauth['info']['email'] if email.blank?
     self.pseudo =  omniauth['info']['nickname'] if pseudo.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'] ,:token=> omniauth['credentials']['token'])
-    #self.skip_confirmation!
-    self.confirmed_at = Time.now.utc
   end
 
   def password_required?
