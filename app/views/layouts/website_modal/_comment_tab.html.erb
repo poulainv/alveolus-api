@@ -7,6 +7,9 @@
       <div class="line-separator-dashed"></div>
       <div id="detailWebsiteModalComments">
         <%=  render :partial => "comments/index", :collection => comments, :as => :comments %>
+        <% if comments.length == 0 %>
+        Pas encore de commentaire, laissez le premier !
+        <% end %>
       </div>
     </div>
 
