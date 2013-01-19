@@ -16,8 +16,7 @@ class AuthenticationsController < ApplicationController
  #     authentication.user.facebook.feed!(
   #     :message => 'Hello, Facebook!',
    #   :name => 'My Rails 3 App with Omniauth, Devise and FB_graph'
-    #    )
-     
+    #    ) 
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
@@ -25,7 +24,9 @@ class AuthenticationsController < ApplicationController
       redirect_to authentications_url
     else
       user = User.new
+
       user.apply_omniauth(omniauth)
+      user.skip_confirmation!
       if user.save
         flash[:notice] = "Vous vous êtes correctement enregistré"
         sign_in_and_redirect(:user, user)

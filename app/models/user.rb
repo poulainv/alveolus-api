@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
 
   has_many :comments, :dependent => :destroy
-  has_many :authentications
+  has_many :authentications, :dependent => :destroy
   has_many :webapps
   has_many :bookmarks, :foreign_key => "user_id", :dependent => :destroy
   has_many :webapps_starred, :through => :bookmarks, :source => :webapp
