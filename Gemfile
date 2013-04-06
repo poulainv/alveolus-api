@@ -23,8 +23,8 @@ group :production do
  
 end
 
-gem 'bootstrap-sass'
-gem 'xpath'
+gem 'bootstrap-sass' # à supprimer ?
+gem 'xpath' # Utilité à vérifier
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -51,7 +51,7 @@ group :development do
   gem 'fb_graph'
   gem 'devise-i18n'
   gem 'activerecord-reputation-system', require: 'reputation_system'
-gem "squeel"
+  gem "squeel"
 end
 
 group :test do
@@ -61,12 +61,11 @@ group :test do
   gem 'devise'
   gem 'omniauth'
   gem 'omniauth-facebook'
-  gem 'cucumber-rails'
-  gem 'database_cleaner'
   gem 'activerecord-reputation-system', require: 'reputation_system'
 
 end
 
+gem 'therubyracer'
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
