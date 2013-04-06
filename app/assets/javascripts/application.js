@@ -15,18 +15,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree  .
-
-
-
-
-function increment_nb_click(websiteId, element){
-
-     // Increment nb_click
-        $.ajax({
-            type: "GET",
-            url: "/webapps/"+websiteId+"/click/"+element
-        }).done(function( msg ) {
-            console.log("click increment : "+element)
-        });
-
-}
