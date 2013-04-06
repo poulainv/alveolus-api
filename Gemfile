@@ -6,6 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+
 group :production do
   gem 'thin'
   gem 'pg'
@@ -20,11 +21,9 @@ group :production do
   gem 'devise-i18n'
   gem 'activerecord-reputation-system', require: 'reputation_system'
   gem "squeel"
- 
 end
 
-gem 'bootstrap-sass' # à supprimer ?
-gem 'xpath' # Utilité à vérifier
+gem 'xpath'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -39,8 +39,6 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.2.1.1)
-      sass (~> 3.2)
     builder (3.0.4)
     capybara (2.0.1)
       mime-types (>= 1.16)
@@ -235,7 +233,6 @@ DEPENDENCIES
   activerecord-reputation-system
   annotate
   aws-sdk
-  bootstrap-sass
   capybara (>= 1.1.2)
   certified
   coffee-rails (~> 3.2.1)
