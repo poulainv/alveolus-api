@@ -10,110 +10,16 @@
     before_filter :webapps_top_shared, :only => [ :index]
     before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
 
-
-    # GET /webapps/
     def index
-      # GET /tags/:tag_id/webapps/
-      if (params[:tag_id])
-        @tag = Tag.find_by_id(params[:tag_id])
-        @webapps = Webapp.tagged_with(@tag.name).uniq
-        @subtitle = "Résultat de la recherche :  #"+@tag.name
-        @nb_results = @webapps.length ;
-        respond_to do |format|
-          format.html {
-            render :search , :layout => "pages"
-          }
-          format.json{
-            render :json => @webapps.uniq.to_json(:methods => %w(nb_rating preview))
-          }
-
-        end
-
-
-      elsif params[:order]
-        n = 12
-        case params[:order]
-        when "recent"
-          @webapps = Webapp.recent(n)
-          @subtitle = "Nouveautés"
-        when "trend"
-          @webapps = Webapp.trend(n)
-          @subtitle = "Les plus populaires"
-        when "commented"
-          @webapps = Webapp.most_commented(n)
-          @subtitle = "Les plus commentés"
-        when "rated"
-          @webapps = Webapp.best_rated(n)
-          @subtitle = "Les mieux notés"
-        when "suggested"
-          @webapps = Webapp.suggested
-          @subtitle = "Notre sélection"
-        when "random"
-          @webapps = Webapp.random(n)
-          @subtitle = "Aléatoire"
-        when "unvalidated"
-          @webapps = Webapp.unvalidated
-          @subtitle = "Sites Web non-validés"
-          render :vote
-          return;
-        when "moderate"
-          if(current_user.try(:admin?))
-            @webapps = Webapp.all
-            @subtitle = "Tous"
-          else
-            flash[:error] = "Les droits d'administrateurs sont nécessaires"
-            redirect_to accueil_path
-            return;
-          end
-        end
-
-        @nb_results = @webapps.length ;
-        render :search , :partial => "webapps/preview_website_list",:collection => @webapps, :as => :website if params[:layout] == "list"
-        render :search , :partial => "webapps/preview_website_large_grid",:collection => @webapps, :as => :website if params[:layout] == "grid"
-        render :search , :layout => "pages" if params[:layout] == "true"
-
-        ## SEARCH
-      elsif params[:search]
-        query = params[:search]
-        if query.length < 3
-          flash[:error] = "Veuillez entrer au moins 3 caractères"
-          redirect_to accueil_path
-        else
-          @webapps = Webapp.validated.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
-          tags = Tag.where{(name =~ "%#{query}%")}
-          tags.each do |tag|
-            @webapps += tag.webapps
-          end
-          @webapps = @webapps.uniq
-          @nb_results = @webapps.length
-          @subtitle = "Résultat de la recherche : "+params[:search]
-          respond_to do |format|
-            format.html {
-              render :search , :layout => "pages"
-            }
-            format.json {
-              render :json => @webapps.to_json
-            }
-          end
-        end
-
-        # GET /webapps/
-      else
-        @subtitle = "Tous les sites Web"
-        @webapps = Webapp.validated
-        @webapps_suggest = Webapp.suggested
-        @webapps_top_recent = Webapp.recent(10)
-        respond_to do |format|
-          format.html {
-            render :layout => "home"
-          }
-          format.json{
-            render :json => @webapps.to_json(:methods => %w(nb_rating)), :layout => "home"
-          }
-        end
-      end
+      @webapps = Webapp.all
+      render json: @webapps
     end
 
+    # GET /webapps/:id
+    def show
+      @webapp = Webapp.find_by_id(params[:id])
+      render json: @webapp
+    end
 
     # GET /webapps/new
     def new
@@ -121,16 +27,6 @@
       @title = "Un site Web à proposer ?"
       #If we want apply an other layout with this method :
       render :layout => "pages"
-    end
-
-    # GET /webapps/:id
-    def show
-      if @webapp = Webapp.find_by_id(params[:id])
-        render :layout => false
-      else
-        flash[:error] = "Le site web demandé n'existe pas"
-        redirect_to accueil_path
-      end
     end
 
     # POST /webapps/
