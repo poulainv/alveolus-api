@@ -241,6 +241,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.0)
   fb_graph
   jquery-rails
+  json
   mysql2
   omniauth
   omniauth-facebook
