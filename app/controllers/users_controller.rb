@@ -3,23 +3,16 @@
 
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:edit, :update, :show , :index]
-
-
+  before_filter :authenticate_user!, :only => [:edit, :update]
 
   def index
-    if (current_user.admin?)
       @users = User.all
-      render "users/index", :layout => "pages"
-    else redirect_to accueil_path, :alert => "Vous devez être administrateur pour accéder à cette page"
-    end
+      render json: @users
   end
 
   def show
     @user = User.find(params[:id])
-    # Un peu laid, passé par un parametre local plz
-    @nb_results = @user.webapps_starred.length
-    redirect_to users_path, :alert => "Impossible d'accéder à cet utilisteur" if @user.id!=current_user.id
+    render json: @user
   end
 
   def update
