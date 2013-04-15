@@ -28,6 +28,12 @@
       render json: @tags
     end
 
+    # GET /webapps/:id/bookmarks
+    def bookmarks
+      @bookmarks = Webapp.find(params[:id]).bookmarks
+      render json: @bookmarks
+    end
+
     # GET /webapps/:id
     def show
       @webapp = Webapp.find_by_id(params[:id])
