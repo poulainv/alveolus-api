@@ -15,8 +15,14 @@
       render json: @webapps
     end
 
-    def webappComments
+    # GET /webapps/:id/comments
+    def comments
       render json: Webapp.find(params[:id]).comments
+    end
+
+    # GET /webapps/:id/tags
+    def tags
+      render json: Webapp.find(params[:id]).tags
     end
 
     # GET /webapps/:id
