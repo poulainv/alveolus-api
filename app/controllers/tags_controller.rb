@@ -8,30 +8,16 @@ class TagsController < ApplicationController
   def new
   end
 
+  # GET /tags/:id
   def show
-    @tags = Tag.most_used(30)
-    respond_to do |format|
-      format.html
-      format.json{
-        render :json => @tags.to_json(:methods => %w(poid))
-      }
-    end
+    @tag = Tag.find(params[:id])
+    render json: @tag
   end
 
-
-
+  # GET /tags
   def index
-    if params[:webapp_id]
-      if  @webapp = Webapp.find(params[:webapp_id])
-        render :json => @webapp.best_tags(3).to_json(:include => :tagAppRelations)
-      else
-        flash[:error] = "La Webapp demandé n'existe pas"
-        redirect_to accueil_path
-      end
-    else
-      flash[:error] = "La page demandée n'existe pas"
-      redirect_to accueil_path
-    end
+    @tags = Tag.all
+    render json: @tags
   end
 
 
