@@ -10,6 +10,7 @@
     before_filter :webapps_top_shared, :only => [ :index]
     before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
 
+    # GET /webapps
     def index
       @webapps = Webapp.all
       render json: @webapps
@@ -17,12 +18,14 @@
 
     # GET /webapps/:id/comments
     def comments
-      render json: Webapp.find(params[:id]).comments
+      @comments = Webapp.find(params[:id]).comments
+      render json: @comments
     end
 
     # GET /webapps/:id/tags
     def tags
-      render json: Webapp.find(params[:id]).tags
+      @tags = Webapp.find(params[:id]).tags
+      render json: @tags
     end
 
     # GET /webapps/:id
