@@ -11,6 +11,8 @@ EnjoyTheWeb::Application.routes.draw do
   match "/webapps/:id/comments/", :to => "webapps#comments"
   match "/webapps/:id/tags/", :to => "webapps#tags"
 
+  match "/users/:id/comments/", :to => "users#comments"
+
   match '/about',   :to => 'pages#about'
   match '/faq',   :to => 'pages#faq'
   match '/accueil',   :to => 'webapps#index'

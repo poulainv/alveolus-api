@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  # GET /users/:id/comments
+  def comments
+    @comments = User.find(params[:id]).comments
+    render json: @comments
+  end
+
   def update
     @user = User.find(params[:id])
     if(current_user.try(:admin?))
