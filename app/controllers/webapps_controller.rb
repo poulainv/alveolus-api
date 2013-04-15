@@ -15,6 +15,10 @@
       render json: @webapps
     end
 
+    def webappComments
+      render json: Webapp.find(params[:id]).comments
+    end
+
     # GET /webapps/:id
     def show
       @webapp = Webapp.find_by_id(params[:id])

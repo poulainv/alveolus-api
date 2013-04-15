@@ -8,7 +8,7 @@ EnjoyTheWeb::Application.routes.draw do
   
   get "pages/about"
 
- 
+  match "/webapps/:id/comments/", :to => "webapps#webappComments"
 
   match '/about',   :to => 'pages#about'
   match '/faq',   :to => 'pages#faq'
