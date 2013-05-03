@@ -1,5 +1,8 @@
 EnjoyTheWeb::Application.routes.draw do
 
+  ## To accept ajax cross domain
+  match '/*path' => 'application#options', :via => :options
+  
   resources :feedback, :only => [:new, :create]
 
   resources :authentications
