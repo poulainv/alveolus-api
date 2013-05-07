@@ -37,7 +37,6 @@
     # GET /webapps/:id
     def show
       @webapp = Webapp.find_by_id(params[:id])
-      render :json => { :webapp => @webapp, :tags => @webapp.tags, :comments => @webapp.comments }
     end
 
     # GET /webapps/new
