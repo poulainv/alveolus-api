@@ -24,7 +24,7 @@
 
 class Webapp < ActiveRecord::Base
 
-  attr_accessible :facebook_id,:twitter_id, :gplus_id,:average_rate,:vimeo_id,:user_id,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :suggested,:description, :title, :url, :validate
+  attr_accessible :facebook_id,:twitter_id, :gplus_id,:average_rate,:vimeo_id,:user_id,:photo,:comments,:tags,:tag_list,:nb_click_preview, :promoted,  :nb_click_url,:nb_click_detail,:caption, :suggested,:description, :title, :url, :validate, :category_id
 
   before_validation :uniform_url, :only => [:url]
 

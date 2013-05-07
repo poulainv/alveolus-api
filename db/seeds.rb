@@ -14,8 +14,19 @@
 Webapp.delete_all
 Tag.delete_all
 TagAppRelation.delete_all
+Category.delete_all
+Comment.delete_all
+Bookmark.delete_all
+
+Category.create(:name => 'Crowdfunding')
+Category.create(:name => 'Food')
+Category.create(:name => 'Autopartage')
+Category.create(:name => 'Connaissance')
+Category.create(:name => 'Hébergement')
+Category.create(:name => 'Art')
 
 Webapp.create( :title =>'Babyloan',
+  :category_id => 1,
   :caption => 'Le site des microcrédits solidaires. C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-entrepreneurs de sortir de la précarité grâce au fruit de leur travail.',
   :description => 'Babyloan est le premier site Européen de microcrédits solidaires
 C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-entrepreneurs de sortir de la précarité grâce au fruit de leur travail.',
@@ -29,6 +40,7 @@ C\'est une nouvelle forme de solidarité par le Prêt, qui permet à des micro-e
 
 
 Webapp.create( :title =>'CupOfTeach',
+  :category_id => 4,
   :caption => 'Cup of teach est la première université entre particuliers. Découvrez des ateliers uniques près de chez vous.',
   :description => 'Cup of teach, cʼest avant tout lʼhistoire de deux amis qui avaient un grand projet : permettre à chacun d’entre nous d’apprendre toute sa vie durant. En partageant nos connaissances, en découvrant celles des autres, nous créons une véritable encyclopédie vivante et un nouveau chemin vers la découverte. Toutes les passions y tiennent la première place, surtout les vôtres !',
   :url => 'http://www.cupofteach.com/',
@@ -41,6 +53,7 @@ Webapp.create( :title =>'CupOfTeach',
 
 
 Webapp.create( :title =>'Deways',
+  :category_id => 3,
   :caption => 'Louez le véhicule d\'un membre de la communauté Deways proche de chez vous. C\'est pratique, économique, convivial et sûr !',
   :description => 'Deways est la première communauté de location de voitures entre particuliers. Notre communauté est composée de conducteurs et de propriétaires : que vous soyez l’un ou l’autre, tout s’y fait dans un climat accueillant, convivial et sécurisé grâce notamment à l’assurance MACIF-DEWAYS.',
   :url => 'http://www.deways.com/',
@@ -52,6 +65,7 @@ Webapp.create( :title =>'Deways',
 
 
 Webapp.create( :title =>'LaMachineDuVoisin',
+  :category_id => 3,
   :caption => 'La Machine Du Voisin met gratuitement en relation les personnes cherchant à faire leur lessive et celles souhaitant partager leur machine à laver.',
   :description => 'Ce projet original a pour vocation de mettre en relation d’heureux propriétaires de machines à laver avec des personnes comme vous et nous, dépourvues du précieux appareil ou trop éloignées d’une laverie, qui souhaitent, en échange d’un beau sourire et/ou d’une rémunération modique, partager un peu de leur temps et le tambour de leurs lave-linge.',
   :url => 'http://www.lamachineduvoisin.fr/',
@@ -62,11 +76,9 @@ Webapp.create( :title =>'LaMachineDuVoisin',
   :password => "nadal89")
 
 )
-             
-
-
 
 Webapp.create( :title =>'Covoiturage',
+  :category_id => 3,
   :caption => 'Covoiturage : Voyagez moins cher en toute confiance - 2 Millions de conducteurs et passagers. Départs immédiats !',
   :description => 'Notre ambition : rendre le covoiturage toujours plus facile, fiable et efficace en mettant simplement en relation des conducteurs effectuant un trajet, ponctuel ou régulier, et des passagers souhaitant effectuer ce même trajet.
 
@@ -84,6 +96,7 @@ Le but : faire ainsi coïncider les besoins, partager les frais entre covoitureu
 
 
 Webapp.create( :title =>'MyMajorCompany',
+  :category_id => 1,
   :caption => 'Pionnier du financement participatif mondial, MMC vous propose de financer et de donner vie à tout type de projets culturels et innovants !',
   :description => 'My Major Company est un des pionniers du financement participatif mondial, et aujourd’hui leader du secteur en Europe, par la taille de sa communauté, les montants levés – plus de 12 millions d\'euros sur près de 42.000 projets en France, en Allemagne et en Angleterre – et les succès commerciaux engendrés.',
   :url => 'http://www.mymajorcompany.com/',
@@ -96,6 +109,7 @@ Webapp.create( :title =>'MyMajorCompany',
 
 
 Webapp.create( :title =>'Artilinki',
+  :category_id => 6,
   :caption => 'Artilinki est le premier réseau social international dédié à l’art et à la créativité.
 En 13 langues et ouvert à l\'ensemble des filières, il contribue au décloisonnement des arts.',
   :description => 'Artilinki n\'est pas un réseau parmi tant d\'autres mais un réseau dédié à l\'art sous toutes ses formes.
@@ -111,6 +125,7 @@ Un réseau utile, alternatif et indépendant dont le but est d\'accompagner la m
 
 
 Webapp.create( :title =>'TED',
+  :category_id => 4,
   :caption => 'Conférences de personnalités parmi les plus fascinantes au monde : des penseurs radicaux de l\'éducation, des génies de la technologie, des non-conformistes de la médecine...',
   :description => 'Conferences captivantes par des gens remarquables, gratuites a travers le monde.
 TED présente des conférences de personnalités parmi les plus fascinantes au monde : des penseurs radicaux de l\'éducation, des génies de la technologie, des non-conformistes de la médecine, des gourous du monde des affaires, et des légendes de la musique.
@@ -125,6 +140,7 @@ Partez à la découverte de plus de 1300 TEDTalks, à regarder ou à écouter (a
 
 
 Webapp.create( :title =>'Fleex',
+  :category_id => 4,
   :caption => 'Apprenez l\'anglais avec vos vidéos préférées',
   :description => 'Les vidéos que vous aimez
 Grâce à fleex, apprenez l’anglais avec les vidéos que vous aimez. A partir des séries TV et films stockés sur votre disque dur, fleex construit à la volée une vraie expérience éducative pour vous permettre d\'améliorer votre pratique de la langue. A court d\'idées ? Choisissez dans notre catalogue l’une des 700+ vidéos que nous avons sélectionnées pour vous !',
@@ -137,6 +153,7 @@ Grâce à fleex, apprenez l’anglais avec les vidéos que vous aimez. A partir 
 )
 
 Webapp.create( :title =>'La Ruche qui dit Oui !',
+  :category_id => 2,
   :caption => 'La Ruche qui dit Oui ! permet de vous réunir pour acheter directement aux producteurs de votre région.',
   :description => 'Comment ça marche ?
 C\'est en combinant circuits courts et achats groupés que La Ruche qui Dit Oui ! permet aux producteurs et aux consommateurs de bénéficier de meilleurs prix.

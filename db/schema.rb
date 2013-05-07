@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507161853) do
+ActiveRecord::Schema.define(:version => 20130507171608) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20130507161853) do
     t.string   "facebook_id"
     t.string   "twitter_id"
     t.string   "gplus_id"
+    t.integer  "category_id"
   end
 
 end
