@@ -34,6 +34,7 @@ class Webapp < ActiveRecord::Base
   #has_many :users, :through => :bookmarks , :source => :user
   has_many :comments , :dependent => :destroy
   belongs_to :user
+  belongs_to :category
   
   url_regex  =  /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
 
