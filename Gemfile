@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'json'
+gem 'rabl'
 
 group :production do
   gem 'thin'

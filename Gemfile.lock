@@ -136,6 +136,8 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    rabl (0.8.4)
+      activesupport (>= 2.3.14)
     rack (1.4.3)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -247,6 +249,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg
+  rabl
   rails (= 3.2.11)
   rmagick
   rspec (= 2.8.0)
