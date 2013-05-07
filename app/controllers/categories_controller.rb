@@ -14,7 +14,6 @@ class CategoriesController < ApplicationController
 
  	# GET /categories/:id/webapps
     def webapps
-      @webapps = Category.find(params[:id]).webapps
-      render json: @webapps
+    	@category = Category.find(params[:id])
     end
 end
