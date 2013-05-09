@@ -6,7 +6,10 @@ node do |webapp|
 		attributes *Tag.column_names
 	end
 
-	child webapp.comments do
+	child webapp.comments do |t|
 		attributes *Comment.column_names
+		node (:user) do |comment|
+			comment.user.email
+		end
 	end
 end
