@@ -10,7 +10,11 @@ node do |webapp|
 		child webapp.comments do |t|
 			attributes *Comment.column_names
 			node (:user) do |comment|
-				comment.user.email
+				if comment.user.pseudo
+					comment.user.pseudo
+				else
+					"user " + comment.user.id.to_s
+				end
 			end
 		end
 	end
