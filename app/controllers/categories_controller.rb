@@ -16,4 +16,11 @@ class CategoriesController < ApplicationController
     def webapps
     	@category = Category.find(params[:id])
     end
+
+    # GET /categories/:id/webapps
+    def featuredWebapp
+    	@category = Category.find(params[:id])
+    	@webapp = @category.featuredWebapp
+    	render "webapps/show"
+    end
 end

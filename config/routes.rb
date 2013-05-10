@@ -19,6 +19,7 @@ EnjoyTheWeb::Application.routes.draw do
   match "/users/:id/bookmarks/", :to => "users#bookmarks"
 
   match "/categories/:id/webapps", :to => "categories#webapps"
+  match "/categories/:id/featured_webapp", :to => "categories#featuredWebapp"
 
   match '/about',   :to => 'pages#about'
   match '/faq',   :to => 'pages#faq'
