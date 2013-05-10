@@ -13,7 +13,6 @@
     # GET /webapps
     def index
       @webapps = Webapp.all
-      render json: @webapps
     end
 
     # GET /webapps/:id/comments
