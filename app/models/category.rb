@@ -5,10 +5,10 @@ class Category < ActiveRecord::Base
 
    # Return a random featured webapp for a category
   def featuredWebapp
-  	if Rails.env == "development"
-    	self.webapps.where(:featured => true).order("RAND()").first
-    elsif Rails.env == "production"
+    if Rails.env == "production"
     	self.webapps.where(:featured => true).order("RANDOM()").first
+    else
+    	self.webapps.where(:featured => true).order("RAND()").first
     end
   end
 end
