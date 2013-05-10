@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507171608) do
+ActiveRecord::Schema.define(:version => 20130510085605) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(:version => 20130507171608) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
-    t.boolean  "suggested"
+    t.boolean  "featured"
     t.integer  "nb_click_shared",    :default => 0
     t.integer  "user_id"
     t.string   "vimeo_id"
