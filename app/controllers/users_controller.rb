@@ -17,11 +17,6 @@ class UsersController < ApplicationController
     render json: @user
   end
 
-  # GET /users/:id/comments
-  def comments
-    @comments = User.find(params[:id]).comments
-    render json: @comments
-  end
 
   # GET /users/:id/bookmarks
   def bookmarks
