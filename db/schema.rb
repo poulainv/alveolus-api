@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20130512203518) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "description"
+    t.text   "description"
   end
 
   create_table "comments", :force => true do |t|
