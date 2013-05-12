@@ -2,12 +2,6 @@
 
   class WebappsController < ApplicationController
 
-    # To call method before some other methods
-    before_filter :webapps_top_comment, :only =>[:index]
-    before_filter :webapps_top_trend, :only => [:index]
-    before_filter :webapps_promoted, :only => [ :index]
-    before_filter :webapps_top_rated, :only => [:index]
-    before_filter :webapps_top_shared, :only => [ :index]
     before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
 
     # GET /webapps
