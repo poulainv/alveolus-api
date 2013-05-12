@@ -13,5 +13,9 @@ node do |webapp|
 				attributes :id, :pseudo
 			end
 		end
+
+		child webapp.category do |t|
+			attributes :id, :name
+		end
 	end
 end

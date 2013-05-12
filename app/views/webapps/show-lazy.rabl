@@ -8,5 +8,9 @@ node do |webapp|
 		child :tags do
 			attributes *Tag.column_names
 		end
+
+		child webapp.category do |t|
+			attributes :id, :name
+		end
 	end
 end
