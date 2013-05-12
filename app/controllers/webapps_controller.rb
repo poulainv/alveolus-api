@@ -135,6 +135,8 @@
         @webapps = Webapp.most_commented(n)
       when "rated"
         @webapps = Webapp.best_rated(n)
+      when "shared"
+        @webapps = Webapp.best_shared(n)
       when "random"
         @webapps = Webapp.random(n)
       end
@@ -142,32 +144,5 @@
     end
   end
 
-    ## Methods TOPS
 
-    protected
-    def webapps_top_trend
-      @webapps_top_trend = Webapp.trend(5)
-    end
-
-    protected
-    def webapps_top_comment
-      @webapps_top_comment = Webapp.most_commented(5)
-    end
-
-    protected
-    def webapps_top_rated
-      @webapps_top_rated = Webapp.best_rated(5)
-    end
-
-    protected
-    def webapps_top_shared
-      @webapps_top_shared = Webapp.best_shared(5)
-    end
-
-    def webapps_promoted
-      @webapps_promoted = Webapp.promoted
-    end
-
-
-
-  end
+end
