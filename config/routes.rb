@@ -11,15 +11,19 @@ EnjoyTheWeb::Application.routes.draw do
   
   get "pages/about"
 
+  ## Webapp/Alveoles
   match "/webapps/:id/comments/", :to => "webapps#comments"
   match "/webapps/:id/tags/", :to => "webapps#tags"
   match "/webapps/:id/bookmarks/", :to => "webapps#bookmarks"
 
+  ## User
   match "/users/:id/comments/", :to => "users#comments"
   match "/users/:id/bookmarks/", :to => "users#bookmarks"
 
+  ## Categories
   match "/categories/:id/webapps", :to => "categories#webapps"
-  match "/categories/:id/featured_webapp", :to => "categories#featuredWebapp"
+  match "/categories/:id/featured_webapp", :to => "categories#featured_webapp"
+  match "/categories/:id/featured_webapps", :to => "categories#featured_webapps"
 
   match '/about',   :to => 'pages#about'
   match '/faq',   :to => 'pages#faq'

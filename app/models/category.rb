@@ -4,11 +4,14 @@ class Category < ActiveRecord::Base
   has_many :webapps
 
    # Return a random featured webapp for a category
-  def featuredWebapp
+  def featured_webapp(n)
     if Rails.env == "production"
-    	self.webapps.where(:featured => true).order("RANDOM()").first
+    	self.webapps.where(:featured => true).order("RANDOM()").limit(n)
     else
-    	self.webapps.where(:featured => true).order("RAND()").first
+    	self.webapps.where(:featured => true).order("RAND()").limit(n)
     end
   end
+
 end
+
+
