@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr" ng-app="alveolus">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.css" >
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/webapp.css"/>
+  <link rel="stylesheet" href="css/FontAwesome/css/font-awesome.min.css"> <!-- Ajout d'icones à bootstrap -->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'><!-- police Open Sans -->
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/services.js"></script>
+  <script src="js/controllers/homeCtrl.js"></script>
+  <script src="js/controllers/webAppDescCtrl.js"></script>
+  <script src="js/controllers/userCtrl.js"></script>
+  <script src="js/filters/filters.js"></script>
+  <script src="js/directives/directives.js"></script>
+  <script src="js/dom.js"></script>
+
+</head>
+
+<body>
+  <div id="mainContainer">
+    <div id="headerCarousel">
+      <img id="headerImgCarousel" src="img/img.jpg" alt="imgCarrousel">
+    </div>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <!-- Be sure to leave the brand out there if you want it shown -->
+          <a class="brand" href="#"><img id="logoNavbar" src="img/logo_home2.png" alt="logoNavbar"></a>
+
+          <div id="searchNavbar" class="input-append navbar-search">
+            <input class="span2" type="text" placeholder="Entrez une recherche">
+            <span class="add-on">
+              <i class="icon-search"></i>
+            </span>
+          </div>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              <li class="divider-vertical"></li>
+              <li><a href="#"><i class="icon-plus icon-white"></i> Poster une Alvéole</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="#"><i class="icon-eye-open icon-white"></i> À propos d'AlveolUs</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="#"><i class="icon-user icon-white"></i> Sign in</a></li>
+              <li class="divider-vertical"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-view></div>
+  </div>
+  
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="lib/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+
+</body>
+</html>
