@@ -18,12 +18,12 @@ Category.delete_all
 Comment.delete_all
 Bookmark.delete_all
 
-Category.create(:name => 'Crowdfunding')
-Category.create(:name => 'Food')
-Category.create(:name => 'Autopartage')
-Category.create(:name => 'Connaissance')
-Category.create(:name => 'Hébergement')
-Category.create(:name => 'Art')
+Category.create(:name => 'Crowdfunding',:description => "Appelé aussi finance participative, le crowfunding est une technique de financement de projets ou de création d\'entreprise utilisant internet comme canal de mise en relation entre les porteurs de projet et les personnes souhaitant investir dans ces projets.")
+Category.create(:name => 'Food', :description => "Partager un repas, promouvoir l\'agriculture locale, créer un jardin partager, cette catégorie vous fait découvrir les sites internet collaboratif autour de la nourriture")
+Category.create(:name => 'Autopartage', :description => "Découvrez les nouvelles façon de partager sa voiture. En covoiturage ou en location, participer à réduire le nombre de véhicule, et réduisez vos coût")
+Category.create(:name => 'Connaissance', :description => "Internet est formidable pour partager le savoir et transmettre la connaissance. Découvrez les nombreux sites basés sur la contribution permettant d\'apprendre")
+Category.create(:name => 'Hébergement', :description => "Trouver un logement à l\'autre bout du monde en échange du votre, être accueilli en couchsurfing ou faire du woofing, découvrez les nouvelles façons de se rencontrer")
+Category.create(:name => 'Art', :description => "Collaborer et partager autour de l\'art")
 
 Webapp.create( :title =>'Babyloan',
   :category_id => 1,

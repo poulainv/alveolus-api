@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130510085605) do
+ActiveRecord::Schema.define(:version => 20130512203518) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20130510085605) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "comments", :force => true do |t|
@@ -162,7 +163,7 @@ ActiveRecord::Schema.define(:version => 20130510085605) do
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
     t.boolean  "featured"
-    t.integer  "nb_click_shared",    :default => 0
+    t.integer  "nb_click_shared"
     t.integer  "user_id"
     t.string   "vimeo_id"
     t.string   "facebook_id"
