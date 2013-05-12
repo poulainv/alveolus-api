@@ -124,6 +124,24 @@
       render :status => 200, :nothing => true
     end
 
+    ## Get webapp/trend/:what
+    def trend
+      n = 12
+      if params[:type]
+       case params[:type]
+       when "recent"
+        @webapps = Webapp.recent(n)
+      when "commented"
+        @webapps = Webapp.most_commented(n)
+      when "rated"
+        @webapps = Webapp.best_rated(n)
+      when "random"
+        @webapps = Webapp.random(n)
+      end
+      render "webapps/index"
+    end
+  end
+
     ## Methods TOPS
 
     protected

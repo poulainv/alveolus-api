@@ -33,5 +33,16 @@ class CategoriesController < ApplicationController
         render "webapps/show"
     end
 
+    # GET /categories/featured_webapps
+    def categories_featured_webapps
+        @categories = Category.all
+        
+        @categories.each do |c|
+            c.webapps = c.featured_webapp(@@nb_webapp_featured)
+        end 
+         render :json => @categories.to_json( :include => :featured_webapp.to_json )
+
+    end
+
 
 end
