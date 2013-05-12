@@ -9,7 +9,7 @@ node do |webapp|
 
 		child webapp.comments do |t|
 			attributes *Comment.column_names
-			child (:user) do 
+			child (:user) do
 				attributes :id, :pseudo
 			end
 		end
