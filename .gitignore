@@ -16,3 +16,6 @@
 
 # File system OS
 .DS_STORE
+.DS_Store
+.gitignore
+public/.DS_Store
