@@ -6,19 +6,31 @@ angular.module('alveolus.webAppDescCtrl', []).
 controller('WebAppDescCtrl', function($scope, $routeParams, Webapp, WebappFacebook, User, Categorie, WebappComments, WebappTwitter) {
 
 	$scope.webAppId=$routeParams.webAppId;
-	$scope.result=Webapp.get({id: $routeParams.webAppId}, function(){
-		$scope.user=$scope.result.webapp.user_id ? User.get({id: $scope.result.webapp.user_id}) : {'pseudo':'l\'équipe'};
-	    $scope.category=Categorie.get({id: $scope.result.webapp.category_id});
+	$scope.webapp=Webapp.get({id: $routeParams.webAppId}, function(){
+		$scope.user=$scope.webapp.user_id ? User.get({id: $scope.webapp.user_id}) : {'pseudo':'l\'équipe'};
+	    $scope.category=Categorie.get({id: $scope.webapp.category_id});
 
-	    $scope.result.webapp.facebook_id="294735233916083"; // à remplacer quand données complètes
-		WebappFacebook.get($scope.result.webapp.facebook_id,function(data){$scope.facebook=data}); 
+	    $scope.webapp.facebook_id="294735233916083"; // à remplacer quand données complètes
+	    if($scope.webapp.facebook_id)
+			WebappFacebook.get($scope.webapp.facebook_id,function(data){$scope.facebook=data}); 
+		else $scope.facebook=null;
 
-		$scope.result.webapp.twitter_id="Cupofteach"; // à remplacer aussi
-		WebappTwitter.get($scope.result.webapp.twitter_id,function(data){$scope.twitter=data});
+		$scope.webapp.twitter_id="Cupofteach"; // à remplacer aussi
+		if($scope.webapp.twitter_id)
+			WebappTwitter.get($scope.webapp.twitter_id,function(data){$scope.twitter=data});
+		else $scope.twitter=null;
+
+		$scope.webapp.gplus_id="103505662474284621269"; // à remplacer aussi
+		// if($scope.webapp.gplus_id)
+		// 	WebappTwitter.get($scope.webapp.gplus_id,function(data){$scope.twitter=data});
+		// else $scope.twitter=null; // A voir récupération données google+
+
+
+		$scope.webapp.vimeo_id="53270929";
 		
 	});
 
-
+	
 
 	$('#webappModal').modal({
         backdrop: true,
