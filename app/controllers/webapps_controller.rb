@@ -9,12 +9,6 @@
       @webapps = Webapp.all
     end
 
-    # GET /webapps/:id/comments
-    def comments
-      @comments = Webapp.find(params[:id]).comments
-      render json: @comments
-    end
-
     # GET /webapps/:id/tags
     def tags
       @tags = Webapp.find(params[:id]).tags
@@ -35,25 +29,22 @@
     # GET /webapps/new
     def new
       @webapp = Webapp.new
-      @title = "Un site Web à proposer ?"
-      #If we want apply an other layout with this method :
-      render :layout => "pages"
+      render :json => @webapp
     end
 
     # POST /webapps/
     def create
-      tag_list  = params[:webapp].delete(:tag_list)
-      @webapp  = current_user.webapps.build(params[:webapp])
+      #tag_list  = params[:webapp].delete(:tag_list)
+      # @webapp  = current_user.webapps.build(params[:webapp])
+      @webapp  = webapps.build(params[:webapp])
       @webapp.nb_click_shared = 0;
       if @webapp.save
-        @webapp.add_tags(tag_list, current_user)
-        flash[:success] = "Votre soumission a bien été prise en compte"
-        redirect_to accueil_path
+        # @webapp.add_tags(tag_list, current_user)
+        render :json => "ok", :status => :created
       else
-        @title = "Une nouvelle idée de Website ?"
-        render :layout => "pages", :action => "new"
-      end
-    end
+       render :json => "ko", :status => :unprocessable_entity
+     end
+   end
 
     # GET /webapp/1/edit
     def edit
