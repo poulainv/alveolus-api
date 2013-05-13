@@ -1,0 +1,23 @@
+<h1>Listing admin_webapps</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_webapps.each do |admin_webapp| %>
+  <tr>
+    <td><%= admin_webapp.title %></td>
+     <td><%= link_to 'Show', admin_webapp %></td>
+    <td><%= link_to 'Edit', edit_admin_webapp_path(admin_webapp) %></td>
+    <td><%= link_to 'Destroy', admin_webapp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Webapp', new_admin_webapp_path %>

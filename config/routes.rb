@@ -59,6 +59,13 @@ EnjoyTheWeb::Application.routes.draw do
     end
   end
 
+   namespace :admin do
+      # Directs /admin/users/* to Admin::UsersController
+      # (app/controllers/admin/products_controller.rb)
+      resources :users
+      resources :webapps
+    end
+
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
   root :to => "webapps#index"
