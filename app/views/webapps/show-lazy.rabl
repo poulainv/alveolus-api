@@ -1,12 +1,12 @@
 ## Show webapp without comments 
 
 object @webapp
-attributes *Webapp.column_names
+attributes :id, :rating, :title, :description, :caption, :image, :average_rate
 
 node do |webapp|
 	if webapp
 		child :tags do
-			attributes *Tag.column_names
+			attributes :id, :name
 		end
 
 		child webapp.category do |t|
