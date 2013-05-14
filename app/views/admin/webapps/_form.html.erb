@@ -33,6 +33,13 @@
         <%= f.text_area :description, :class => "input-xxlarge" %>
       </div>
 
+       <div class="field">
+        Catégorie
+         <%= f.select :category_id, Category.all.collect {|x| [x.name, x.id]}, {}%>
+      </div>
+
+    
+
         <div class="field">
           Identifiant Vimeo <%= f.text_field :vimeo_id, :placeholder=>"Optionnel" %>
         </div>
@@ -42,23 +49,20 @@
         </div>
 
        <div class="field">
-          Identifiant G+ <%= f.text_field :twitter_id, :placeholder=>"Optionnel" %>
+          Identifiant G+ <%= f.text_field :gplus_id, :placeholder=>"Optionnel" %>
         </div>
 
        <div class="field">
-          Identifiant Twitter <%= f.text_field :gplus_id, :placeholder=>"Optionnel" %>
+          Identifiant Twitter <%= f.text_field :twitter_id, :placeholder=>"Optionnel" %>
         </div>
 
         <div class="field">
           Validation <%= f.check_box :validate %>
         </div>
 
-        <div class="field">
-          Promotion <%= f.check_box :promoted %>
-        </div>
 
         <div class="field">
-          Suggestion <%= f.check_box :featured %>
+          Featured <%= f.check_box :featured %>
         </div>
     <!--   <div>
         <%= f.label :tag_list, "Tags (séparé par virgules)" %>
