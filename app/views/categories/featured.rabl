@@ -1,5 +1,5 @@
 object @categories
-attributes :id,:name
+attributes :id,:name, :description
 
 node do |categories|
 	if categories
@@ -9,6 +9,10 @@ node do |categories|
 				if featured_webapp
 					child :tags do
 						attributes :id,:name
+					end
+
+					child :comments do |t|
+						attributes :id
 					end
 				end
 			end
