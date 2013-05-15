@@ -2,7 +2,7 @@
 
   class WebappsController < ApplicationController
 
-    before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
+    before_filter :authenticate_user!, :only => [ :edit, :update ,:destroy]
 
     # GET /webapps
     def index
@@ -23,7 +23,10 @@
 
     # GET /webapps/:id
     def show
-      @webapp = Webapp.find_by_id(params[:id])
+    #  if current_user
+        @webapp = Webapp.find_by_id(params[:id])
+     # end
+
     end
 
     # GET /webapps/new
@@ -36,7 +39,7 @@
     def create
       #tag_list  = params[:webapp].delete(:tag_list)
       # @webapp  = current_user.webapps.build(params[:webapp])
-      @webapp  = webapps.build(params[:webapp])
+      @webapp  = Webapp.new(params[:webapp])
       @webapp.nb_click_shared = 0;
       if @webapp.save
         # @webapp.add_tags(tag_list, current_user)
