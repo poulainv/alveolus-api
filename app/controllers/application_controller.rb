@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  
+  #protect_from_forgery
   #http_basic_authenticate_with :name => "admin", :password => "quenelle"
 
    # do not use CSRF for CORS options
@@ -17,6 +18,18 @@ class ApplicationController < ActionController::Base
 
   def options 
     render :text => '', :content_type => 'text/plain'
+  end
+
+  def resource_name
+    :user
+  end
+ 
+  def resource
+    @resource ||= User.new
+  end
+ 
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
   
 end
