@@ -3,9 +3,9 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.homeCtrl', []).
-controller('HomeCtrl', function($scope,$location,WebappsList,FeaturedApp,Categories) {
+controller('HomeCtrl', function($scope,$location,CategoryService,WebappService) {
 
-	$scope.webapps = WebappsList.query(function(){
+	$scope.webapps = WebappService.query(function(){
 		$scope.numColumns = 4;
 		$scope.rows = [];
 		$scope.cols = [];
@@ -16,19 +16,16 @@ controller('HomeCtrl', function($scope,$location,WebappsList,FeaturedApp,Categor
 		});
 	});
 
-	$scope.isCollapsed = false;
-	$scope.categories = Categories.getCategories(function(){
-		$scope.catSelected = $scope.categories[0];
-		$scope.descCatSelected =  $scope.categories[0].description;
-		$scope.appFeatured = FeaturedApp.get({id:$scope.catSelected.id});
-	});
+	CategoryService.getCategoriesWithFeaturedApps(function(data){
+		$scope.categories = data ;
+		$scope.catSelected = $scope.categories[Math.floor(Math.random() * $scope.categories.length)];
+		$scope.descCatSelected =  $scope.catSelected.description;
+		$scope.appFeatured = $scope.catSelected.webapps[Math.floor(Math.random() * $scope.catSelected.webapps.length)];
+	})
 
 	$scope.changeCat = function(cat){
-		$scope.isCollapsed = true;
 		$scope.catSelected = cat;
-		$scope.appFeatured = FeaturedApp.get({id:cat.id}, function(){
-			$scope.isCollapsed = false;			
-		});	
+		$scope.appFeatured = cat.webapps[Math.floor(Math.random() * $scope.catSelected.webapps.length)];
 	}
 
 	$scope.itemClass = function(cat) {
