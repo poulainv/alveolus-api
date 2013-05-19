@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  protect_from_forgery
+  protect_from_forgery with: :null_session
   #http_basic_authenticate_with :name => "admin", :password => "quenelle"
 
    # do not use CSRF for CORS options
