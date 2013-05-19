@@ -42,9 +42,9 @@
       @webapp.nb_click_shared = 0;
       if @webapp.save
         @webapp.add_tags(tag_list, current_user)
-        render :json => "ok", :status => :created
+        render :json => @webapp, :status => :created
       else
-        render :json => {:errors => "ok", :status => :unprocessable_entity}
+        render :json => {:errors => @webapp.errors.full_messages, :status => :unprocessable_entity}
       end
     end
 
