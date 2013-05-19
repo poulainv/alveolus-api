@@ -2,7 +2,7 @@
 
     class WebappsController < BaseController
 
-    before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
+    before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy, :vote]
 
     # GET /webapps
     def index
@@ -112,7 +112,7 @@
       render :status => 200, :nothing => true
     end
 
-    ## Get webapp/trend/:what
+    ## Get webapp/trend/:type
     def trend
       n = 12
       if params[:type]
@@ -127,6 +127,8 @@
         @webapps = Webapp.best_shared(n)
       when "random"
         @webapps = Webapp.random(n)
+      when "unvalidated"
+        @webapps = Webapp.unvalidated
       end
       render "webapps/index"
     end
