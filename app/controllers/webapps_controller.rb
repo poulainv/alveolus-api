@@ -39,7 +39,8 @@
     def create
       tag_list  = params[:webapp].delete(:tag_list)
       @webapp  = current_user.webapps.build(params[:webapp])
-      @webapp.nb_click_shared = 0;
+      @webapp.nb_click_shared = 0
+      @webapp.validate = false 
       if @webapp.save
         @webapp.add_tags(tag_list, current_user)
         render :json => @webapp, :status => :created
@@ -131,4 +132,20 @@
     end
   end
 
+  def search
+    if params[:search]
+      query = params[:search]
+      if query.length < 3
+           render :json => {:errors => "search too short", :status => :unprocessable_entity}
+      else
+        @webapps = Webapp.validated.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
+        tags = Tag.where{(name =~ "%#{query}%")}
+        tags.each do |tag|
+          @webapps += tag.webapps
+        end
+        @webapps = @webapps.uniq
+        render "webapps/index"
+      end
+    end
+  end
 end

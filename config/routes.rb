@@ -13,6 +13,7 @@ EnjoyTheWeb::Application.routes.draw do
   match "/webapps/:id/tags/", :to => "webapps#tags"
   match "/webapps/:id/bookmarks/", :to => "webapps#bookmarks"
   match "/webapps/trend/:type", :to => "webapps#trend"
+  match "/webapps/search/:search", :to => "webapps#search"
 
   ## User
   match "/users/:id/bookmarks/", :to => "users#bookmarks"
