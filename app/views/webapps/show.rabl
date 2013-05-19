@@ -17,5 +17,8 @@ node do |webapp|
 		child webapp.category do |t|
 			attributes :id, :name
 		end
+
+		node(:image_url) { |webapp| webapp.image_url }
+
 	end
 end

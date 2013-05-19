@@ -140,6 +140,10 @@ class Webapp < ActiveRecord::Base
     self.evaluations.where{(value == "1") }.length
   end
 
+    def image_url
+        photo.url(:medium)
+    end
+
   def count_negative
     self.evaluations.where{(value == "-1") }.length
   end
