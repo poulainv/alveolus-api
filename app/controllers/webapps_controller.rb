@@ -1,8 +1,8 @@
   # encoding: utf-8
 
-  class WebappsController < ApplicationController
+    class WebappsController < BaseController
 
-    before_filter :authenticate_user!, :only => [ :edit, :update ,:destroy]
+    before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy]
 
     # GET /webapps
     def index
@@ -24,10 +24,10 @@
     # GET /webapps/:id
     def show
     #  if current_user
-        @webapp = Webapp.find_by_id(params[:id])
+    @webapp = Webapp.find_by_id(params[:id])
      # end
 
-    end
+   end
 
     # GET /webapps/new
     def new
@@ -37,17 +37,16 @@
 
     # POST /webapps/
     def create
-      #tag_list  = params[:webapp].delete(:tag_list)
-      # @webapp  = current_user.webapps.build(params[:webapp])
-      @webapp  = Webapp.new(params[:webapp])
+      tag_list  = params[:webapp].delete(:tag_list)
+      @webapp  = current_user.webapps.build(params[:webapp])
       @webapp.nb_click_shared = 0;
       if @webapp.save
-        # @webapp.add_tags(tag_list, current_user)
+        @webapp.add_tags(tag_list, current_user)
         render :json => "ok", :status => :created
       else
-       render :json => "ko", :status => :unprocessable_entity
-     end
-   end
+        render :json => {:errors => "ok", :status => :unprocessable_entity}
+      end
+    end
 
     # GET /webapp/1/edit
     def edit
@@ -131,6 +130,5 @@
       render "webapps/index"
     end
   end
-
 
 end

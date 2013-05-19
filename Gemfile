@@ -8,6 +8,7 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'json'
 gem 'rabl'
+gem 'inherited_resources'
 
 group :production do
   gem 'thin'

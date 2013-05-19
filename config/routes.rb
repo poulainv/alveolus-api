@@ -6,8 +6,6 @@ EnjoyTheWeb::Application.routes.draw do
   resources :feedback, :only => [:new, :create]
 
   resources :authentications
-
-  devise_for :users
   
   get "pages/about"
 
@@ -65,7 +63,7 @@ EnjoyTheWeb::Application.routes.draw do
       resources :users
       resources :webapps
     end
-
+  devise_for :users, :controllers => {:sessions => 'sessions'}
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
   root :to => "webapps#index"

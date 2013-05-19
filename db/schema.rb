@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512203518) do
+ActiveRecord::Schema.define(:version => 20130519104306) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20130512203518) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.text   "description"
+    t.text     "description"
   end
 
   create_table "comments", :force => true do |t|
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20130512203518) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "confirmation_url"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
