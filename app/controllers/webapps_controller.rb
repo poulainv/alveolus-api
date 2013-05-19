@@ -129,6 +129,8 @@
         @webapps = Webapp.random(n)
       when "unvalidated"
         @webapps = Webapp.unvalidated
+        render :json => @webapps.to_json(:methods => %w(count_negative count_positive))
+        return
       end
       render "webapps/index"
     end
