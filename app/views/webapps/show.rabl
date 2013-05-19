@@ -18,7 +18,7 @@ node do |webapp|
 			attributes :id, :name
 		end
 
-		node(:image_url) { |webapp| webapp.image_url }
+		node(:image_url) { |webapp| webapp.image_url(:medium) }
 
 	end
 end

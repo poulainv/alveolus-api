@@ -69,6 +69,7 @@ EnjoyTheWeb::Application.configure do
   ## Config paperclip on amazon S3
   PAPERCLIP_STORAGE_WEBAPP = {
     :styles => { :caroussel => "550x350!",:medium => "500x300>", :small => "240x160!"},
+    :default_url => "img/missing.png",
     :convert_options => {
        :caroussel => "-quality 75 -strip",
        :small => "-quality 75 -strip",
