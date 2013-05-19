@@ -27,10 +27,6 @@ EnjoyTheWeb::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/faq',   :to => 'pages#faq'
   match '/accueil',   :to => 'webapps#index'
-  match '/suggestion',   :to => 'webapps#new'
-  match '/moderation_users',   :to => 'users#index'
-  match '/vote', :to => "webapps#index", :order=>'unvalidated', :layout=>'true'
-  match '/website', :to => "pages#show"
   match "/contact", :to => "pages#contact"
 
   resources :tags do
