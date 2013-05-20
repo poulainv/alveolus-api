@@ -1,21 +1,26 @@
-'use strict';
+    'use strict';
 
 
 // Declare app level module which depends on filters, and services
-angular.module('alveolus', 
+angular.module('alveolus',
     ['alveolus.filters',
-    'alveolus.services',
-    'alveolus.webappService', 
-    'alveolus.categoryService', 
-    'alveolus.commentService', 
+    'ngCookies',
+    'alveolus.webappService',
+    'alveolus.categoryService',
+    'alveolus.commentService',
+    'alveolus.sessionService',
     'alveolus.socialService', 
+    'alveolus.feedbackService', 
     'alveolus.userService', 
+    'alveolus.tagService', 
     'alveolus.directives', 
     'alveolus.homeCtrl', 
+    'alveolus.mainCtrl', 
     'alveolus.webappCtrl', 
-    'alveolus.addWebappCtrl', 
-    'alveolus.userCtrl', 
-    'alveolus.webAppListCtrl', 
+    'alveolus.addWebappCtrl',
+    'alveolus.userCtrl',
+    'alveolus.webAppListCtrl',
+    'alveolus.voteCtrl',
     'ui.bootstrap'
     ]).
 config(
@@ -23,13 +28,12 @@ config(
     $routeProvider.
     when('', {templateUrl: 'partials/home.html',   controller: 'HomeCtrl'}).
     when('/alveoles/new', {templateUrl: 'partials/addWebapp.html',   controller: 'AddWebappCtrl'}).
+    when('/alveoles/search/:content', {templateUrl: 'partials/webAppList.html',   controller: 'WebAppListCtrl'}).
     when('/alveoles/:webAppId', {templateUrl: 'partials/webAppDesc.html',   controller: 'WebappCtrl'}).
     when('/webappModal/:webAppId', {templateUrl: 'partials/webAppModal.html',   controller: 'WebappCtrl'}).
-    when('/alveoles/categorie/:catId', {templateUrl: 'partials/webAppList.html', controller: 'WebAppListCtrl'}).
-    when('/alveoles/featured/:selectionId', {templateUrl: 'partials/webAppList.html', controller: 'WebAppListCtrl'}).
-    when('/alveoles/search/:content', {templateUrl: 'partials/webAppList.html', controller: 'WebAppListCtrl'}).
+    when('/alveoles', {templateUrl: 'partials/webAppList.html', controller: 'WebAppListCtrl'}).
     when('/user/:userId', {templateUrl: 'partials/user.html',   controller: 'UserCtrl'}).
-    otherwise({redirectTo: ''});
-}],["$httpProvider", function($httpProvider) {
-    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+    when('/vote', {templateUrl: 'partials/vote.html',   controller: 'VoteCtrl'}).
+    otherwise({redirectTo: '/', templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
 }]);
+

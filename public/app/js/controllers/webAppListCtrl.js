@@ -3,166 +3,123 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.webAppListCtrl', []).
-controller('WebAppListCtrl', function($scope,$routeParams,WebappService,CategoryService) {
+controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappService,CategoryService) {
 
 
+	// $('#headerCarousel').hide();
+	init();
 
-	go();
+	/**
+	* On change de catégorie
+	**/
+	$scope.changeCat = function(cat){
 
-	function catDisplay(){
-		$scope.subcats = new Array();
+		console.log("changeCat("+cat.name+")");
+		console.log($scope.cats);
 
+		$scope.subcats = [] ;
+		$scope.subTitle = cat.name;
 
-		WebappService.getFeaturedApps({catId: $routeParams.catId}, function(data){
-			var c = new Object();
-			c.name ='Sélection de l\'équipe';
-			c.alveoles = data;
-			$scope.subcats.push(c);
+		// Get featured app for category 'cat'
+		$scope.subcats.push({ name : 'Sélection de l\'équipe', alveoles : cat.webapps});
 
-			//On doit attendre que la requête des app featured soit terminée pour être sur que les subcats soient dans le bon ordre
-			WebappService.getAppsFromCat({catId: $routeParams.catId}, function(data){
-				var c = new Object();
-				c.name ='Toutes les alvéoles';
-				c.alveoles = data.webapps;
-				$scope.subcats.push(c);
-			});
+		// Get all apps for category 'cat'
+		WebappService.getAppsFromCat({catId: cat.id}, function(data){
+			$scope.subcats.push({ name : 'Toutes les alvéoles', alveoles : data.webapps});
 		});
+	};
 
-		$scope.numColumns = 4;
-		$scope.rows = [];
-		$scope.cols = [];
 
-		$scope.$watch("webApps.length", function(){
-			// $scope.rows.length = Math.ceil($scope.webApps.length / $scope.numColumns);
-			// $scope.cols.length = $scope.numColumns;        
-		});
-	}
-
-	function getSelectionName(id){
-		for(var i in $scope.selectionCats){
-			if($scope.selectionCats[i].id == id){
-				return $scope.selectionCats[i].name;
-			}
-		}
-		return null;
-	}
-
-	function display(){
-		setPageName($scope.cats);
-		setSelectionCats();
-
-		if($routeParams.catId){
-			console.log('Liste catégorie');
-
-			//Affichage par catégorie
-			catDisplay();
-		}
-
-		else if($routeParams.selectionId){
-
-			console.log('Liste sélection');
-
-			//Affichage par sélection
-			selectionDisplay();
-		}
-
-		else if($routeParams.content){
-			console.log('Résultat recherche');
-
-			//Affichage du résultat de la recherche
-			resultDisplay();
-		}	
-
-	}
-
-	function go(){
-		$scope.subcats = new Array();
-		// On commence par charger les catégories
-		$scope.cats = CategoryService.getCategories(function(){
-			//On lance l'affichage
-			display();		
-		});
-		//Watcher pour ne pas requeter à chaque fois
-		$scope.$watch('cats',function(newValue){
-			if(newValue && newValue.length > 0 ){
-				//On lance l'affichage
-				display();
-			}
-		});
-
-	}
-
-	function selectionDisplay(){
-
-		switch(parseInt($routeParams.selectionId)){
+	/**
+	* On change de feature
+	**/
+	$scope.changeFeat = function(catFeat){
+		console.log("changeFeat("+catFeat.name+")");
+		
+		$scope.subTitle = catFeat.name;
+		$scope.subcats = [] ;
+		
+		switch(catFeat.id){
 			case 1:
 			//Sélection de l'équipe
-			$scope.pageName = getSelectionName(1);
+			for(var i in $scope.cats){
+				$scope.subcats.push({ name : $scope.cats[i].name, alveoles : $scope.cats[i].webapps});
+			}
 			break;
 			case 2:
 			//Les plus commentéees
-			$scope.pageName = getSelectionName(2);
 			WebappService.getMostCommented(function(data){
-				$scope.mostCommentedApps = data;
-				$scope.subcats[0].alveoles = data;
-			})
+				$scope.subcats.push({ name : '', alveoles : data});
+
+			});
 			break;
 			case 3:
 			//Les mieux notées
-			$scope.pageName = getSelectionName(3);
 			WebappService.getBest(function(data){
-				$scope.bestApps = data;
-				$scope.subcats[0].alveoles = data;
-			})
+				$scope.subcats.push({ name : '', alveoles : data});
+			});
 			break;
 			case 4:
 			//Les plus récentes
-			$scope.pageName = getSelectionName(4);
 			WebappService.getMostRecent(function(data){
-				$scope.mostRecentApps = data;
-				$scope.subcats[0].alveoles = data;
-			})
+				$scope.subcats.push({ name : '', alveoles : data});
+			});
 			break;
 			case 5:
 			//Les plus partagées
-			$scope.pageName = getSelectionName(5);
 			WebappService.getMostShared(function(data){
-				$scope.mostSharedApps = data;
-				$scope.subcats[0].alveoles = data;
-			})
+				$scope.subcats.push({ name : '', alveoles : data});
+			});
 			break;
 			default:
 			break;
-
 		}
+	};
 
+	$scope.search = function(content){
+		$location.path('/alveoles/search/'+content);
+	};
+
+	$scope.searchResults = function(content){
+		$scope.subTitle = content;
+		$scope.subcats = [] ;
+		WebappService.search({'content':content}, function(data){
+			$scope.subcats.push({ name : 'Résultats de la recherche', alveoles : data});
+		});
 	}
 
-	function setPageName(cats){
-		if($routeParams.catId){
-			$scope.pageName=cats[parseInt($routeParams.catId)-1].name;
-		}
-		else if($routeParams.selectionId && $routeParams.selectionId == 1){
-			$scope.subcats = [];
+	/**
+	* Initialiase les variables au chargement de la page (une seule fois)
+	**/
+	function init(){
 
-			for(var i in cats){
-				var r = new Object();
-				r.name = cats[i].name;
-				r.alveoles = null;
-				$scope.subcats.push(r);
+		console.log("init()");
+
+		$scope.subcats = [];
+		initSelectionCats();
+		var idCat = CategoryService.getIdCatSelected();
+
+		// On commence par charger les catégories
+		CategoryService.getCategoriesWithFeaturedApps(function(data){
+			//Si l'utilisateur arrive sur la page directement depuis l'url, on le met sur les staff picks
+			$scope.cats = data;
+			if($routeParams.content){
+				$scope.searchResults($routeParams.content);
+			} else if(idCat){
+				$scope.changeCat($scope.cats[idCat-1]);				
+			} else {
+				$scope.changeFeat($scope.selectionCats[0]);
 			}
+		});
 
-		} else {
-			$scope.subcats = [];
-			var r = new Object();
-			r.name = '';
-			r.alveoles = null;
-			$scope.subcats.push(r);
-		}
-		
 	}
 
-	function setSelectionCats(){
+
+	/**
+	* On initialise la liste des sélections
+	**/
+	function initSelectionCats(){
+		console.log("setSelectionCats()");
 		$scope.selectionCats = [
 		{
 			'name':'Sélection de l\'équipe',
@@ -184,11 +141,7 @@ controller('WebAppListCtrl', function($scope,$routeParams,WebappService,Category
 			'name':'Les plus partagées',
 			'id':5
 		}
-		]
-	}
-
-	function resultDisplay(){
-		$scope.pageName = $routeParams.content;
+		];
 	}
 
 });

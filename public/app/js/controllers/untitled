@@ -1,0 +1,124 @@
+ <input type="text" ng-model="user.email"/>
+ <input type="password" ng-model="user.password"/>
+ <button ng-click="log()">Go</button>
+{{user.email}}{{user.password}}
+ <button ng-click="exit()">Exit</button>
+	$scope.user = SessionService.getUser();
+
+	$scope.log = function() {
+		SessionService.sign_in($scope.user,function(d){
+			
+		});
+	}
+
+	$scope.exit = function() {
+		SessionService.sign_out(function(d){
+			
+		});
+	}
+
+	              <div id="loginHtml" class="hide">
+                <div class="control-group">
+                  <div class="controls">
+                    <div class="input-prepend">
+                      <span class="add-on"><div class="icon-user"></div></span>
+                      <input id="user-email" type="text" ng-model="user.email"/>
+                    </div>
+                  </div>
+                  <div class="control-group custom_inline" >
+                    <div class="controls">
+                      <div class="input-prepend">
+                        <span class="add-on"><div class="icon-lock"></div></span>
+                        <input id="user-password" type="password" ng-model="user.password"/>
+                      </div>
+                    </div>
+                    <button id="login" class="btn btn-success btn-block" >Go</button>
+                    <div class="line-separator"></div>
+
+                    <!-- <p> Ou connectez-vous avec : </p> -->
+      <!-- <div id="openIdProviders">
+        <a class="openIdProvider hover_green" id="facebookLogIn" href="/auth/facebook">Facebook</a>
+        <a class="openIdProvider soon hover_green" id="googleLogIn" href=""> Google </a>
+        <a class="openIdProvider soon hover_green" id="twitterLogIn" href="">Twitter </a>
+      </div> -->
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+ 
+
+
+<body>
+  <div id="page">
+
+    <div id="content">
+      <div id="header">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <h1>AlveolUs Rails API2</h1>
+
+        <input type="text" id="log"/>
+
+        <input type="password" id="pwd"/>
+
+        <script>
+        var url="http://localhost:3000"
+        var auth_token = ""; 
+        function login() {
+          var url="http://localhost:3000"
+          console.log("goo in");
+          var email = $('#log').val();
+          var password = $('#pwd').val();
+          console.log(password);
+          var url = '';
+          var data = {remote: true, commit: "Sign in", utf8: "✓", remember_me: 1, password: password, email: email};
+          $.post('http://localhost:3000/users/sign_in.json', data, function(resp) {
+            console.log(resp);
+            if(resp.success) {
+              auth_token = resp.auth_token;
+              console.log("ok");
+            } else {
+              console.log("ko");
+      // let the user know they failed authentication
+    }
+  });
+          return false;
+        }
+
+        function test() {
+          var url="http://localhost:3000"
+          var data = {auth_token:"auth_token"};
+          console.log("goo tes token : "+auth_token);
+          $.post(url+'/webapps', data, function(resp) {
+            console.log(resp);
+            if(resp.success) {
+              console.log("ok");
+            } else {
+              console.log("ko");
+            }
+          }, function(d){
+              console.log("eror");
+            }
+          );
+          return false;
+        }
+
+        function logout() {
+          var url="http://localhost:3000"
+          console.log("goo out");
+          var url = '';
+          $.ajax({            url: url+"/users/sign_out.json",
+            type : 'DELETE'
+          }).done(function(data) {
+            console.log(data);
+          });
+          return false;
+        }
+        </script>
+      </div>
+
+    </div>
+  </body>

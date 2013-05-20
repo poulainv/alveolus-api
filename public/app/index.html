@@ -4,38 +4,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My AngularJS App</title>
+  <title>AlveolUs</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap-responsive.css" >
   <link rel="stylesheet" href="css/app.css"/>
   <link rel="stylesheet" href="css/webapp.css"/>
+  <link rel="stylesheet" href="css/feedback.css"/>
   <link rel="stylesheet" href="css/FontAwesome/css/font-awesome.min.css"> <!-- Ajout d'icones à bootstrap -->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'><!-- police Open Sans -->
 
   <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-  -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>-->
   <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-cookies.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/services/services.js"></script>
+  <script src="js/services/sessionService.js"></script>
   <script src="js/services/webappService.js"></script>
   <script src="js/services/categoryService.js"></script>
   <script src="js/services/commentService.js"></script>
   <script src="js/services/socialService.js"></script>
+  <script src="js/services/feedbackService.js"></script>
+  <script src="js/services/tagService.js"></script>
   <script src="js/services/userService.js"></script>
   <script src="js/controllers/homeCtrl.js"></script>
+  <script src="js/controllers/mainCtrl.js"></script>
   <script src="js/controllers/webappCtrl.js"></script>
   <script src="js/controllers/addWebappCtrl.js"></script>
   <script src="js/controllers/webAppListCtrl.js"></script>
   <script src="js/controllers/userCtrl.js"></script>
+  <script src="js/controllers/voteCtrl.js"></script>
   <script src="js/filters/filters.js"></script>
   <script src="js/directives/directives.js"></script>
-  <script src="js/dom.js"></script>
 
 </head>
 
-<body ng-cloak>
+<body ng-controller="MainCtrl">
   <div id="mainContainer">
     <div id="headerCarousel">
       <img id="headerImgCarousel" src="img/img.jpg" alt="imgCarrousel">
@@ -48,31 +53,128 @@
           <a class="brand" href="#"><img id="logoNavbar" src="img/logo_home2.png" alt="logoNavbar"></a>
 
           <div id="searchNavbar" class="input-append navbar-search">
-            <input class="span2" type="text" placeholder="Entrez une recherche">
-            <span class="add-on">
-              <i class="icon-search"></i>
-            </span>
+            <form name="myForm" ng-submit="search(searchContent)">
+              <input id="searchInput" class="span2" type="text" ng-model="searchContent" placeholder="Entrez une recherche">
+              <!-- <typeahead model="testModel" data="getTags()"></typeahead> -->
+              <span class="add-on link" ng-click="search(searchContent)">
+                <i class="icon-search"></i>
+              </span>
+            </form>
           </div>
           <div class="nav-collapse collapse">
-            <ul class="nav pull-right">
-              <li class="divider-vertical"></li>
-              <li><a href="#/alveoles/new"><i class="icon-plus icon-white"></i> Poster une Alvéole</a></li>
-              <li class="divider-vertical"></li>
-              <li><a href="#"><i class="icon-eye-open icon-white"></i> À propos d'AlveolUs</a></li>
-              <li class="divider-vertical"></li>
-              <li><a href="#"><i class="icon-user icon-white"></i> Connexion</a></li>
-              <li class="divider-vertical"></li>
-            </ul>
+           <ul class="nav pull-right">
+             <li class="divider-vertical"></li>
+             <li><a href="#/alveoles/new"><i class="icon-plus icon-white"></i> Poster une Alvéole</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="#"><i class="icon-eye-open icon-white"></i> À propos d'AlveolUs</a></li>
+             <li class="divider-vertical"></li>
+             <li>
+              <a ng-hide="isLogged" ng-click="openModalLogin()"><i class="icon-user icon-white"></i>Connexion</a>
+              <a ng-show="isLogged" ng-click="sign_out()"><i class="icon-user icon-white"></i> Déconnexion</a>
+            </li>
+             <li class="divider-vertical"></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+   </div>
+   <a ng-click="openModalFeedback()" id="feedback_link" class="feedback_link left"></a>
+   <div class="row-fluid">
+     <div class="offset1 span10">
+      <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+  </div>
+  <div ng-view></div>
+</div>
+
+<div id="modalLogin" class="modal hide" tabindex="-1" role="dialog" aria-hidden="true" close="closeModalLogin()">
+  <div class="modal-header">
+    <h4>Connexion</h4>
+  </div>
+  <div class="modal-body">
+   <div class="control-group">
+    <div class="controls">
+      <div class="input-prepend">
+        <span class="add-on"><div class="icon-user"></div></span>
+        <input id="user-email" type="text" ng-model="user.email"/>
+      </div>
+    </div>
+    <div class="control-group custom_inline" >
+     <div class="controls">
+       <div class="input-prepend">
+         <span class="add-on"><div class="icon-lock"></div></span>
+         <input id="user-password" type="password" ng-model="user.password"/>
+       </div>
+     </div>
+     <div class="line-separator">
+     </div>
+    </div>
+
+  </div>
+</div>
+<div class="modal-footer">
+  <button ng-click="sign_in(user)" class="btn btn-success">Se connecter</button>
+  <button class="btn btn-warning cancel" ng-click="closeModalLogin()">Annuler</button>
+</div>
+</div>
+
+<div id="modalFeedback" class="modal hide" tabindex="-1" role="dialog" aria-hidden="true" close="closeModalFeedback()">
+  <div class="modal-header">
+    <h4>Feedback</h4>
+  </div>
+  <form name="formFeedback">
+    <div class="modal-body">
+      <div class="control-group">
+        <div class="controls">
+          <textarea autofocus="autofocus" cols="40" ng-model="feedback.content" id="feedbackContent" name="feedbackContent" placeholder="Une idée, un commentaire, un bug ? Dites-nous tout !" rows="20"></textarea>
+        </div>
+        <div class="modal-footer">
+          <div class="control-group">
+            <div class="controls">
+              <button class="btn btn-warning cancel" ng-click="closeModalFeedback()">Cancel</button>
+              <button class="btn btn-success"  ng-click="sendFeedback(feedback)" ng-disabled="!feedback.content">Envoyer
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
-    <div ng-view></div>
+  </form>
+</div> 
+
+<div id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="span3 offset2">
+        <h5>Qui sommes nous ?</h5>
+        <ul>
+          <li><a href="#">Nos valeurs</a></li>
+          <li><a href="#">L'équipe</a></li>
+          <li><a href="#">F.A.Q.</a></li>
+        </ul>
+
+      </div>
+      <div class="span3">
+        <h5>Contactez-nous</h5>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Signaler un bug</a></li>
+          <li><a href="#">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <h5>A propos</h5>
+        EnjoyTheWeb est un projet original ayant pour vocation de rapprocher deux entités ayant besoin l'une de l'autre : les sites web innovants et les internautes.
+    </div>
   </div>
-  
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <script src="lib/bootstrap/bootstrap.min.js"></script>
-  <script src="lib/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+</div>
+
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="lib/bootstrap/bootstrap.min.js"></script>
+<script src="lib/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
 
 </body>
 </html>

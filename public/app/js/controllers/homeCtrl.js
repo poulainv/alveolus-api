@@ -3,7 +3,8 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.homeCtrl', []).
-controller('HomeCtrl', function($scope,$location,CategoryService,WebappService) {
+controller('HomeCtrl', function($scope,$location,CategoryService,WebappService,SessionService) {
+
 
 	$scope.webapps = WebappService.query(function(){
 		$scope.numColumns = 4;
@@ -17,11 +18,11 @@ controller('HomeCtrl', function($scope,$location,CategoryService,WebappService) 
 	});
 
 	CategoryService.getCategoriesWithFeaturedApps(function(data){
-		$scope.categories = data ;
+		$scope.categories = data;
 		$scope.catSelected = $scope.categories[Math.floor(Math.random() * $scope.categories.length)];
 		$scope.descCatSelected =  $scope.catSelected.description;
 		$scope.appFeatured = $scope.catSelected.webapps[Math.floor(Math.random() * $scope.catSelected.webapps.length)];
-	})
+	});
 
 	$scope.changeCat = function(cat){
 		$scope.catSelected = cat;
@@ -29,16 +30,21 @@ controller('HomeCtrl', function($scope,$location,CategoryService,WebappService) 
 	}
 
 	$scope.itemClass = function(cat) {
-		return cat.id === $scope.catSelected.id ? 'catSelected' : undefined;
+		return cat.id === $scope.catSelected.id ? 'btnCatFocus' : undefined;
 	};
 
 	$scope.changeView = function(url){
 		console.log(url);
+		CategoryService.setIdCatSelected($scope.catSelected.id);
 		$location.path(url);
 	}
 
 	$scope.changeDesc = function(catSelected){
 		$scope.descCatSelected = catSelected;
 	}
+
+	$scope.search = function(content){
+		$location.path('/alveoles/search/'+content);
+	};
 
 });
