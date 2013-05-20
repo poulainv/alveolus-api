@@ -3,7 +3,7 @@
 
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:edit, :update]
+  before_filter :authenticate_user!, :only => [:edit, :update, :show]
 
   # GET /users
   def index
@@ -13,8 +13,10 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
-    @user = User.find(params[:id])
-    render json: @user
+    if params[:id] == current_user.id or current_user.try(:admin?)
+      @user = User.find(params[:id])
+      render "users/show"
+    end
   end
 
 
@@ -46,13 +48,13 @@ class UsersController < ApplicationController
     render :layout => "pages"
   end
 
-  def destroy
-    user = User.find(params[:id])
-    unless user == current_user
-      user.destroy
-      redirect_to users_path, :notice => "User deleted."
-    else
-      redirect_to users_path, :notice => "Can't delete yourself."
-    end
-  end
+  # def destroy
+  #   user = User.find(params[:id])
+  #   unless user == current_user
+  #     user.destroy
+  #     redirect_to users_path, :notice => "User deleted."
+  #   else
+  #     redirect_to users_path, :notice => "Can't delete yourself."
+  #   end
+  # end
 end

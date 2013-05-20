@@ -48,19 +48,26 @@ EnjoyTheWeb::Application.routes.draw do
     member { post :vote }    
   end
 
-  resources :users do
+  resources :users, :except => :destroy do
     resources :webapps do
       resources :comments
     end
   end
 
-   namespace :admin do
-      # Directs /admin/users/* to Admin::UsersController
-      # (app/controllers/admin/products_controller.rb)
-      resources :users
-      resources :webapps
-    end
+
+
+  namespace :admin do
+    resources :users
+    resources :webapps
+
+  end
   devise_for :users, :controllers => {:sessions => 'sessions'}
+
+  devise_scope :user do
+    delete "sign_out", :to => "sessions#destroy"
+    post "sign_in", :to => "sessions#create"
+  end
+
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
   root :to => "webapps#index"
