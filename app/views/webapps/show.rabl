@@ -17,7 +17,7 @@ node do |webapp|
 		end
 
 		child webapp.user do |t|
-			attributes :id, :pseudo
+			extends 'users/show-lazy'
 		end
 
 		node(:image_url) { |webapp| webapp.image_url(:medium) }

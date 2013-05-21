@@ -13,6 +13,10 @@ node do |webapps|
 		attributes :id, :name
 		end
 
+		child :user do |t|
+			extends 'users/show-lazy'
+		end
+
 		node(:image_url) { |webapp| webapp.image_url(:medium) }
 
 		node(:count_positive) { |webapp| webapp.count_positive }
@@ -20,5 +24,7 @@ node do |webapps|
 		node(:count_negative) { |webapp| webapp.count_negative }
 
 		node(:my_vote) { |webapp| webapp.vote_user(current_user) if(current_user) }
+
+		
 	end
 end
