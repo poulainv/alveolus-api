@@ -19,6 +19,6 @@ node do |webapps|
 
 		node(:count_negative) { |webapp| webapp.count_negative }
 
-		node(:my_vote) { |webapp| webapp.vote_user(current_user)}
+		node(:my_vote) { |webapp| webapp.vote_user(current_user) if(current_user) }
 	end
 end
