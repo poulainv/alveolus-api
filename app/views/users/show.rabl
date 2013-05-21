@@ -1,20 +1,20 @@
 object @user
-attributes *User.column_names
+extends 'users/show-lazy'
+
 
 node do |user|
 	if user
 		child :comments do
-			attributes *Comment.column_names
+			attributes :id, :body, :rating
 		end
 
 		child :webapps do
-			attributes *Webapp.column_names
+			attributes :id, :title, :caption, :description
 		end
 
 		child :webapps_starred do
-			attributes *Webapp.column_names
+			attributes :id, :title, :caption, :description
 		end
 
-		
 	end
 end

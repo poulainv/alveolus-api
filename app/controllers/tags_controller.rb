@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 
-class TagsController < ApplicationController
+class TagsController < BaseController
 
   before_filter :authenticate_user!, :only => [:create]
 

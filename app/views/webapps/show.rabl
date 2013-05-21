@@ -4,18 +4,20 @@ attributes *Webapp.column_names
 node do |webapp|
 	if webapp
 		child :tags do
-			attributes *Tag.column_names
+			attributes :id, :name
 		end
 
 		child webapp.comments do |t|
-			attributes *Comment.column_names
-			child (:user) do
-				attributes :id, :pseudo
-			end
+			extends "comments/index"
 		end
+
 
 		child webapp.category do |t|
 			attributes :id, :name
+		end
+
+		child webapp.user do |t|
+			attributes :id, :pseudo
 		end
 
 		node(:image_url) { |webapp| webapp.image_url(:medium) }

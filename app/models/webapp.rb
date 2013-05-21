@@ -150,7 +150,8 @@ class Webapp < ActiveRecord::Base
 
   def vote_user(user)
     return "up" if evaluations.where{(source_id == user.id) }.first.try(:value) == 1
-    return "down"
+    return "down" if evaluations.where{(source_id == user.id) }.first.try(:value) == -1
+    return "none"
   end
   
   def nb_rating

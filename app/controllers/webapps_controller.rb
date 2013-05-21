@@ -25,8 +25,7 @@
     def show
     #  if current_user
     @webapp = Webapp.find_by_id(params[:id])
-     # end
-
+    render "webapps/show"
    end
 
     # GET /webapps/new
@@ -45,7 +44,7 @@
         @webapp.add_tags(tag_list, current_user)
         render :json => @webapp, :status => :created
       else
-        render :json => {:errors => @webapp.errors.full_messages, :status => :unprocessable_entity}
+        render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
       end
     end
 
@@ -55,27 +54,23 @@
       if current_user.try(:admin?) or current_user.id == @webapp.user_id
         render :layout => "pages"
       else
-        flash[:error] = "Vous devez être administrateur pour éditer les websites ou bien l'utilisateur à l'initiative de cette suggestion."
-        redirect_to accueil_path
+        render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
       end
     end
 
 
     # PUT /webapps/1
-    # earPUT /webapps/1.json
     def update
       @webapp = Webapp.find(params[:id])
-      if current_user.try(:admin?) or (current_user.id == @webapp.user_id and @webapp.validate == false)
-        respond_to do |format|
-          if @webapp.update_attributes(params[:webapp])
-            format.html { redirect_to accueil_path, notice: 'Les données du website ont correctement été modifiées' }
-            format.json { head :no_content }
-          else
-            format.html { render action: "edit",:layout =>"pages" }
-            format.json { render json: @webapp.errors, status: :unprocessable_entity }
-          end
+      # if current_user.try(:admin?) or (current_user.id == @webapp.user_id and @webapp.validate == false)
+      
+        if @webapp.update_attributes(params[:webapp])
+          render :json => @webapp, :status => :created
+        else
+         render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
         end
-      end
+      
+      # end
     end
 
     # DELETE /webapps/1
@@ -129,7 +124,8 @@
         @webapps = Webapp.random(n)
       when "unvalidated"
         @webapps = Webapp.unvalidated
-        render :json => @webapps.to_json(:methods => %w(count_negative count_positive))
+        # render :json => @webapps.to_json(:methods => %w(count_negative count_positive))
+        render "webapps/show-with-vote"
         return
       end
       render "webapps/index"

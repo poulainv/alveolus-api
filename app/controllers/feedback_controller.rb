@@ -1,5 +1,5 @@
 # encoding: utf-8
-class FeedbackController < ApplicationController
+class FeedbackController < BaseController
   layout false
 
   def new

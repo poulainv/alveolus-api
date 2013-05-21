@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 
-class BookmarksController < ApplicationController
+class BookmarksController < BaseController
 
 
  # GET "webapps/:webapp_id/bookmarks

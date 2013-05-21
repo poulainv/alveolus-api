@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < BaseController
 
     @@nb_webapp_featured = 3
 

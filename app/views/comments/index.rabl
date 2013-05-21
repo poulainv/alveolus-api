@@ -1,1 +1,2 @@
-TODO
+collection @comments
+extends "comments/show"

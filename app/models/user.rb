@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
 
 
   ## virtual attributes
-  def image
-    self.avatar.url(:mini)
+  def image_url(type)
+        self.avatar.url(type)
   end
 
 
