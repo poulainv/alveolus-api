@@ -27,16 +27,13 @@ class TagsController < BaseController
         if @webapp.add_tags(params[:tag],current_user)
           render :json => @webapp.best_tags.to_json
         else
-          flash[:error] = "Vous avez déjà taggué ce site"
-          render :json => "", :status => 406
+          render :json => {:errors => "error"}, :status => :unprocessable_entity
         end
       else
-        flash[:error] = "La Webapp demandé n'existe pas"
-        redirect_to accueil_path
+        render :json => {:errors => "I can't find this alveoles"}, :status => :unprocessable_entity
       end
     else
-      flash[:error] = "La page demandée n'existe pas"
-      redirect_to accueil_path
+      render :json => {:errors => "I neew webapp_id : alveole ID!"}, :status => :unprocessable_entity
     end
   end
 

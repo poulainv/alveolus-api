@@ -94,7 +94,7 @@ EnjoyTheWeb::Application.configure do
   }
 
   ## Mailer
-  config.action_mailer.default_url_options = { :host => 'stark-ocean-4831.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'quiet-spire-4994.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = true
 
   # Disable delivery errors, bad email addresses will be ignored

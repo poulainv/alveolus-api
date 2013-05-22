@@ -61,11 +61,12 @@ EnjoyTheWeb::Application.routes.draw do
     resources :webapps
 
   end
-  devise_for :users, :controllers => {:sessions => 'sessions'}
+  devise_for :users, :controllers => {:sessions => 'sessions', :registrations => "registrations"}
 
   devise_scope :user do
     delete "sign_out", :to => "sessions#destroy"
     post "sign_in", :to => "sessions#create"
+    post "registration", :to => "registrations#create"
   end
 
   match '/webapps/:id/click/:element' => 'webapps#click'
