@@ -13,7 +13,7 @@ class UsersController < BaseController
 
   # GET /users/:id
   def show
-    if params[:id] == current_user.id or current_user.try(:admin?)
+    if params[:id].to_i == current_user.id || current_user.try(:admin?)
       @user = User.find(params[:id])
       render "users/show"
     end

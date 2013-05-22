@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20130519104306) do
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
     t.boolean  "featured"
-    t.integer  "nb_click_shared"
+    t.integer  "nb_click_shared",    :default => 0
     t.integer  "user_id"
     t.string   "vimeo_id"
     t.string   "facebook_id"
