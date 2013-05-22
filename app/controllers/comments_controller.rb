@@ -58,7 +58,7 @@ end
     # DELETE /comments/1
     def destroy
       @comment = Comment.find(params[:id])
-      if current_user.id.to_i == @comment.user.id
+      if current_user.id == @comment.user.id
         @webapp = @comment.webapp
         @comment.destroy
         @comments = @webapp.comments.commented
