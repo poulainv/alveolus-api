@@ -5,7 +5,7 @@ extends 'users/show-lazy'
 node do |user|
 	if user
 		child :comments do
-			attributes :id, :body, :rating
+			attributes :id, :body, :rating, :created_at, :updated_at, :webapp_id
 		end
 
 		child :webapps do
