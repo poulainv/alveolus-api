@@ -5,12 +5,12 @@ class CommentsController < BaseController
 
   before_filter :authenticate_user! , :only => [:create, :update, :destroy]
 
-  def index
+def index
     # GET Comment for user/webapp/
-    if params[:webapp_id] and params[:user_id]
+  if params[:webapp_id] and params[:user_id]
      @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
      render "comments/show"
-   elsif params[:user_id]
+  elsif params[:user_id]
      @comment = Comment.find_by_user_id(params[:user_id])
      render "comments/show"
     # GET Comment for webapp/
@@ -20,9 +20,9 @@ class CommentsController < BaseController
       render "comments/index"
     else
       render :json => {:errors => "I can't find this aveolus or maybe user, contact admin ;)"}, :status => :not_found
-return 
-end
-end
+      return 
+    end
+  end
 end
 
 def create
@@ -58,7 +58,13 @@ end
     # DELETE /comments/1
     def destroy
       @comment = Comment.find(params[:id])
-      @comment.destroy
-      render :json => {:success => "Well done"}
+      if current_user.id.to_i == @comment.user.id
+        @webapp = @comment.webapp
+        @comment.destroy
+        @comments = @webapp.comments.commented
+        render "comments/index"
+      else
+       render :json => {:errors => "You can delete just your comment"}, :status => :unprocessable_entity
+       end
     end
   end
