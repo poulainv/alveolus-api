@@ -3,11 +3,20 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.webappCtrl', []).
-controller('WebappCtrl', function($scope,$routeParams, WebappService, SocialService, CommentService) {
+controller('WebappCtrl', function($scope,$routeParams, WebappService, SocialService, CommentService, UserService) {
 
 	$scope.webAppId=$routeParams.webAppId;
 	$scope.webapp=WebappService.get({id: $routeParams.webAppId}, function(){
-		$scope.user=$scope.webapp.user_id ? User.get({id: $scope.webapp.user_id}) : {'pseudo':'l\'équipe'};
+		$scope.webapp.user_id=2;
+		$scope.userPost=$scope.webapp.user_id ? UserService.get({id: $scope.webapp.user_id}) : {'pseudo':'l\'équipe'};
+
+		if($scope.user.id)
+			UserService.alreadyCommented({webAppId : $scope.webAppId, userId : $scope.user.id}, function(data){
+				if($.isEmptyObject(data)) $scope.canComment=true;
+				else $scope.canComment=false;
+				
+			});
+		else $scope.canComment=false;
 
 		// DONNEES EXEMPLES
 	    //$scope.webapp.facebook_id="294735233916083";
@@ -47,10 +56,15 @@ controller('WebappCtrl', function($scope,$routeParams, WebappService, SocialServ
 
 
 	$scope.submitComment = function(comment) {
-	    CommentService.addComment({webappId : $routeParams.webAppId, comment : $scope.comment}, function(data){
+	    CommentService.addComment({webappId : $scope.webAppId, comment : comment.body, 
+	    	rating : comment.rating}, function(data){
 	    	alert(data);
 	    });
   	};
+
+  	$scope.submitEditComment=function(comment){
+  		alert(comment.id);
+  	}
 
   	$scope.submitTag = function(tag) {
 	    // CommentService.addComment({webappId : $routeParams.webAppId, comment : $scope.comment}, function(data){
