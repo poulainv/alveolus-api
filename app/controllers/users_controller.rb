@@ -30,15 +30,15 @@ class UsersController < BaseController
     @user = User.find(params[:id])
     if(current_user.try(:admin?))
       if @user.update_attributes(params[:user])
-        redirect_to users_path, :notice => "Modification enregistrées"
+         render "users/show"
       else
-        redirect_to users_path, :alert => "Impossible d'enregistrer les modifications"
+         render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
       end
     else
       if current_user.id == @user.id and @user.update_attributes(params[:user])
-        redirect_to edit_user_path, :notice => "Modification enregistrées"
+         render "users/show"
       else
-        redirect_to edit_user_path, :alert => "Impossible d'enregistrer les modifications"
+         render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
       end
     end
   end
