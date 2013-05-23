@@ -9,12 +9,6 @@
       @webapps = Webapp.all
     end
 
-    # GET /webapps/:id/tags
-    def tags
-      @tags = Webapp.find(params[:id]).tags
-      render json: @tags
-    end
-
     # GET /webapps/:id/bookmarks
     def bookmarks
       @bookmarks = Webapp.find(params[:id]).bookmarks
