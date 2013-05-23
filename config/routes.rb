@@ -13,9 +13,6 @@ EnjoyTheWeb::Application.routes.draw do
   match "/webapps/trend/:type", :to => "webapps#trend"
   match "/webapps/search/:search", :to => "webapps#search"
 
-  ## User
-  match "/users/:id/bookmarks/", :to => "users#bookmarks"
-
   ## Categories
   match "/categories/:id/webapps", :to => "categories#webapps"
   match "/categories/:id/featured_webapp", :to => "categories#featured_webapp"
@@ -47,6 +44,7 @@ EnjoyTheWeb::Application.routes.draw do
   end
 
   resources :users, :except => :destroy do
+    resources :bookmarks
     resources :webapps do
       resources :comments
     end
