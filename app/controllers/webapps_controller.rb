@@ -4,29 +4,17 @@
 
     before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy, :vote]
 
-    # GET /webapps
+    # GET /webapps OR /categories/:category_id/webapps
     def index
-      @webapps = Webapp.all
-    end
-
-    # GET /webapps/:id/tags
-    def tags
-      @tags = Webapp.find(params[:id]).tags
-      render json: @tags
-    end
-
-    # GET /webapps/:id/bookmarks
-    def bookmarks
-      @bookmarks = Webapp.find(params[:id]).bookmarks
-      render json: @bookmarks
+      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps : Webapp.all
     end
 
     # GET /webapps/:id
     def show
-    #  if current_user
-    @webapp = Webapp.find_by_id(params[:id])
-    render "webapps/show"
-   end
+      #  if current_user
+      @webapp = Webapp.find_by_id(params[:id])
+      render "webapps/show"
+    end
 
     # GET /webapps/new
     def new

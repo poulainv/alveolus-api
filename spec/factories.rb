@@ -1,16 +1,23 @@
 
 # This will guess the WebApp class
 FactoryGirl.define do
+  factory :category do
+    name              'Crowdfunding'
+  end
+end
+
+FactoryGirl.define do
   factory :webapp do
-    title                  "Rue89"
-    caption                 "Site d'information"*4
-    description            "Journal independant generalise"*5
-    average_rate 0
-    sequence(:url){|n| "http://www.#{n}lemonde.com" }
-    validate true
-    nb_click_preview 3
-    nb_click_detail 3
-    nb_click_url 3
+    title             "Babyloan"
+    category_id       1
+    caption           "Le site des microcredits solidaires. C\'est une nouvelle forme de solidarite par le Pret, qui permet a des micro-entrepreneurs de sortir de la precarite grace au fruit de leur travail."
+    description       "Babyloan est le premier site Europeen de microcredits solidaires C\'est une nouvelle forme de solidarite par le Pret, qui permet a des micro-entrepreneurs de sortir de la precarite grace au fruit de leur travail."
+    sequence(:url)    {|n| "http://www.#{n}babyloan.org" }
+    validate          true
+    nb_click_preview  23
+    nb_click_detail   43
+    nb_click_url      13
+    average_rate      0
   end
 end
 

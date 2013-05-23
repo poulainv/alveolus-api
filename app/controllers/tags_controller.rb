@@ -14,12 +14,11 @@ class TagsController < BaseController
     render json: @tag
   end
 
-  # GET /tags
+  # GET /tags OR /webapps/:webapp_id/tags
   def index
-    @tags = Tag.all
+    @tags = (params[:webapp_id]) ? Webapp.find(params[:webapp_id]).tags : Tag.all
     render json: @tags
   end
-
 
   def create
     if params[:webapp_id]

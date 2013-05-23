@@ -6,28 +6,13 @@ EnjoyTheWeb::Application.routes.draw do
   resources :feedback, :only => [:new, :create]
 
   resources :authentications
-  
-  get "pages/about"
 
   ## Webapp/Alveoles
-  match "/webapps/:id/tags/", :to => "webapps#tags"
-  match "/webapps/:id/bookmarks/", :to => "webapps#bookmarks"
   match "/webapps/trend/:type", :to => "webapps#trend"
   match "/webapps/search/:search", :to => "webapps#search"
 
-  ## User
-  match "/users/:id/bookmarks/", :to => "users#bookmarks"
-
   ## Categories
-  match "/categories/:id/webapps", :to => "categories#webapps"
-  match "/categories/:id/featured_webapp", :to => "categories#featured_webapp"
-  match "/categories/:id/featured_webapps", :to => "categories#featured_webapps"
   match "/categories/featured_webapps", :to => "categories#categories_featured_webapps"
-
-  match '/about',   :to => 'pages#about'
-  match '/faq',   :to => 'pages#faq'
-  match '/accueil',   :to => 'webapps#index'
-  match "/contact", :to => "pages#contact"
 
   resources :tags do
     resources :webapps
@@ -36,19 +21,25 @@ EnjoyTheWeb::Application.routes.draw do
     end
   end
 
-
   resources :comments
 
-  resources :categories
+  resources :categories do
+    resources :webapps
+    member {
+      get :featured_webapp
+      get :featured_webapps
+    }
+  end
 
   resources :webapps do
     resources :bookmarks  
-    resources  :tags
+    resources :tags
     resources :comments
     member { post :vote }    
   end
 
   resources :users, :except => :destroy do
+    resources :bookmarks
     resources :webapps do
       resources :comments
     end

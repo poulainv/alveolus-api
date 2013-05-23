@@ -19,13 +19,6 @@ class UsersController < BaseController
     end
   end
 
-
-  # GET /users/:id/bookmarks
-  def bookmarks
-    @bookmarks = User.find(params[:id]).bookmarks
-    render json: @bookmarks
-  end
-
   def update
     @user = User.find(params[:id])
     if(current_user.try(:admin?))

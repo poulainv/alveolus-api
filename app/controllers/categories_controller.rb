@@ -14,11 +14,6 @@ class CategoriesController < BaseController
         render json: @category
  	end
 
- 	# GET /categories/:id/webapps
-    def webapps
-    	@category = Category.find(params[:id])
-    end
-
     # GET /categories/:id/featured_webapp
     def featured_webapp
         @category = Category.find(params[:id])
