@@ -9,18 +9,12 @@
       @webapps = Webapp.all
     end
 
-    # GET /webapps/:id/bookmarks
-    def bookmarks
-      @bookmarks = Webapp.find(params[:id]).bookmarks
-      render json: @bookmarks
-    end
-
     # GET /webapps/:id
     def show
-    #  if current_user
-    @webapp = Webapp.find_by_id(params[:id])
-    render "webapps/show"
-   end
+      #  if current_user
+      @webapp = Webapp.find_by_id(params[:id])
+      render "webapps/show"
+    end
 
     # GET /webapps/new
     def new

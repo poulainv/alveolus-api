@@ -6,9 +6,8 @@ class BookmarksController < BaseController
 
  # GET "webapps/:webapp_id/bookmarks
   def index
-    
-    @bookmarks = current_user.webapps_starred
-
+    @bookmarks = Webapp.find(params[:webapp_id]).bookmarks if (params[:webapp_id]) 
+    render json: @bookmarks
   end
 
  # POST "webapps/:webapp_id/bookmarks

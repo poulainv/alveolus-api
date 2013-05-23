@@ -10,7 +10,6 @@ EnjoyTheWeb::Application.routes.draw do
   get "pages/about"
 
   ## Webapp/Alveoles
-  match "/webapps/:id/bookmarks/", :to => "webapps#bookmarks"
   match "/webapps/trend/:type", :to => "webapps#trend"
   match "/webapps/search/:search", :to => "webapps#search"
 
@@ -42,7 +41,7 @@ EnjoyTheWeb::Application.routes.draw do
 
   resources :webapps do
     resources :bookmarks  
-    resources  :tags
+    resources :tags
     resources :comments
     member { post :vote }    
   end
