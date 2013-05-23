@@ -10,41 +10,69 @@ describe WebappsController do
 
     #Webapp.stub(:recent).and_return(Webapp.new)
     #Webapp.stub(:trend).and_return(Webapp.new)
-
+    FactoryGirl.create(:category)
     (0..2).each do
       FactoryGirl.create(:webapp)
     end
   end
 
   ## Test INDEX method
-  describe "index GET" do
-
-    it "shall return a success http" do
+  describe "GET index" do
+    it "should return a success http" do
       get 'index'
       response.should be_success
     end
 
-    it "includes id" do
-      get :show, id: Webapp.first
-      puts response.body #.to_json.should have_json_path("id")
-      #user.to_json.should have_json_type(Integer).at_path("id")
+    it "should return a valid json" do
+      get 'index'
+      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
     end
 
-    #it "includes the ID" do
-     # user.to_json.should have_json_path("id")
-    #  user.to_json.should have_json_type(Integer).at_path("id")
-    #end
+    it "should return 3 webapps" do
+      get 'index'
+      response.body.should have_json_size(3)
+    end
 
-    #it "shall call Webapp validated method" do
-     # Webapp.should_receive(:validated)
-    #  get 'index'
-    #end
+    it "should have integer id" do
+      get 'index'
+      response.body.should have_json_path("0/id")
+      response.body.should have_json_type(Integer).at_path("0/id")
+    end
 
-    #it "shall return list of webapps" do
-    #  get 'index', :format => :json
-     # webapps = JSON.parse(@response.body)
-     # webapps.size.should == 3
-    #end
+    it "should have string title 'Babyloan'" do
+      get 'index'
+      response.body.should have_json_path("0/title")
+      response.body.should have_json_type(String).at_path("0/title")
+      parse_json(response.body, "0/title").should == Webapp.first.title
+    end
+
+    it "should have string caption" do
+      get 'index'
+      response.body.should have_json_path("0/caption")
+      response.body.should have_json_type(String).at_path("0/caption")
+      parse_json(response.body, "0/caption").should == Webapp.first.caption
+    end
+
+    it "should have string description" do
+      get 'index'
+      response.body.should have_json_path("0/description")
+      response.body.should have_json_type(String).at_path("0/description")
+      parse_json(response.body, "0/description").should == Webapp.first.description
+    end
+
+    it "should have integer category id" do
+      get 'index'
+      response.body.should have_json_path("0/category_id")
+      response.body.should have_json_type(Integer).at_path("0/category_id")
+      parse_json(response.body, "0/category_id").should == Webapp.first.category_id
+    end
+
+    it "should have integer nb_click_preview" do
+      get 'index'
+      response.body.should have_json_path("0/nb_click_preview")
+      response.body.should have_json_type(Integer).at_path("0/nb_click_preview")
+      parse_json(response.body, "0/nb_click_preview").should == Webapp.first.nb_click_preview
+    end
   end
 
   ## Test NEW method
