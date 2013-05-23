@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'json'
 gem 'rabl'
 gem 'inherited_resources'
+gem 'json_spec'
 
 group :production do
   gem 'thin'
