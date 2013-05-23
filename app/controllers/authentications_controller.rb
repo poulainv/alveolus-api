@@ -12,24 +12,23 @@ class AuthenticationsController < BaseController
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
    
     if authentication
-      flash[:notice] = "Vous vous êtes correctement authentifié"
- #     authentication.user.facebook.feed!(
-  #     :message => 'Hello, Facebook!',
-   #   :name => 'My Rails 3 App with Omniauth, Devise and FB_graph'
-    #    ) 
-      sign_in_and_redirect(:user, authentication.user)
+      user = authentication.user
+      sign_in(:user, user)
+      user.ensure_authentication_token!
+      render :json=> {:success=>true, :auth_token=>user.authentication_token, :email=>user.email, :id => user.id}
     elsif current_user
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
-      flash[:notice] = "Vous vous êtes correctement authentifié"
-      redirect_to authentications_url
+      sign_in(:user, user)
+      user.ensure_authentication_token!
+      render :json=> {:success=>true, :auth_token=>user.authentication_token, :email=>user.email, :id => user.id}
     else
       user = User.new
-
       user.apply_omniauth(omniauth)
-      user.skip_confirmation!
+      # user.skip_confirmation!
       if user.save
-        flash[:notice] = "Vous vous êtes correctement enregistré"
-        sign_in_and_redirect(:user, user)
+        sign_in(:user, user)
+        user.ensure_authentication_token!
+        render :json=> {:success=>true, :auth_token=>user.authentication_token, :email=>user.email, :id => user.id}
       else
         session[:omniauth] = omniauth.except('extra')
         redirect_to new_user_registration_url
