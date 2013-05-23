@@ -16,10 +16,7 @@ EnjoyTheWeb::Application.routes.draw do
   ## Categories
   match "/categories/featured_webapps", :to => "categories#categories_featured_webapps"
 
-  match '/about',   :to => 'pages#about'
-  match '/faq',   :to => 'pages#faq'
   match '/accueil',   :to => 'webapps#index'
-  match "/contact", :to => "pages#contact"
 
   resources :tags do
     resources :webapps
