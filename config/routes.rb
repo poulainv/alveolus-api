@@ -14,7 +14,6 @@ EnjoyTheWeb::Application.routes.draw do
   match "/webapps/search/:search", :to => "webapps#search"
 
   ## Categories
-  match "/categories/:id/webapps", :to => "categories#webapps"
   match "/categories/:id/featured_webapp", :to => "categories#featured_webapp"
   match "/categories/:id/featured_webapps", :to => "categories#featured_webapps"
   match "/categories/featured_webapps", :to => "categories#categories_featured_webapps"
@@ -34,7 +33,9 @@ EnjoyTheWeb::Application.routes.draw do
 
   resources :comments
 
-  resources :categories
+  resources :categories do
+    resources :webapps
+  end
 
   resources :webapps do
     resources :bookmarks  

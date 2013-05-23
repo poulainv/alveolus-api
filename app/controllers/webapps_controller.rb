@@ -4,9 +4,9 @@
 
     before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy, :vote]
 
-    # GET /webapps
+    # GET /webapps OR /categories/:category_id/webapps
     def index
-      @webapps = Webapp.all
+      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps : Webapp.all
     end
 
     # GET /webapps/:id
