@@ -6,8 +6,6 @@ EnjoyTheWeb::Application.routes.draw do
   resources :feedback, :only => [:new, :create]
 
   resources :authentications
-  
-  get "pages/about"
 
   ## Webapp/Alveoles
   match "/webapps/trend/:type", :to => "webapps#trend"
