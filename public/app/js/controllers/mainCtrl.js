@@ -37,10 +37,6 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
         $scope.isLogged ? addAlert(alertLogFail)  : addAlert(alertUnlogSuccess);
     });
 
-
-	 $scope.authFacebook = function(){
-	 	SessionService.authFacebook();
-	 }
 	
 	$scope.search = function(content){
 		$location.path('/alveoles/search/'+content);
@@ -98,6 +94,9 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 
 	$scope.sendFeedback = function (content) {
 		$scope.closeModalFeedback();
+		content.page = $location.path() ;
+		content.email = $scope.user.email ; 
+		console.log("feedback"+content.comment);
 		FeedbackService.sendFeedback(content,function(data){
 			console.log(data);
 		});

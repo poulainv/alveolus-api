@@ -75,8 +75,9 @@ factory('SessionService', function($log, $cookieStore, $resource, $http, $rootSc
       var cookieToken = getTokenCookie();
         if(getTokenCookie()!=null && getTokenCookie()!=""){
           console.log("session cookie found");
+          token = getTokenCookie();
           setUser({success: true, id : getUserIdCookie()});
-          setHttpProviderCommonHeaderToken(getTokenCookie());
+          setHttpProviderCommonHeaderToken(token);
           broadcastLogged();
         }
         else{
@@ -146,24 +147,7 @@ factory('SessionService', function($log, $cookieStore, $resource, $http, $rootSc
       service.sign_in(xsrf);
     };
   
-    var authFacebook = function(){
-       $http({
-          method:'GET',
-          url: '/auth/facebook',
-        }).success(function(data){
-          console.log("User logged");
-          setUser({id : data.id, email : data.email, success: true });
-          token = data.auth_token;
-          setHttpProviderCommonHeaderToken(token);
-          setSessionToken(token,data.id);
-          broadcastLogged();
-        })
-        .error(function(data) {
-          console.log("Error sign_out");
-          resetUser();
-        });
 
-    };
 
     sign_out = function() {
       service.sign_out(user);
@@ -183,8 +167,7 @@ factory('SessionService', function($log, $cookieStore, $resource, $http, $rootSc
       sign_in: sign_in,
       sign_out: sign_out,
       authorized: authorized,
-      getUser: getUser,
-      authFacebook : authFacebook
+      getUser: getUser
     };
   }
 );
