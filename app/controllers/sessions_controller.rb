@@ -1,9 +1,8 @@
 class SessionsController < Devise::SessionsController
- before_filter :authenticate_user!, :except => [:create, :destroy]
+ before_filter :user_needed!, :except => [:create, :destroy]
   respond_to :json
 
   def create
-    print "bonjour"
     resource = User.find_for_database_authentication(:email => params[:email])
     return invalid_login_attempt unless resource
 

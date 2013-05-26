@@ -2,7 +2,7 @@
 
     class WebappsController < BaseController
 
-    before_filter :authenticate_user!, :only => [:create, :edit, :update ,:destroy, :vote]
+    before_filter :user_needed!, :only => [:create, :edit, :update ,:destroy, :vote]
 
     # GET /webapps OR /categories/:category_id/webapps
     def index

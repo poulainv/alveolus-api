@@ -3,7 +3,7 @@
 
 class CommentsController < BaseController
 
-  before_filter :authenticate_user! , :only => [:create, :update, :destroy]
+  before_filter :user_needed! , :only => [:create, :update, :destroy]
 
 def index
     # GET Comment for user/webapp/
