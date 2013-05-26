@@ -12,8 +12,10 @@ node do |user|
 			attributes :id, :title, :caption, :description
 		end
 
-		child :webapps_starred do
-			attributes :id, :title, :caption, :description
+		child :bookmarks do
+			child :webapp do
+				attributes :id, :title, :caption, :description
+			end
 		end
 
 	end
