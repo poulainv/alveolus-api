@@ -1,9 +1,8 @@
 # encoding: utf-8
-
-
 class BookmarksController < BaseController
 
-
+  before_filter :user_needed!, :only => [:create]
+  
  # GET "webapps/:webapp_id/bookmarks OR /users/:user_id/bookmarks
   def index
     if (params[:webapp_id])
@@ -19,11 +18,9 @@ class BookmarksController < BaseController
     @bookmark  = current_user.bookmarks.build(:webapp_id => params[:webapp_id])
     @bookmark.user_id = current_user.id
      if @bookmark.save
-        flash[:success] = "Favoris ajouté"
-        render :json => "ok".to_json
+        render :json => {:success => "Alveolus bookmarked"}, :status => :created
       else
-        flash[:error] = "Vous avez déjà ajouté ce website"
-        redirect_to accueil_path
+        render :json => {:errors => @bookmark.errors.full_messages } ,:status => :unprocessable_entity
       end
   end
 
