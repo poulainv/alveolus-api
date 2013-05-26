@@ -83,7 +83,7 @@ EnjoyTheWeb::Application.configure do
 
   PAPERCLIP_STORAGE_AVATAR = {
     :styles => { :small => "75x75#", :mini=>"50x50#"},
-    :default_url => "/img/avatar.jpg",
+    :default_url => "img/avatar.jpg",
     :convert_options => {
       :small => "-quality 75 -strip", :mini= => "-quality 75 -strip" },
     :storage => :s3, :s3_credentials => {
