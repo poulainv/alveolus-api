@@ -12,7 +12,7 @@ class FeedbackController < BaseController
     if @feedback.valid?
       FeedbackMailer.feedback(@feedback).deliver
       
-      render :status => :created, :text => '<h4>Bien reçu, merci !</h4>'
+      render :json =>  {:success => '<h4>Bien reçu, merci !</h4>'}, :status => :created
     else
       @error_message = "Please enter your #{@feedback.subject.to_s.downcase}"
 
@@ -20,7 +20,7 @@ class FeedbackController < BaseController
       # use of AJAX as we could return the error message in JSON, but
       # it makes easier the customization of the form with error messages
       # without worrying about the javascript.
-      render :action => 'new', :status => :unprocessable_entity
+      render :json => {:errors => @error_message}, :status => :unprocessable_entity
     end
   end
 end

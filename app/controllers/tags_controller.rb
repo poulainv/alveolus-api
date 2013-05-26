@@ -11,13 +11,13 @@ class TagsController < BaseController
   # GET /tags/:id
   def show
     @tag = Tag.find(params[:id])
-    render json: @tag
+    render "tags/show"
   end
 
   # GET /tags OR /webapps/:webapp_id/tags
   def index
     @tags = (params[:webapp_id]) ? Webapp.find(params[:webapp_id]).tags : Tag.all
-    render json: @tags
+    render "tags/index"
   end
 
   def create
