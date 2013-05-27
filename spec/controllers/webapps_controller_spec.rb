@@ -9,7 +9,6 @@ describe WebappsController do
     #Webapp.stub(:recent).and_return(Webapp.new)
     #Webapp.stub(:trend).and_return(Webapp.new)
 
-    FactoryGirl.create(:category)
     (0..2).each do
       FactoryGirl.create(:webapp, :with_comments)
     end

@@ -1,7 +1,6 @@
 
 FactoryGirl.define do
   factory :category do
-    id                1
     name              'Crowdfunding'
   end
 end
@@ -10,7 +9,7 @@ end
 FactoryGirl.define do
   factory :webapp do
     title             "Babyloan"
-    category_id       1
+    category          FactoryGirl.create(:category)
     caption           "Le site des microcredits solidaires. C\'est une nouvelle forme de solidarite par le Pret, qui permet a des micro-entrepreneurs de sortir de la precarite grace au fruit de leur travail."
     description       "Babyloan est le premier site Europeen de microcredits solidaires C\'est une nouvelle forme de solidarite par le Pret, qui permet a des micro-entrepreneurs de sortir de la precarite grace au fruit de leur travail."
     sequence(:url)    {|n| "http://www.#{n}babyloan.org" }
