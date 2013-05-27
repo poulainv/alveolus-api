@@ -1,11 +1,12 @@
 
-# This will guess the WebApp class
 FactoryGirl.define do
   factory :category do
+    id                1
     name              'Crowdfunding'
   end
 end
 
+# This will guess the WebApp class
 FactoryGirl.define do
   factory :webapp do
     title             "Babyloan"
@@ -18,10 +19,16 @@ FactoryGirl.define do
     nb_click_detail   43
     nb_click_url      13
     average_rate      0
+
+    trait :with_comments do
+      after (:create) do |instance|
+        create_list(:comment, 2, webapp: instance)
+      end
+    end
+
   end
 end
 
-# This will guess the WebApp class
 FactoryGirl.define do
   factory :tag do
     name                  "tag1"
