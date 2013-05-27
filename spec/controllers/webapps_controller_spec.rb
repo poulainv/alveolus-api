@@ -160,7 +160,7 @@ describe WebappsController do
     end
   end
 
-  # Test NEW method
+  ## Test EDIT method
   describe "GET 'edit'" do
 
     context 'when logged out' do
