@@ -2,6 +2,7 @@ require 'spec_helper'
 
 
 describe WebappsController do
+  render_views
   
   ## for testing we add 3 webapps in test data base
   before(:each) do
