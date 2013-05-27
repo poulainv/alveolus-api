@@ -40,7 +40,8 @@
     def edit
       @webapp = Webapp.find(params[:id])
       if current_user.try(:admin?) or current_user.id == @webapp.user_id
-        render :layout => "pages"
+        # temporary view, TODO
+        render :layout => "application"
       else
         render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
       end

@@ -6,11 +6,9 @@ describe WebappsController do
   
   ## for testing we add 3 webapps in test data base
   before(:each) do
-    #@user = FactoryGirl.create(:user)
-    #sign_in @user
-
     #Webapp.stub(:recent).and_return(Webapp.new)
     #Webapp.stub(:trend).and_return(Webapp.new)
+
     FactoryGirl.create(:category)
     (0..2).each do
       FactoryGirl.create(:webapp, :with_comments)
@@ -159,6 +157,25 @@ describe WebappsController do
     it "should have category" do
       get :show, id: Webapp.first
       response.body.should have_json_path("category")
+    end
+  end
+
+  # Test NEW method
+  describe "GET 'edit'" do
+
+    context 'when logged out' do
+      it "should return 401 code" do
+        get :edit, id: Webapp.first
+        response.response_code.should == 401
+      end
+    end
+    
+    context 'when logged in' do
+      login_admin
+      it "returns http success" do
+        get :edit, id: Webapp.first
+        response.should be_success
+      end
     end
   end
 
