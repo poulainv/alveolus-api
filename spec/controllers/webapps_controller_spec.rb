@@ -13,7 +13,7 @@ describe WebappsController do
     #Webapp.stub(:trend).and_return(Webapp.new)
     FactoryGirl.create(:category)
     (0..2).each do
-      FactoryGirl.create(:webapp)
+      FactoryGirl.create(:webapp, :with_comments)
     end
   end
 
@@ -73,6 +73,21 @@ describe WebappsController do
       response.body.should have_json_path("0/nb_click_preview")
       response.body.should have_json_type(Integer).at_path("0/nb_click_preview")
       parse_json(response.body, "0/nb_click_preview").should == Webapp.first.nb_click_preview
+    end
+
+    it "should have tags list" do
+      get 'index'
+      response.body.should have_json_path("0/tags")
+    end
+
+    it "should have comments list" do
+      get 'index'
+      response.body.should have_json_path("0/comments")
+    end
+
+    it "should have category" do
+      get 'index'
+      response.body.should have_json_path("0/category")
     end
   end
 
