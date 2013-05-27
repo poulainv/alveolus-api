@@ -2,17 +2,15 @@ require 'spec_helper'
 
 
 describe WebappsController do
+  render_views
   
   ## for testing we add 3 webapps in test data base
   before(:each) do
-    #@user = FactoryGirl.create(:user)
-    #sign_in @user
-
     #Webapp.stub(:recent).and_return(Webapp.new)
     #Webapp.stub(:trend).and_return(Webapp.new)
-    FactoryGirl.create(:category)
+
     (0..2).each do
-      FactoryGirl.create(:webapp)
+      FactoryGirl.create(:webapp, :with_comments)
     end
   end
 
@@ -37,6 +35,7 @@ describe WebappsController do
       get 'index'
       response.body.should have_json_path("0/id")
       response.body.should have_json_type(Integer).at_path("0/id")
+      parse_json(response.body, "0/id").should == Webapp.first.id
     end
 
     it "should have string title 'Babyloan'" do
@@ -72,6 +71,110 @@ describe WebappsController do
       response.body.should have_json_path("0/nb_click_preview")
       response.body.should have_json_type(Integer).at_path("0/nb_click_preview")
       parse_json(response.body, "0/nb_click_preview").should == Webapp.first.nb_click_preview
+    end
+
+    it "should have tags list" do
+      get 'index'
+      response.body.should have_json_path("0/tags")
+    end
+
+    it "should have comments list" do
+      get 'index'
+      response.body.should have_json_path("0/comments")
+    end
+
+    it "should have category" do
+      get 'index'
+      response.body.should have_json_path("0/category")
+    end
+  end
+
+  ## Test SHOW method
+  describe "GET show" do
+    it "should return a success http" do
+      get :show, id: Webapp.first
+      response.should be_success
+    end
+
+    it "should return a valid json" do
+      get :show, id: Webapp.first
+      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+    end
+
+    it "should have integer id" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("id")
+      response.body.should have_json_type(Integer).at_path("id")
+       parse_json(response.body, "id").should == Webapp.first.id
+    end
+
+    it "should have string title 'Babyloan'" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("title")
+      response.body.should have_json_type(String).at_path("title")
+      parse_json(response.body, "title").should == Webapp.first.title
+    end
+
+    it "should have string caption" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("caption")
+      response.body.should have_json_type(String).at_path("caption")
+      parse_json(response.body, "caption").should == Webapp.first.caption
+    end
+
+    it "should have string description" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("description")
+      response.body.should have_json_type(String).at_path("description")
+      parse_json(response.body, "description").should == Webapp.first.description
+    end
+
+    it "should have integer category id" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("category_id")
+      response.body.should have_json_type(Integer).at_path("category_id")
+      parse_json(response.body, "category_id").should == Webapp.first.category_id
+    end
+
+    it "should have integer nb_click_preview" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("nb_click_preview")
+      response.body.should have_json_type(Integer).at_path("nb_click_preview")
+      parse_json(response.body, "nb_click_preview").should == Webapp.first.nb_click_preview
+    end
+
+    it "should have tags list" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("tags")
+    end
+
+    it "should have comments list" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("comments")
+    end
+
+    it "should have category" do
+      get :show, id: Webapp.first
+      response.body.should have_json_path("category")
+    end
+  end
+
+  ## Test EDIT method
+  describe "GET 'edit'" do
+
+    context 'when logged out' do
+      it "should return 401 code" do
+        get :edit, id: Webapp.first
+        response.response_code.should == 401
+      end
+    end
+    
+    context 'when logged in' do
+      login_admin
+      it "returns http success" do
+        get :edit, id: Webapp.first
+        response.should be_success
+      end
     end
   end
 
