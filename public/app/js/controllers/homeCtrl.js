@@ -3,7 +3,7 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.homeCtrl', []).
-controller('HomeCtrl', function($scope,$location,CategoryService,WebappService,SessionService) {
+controller('HomeCtrl', function($scope,$location,CategoryService,WebappService,SessionService, UserService) {
 
 
 	$scope.webapps = WebappService.query(function(){
@@ -22,6 +22,8 @@ controller('HomeCtrl', function($scope,$location,CategoryService,WebappService,S
 		$scope.catSelected = $scope.categories[Math.floor(Math.random() * $scope.categories.length)];
 		$scope.descCatSelected =  $scope.catSelected.description;
 		$scope.appFeatured = $scope.catSelected.webapps[Math.floor(Math.random() * $scope.catSelected.webapps.length)];
+		// $('#contentWrapper').show();
+		// $('#loading').hide();
 	});
 
 	$scope.changeCat = function(cat){

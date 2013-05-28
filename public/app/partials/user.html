@@ -49,15 +49,15 @@
 
 
 					<div class="tab-pane" id="favoris">
-						<div ng-show="user.webapps">
+						<div ng-show="user.bookmarks">
 							<div class="light-separator"></div>
-							<div ng-repeat="webapp in user.webapps">
+							<div ng-repeat="bookmark in user.bookmarks">
 								<div class="row">
-									<img class="span2" ng-src="{{webapp.image_url}}"/>
+									<img class="span2" ng-src="{{bookmark.webapp.image_url}}"/>
 									<div class="span8">
-										<h3>{{webapp.title}}</h3>
-										<h4>{{webapp.caption}}</h4>
-										<p>{{webapp.description}}</p>
+										<h3>{{bookmark.webapp.title}}</h3>
+										<h4>{{bookmark.webapp.caption}}</h4>
+										<p>{{bookmark.webapp.description}}</p>
 									</div>
 								</div>
 								<div class="light-separator"></div>
@@ -103,35 +103,41 @@
 								<div class="row">
 									<aside class="span2">
 										<div class="text-center">
-											<i class="icon-user icon-4x"></i>
-											<!-- <img ng-src="{{comment.user.image_url}}"/> -->
-											<p ng-show="user.id==comment.user.id">Moi</p>
-											<p ng-show="user.id!=comment.user.id">{{comment.user.pseudo}}</p>
-											<div class="starsRatingShow">
-												<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
-											</div>
+											<span class="label pull-right"><a href="alveoles/{{comment.webapp_id}}">Webapp {{comment.webapp_id}}</a></span>
 										</div>
 									</aside>
 									<section class="span8">
-										<div ng-hide="editComment" ng-init="editComment=false">
-											<span class="label pull-right">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
-											<p>{{comment.body}}</p>
-											<p><button ng-show="user.id==comment.user.id" class="btn btn-primary btn-small" ng-click="editComment=true"><i class="icon-white icon-pencil"></i> Editer mon commentaire</button></p>
+									 	<span class="label pull-right">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
+									 	<div class="starsRatingShow">
+											<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
 										</div>
-										<div ng-show="editComment">
-											<textarea class="span8" type="text" rows="3" ng-model="comment.body" id="textAreaEditComment">{{comment.body}}</textarea>
-											<button class="btn btn-primary btn-small" ng-click="submitEditComment(comment);"><i class="icon-white icon-pencil"></i> Modifier</button>
-										</div>
-									</section>
+									 	<p>{{comment.body}}</p>
+									 </section>
 								</div>
 								<div class="light-separator"></div>
 							</div>
 						</div>
 
-						<div ng-show="!user.comments">Pas de commentaires pour le moment :(</div>
+						<div ng-show="!user.comments">Vous n'avez posté aucun commentaire :(</div>
 
 					</div>
-					<div class="tab-pane" id="suggestions">Suggestions</div>
+					<div class="tab-pane" id="suggestions">
+
+						<div ng-show="user.webapps">
+							<div class="light-separator"></div>
+							<div ng-repeat="webapp in user.webapps">
+								<div class="row">
+									<img class="span2" ng-src="{{webapp.image_url}}"/>
+									<div class="span8">
+										<h3>{{webapp.title}}</h3>
+										<h4>{{webapp.caption}}</h4>
+										<p>{{webapp.description}}</p>
+									</div>
+								</div>
+								<div class="light-separator"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 

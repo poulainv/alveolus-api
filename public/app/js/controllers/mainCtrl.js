@@ -3,12 +3,13 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.mainCtrl', []).
-controller('MainCtrl', function($scope,$routeParams,$location,WebappService,SessionService,TagService,FeedbackService) {
+controller('MainCtrl', function($scope,$routeParams,$location,WebappService,SessionService,TagService,FeedbackService,UserService) {
 
 	var alertLogSuccess = { type: 'success', msg: 'Parfait, vous êtes correctement authentifié' } ;
 	var alertLogFail = { type: 'error', msg: 'Oops, impossible de vous authentifier' } ;
 	var alertUnauthorized = { type: 'error', msg: 'Vous devez être authentifié' } ;
 	var alertUnlogSuccess = { type: 'info', msg: 'A bientôt ! Vous vous êtes correctement déconnecté' } ;
+	var alertSuggestionSaved = { type: 'success', msg: 'Votre proposition a bien été prise en compte' } ;
 
 // $.ajax({
 //   type: "GET",
@@ -20,15 +21,29 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 	
 	$scope.user = SessionService.getUser();
     $scope.isLogged = SessionService.authorized();
-
+    $scope.userInfo = $scope.isLogged ? UserService.get({id:$scope.user.id}): null;
 	// To receive broadcasts
-	 $scope.$on('onLoggedSuccess', function() {
+	$scope.$on('onLoggedSuccess', function() {
 	 	console.log("catch onLoggedSuccess");
         $scope.user = SessionService.getUser();
         $scope.isLogged = SessionService.authorized();
         $scope.isLogged ? addAlert(alertLogSuccess)  : addAlert(alertLogFail);
 		$scope.closeModalLogin();
     });
+
+	$scope.$on('onSuggestionSaved', function() {
+	 	console.log("catch onSuggestionSaved");
+	 	// $location.path('/');
+        addAlert(alertSuggestionSaved);
+    });
+
+	 // When 401 response is receive, an interceptor broadcast
+	 // onNeedLogin, so we catch it then we open modal login
+	$scope.$on('onNeedLogin', function() {
+		console.log("catch need login");
+		SessionService.resetSession();
+		$scope.openModalLogin();
+	});
 
 	  $scope.$on('onUnloggedSuccess', function() {
 	 	console.log("catch onUnLoggedSuccess");
@@ -62,15 +77,17 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 		$scope.alerts = [];
 		$scope.alerts.push(alert);
 	};
+	$scope.addAlert = addAlert;
 
 	$scope.closeAlert = function(index) {
 		$scope.alerts.splice(index, 1);
 	};
 
 	// Reset alert when change location
-	$scope.$on('$locationChangeSuccess', function(event) {
+	$scope.$on('$locationChangeStart', function(event) {
 		$scope.alerts = [];
 	});
+
 
 	// Manage open and close of modal login
 	$scope.openModalLogin = function () {
