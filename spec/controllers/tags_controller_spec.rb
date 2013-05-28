@@ -43,7 +43,6 @@ describe TagsController do
   describe "GET show" do
     it "should return a success http" do
       get :show, id: Tag.first
-      puts response.body
       response.should be_success
     end
 
