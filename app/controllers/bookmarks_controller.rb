@@ -8,7 +8,7 @@ class BookmarksController < BaseController
     if (params[:webapp_id])
       @bookmarks = Webapp.find(params[:webapp_id]).bookmarks
     elsif (params[:user_id])
-      @bookmarks = Webapp.find(params[:user_id]).bookmarks
+      @bookmarks = User.find(params[:user_id]).bookmarks
     end
     render json: @bookmarks
   end
