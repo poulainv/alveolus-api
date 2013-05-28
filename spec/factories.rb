@@ -25,6 +25,12 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_bookmarks do
+      after (:create) do |instance|
+        create_list(:bookmark, 2, webapp: instance)
+      end
+    end
+
   end
 end
 
@@ -53,9 +59,16 @@ end
 
 FactoryGirl.define do
   factory :comment do
-  body "Foo bar"
-  rating 2
-  association :user
-  association :webapp
+    body "Foo bar"
+    rating 2
+    association :user
+    association :webapp
+  end
+end
+
+FactoryGirl.define do
+  factory :bookmark do
+    association :user
+    association :webapp
   end
 end
