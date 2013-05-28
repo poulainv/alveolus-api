@@ -57,6 +57,8 @@ describe UsersController do
 
   ## Test SHOW method
   describe "GET show" do
+
+    ## NOT LOGGED IN
     context 'when logged out' do
       it "should return 401 code" do
         get :show, id: User.first
@@ -74,6 +76,7 @@ describe UsersController do
       end
     end
 
+    ## LOGGED IN AS ADMIN
     context 'when logged in as admin' do
       login_admin
 
@@ -118,13 +121,55 @@ describe UsersController do
 
     end
 
-
+    ## LOGGED IN AS USER
     context 'when logged in as user' do
       login_user
+
       it "should not show another user" do
-        get :show, id: User.last
+        get :show, id: User.first
         response.response_code.should == 401
       end
+
+      # User.last is logged user
+      it "should return a success http" do
+        get :show, id: User.last
+        response.should be_success
+      end
+
+      it "should return a valid json" do
+        get :show, id: User.last
+        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      end
+
+      it "should have integer id" do
+        get :show, id: User.last
+        response.body.should have_json_path("id")
+        response.body.should have_json_type(Integer).at_path("id")
+        parse_json(response.body, "id").should == User.last.id
+      end
+
+      it "should have string email" do
+        get :show, id: User.last
+        response.body.should have_json_path("email")
+        response.body.should have_json_type(String).at_path("email")
+        parse_json(response.body, "email").should == User.last.email
+      end
+
+      it "should have comments list" do
+        get :show, id: User.last
+        response.body.should have_json_path("comments")
+      end
+
+      it "should have webapps list" do
+        get :show, id: User.last
+        response.body.should have_json_path("webapps")
+      end
+
+      it "should have bookmarks list" do
+        get :show, id: User.last
+        response.body.should have_json_path("bookmarks")
+      end
+
     end
 
     

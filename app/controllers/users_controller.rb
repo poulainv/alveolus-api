@@ -16,6 +16,8 @@ class UsersController < BaseController
     if params[:id].to_i == current_user.id || current_user.try(:admin?)
       @user = User.find(params[:id])
       render "users/show"
+    else
+      render json: { error: "Permission denied"}, status: 401
     end
   end
 
