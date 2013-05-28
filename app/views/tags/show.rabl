@@ -1,2 +1,2 @@
-object @tags
+object @tag
 attributes :id, :name
