@@ -132,6 +132,74 @@ describe CommentsController do
 
   end
 
+  ## Test create method
+  describe "POST create" do
 
+  	## NOT LOGGED IN
+    context 'when logged out' do
+    	it "should return 401 code" do
+    		post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+        response.response_code.should == 401
+      end
+
+      it "should return a valid json" do
+        post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      end
+
+      it "should display authentication error" do
+        post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+        response.body.should have_json_path("errors")
+        response.body.should have_json_type(String).at_path("errors")
+        parse_json(response.body, "errors").should == "Authentication needed"
+      end
+    end
+
+    ## LOGGED IN AS USER
+    context 'when logged in as user' do
+      login_user
+
+      ## Valid comment
+      context "when new comment is valid" do
+
+	      it "should return a success http" do
+	        post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+	        response.should be_success
+	      end
+
+	      it "should return a valid json" do
+	        post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+	        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+	      end
+
+	      it "should return webapp comments" do
+	      	post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+	      	response.body.should have_json_size(Webapp.first.comments.count)
+	    	end
+
+	    end
+
+	    ##  Unvalid comment
+	    context "when new comment is unvalid" do
+
+	    	it "should return 422 code" do
+    			post :create, webapp_id: Webapp.first
+        	response.response_code.should == 422
+      	end
+
+	    	it "should return a valid json" do
+        	post :create, webapp_id: Webapp.first
+        	expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      	end
+
+      	it "should display error" do
+	        post :create, webapp_id: Webapp.first
+	        response.body.should have_json_path("errors")
+      	end
+
+	    end
+
+    end
+  end
 
 end
