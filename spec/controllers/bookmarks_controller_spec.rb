@@ -63,8 +63,9 @@ describe BookmarksController do
 	      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
 	    end
 
-	    it "should return 2 bookmarks" do
+	    it "should return users bookmarks" do
 	      get :index, user_id: User.first
+	      puts User.first.bookmarks.count
 	      response.body.should have_json_size(User.first.bookmarks.count)
 	    end
 
