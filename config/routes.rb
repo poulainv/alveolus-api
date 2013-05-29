@@ -43,6 +43,7 @@ EnjoyTheWeb::Application.routes.draw do
     resources :webapps do
       resources :comments
     end
+    resources :comments
   end
 
 
