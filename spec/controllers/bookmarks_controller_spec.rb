@@ -138,4 +138,26 @@ describe BookmarksController do
     end
 
 	end
+
+	describe "DELETE destroy" do
+
+		## NOT LOGGED IN
+    context 'when logged out' do
+    	it "should return 401 code" do
+        delete :destroy, webapp_id: Webapp.first
+        response.response_code.should == 401
+      end
+    end
+
+    ## LOGGED IN AS USER
+    context 'when logged in as user' do
+      login_user
+
+      it "should return a success http" do
+	      delete :destroy, webapp_id: Webapp.first
+	      response.should be_success
+	    end
+    end
+
+	end
 end
