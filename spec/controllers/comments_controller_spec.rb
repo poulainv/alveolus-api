@@ -200,6 +200,74 @@ describe CommentsController do
 	    end
 
     end
+
+  end
+
+  ## Test update method
+  describe "PUT update" do
+
+  	## NOT LOGGED IN
+    context 'when logged out' do
+      it "should return 401 code" do
+        put :update, id: Comment.first, rating: 3, comment: "Bla"
+        response.response_code.should == 401
+      end
+
+      it "should return a valid json" do
+        put :update, id: Comment.first, rating: 3, comment: "Bla"
+        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      end
+
+      it "should display authentication error" do
+        put :update, id: Comment.first, rating: 3, comment: "Bla"
+        response.body.should have_json_path("errors")
+        response.body.should have_json_type(String).at_path("errors")
+        parse_json(response.body, "errors").should == "Authentication needed"
+      end
+    end
+
+    ## LOGGED IN AS USER
+    context 'when logged in as user' do
+      login_user
+
+      ## Valid comment
+	    context "when comment is valid" do
+	      it "should return a success http" do
+	        put :update, id: Comment.first, rating: 3, comment: "Bla"
+	        response.should be_success
+	      end
+
+	      it "should return a valid json" do
+	        put :update, id: Comment.first, rating: 3, comment: "Bla"
+	        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+	      end
+
+	      it "should return webapp comments" do
+	      	put :update, id: Comment.first, rating: 3, comment: "Bla"
+	      	response.body.should have_json_size(Webapp.first.comments.count)
+	    	end
+	    end
+
+	    ##  Unvalid comment
+	    context "when comment is unvalid" do
+	    	it "should return 422 code" do
+    			put :update, id: Comment.first
+        	response.response_code.should == 422
+      	end
+
+	    	it "should return a valid json" do
+        	put :update, id: Comment.first
+        	expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      	end
+
+      	it "should display error" do
+	        put :update, id: Comment.first
+	        response.body.should have_json_path("errors")
+      	end
+	    end
+
+    end
+
   end
 
 end
