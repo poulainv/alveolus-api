@@ -13,6 +13,8 @@ EnjoyTheWeb::Application.routes.draw do
 
   ## Categories
   match "/categories/featured_webapps", :to => "categories#categories_featured_webapps"
+  match "/categories/all", :to => "categories#categories_all_webapps"
+
 
   resources :tags do
     resources :webapps
