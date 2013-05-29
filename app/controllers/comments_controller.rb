@@ -11,8 +11,8 @@ def index
      @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
      render "comments/show"
   elsif params[:user_id]
-     @comment = Comment.find_by_user_id(params[:user_id])
-     render "comments/show"
+     @comments = Comment.find_by_user_id(params[:user_id])
+     render "comments/index"
     # GET Comment for webapp/
   elsif params[:webapp_id]
     if  @webapp = Webapp.find(params[:webapp_id])
