@@ -42,6 +42,7 @@ EnjoyTheWeb::Application.routes.draw do
     resources :bookmarks
     resources :webapps do
       resources :comments
+      resources :bookmarks
     end
     resources :comments
   end
