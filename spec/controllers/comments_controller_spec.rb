@@ -270,4 +270,67 @@ describe CommentsController do
 
   end
 
+  ## Test destroy method
+  describe "DELETE destroy" do
+
+  	## NOT LOGGED IN
+    context 'when logged out' do
+      it "should return 401 code" do
+      	delete :destroy, id: Comment.first
+      	response.response_code.should == 401
+      end
+
+      it "should return a valid json" do
+        delete :destroy, id: Comment.first
+        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      end
+
+      it "should display authentication error" do
+        delete :destroy, id: Comment.first
+        response.body.should have_json_path("errors")
+        response.body.should have_json_type(String).at_path("errors")
+        parse_json(response.body, "errors").should == "Authentication needed"
+      end
+    end
+
+    ## LOGGED IN AS USER
+    context 'when logged in as user' do
+      login_user
+
+      context "when trying to destroy a comment belonging to another user" do
+      	it "should return 422 code" do
+    			delete :destroy, id: User.first.comments.first
+        	response.response_code.should == 422
+    		end
+
+    		it "should return a valid json" do
+	      	delete :destroy, id: User.first.comments.first
+	      	expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+    		end
+
+	    	it "should display error" do
+	        delete :destroy, id: User.first.comments.first
+	        response.body.should have_json_path("errors")
+	        response.body.should have_json_type(String).at_path("errors")
+        	parse_json(response.body, "errors").should == "You can delete just your comment"
+	    	end
+	    end
+
+	    context "when trying to destroy a comment belonging to logged user" do
+	    	
+	    	it "should return a success http" do
+	        delete :destroy, id: User.last.comments.first.id
+	        response.should be_success
+	      end
+
+	      it "should return a valid json" do
+	        delete :destroy, id: User.last.comments.first.id
+	        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+	      end
+
+	    end
+    end
+
+  end
+
 end
