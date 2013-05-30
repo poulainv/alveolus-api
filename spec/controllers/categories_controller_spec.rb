@@ -130,4 +130,58 @@ describe CategoriesController do
     
   end
 
+  ## Test featured_webapps method
+  describe "GET featured_webapps" do
+
+    it "returns http success" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.should be_success
+    end
+
+    it "should return a valid json" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+    end
+
+    it "should return 3 featured webapps" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_size(3)
+    end
+
+    it "should have integer id" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/id")
+      response.body.should have_json_type(Integer).at_path("0/id")
+    end
+
+    it "should have string title" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/title")
+      response.body.should have_json_type(String).at_path("0/title")
+    end
+
+    it "should have string caption" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/caption")
+      response.body.should have_json_type(String).at_path("0/caption")
+    end
+
+    it "should have string description" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/description")
+      response.body.should have_json_type(String).at_path("0/description")
+    end
+
+     it "should have tags list" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/tags")
+    end
+
+    it "should have category" do
+      get :featured_webapps, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("0/category")
+    end
+
+  end
+
 end
