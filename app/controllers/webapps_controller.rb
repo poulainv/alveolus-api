@@ -6,14 +6,15 @@
 
     # GET /webapps OR /categories/:category_id/webapps
     def index
-      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps : Webapp.all
+      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps : Webapp.includes(:category, :comments, :user).all
+      render json: @webapps, :each_serializer => WebappLazySerializer
     end
 
     # GET /webapps/:id
     def show
       #  if current_user
       @webapp = Webapp.find_by_id(params[:id])
-      render "webapps/show"
+      render json: @webapp
     end
 
     # GET /webapps/new
@@ -113,11 +114,10 @@
         @webapps = Webapp.random(n)
       when "unvalidated"
         @webapps = Webapp.unvalidated
-        # render :json => @webapps.to_json(:methods => %w(count_negative count_positive))
-        render "webapps/show-with-vote"
+        render json: @webapps, :each_serializer => WebappVoteSerializer
         return
       end
-      render "webapps/index"
+      render json: @webapps, :each_serializer => WebappLazySerializer
     end
   end
 
@@ -133,7 +133,7 @@
           @webapps += tag.webapps
         end
         @webapps = @webapps.uniq
-        render "webapps/index"
+          render json: @webapps, :each_serializer => WebappLazySerializer
       end
     end
   end

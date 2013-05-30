@@ -9,15 +9,15 @@ class CommentsController < BaseController
       # GET Comment for user/webapp/
     if params[:webapp_id] and params[:user_id]
        @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
-       render "comments/show"
+       render json: @comment
     elsif params[:user_id]
        @comments = Comment.find_by_user_id(params[:user_id])
-       render "comments/index"
+        render json: @comments
       # GET Comment for webapp/
     elsif params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
         @comments = @webapp.comments.commented
-        render "comments/index"
+        render json: @comments
       else
         render :json => {:errors => "I can't find this aveolus or maybe user, contact admin ;)"}, :status => :not_found
         return 
@@ -33,7 +33,7 @@ class CommentsController < BaseController
       @comment.webapp_id = @webapp.id
       if @comment.save
         @comments = @webapp.comments.commented
-        render "comments/index"
+        render json: @comments
       else
         render :json => {:errors => @comment.errors.full_messages}, :status => :unprocessable_entity
       end
@@ -48,7 +48,7 @@ class CommentsController < BaseController
     if @webapp = Webapp.find_by_id(@comment.webapp_id)
       if @comment.update_attributes(:body =>params[:comment], :rating => params[:rating])
         @comments = @webapp.comments.commented
-        render "comments/index"
+        render json: @comments
       else
         render :json => {:errors => @comment.errors.full_messages}, :status => :unprocessable_entity
       end
@@ -64,7 +64,7 @@ class CommentsController < BaseController
       @webapp = @comment.webapp
       @comment.destroy
       @comments = @webapp.comments.commented
-      render "comments/index"
+      render json: @comments
     else
      render :json => {:errors => "You can delete just your comment"}, :status => :unprocessable_entity
      end

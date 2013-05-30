@@ -30,9 +30,8 @@ class BookmarksController < BaseController
 
   def destroy
     @bookmark = Bookmark.find_by_user_id_and_webapp_id(current_user.id, params[:webapp_id])
-    @bookmark.destroy
-    respond_to do |format|
-      format.html { render :nothing => true }
-    end
+    @bookmark.destroy    
+    format.html { render :nothing => true }
+  
   end
 end

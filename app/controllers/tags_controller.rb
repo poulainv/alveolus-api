@@ -11,20 +11,20 @@ class TagsController < BaseController
   # GET /tags/:id
   def show
     @tag = Tag.find(params[:id])
-    render "tags/show"
+    render json: @tag
   end
 
   # GET /tags OR /webapps/:webapp_id/tags
   def index
     @tags = (params[:webapp_id]) ? Webapp.find(params[:webapp_id]).tags : Tag.all
-    render "tags/index"
+    render json: @tags
   end
 
   def create
     if params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
         if @webapp.add_tags(params[:tag],current_user)
-          render :json => @webapp.best_tags.to_json
+          render json: @webapp.best_tags.to_json
         else
           render :json => {:errors => "error"}, :status => :unprocessable_entity
         end

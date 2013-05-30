@@ -18,26 +18,26 @@ class CategoriesController < BaseController
     def featured_webapp
         @category = Category.find(params[:id])
         @webapp = @category.featured_webapp(1).first
-        render "webapps/show-lazy"
+        render json: @webapp, :serializer => WebappLazySerializer
     end
 
     # GET /categories/:id/featured_webapps
     def featured_webapps
         @category = Category.find(params[:id])
-        @webapp = @category.featured_webapp(@@nb_webapp_featured)
-        render "webapps/show-lazy"
+        @webapps = @category.featured_webapp(@@nb_webapp_featured)
+        render json: @webapps, :each_serializer => WebappLazySerializer
     end
 
     # GET /categories/featured_webapps
     def categories_featured_webapps
         @categories = Category.all
-        render "categories/featured"
+        render json: @categories, :each_serializer => CategoryLazySerializer
     end
 
         # GET /categories/all_webapps
     def categories_all_webapps
         @categories = Category.all
-        render "categories/all"
+        render json: @categories
     end
 
 
