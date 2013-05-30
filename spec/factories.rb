@@ -31,6 +31,10 @@ FactoryGirl.define do
       end
     end
 
+    factory :featured_webapp do
+      featured  true
+    end
+
   end
 end
 
