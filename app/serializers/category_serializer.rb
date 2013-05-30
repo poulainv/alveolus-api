@@ -1,8 +1,9 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :featured_webapp, :description
-  has_many :webapps
+  attributes :id, :name, :description
+  # has_many :webapps
+  has_many :featured_webapp, :key => :webapps, :serializer => WebappLazySerializer
 
-  def featured_webapp
+   def featured_webapp
   	object.featured_webapp
   end
 
