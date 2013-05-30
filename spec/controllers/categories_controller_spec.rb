@@ -184,4 +184,49 @@ describe CategoriesController do
 
   end
 
+  ## Test categories_featured_webapps method
+  describe "GET categories_featured_webapps" do
+
+    it "returns http success" do
+      get :categories_featured_webapps
+      response.should be_success
+    end
+
+    it "should return a valid json" do
+      get :categories_featured_webapps
+      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+    end
+
+    it "should return all categories" do
+      get :categories_featured_webapps
+      response.body.should have_json_size(Category.count)
+    end
+
+    it "should have integer id" do
+      get :categories_featured_webapps
+      response.body.should have_json_path("0/id")
+      response.body.should have_json_type(Integer).at_path("0/id")
+      parse_json(response.body, "0/id").should == Category.first.id
+    end
+
+    it "should have string name" do
+      get :categories_featured_webapps
+      response.body.should have_json_path("0/name")
+      response.body.should have_json_type(String).at_path("0/name")
+      parse_json(response.body, "0/name").should == Category.first.name
+    end
+
+    it "should have description field" do
+      get :categories_featured_webapps
+      response.body.should have_json_path("0/description")
+      parse_json(response.body, "0/description").should == Category.first.description
+    end
+
+    it "should have tags list" do
+      get :categories_featured_webapps
+      response.body.should have_json_path("0/webapps")
+    end
+
+  end
+
 end
