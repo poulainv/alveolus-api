@@ -32,8 +32,7 @@ class CommentsController < BaseController
       @comment  = current_user.comments.build(:rating => params[:rating], :body => params[:comment])
       @comment.webapp_id = @webapp.id
       if @comment.save
-        @comments = @webapp.comments.commented
-        render "comments/index"
+        render "comments/show"
       else
         render :json => {:errors => @comment.errors.full_messages}, :status => :unprocessable_entity
       end
@@ -47,8 +46,7 @@ class CommentsController < BaseController
     @comment = Comment.find(params[:id])
     if @webapp = Webapp.find_by_id(@comment.webapp_id)
       if @comment.update_attributes(:body =>params[:comment], :rating => params[:rating])
-        @comments = @webapp.comments.commented
-        render "comments/index"
+        render "comments/show"
       else
         render :json => {:errors => @comment.errors.full_messages}, :status => :unprocessable_entity
       end
