@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe CategoriesController do
+  render_views
 
 	before(:each) do
     (0..2).each do
-      FactoryGirl.create(:webapp, :with_comments)
+      FactoryGirl.create(:featured_webapp)
     end
   end
 
@@ -78,6 +79,55 @@ describe CategoriesController do
     parse_json(response.body, "description").should == Category.first.description
    end
 
+  end
+
+  ## Test featured_webapp method
+  describe "GET featured_webapp" do
+
+    it "returns http success" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.should be_success
+    end
+
+    it "should return a valid json" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+    end
+
+    it "should have integer id" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("id")
+      response.body.should have_json_type(Integer).at_path("id")
+    end
+
+    it "should have string title" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("title")
+      response.body.should have_json_type(String).at_path("title")
+    end
+
+    it "should have string caption" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("caption")
+      response.body.should have_json_type(String).at_path("caption")
+    end
+
+    it "should have string description" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("description")
+      response.body.should have_json_type(String).at_path("description")
+    end
+
+     it "should have tags list" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("tags")
+    end
+
+    it "should have category" do
+      get :featured_webapp, id: Webapp.where(:featured => true).first.category
+      response.body.should have_json_path("category")
+    end
+    
   end
 
 end
