@@ -11,6 +11,37 @@ describe BookmarksController do
 
   describe "GET index" do
 
+  	context "when webapp_id and user_id are provided" do
+
+  		it "should return a success http" do
+	      get :index, webapp_id: Webapp.first, user_id: User.first
+	      response.should be_success
+	    end
+
+	    it "should return a valid json" do
+	      get :index, webapp_id: Webapp.first, user_id: User.first
+	      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+	    end
+
+	    it "should have integer id" do
+	      get :index, webapp_id: Webapp.first, user_id: User.first
+	      response.body.should have_json_path("id")
+	      response.body.should have_json_type(Integer).at_path("id")
+	    end
+
+	    it "should have integer user_id" do
+	      get :index, webapp_id: Webapp.first, user_id: User.first
+	      response.body.should have_json_path("user_id")
+	      response.body.should have_json_type(Integer).at_path("user_id")
+	    end
+
+	    it "should have integer webapp_id" do
+	      get :index, webapp_id: Webapp.first, user_id: User.first
+	      response.body.should have_json_path("webapp_id")
+	      response.body.should have_json_type(Integer).at_path("webapp_id")
+	    end
+  	end
+
   	context "when webapp_id is provided" do
 
 	    it "should return a success http" do
@@ -144,7 +175,7 @@ describe BookmarksController do
 		## NOT LOGGED IN
     context 'when logged out' do
     	it "should return 401 code" do
-        delete :destroy, webapp_id: Webapp.first
+        delete :destroy, webapp_id: Webapp.first, bookmark_id: Bookmark.first
         response.response_code.should == 401
       end
     end
@@ -154,7 +185,7 @@ describe BookmarksController do
       login_user
 
       it "should return a success http" do
-	      delete :destroy, webapp_id: Webapp.first
+	      delete :destroy, webapp_id: Webapp.first, bookmark_id: Bookmark.first
 	      response.should be_success
 	    end
     end
