@@ -5,7 +5,11 @@ class BookmarksController < BaseController
   
  # GET "webapps/:webapp_id/bookmarks OR /users/:user_id/bookmarks
   def index
-    if (params[:webapp_id])
+    if params[:webapp_id] && params[:user_id]
+      @bookmark = Bookmark.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
+      render json: @bookmark
+      return
+    elsif (params[:webapp_id])
       @bookmarks = Webapp.find(params[:webapp_id]).bookmarks
     elsif (params[:user_id])
       @bookmarks = User.find(params[:user_id]).bookmarks

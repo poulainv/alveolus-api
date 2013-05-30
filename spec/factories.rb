@@ -31,6 +31,10 @@ FactoryGirl.define do
       end
     end
 
+    factory :featured_webapp do
+      featured  true
+    end
+
   end
 end
 
@@ -52,6 +56,12 @@ FactoryGirl.define do
 
     factory :admin_user do
       admin
+    end
+
+    trait :with_comments do
+      after (:create) do |instance|
+        create_list(:comment, 2, user: instance)
+      end
     end
 
   end
