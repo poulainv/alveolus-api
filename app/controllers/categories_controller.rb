@@ -34,5 +34,11 @@ class CategoriesController < BaseController
         render "categories/featured"
     end
 
+        # GET /categories/all_webapps
+    def categories_all_webapps
+        @categories = Category.all
+        render "categories/all"
+    end
+
 
 end

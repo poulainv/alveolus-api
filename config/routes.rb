@@ -13,6 +13,8 @@ EnjoyTheWeb::Application.routes.draw do
 
   ## Categories
   match "/categories/featured_webapps", :to => "categories#categories_featured_webapps"
+  match "/categories/all", :to => "categories#categories_all_webapps"
+
 
   resources :tags do
     resources :webapps
@@ -62,6 +64,7 @@ EnjoyTheWeb::Application.routes.draw do
     post "registration", :to => "registrations#create"
   end
 
+  match '/facebook/fetch' => 'facebooks#fetch'
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
   root :to => "webapps#index"

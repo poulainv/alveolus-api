@@ -7,13 +7,13 @@ node do |user|
 		child :comments do
 			attributes :id, :body, :rating, :created_at, :updated_at, :webapp_id
 			child :webapp do
-				attributes :id, :title, :caption, :description
+			attributes :id, :title, :caption, :description
 				node(:image_url) { |webapp| webapp.image_url(:medium) }
 			end
 		end
 
 		child :webapps do
-			attributes :id, :title, :caption, :description
+			attributes :id, :title, :caption, :description, :validate
 			node(:image_url) { |webapp| webapp.image_url(:medium) }
 		end
 
