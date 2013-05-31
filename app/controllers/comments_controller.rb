@@ -8,11 +8,11 @@ class CommentsController < BaseController
   def index
       # GET Comment for user/webapp/
     if params[:webapp_id] and params[:user_id]
-       @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
-       render json: @comment
+      @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
+      render json: @comment
     elsif params[:user_id]
-       @comments = Comment.find_by_user_id(params[:user_id])
-        render json: @comments
+      @comments = User.find(params[:user_id]).comments
+      render json: @comments
       # GET Comment for webapp/
     elsif params[:webapp_id]
       if  @webapp = Webapp.find(params[:webapp_id])
