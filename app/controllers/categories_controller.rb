@@ -31,13 +31,13 @@ class CategoriesController < BaseController
     # GET /categories/featured_webapps
     def categories_featured_webapps
         @categories = Category.all
-        render json: @categories, :each_serializer => CategoryLazySerializer
+        render json: @categories, :each_serializer => CategorySerializer
     end
 
         # GET /categories/all_webapps
     def categories_all_webapps
         @categories = Category.all
-        render json: @categories
+        render json: @webapps, :each_serializer => WebappAllSerializer
     end
 
 
