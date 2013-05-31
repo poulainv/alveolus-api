@@ -12,6 +12,10 @@ class Category < ActiveRecord::Base
     end
   end
 
+  def validated
+    self.webapps.validated
+  end
+
 end
 
 

@@ -7,7 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'json'
-gem 'rabl'
+gem 'active_model_serializers'
 gem 'inherited_resources'
 gem 'json_spec'
 
