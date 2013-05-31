@@ -42,7 +42,8 @@
       @webapp = Webapp.find(params[:id])
       if current_user.try(:admin?) or current_user.id == @webapp.user_id
         # Temporary view, TODO
-        render "index"
+        @webapps = Webapp.all
+        render json: @webapps
       else
         render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
       end
