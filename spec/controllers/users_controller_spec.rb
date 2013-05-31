@@ -34,23 +34,9 @@ describe UsersController do
       parse_json(response.body, "0/id").should == User.first.id
     end
 
-    it "should have string email" do
+    it "should not have email" do
       get :index
-      response.body.should have_json_path("0/email")
-      response.body.should have_json_type(String).at_path("0/email")
-      parse_json(response.body, "0/email").should == User.first.email
-    end
-
-    it "should not be admin" do
-      get :index
-      response.body.should have_json_path("0/admin")
-      parse_json(response.body, "0/admin").should == User.first.admin
-    end
-
-    it "should be admin" do
-      get :index
-      response.body.should have_json_path("3/admin")
-      parse_json(response.body, "3/admin").should == User.last.admin
+      response.body.should_not have_json_path("0/email")
     end
 
   end
