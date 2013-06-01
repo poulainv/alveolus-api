@@ -169,6 +169,11 @@ class Webapp < ActiveRecord::Base
   def reviews
     comments.commented.to_json(:include => :user)
   end
+
+  def bookmarked?(webapp_id,user_id)
+    return true if Bookmark.find_by_webapp_id_and_user_id(webapp_id, user_id)
+    return false
+  end
  
 
   #######################

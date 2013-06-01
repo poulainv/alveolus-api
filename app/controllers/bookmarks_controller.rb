@@ -35,7 +35,6 @@ class BookmarksController < BaseController
   def destroy
     @bookmark = Bookmark.find_by_user_id_and_webapp_id(current_user.id, params[:webapp_id])
     @bookmark.destroy    
-    format.html { render :nothing => true }
-  
+    render :json => {:success => "Alveolus debookmarked"}, :status => :created
   end
 end

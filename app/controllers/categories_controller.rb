@@ -37,7 +37,7 @@ class CategoriesController < BaseController
         # GET /categories/all_webapps
     def categories_all_webapps
         @categories = Category.all
-        render json: @webapps, :each_serializer => WebappAllSerializer
+        render json: @categories, :each_serializer => CategoryAllSerializer
     end
 
 

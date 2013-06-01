@@ -65,6 +65,7 @@ EnjoyTheWeb::Application.routes.draw do
   end
 
   match '/facebook/fetch' => 'facebooks#fetch'
+  match '/webapps/:webapp_id/bookmarks' => 'bookmarks#destroy', :via => :delete
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
   root :to => "webapps#index"
