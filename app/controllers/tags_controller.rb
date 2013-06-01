@@ -47,4 +47,11 @@ class TagsController < BaseController
     end
   end
 
+    # GET /tags/all_webapps
+    def tags_all_webapps
+        @tags = Tag.used
+        render json: @tags, :each_serializer => TagAllSerializer
+    end
+
+
 end

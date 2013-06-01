@@ -2,7 +2,7 @@ EnjoyTheWeb::Application.routes.draw do
 
   ## To accept ajax cross domain
   match '/*path' => 'application#options', :via => :options
-  
+  match '/tags_with_webapp' => "tags#tags_all_webapps"
   resources :feedback, :only => [:new, :create]
 
   resources :authentications
@@ -64,6 +64,7 @@ EnjoyTheWeb::Application.routes.draw do
     post "registration", :to => "registrations#create"
     get "confirmation", :to =>"confirmations#show"
   end
+
 
   match '/facebook/fetch' => 'facebooks#fetch'
   match '/webapps/:webapp_id/bookmarks' => 'bookmarks#destroy', :via => :delete
