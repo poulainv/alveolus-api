@@ -172,10 +172,28 @@ describe CommentsController do
 	        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
 	      end
 
-	      it "should return webapp comments" do
+	      it "should have integer id" do
 	      	post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
-	      	response.body.should have_json_size(Webapp.first.comments.count)
+		      response.body.should have_json_path("id")
+		      response.body.should have_json_type(Integer).at_path("id")
 	    	end
+
+		    it "should have string body" do
+		      post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+		      response.body.should have_json_path("body")
+		      response.body.should have_json_type(String).at_path("body")
+		    end
+
+		    it "should have integer rating" do
+		      post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+		      response.body.should have_json_path("rating")
+		      response.body.should have_json_type(Integer).at_path("rating")
+		    end
+
+		    it "should have user" do
+		      post :create, webapp_id: Webapp.first, rating: 2, comment: "Bla"
+		      response.body.should have_json_path("user")
+		    end
 
 	    end
 
@@ -242,10 +260,28 @@ describe CommentsController do
 	        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
 	      end
 
-	      it "should return webapp comments" do
+	      it "should have integer id" do
 	      	put :update, id: Comment.first, rating: 3, comment: "Bla"
-	      	response.body.should have_json_size(Webapp.first.comments.count)
+		      response.body.should have_json_path("id")
+		      response.body.should have_json_type(Integer).at_path("id")
 	    	end
+
+		    it "should have string body" do
+		      put :update, id: Comment.first, rating: 3, comment: "Bla"
+		      response.body.should have_json_path("body")
+		      response.body.should have_json_type(String).at_path("body")
+		    end
+
+		    it "should have integer rating" do
+		      put :update, id: Comment.first, rating: 3, comment: "Bla"
+		      response.body.should have_json_path("rating")
+		      response.body.should have_json_type(Integer).at_path("rating")
+		    end
+
+		    it "should have user" do
+		      put :update, id: Comment.first, rating: 3, comment: "Bla"
+		      response.body.should have_json_path("user")
+		    end
 	    end
 
 	    ##  Unvalid comment

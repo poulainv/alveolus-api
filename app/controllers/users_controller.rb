@@ -21,6 +21,7 @@ class UsersController < BaseController
     end
   end
 
+  # PUT users/:id
   def update
     @user = User.find(params[:id])
     if(current_user.try(:admin?))
