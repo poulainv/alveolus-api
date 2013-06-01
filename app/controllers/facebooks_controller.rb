@@ -23,6 +23,7 @@ class FacebooksController < BaseController
           render :json=> {:success=>true, :auth_token=>user.authentication_token, :email=>user.email, :id => user.id}
         else
              user = User.new(:email =>user_fb.email, :password => access_token[1..10], :password_confirmation => access_token[1..10])
+            user.skip_confirmation!
             if user.save
               sign_in(:user, user)
               user.ensure_authentication_token!
