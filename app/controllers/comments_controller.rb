@@ -9,7 +9,12 @@ class CommentsController < BaseController
       # GET Comment for user/webapp/
     if params[:webapp_id] and params[:user_id]
        @comment = Comment.find_by_webapp_id_and_user_id(params[:webapp_id], params[:user_id])
+       if @comment
        render json: @comment
+     else
+        render json: ''
+     end
+
     elsif params[:user_id]
        @comments = Comment.find_by_user_id(params[:user_id])
         render json: @comments
