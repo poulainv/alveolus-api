@@ -62,6 +62,7 @@ EnjoyTheWeb::Application.routes.draw do
     delete "sign_out", :to => "sessions#destroy"
     post "sign_in", :to => "sessions#create"
     post "registration", :to => "registrations#create"
+    get "confirmation", :to =>"confirmations#show"
   end
 
   match '/facebook/fetch' => 'facebooks#fetch'

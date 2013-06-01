@@ -7,12 +7,12 @@ class FeedbackController < BaseController
   end
 
   def create
-    @feedback = Feedback.new(params[:feedback])
+    @feedback = Feedback.new(params[:comment],params[:page])
     @feedback.email = current_user.email if user_signed_in?
     if @feedback.valid?
       FeedbackMailer.feedback(@feedback).deliver
       
-      render :json =>  {:success => '<h4>Bien reçu, merci !</h4>'}, :status => :created
+      render :json =>  {:success => '<h4>Bien reçu, merci ! '+@feedback.comment+'</h4>'}, :status => :created
     else
       @error_message = "Please enter your #{@feedback.subject.to_s.downcase}"
 

@@ -1,5 +1,5 @@
-<p>Welcome <%= @resource.email %>!</p>
+<p>Bienvenue sur AlveolUs <%= @resource.email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Vous pouvez confirmer votre adresse email en cliquant sur le lien suivant :</p>
 
-<p><%= link_to 'Confirm my account', user_confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to 'Confirmer mon compte', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

@@ -1,9 +1,9 @@
 class Feedback
   attr_accessor :subject, :email, :comment, :page
 
-  def initialize(params = {})
-    self.comment = params[:comment]
-    self.page = params[:page]
+  def initialize(comment, page)
+    self.comment = comment
+    self.page = page
   end
 
   def valid?
