@@ -12,7 +12,7 @@ angular.module('alveolus.filters', []).filter('star', function() {
 .filter('vimeo', function() {
   return function(input) {
     if(input)
-     return "<iframe src=\"http://player.vimeo.com/video/"+input+"\" width=\"500\" height=\"281\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>";
+     return "<iframe src=\"http://player.vimeo.com/video/"+input+"\" width=\"470\" height=\"281\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>";
    return;
  };
 })
@@ -34,5 +34,13 @@ angular.module('alveolus.filters', []).filter('star', function() {
       input.push(i);
     return input;
   };
+})
+.filter('substring', function() {
+  return function (input) {
+    if(input){
+      return input.substring(0,500)+"..";
+    }
+    return;
+  }
 });
 

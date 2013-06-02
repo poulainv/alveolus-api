@@ -11,55 +11,47 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 	var alertUnlogSuccess = { type: 'info', msg: 'A bientôt ! Vous vous êtes correctement déconnecté' } ;
 	var alertSuggestionSaved = { type: 'success', msg: 'Votre proposition a bien été prise en compte' } ;
 
-// $.ajax({
-//   type: "GET",
-//   url: "http://localhost:3000/users/1",
-//   headers : { 'X-AUTH-TOKEN' : '71yrbjehDJJqyLhVE6eS'}
-// }).done(function( msg ) {
-//   alert( "Data Saved: " + msg );
-// });
-	
 	$scope.user = SessionService.getUser();
-    $scope.isLogged = SessionService.authorized();
-    $scope.userInfo = $scope.isLogged ? UserService.get({id:$scope.user.id}): null;
-	// To receive broadcasts
+	$scope.isLogged = SessionService.authorized();
+	$scope.userInfo = $scope.isLogged ? UserService.get({id:$scope.user.id}): null;
+		// To receive broadcasts
 	$scope.$on('onLoggedSuccess', function() {
-	 	console.log("catch onLoggedSuccess");
-        $scope.user = SessionService.getUser();
-        $scope.isLogged = SessionService.authorized();
-        $scope.isLogged ? addAlert(alertLogSuccess)  : addAlert(alertLogFail);
+		console.log("catch onLoggedSuccess");
+		$scope.user = SessionService.getUser();
+		$scope.isLogged = SessionService.authorized();
+		$scope.isLogged ? addAlert(alertLogSuccess)  : addAlert(alertLogFail);
 		$scope.closeModalLogin();
-    });
+	});
 
 	$scope.$on('onSuggestionSaved', function() {
-	 	console.log("catch onSuggestionSaved");
+		console.log("catch onSuggestionSaved");
 	 	// $location.path('/');
-        addAlert(alertSuggestionSaved);
-    });
+	 	addAlert(alertSuggestionSaved);
+	 });
 
 	 // When 401 response is receive, an interceptor broadcast
 	 // onNeedLogin, so we catch it then we open modal login
-	$scope.$on('onNeedLogin', function() {
-		console.log("catch need login");
-		SessionService.resetSession();
-		$scope.openModalLogin();
-	});
+	 $scope.$on('onNeedLogin', function() {
+	 	console.log("catch need login");
+	 	SessionService.resetSession();
+	 	$scope.openModalLogin();
+	 });
 
-	  $scope.$on('onUnloggedSuccess', function() {
+	 $scope.$on('onUnloggedSuccess', function() {
 	 	console.log("catch onUnLoggedSuccess");
-        $scope.user = SessionService.getUser();
-        $scope.isLogged = SessionService.authorized();
-        $scope.isLogged ? addAlert(alertLogFail)  : addAlert(alertUnlogSuccess);
-    });
+	 	$scope.user = SessionService.getUser();
+	 	$scope.isLogged = SessionService.authorized();
+	 	$scope.isLogged ? addAlert(alertLogFail)  : addAlert(alertLogFail);
+	 });
 
-	
-	$scope.search = function(content){
-		$location.path('/alveoles/search/'+content);
-	};
 
-	$scope.logOrUnlog = function(user){
-		$scope.isLogged && "Bonjour" || "Connexion"
-	}
+	 $scope.search = function(content){
+	 	$location.path('/alveoles/search/'+content);
+	 };
+
+	 $scope.logOrUnlog = function(user){
+	 	$scope.isLogged && "Bonjour" || "Connexion"
+	 }
 
 	// Call SessionService to sin in user with email and password given in modal
 	// Update $scope.user of mainControler
@@ -71,6 +63,13 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 		SessionService.sign_out();
 	};
 
+	$scope.goToAddWebappPage = function(){
+		if($scope.isLogged){
+			$location.path('/alveoles/new');
+		} else {
+			$scope.openModalLogin();
+		}
+	};
 
 	// Manage main alert on all pages 
 	var addAlert = function(alert) {
@@ -130,7 +129,9 @@ controller('MainCtrl', function($scope,$routeParams,$location,WebappService,Sess
 		$('#searchInput').typeahead({
 			source: tagNames,
 			updater:function (item) {
+				console.log(item);
 				$scope.$apply($scope.searchContent = item);
+				console.log($scope.searchContent);
 				return item;
 			}
 		});
