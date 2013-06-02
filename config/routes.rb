@@ -70,7 +70,7 @@ EnjoyTheWeb::Application.routes.draw do
   match '/webapps/:webapp_id/bookmarks' => 'bookmarks#destroy', :via => :delete
   match '/webapps/:id/click/:element' => 'webapps#click'
   match '/auth/:provider/callback' => 'authentications#create'
-  root :to => "webapps#index"
+  root :to => "statics#index"
 
 
 

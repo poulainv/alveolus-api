@@ -9,7 +9,7 @@ gem 'mysql2'
 gem 'json'
 gem 'active_model_serializers'
 gem 'inherited_resources'
-gem 'json_spec'
+
 
 group :production do
   gem 'thin'
@@ -58,6 +58,7 @@ group :development do
 end
 
 group :test do
+  gem 'json_spec'
   gem 'rspec', '2.8.0'
   gem 'capybara', ">= 1.1.2"
   gem 'factory_girl_rails', '4.0'
