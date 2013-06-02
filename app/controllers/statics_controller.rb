@@ -3,7 +3,7 @@ class StaticsController < BaseController
 
  
   def index
-    redirect_to "/app/index.html"
+    redirect_to "/index.html"
     # render 'layouts/application'
   end
 
