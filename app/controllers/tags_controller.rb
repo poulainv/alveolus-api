@@ -49,7 +49,7 @@ class TagsController < BaseController
 
     # GET /tags/all_webapps
     def tags_all_webapps
-        @tags = Tag.used
+        @tags = Tag.most_posted(20)
         render json: @tags, :each_serializer => TagAllSerializer
     end
 

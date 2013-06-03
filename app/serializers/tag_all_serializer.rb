@@ -1,5 +1,5 @@
 class TagAllSerializer < ActiveModel::Serializer
   attributes :id, :name
-  has_many :webapps, :each_serializer => WebappLazySerializer
+  has_many :webapps, :serializer => WebappLazySerializer
   
 end
