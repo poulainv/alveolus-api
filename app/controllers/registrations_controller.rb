@@ -13,10 +13,10 @@ class RegistrationsController < Devise::RegistrationsController
       # sign_in(:user, resource)
       resource.ensure_authentication_token!
        # render :json=> {:success=>true, :auth_token=>resource.authentication_token, :email=>resource.email, :id => resource.id}
-        render :json => "Wait for confirmation"
+        render :json => {:success => "Wait for confirmation"}
     else
       clean_up_passwords(resource)
-      render :json => "Something wrong dude"
+      render :json => {:error => resource.errors.full_messages}, :status => 422
     end
   end
 
