@@ -3,7 +3,7 @@
 
 class TagsController < BaseController
 
-  before_filter :authenticate_user!, :only => [:create]
+  before_filter :user_needed!, :only => [:create]
 
   def new
   end

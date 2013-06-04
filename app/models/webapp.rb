@@ -159,7 +159,7 @@ class Webapp < ActiveRecord::Base
   end
 
   def best_tags
-    n_best_tags(5)
+    n_best_tags(3)
   end
 
   def preview
@@ -190,14 +190,14 @@ class Webapp < ActiveRecord::Base
   ## To increment nb_click_<element>
   def increment_nb_click(hash)
     case hash[:element]
-    when "detail"
-      self.increment(:nb_click_detail).save
-    when "preview"
-      self.increment(:nb_click_preview).save
-    when "url"
-      self.increment(:nb_click_url).save
+      when "detail"
+        self.increment(:nb_click_detail).save
+      when "preview"
+        self.increment(:nb_click_preview).save
+      when "url"
+        self.increment(:nb_click_url).save
       when "shared"
-      self.increment(:nb_click_shared).save
+        self.increment(:nb_click_shared).save
     end
   end
 

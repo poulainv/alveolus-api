@@ -12,8 +12,8 @@
 
     # GET /webapps/:id
     def show
-      #  if current_user
       @webapp = Webapp.find_by_id(params[:id])
+      @webapp.increment_nb_click(:element => 'detail') ## Increment number of view on detail is it useful with google analytics ?
       render json: @webapp
     end
 
@@ -27,7 +27,7 @@
     def create
       tag_list  = params[:webapp].delete(:tag_list)
       @webapp  = current_user.webapps.build(params[:webapp])
-      @webapp.nb_click_shared = 0
+      @webapp.nb_click_shared = 0 ## Is it useful ?
       @webapp.validate = false 
       if @webapp.save
         @webapp.add_tags(tag_list, current_user)
