@@ -1,5 +1,0 @@
-module AuthenticationsHelper
-
-  
-
-end
