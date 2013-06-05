@@ -49,7 +49,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:email){|n| "vincent.poulain#{n}@lemonde.com" }
     password  "saluttoi"
-
+    confirmed_at Time.new
     trait :admin do
       admin true
     end

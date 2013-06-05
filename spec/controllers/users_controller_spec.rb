@@ -11,7 +11,10 @@ describe UsersController do
   end
 
   ## Test INDEX method
-  describe "GET index" do
+  describe "GET index" 
+   ## LOGGED IN AS ADMIN
+   context 'when logged in as admin' do
+    login_admin
     it "should return a success http" do
       get :index
       response.should be_success
@@ -38,8 +41,21 @@ describe UsersController do
       get :index
       response.body.should_not have_json_path("0/email")
     end
-
   end
+end
+
+ ## Test INDEX method
+  describe "GET index" 
+   ## LOGGED IN AS ADMIN
+   context 'when logged in as classic user' do
+    login_user
+    it "should return an http error 401" do
+      get :index
+      response.response_code.should == 401
+    end
+  end
+end
+
 
   ## Test SHOW method
   describe "GET show" do
