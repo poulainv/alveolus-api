@@ -16,8 +16,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
-    print 'bonjour'
-    print params[:id]
     resource = User.find_for_database_authentication(:id => params[:id])
     resource.authentication_token = nil
     resource.save
