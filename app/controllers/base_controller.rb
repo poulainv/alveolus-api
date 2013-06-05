@@ -16,7 +16,6 @@ class BaseController < InheritedResources::Base
 	def get_auth_token
 		if auth_token = params[:auth_token].blank? && request.headers["X-AUTH-TOKEN"]
 			params[:auth_token] = auth_token
-			print params[:auth_token]
 		end
 	end
 end
