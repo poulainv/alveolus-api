@@ -1,7 +1,7 @@
 # encoding: utf-8
 class BookmarksController < BaseController
 
-  before_filter :user_needed!, :only => [:create]
+  before_filter :user_needed!, :only => [:create, :destroy]
   
  # GET "webapps/:webapp_id/bookmarks OR /users/:user_id/bookmarks
   def index
