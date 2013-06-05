@@ -7,8 +7,10 @@ class UsersController < BaseController
 
   # GET /users
   def index
+    if (current_user.try(:admin?))
       @users = User.all
       render json: @users, :each_serializer => UserLazySerializer
+     end
   end
 
   # GET /users/:id
@@ -24,33 +26,35 @@ class UsersController < BaseController
   # PUT users/:id
   def update
     @user = User.find(params[:id])
+    puts @user.email
     if(current_user.try(:admin?))
       if @user.update_attributes(params[:user])
-         render json: @user
-      else
-         render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
-      end
-    else
-      if current_user.id == @user.id and @user.update_attributes(params[:user])
-         render json: @user
-      else
-         render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
-      end
-    end
-  end
+       render json: @user
+     else
+       render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
+     end
+   else
+    if current_user.id == @user.id and @user.update_attributes(params[:user])
+     render json: @user
+   else
+     render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
+   end
+ end
+end
 
   def edit
     @user = User.find(params[:id])
     render :layout => "pages"
   end
 
-  # def destroy
-  #   user = User.find(params[:id])
-  #   unless user == current_user
-  #     user.destroy
-  #     redirect_to users_path, :notice => "User deleted."
-  #   else
-  #     redirect_to users_path, :notice => "Can't delete yourself."
-  #   end
-  # end
+  def destroy
+    user = User.find(params[:id])
+    if (current_user.try(:admin?) or user ==curent_user)   
+      user.destroy
+      render json: {success => "User deleted"}, :status => 200
+    else
+      render json: {Error => "You have to be admin or current user"}, :status => 401
+  end
+
+end
 end
