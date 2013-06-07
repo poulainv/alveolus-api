@@ -11,51 +11,46 @@ describe UsersController do
   end
 
   ## Test INDEX method
-  describe "GET index" 
+  describe "GET index" do
    ## LOGGED IN AS ADMIN
-   context 'when logged in as admin' do
-    login_admin
-    it "should return a success http" do
-      get :index
-      response.should be_success
+    context 'when logged in as admin' do
+      login_admin
+      it "should return a success http" do
+        get :index
+        response.should be_success
+      end
+
+      it "should return a valid json" do
+        get :index
+        expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
+      end
+
+      it "should return 3 users" do
+        get :index
+        response.body.should have_json_size(User.count)
+      end
+
+      it "should have integer id" do
+        get :index
+        response.body.should have_json_path("0/id")
+        response.body.should have_json_type(Integer).at_path("0/id")
+        parse_json(response.body, "0/id").should == User.first.id
+      end
+
+      it "should not have email" do
+        get :index
+        response.body.should_not have_json_path("0/email")
+      end
     end
 
-    it "should return a valid json" do
-      get :index
-      expect { parse_json(response.body) }.should_not raise_error(MultiJson::DecodeError)
-    end
-
-    it "should return 3 users" do
-      get :index
-      response.body.should have_json_size(User.count)
-    end
-
-    it "should have integer id" do
-      get :index
-      response.body.should have_json_path("0/id")
-      response.body.should have_json_type(Integer).at_path("0/id")
-      parse_json(response.body, "0/id").should == User.first.id
-    end
-
-    it "should not have email" do
-      get :index
-      response.body.should_not have_json_path("0/email")
+    context 'when logged in as classic user' do
+      login_user
+      it "should return an http error 401" do
+        get :index
+        response.response_code.should == 401
+      end
     end
   end
-end
-
- ## Test INDEX method
-  describe "GET index" 
-   ## LOGGED IN AS ADMIN
-   context 'when logged in as classic user' do
-    login_user
-    it "should return an http error 401" do
-      get :index
-      response.response_code.should == 401
-    end
-  end
-end
-
 
   ## Test SHOW method
   describe "GET show" do
