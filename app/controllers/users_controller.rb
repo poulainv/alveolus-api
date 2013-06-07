@@ -26,7 +26,6 @@ class UsersController < BaseController
   # PUT users/:id
   def update
     @user = User.find(params[:id])
-    puts @user.email
     if(current_user.try(:admin?))
       if @user.update_attributes(params[:user])
        render json: @user
