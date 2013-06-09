@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
 
   def update_website_add_rating
     @website = Webapp.find_by_id(self.webapp_id)
-    if(@website.comments.length-1 ==0)
+    if(@website.comments.length ==1)
       new_rating = self.rating;
     else
     new_rating = (@website.average_rate*(@website.comments.length-1)+self.rating)/(@website.comments.length)
