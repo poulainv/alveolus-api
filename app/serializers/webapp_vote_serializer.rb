@@ -1,5 +1,5 @@
 class WebappVoteSerializer < ActiveModel::Serializer
-	attributes :id,:caption,:title,:description,:image_url,:count_positive,:count_negative,:my_vote, :facebook_id,:twitter_id, :gplus_id,:vimeo_id,:user_id, :nb_click_url,:nb_click_detail,:url, :category_id
+	attributes :id,:caption,:title,:description,:created_at, :image_url,:count_positive,:count_negative,:my_vote, :facebook_id,:twitter_id, :gplus_id,:vimeo_id,:user_id, :nb_click_url,:nb_click_detail,:url, :category_id
 	# has_many :comments, embed: :ids, :key => :comments
 	attribute :tags
 	has_one :user, :serializer => UserLazySerializer
