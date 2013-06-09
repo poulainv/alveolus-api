@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
 
-  attr_accessible   :pseudo, :avatar,:email, :password, :password_confirmation, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
+  attr_accessible   :pseudo, :avatar,:email, :password, :password_confirmation, :current_password, :tagUserRelations,:remember_me, :comments,:provider, :uid,:last_sign_in_at,:admin
 
   has_attached_file :avatar,  PAPERCLIP_STORAGE_AVATAR ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
   validates_attachment_size :avatar, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }

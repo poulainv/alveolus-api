@@ -32,14 +32,19 @@ class UsersController < BaseController
      else
        render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
      end
-   else
-    if current_user.id == @user.id and @user.update_attributes(params[:user])
-     render json: @user
-   else
-     render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
-   end
- end
-end
+    else
+      # Password update
+      if current_user.id == @user.id and params[:user][:current_password] and @user.update_with_password(params[:user])
+        sign_in @user, :bypass => true
+        render json: @user
+      # Other update
+      elsif current_user.id == @user.id and @user.update_attributes(params[:user])
+        render json: @user
+      else
+        render :json => {:errors => @user.errors.full_messages}, :status => :unprocessable_entity
+      end
+    end
+  end
 
   def edit
     @user = User.find(params[:id])
