@@ -47,6 +47,9 @@ EnjoyTheWeb::Application.routes.draw do
       resources :bookmarks
     end
     resources :comments
+    member {
+      put :update_password
+    }
   end
 
 
