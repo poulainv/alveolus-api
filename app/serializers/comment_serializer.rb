@@ -7,7 +7,7 @@ def webapp_id
 end
 
 def webapp_image_url
-	webapp = object.webapp.photo(:small)
+	webapp = object.webapp.photo(:smallresize)
 end
 
 def webapp_title
