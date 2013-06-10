@@ -1,6 +1,21 @@
 /* app css stylesheet */
+/**Font Politica**/
+@font-face {
+  font-family: "Politica";
+  src: url(../font/Politica.ttf) format("truetype");
+}
 
-a:link, a:visited, a:hover, a:active {
+@font-face {
+  font-family: "Politica-bold";
+  src: url(../font//Politica/Politica-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Politica-italic";
+  src: url(../font//Politica/Politica-Italic.otf) format("opentype");
+}
+
+a, a:link, a:visited, a:hover, a:active {
   color:black;
   text-decoration: none;
   cursor: pointer;
@@ -18,71 +33,94 @@ h1, h2, h3, h4, h5{
   font-family: Politica;
 }
 
+/** ALVEOLE LST ITEM
+* Define how an alveole is displayed in a list
+* or in the carousel
+**/
+
 .alveole{
-  padding: 5px;
-  background-position: 0 307px;
-  height: 360px;
-  max-width: 200px;
   overflow: hidden;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -khtml-border-radius: 6px;
-  border-radius: 6px;
+  position: relative;
+  padding: 5px;
   background-color: #fff;
   border: 1px solid #d0d5cb;
-  position: relative;
-  background-color: #fff;
+  height: 350px;
+}
+.alveoleHeader{
+  padding: 5px;
+  width: 100%;
+  background-color: rgba(255,255,255,0.95);
+  position: absolute;
+  top: -35px;
+  left: 0;
+  transition: top .3s linear;
+  z-index: 99;
+}
+.alveole:hover .alveoleHeader{
+  top:0;
 }
 
 .alveoleName{
-  line-height: 15px;
-  padding: 5px;
+  /*color: rgb(57,181,74);*/
+  /*font-size: 15px;*/
+  /*margin: 0;*/
+}
+.alveoleContent{
+  /*position: absolute;*/
+  /*background-color: #FFF;*/
+  /*background-color: rgba(255,255,255,.8);*/
+  /*height: 215px;*/
+  /*top: 215px;*/
+  /*left: 0;*/
+  /*transition: top .3s ease-in;*/
+  /*padding: 5px;*/
+}
+
+.alveoleContent .more{
+  /*background: none;*/
+  /*text-shadow: none;*/
+  /*background-color: rgb(57,181,74);*/
+  /*color: #FFF;*/
+  /*border: none;*/
+  /*border-radius: 0;*/
+  /*margin-top: 20px;*/
+}
+
+.alveoleContent .more:hover{
+  /*background-color: rgb(57,181,74);*/
 }
 
 .alveoleDesc{
-  color: #75796f!important;
-  padding: 0 5px;
-  font-size: 12px!important;
-  line-height: 15px;
-  height: 60px;
-  text-overflow: ellipsis;
-  /*text-align: justify;*/
+  color: #75796f;
+  font-size: 12px;
+  text-align: justify;
+  /*height: 105px;*/
 }
-
-.alveoleRating{
+.cropedImg{
+  height: 130px;
+  overflow: hidden;  
+  position: relative;
+  border: 1px solid #d0d5cb;
+}
+.alveoleImg{
   position: absolute;
-  left: 10px;
-  bottom: 30px;
+
 }
 
 .alveoleTagsWrapper{
+  height: 38px;
+  top:auto;
+  bottom: 9px;
   position:absolute;
-  bottom:10px;
-  left:10px;
-  width: 200px;
-  height: 18px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-
-.alveoleWrap{
-  display: inline-block;
-  vertical-align: top;
-  text-align: left;
-  moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  -o-border-radius: 9px;
-  -ms-border-radius: 9px;
-  -khtml-border-radius: 9px;
-  border-radius: 9px;
-  background: #eef2ea;
-  padding: 4px;
-  margin: 5px 10px;
-  clear: both;
+.alveoleRatingWrapper{
+  display: block;
+  width: auto;
+  float: right;
+  padding-right: 10px;
 }
+/* -------------------- */
 
 .block{
   display: block!important;
@@ -162,11 +200,26 @@ h1, h2, h3, h4, h5{
 }
 
 .carousel-control{
-  background-color: green;
+  content: ' ';
+  background: none;
+  border: none;
+  border-radius: 0px;
+  height: 56px;
+  width: 35px;
+  color:#3aa935;
+
 }
 
 .carousel-control:hover{
   cursor: pointer;
+  color:#3aa935;
+}
+
+.carousel-control.left{
+  background-image: url('../img/left-arrow.png') 
+}
+.carousel-control.right{
+  background-image: url('../img/right-arrow.png') 
 }
 
 .container-grey{
@@ -178,6 +231,7 @@ h1, h2, h3, h4, h5{
   padding: 20px 0;
   margin-top: 50px;
   background-color: white;
+  min-height: 300px;
 }
 
 .control-group option{
@@ -251,11 +305,16 @@ h1, h2, h3, h4, h5{
   /*height: 80px;*/
 }
 
-.navbar-link{
+.navbar-link-text{
   font-family: politica;
   color: black;
   font-weight: bold;
   font-size: 16px;
+  text-shadow:none;
+}
+
+.navbar-link:hover .navbar-link-text{
+  color: rgb(57,181,74);
 }
 
 .navbar .divider-vertical {
@@ -351,12 +410,21 @@ h1, h2, h3, h4, h5{
 }
 
 .tag{
-  font-family: Politica;
-  color: white !important;
-  /*font-style: italic;*/
-  background-color: rgb(57,181,74);
-  padding: 5px;
   cursor: pointer;
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #FFF !important;
+  white-space: nowrap;
+  vertical-align: baseline;
+  padding: 1px 3px;
+  margin: 0;
+  margin-right: 3px;
+  text-shadow: none;
+  font-weight: normal;
+  background-color: rgb(57,181,74);
 }
 
 .team-member{
@@ -375,8 +443,13 @@ h1, h2, h3, h4, h5{
   border-radius: 4px;
 }
 
-#accountWrapper{
+#accountWrapper, #webappWrapper{
   min-height: 295px;
+}
+
+#alertContainer{
+  position: fixed;
+  top: 90px;
 }
 
 #alveolesList{
@@ -416,7 +489,7 @@ h1, h2, h3, h4, h5{
   position: absolute;
   bottom: 0px;
   left: 0px;
-  width: 100%;
+  width: 90%;
   height: 20px;
   padding:20px;
   background-color: black;
@@ -500,13 +573,30 @@ h1, h2, h3, h4, h5{
   width: 250px;
 }
 
+#headerContainer{
+  background: -webkit-linear-gradient(top, rgb(208,208,208), rgb(220,220,220));
+}
+
 #headerCarousel{
   height: 350px;
 
   overflow: hidden;
   text-align: center;
   margin-bottom: 20px;
-  /*border-bottom: 2px solid black;*/
+  /*background-color:  -webkit-linear-gradient(top, rgb(220,220,220), rgb(208,208,208));*/
+  /*background-image: url("../img/photos-background/main4.jpg"), -webkit-gradient(linear, left bottom, left top, from(rgb(220,220,220)), to(rgb(208,208,208)));*/
+  background-image: url("../img/photos-background/main4.jpg");
+  background-size:1349px 927px;
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+}
+
+#headerSlogan{
+  color: black;
+  font-family: Politica;
+  font-weight: bold;
+  text-align: right;
+  padding: 120px 30px;
 }
 
 #headerImgCarousel{
@@ -575,6 +665,10 @@ h1, h2, h3, h4, h5{
   text-align: center;
 }
 
+#progressBar{
+  margin-left: 0;
+}
+
 #searchNavbar{
   margin-bottom: 0px;
   margin-top: 20px;
@@ -618,7 +712,7 @@ h1, h2, h3, h4, h5{
   background-image: -ms-linear-gradient(left,#DED4B9 0%, #F2EEEB 35%, #F2EEEB 65%, #DED4B9 100%);
   background-image: -o-linear-gradient(left,#DED4B9 0%, #F2EEEB 35%, #F2EEEB 65%, #DED4B9 100%);*/
   background-color: #fff;
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   margin-bottom: 20px;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
@@ -683,22 +777,6 @@ h1, h2, h3, h4, h5{
   border-radius: 15px 
 }
 
-/**Font Politica**/
-@font-face {
-  font-family: "Politica";
-  src: url(../font/Politica.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Politica-bold";
-  src: url(../font//Politica/Politica-Bold.otf) format("opentype");
-}
-
-@font-face {
-  font-family: "Politica-italic";
-  src: url(../font//Politica/Politica-Italic.otf) format("opentype");
-}
-
 /****** LOADING ANIMATION *****/
 /* Animation keyframes - you need to add prefixes */
 
@@ -722,24 +800,9 @@ h1, h2, h3, h4, h5{
   position: absolute;
   top: 200px;
   left: 50%;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   margin: -14px 0 0 -14px;
-}
-
-/* Spinning circle (inner circle) */
-#loading .maskedCircle {
-  width: 20px;
-  height: 20px;
-  border-radius: 12px;
-  border: 3px solid black;
-}
-
-/* Spinning circle mask */
-#loading .mask {
-  width: 12px;
-  height: 12px;
-  overflow: hidden;
 }
 
 /* Spinner */
@@ -747,10 +810,16 @@ h1, h2, h3, h4, h5{
   position: absolute;
   /*left: 550px;*/
   top: 150px;
-  width: 26px;
-  height: 26px;
-  -webkit-animation: spin 1s infinite linear;
-  -o-animation: spin 1s infinite linear;
-  animation: spin 1s infinite linear;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 3s infinite linear;
+  -o-animation: spin 3s infinite linear;
+  animation: spin 3s infinite linear;
+}
+
+/* Joyride plugin*/
+.joyride-tip-guide{
+  margin-top: -85px;
+  z-index: 1500;
 }
 

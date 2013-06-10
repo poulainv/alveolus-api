@@ -25,9 +25,11 @@
 .ulWebAppLinks a{
   text-decoration: none;
 }
-.ulWebAppLinks a:hover{
+.ulWebAppLinks a:hover, .grey-hover a:hover{
   color: #34495e;
 }
+
+
 
 
 
@@ -88,7 +90,7 @@
   height:1px;
   background:#717171;
   border-bottom:1px solid #E8E8E8;
-  margin-top: 4px;
+  margin-top: 10px;
   margin-bottom: 12px;
 }
 
@@ -157,12 +159,14 @@ tagList{
 }
 
 
-#title-webapp{
-  background-color: #2ecc71;
-  padding: 1px;
+.webapp-border{
+  border-bottom: 2px solid rgb(57,181,74);
+  padding-bottom: 9px;
+  padding-top: 9px;
 }
-#title-webapp h1 a{
-  color: white;
+.webapp-border h4{
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 
@@ -171,3 +175,35 @@ tagList{
   padding: 3px;
   color: white;
 }
+
+
+#webapp-content-img{
+  background-color: white;
+}
+
+.webapp-title-margin-top{
+  margin-top: 20px;
+}
+
+#inputTextTag{
+  margin-top: 10px;
+}
+
+.webapp-box-content{
+  background-color: white;
+  padding: 10px;
+}
+
+
+
+/* PAGE USER */
+.user-title-webapp-list{
+  margin: 0;
+  padding: 0;
+}
+
+.button-link{
+  color: white;
+}
+
+

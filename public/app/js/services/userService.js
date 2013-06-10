@@ -32,13 +32,14 @@ factory('UserService', function($http,$resource,globals, SessionService) {
         success(function(data){callback(data);});
     }
 
-     service.updateAvatar = function(id,files,callback){
-        var fd = new FormData();
-        fd.append("user[avatar]", files[0]);
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", callback, false);
-        xhr.addEventListener("error", function(){console.log("There was an error attempting to upload the file.");}, false);
-        xhr.addEventListener("abort", function(){console.log("he upload has been canceled by the user or the browser dropped the connection.");}, false);
+    service.updatePassword = function(params,callback){
+        $http({method:'PUT', url: globals.server_url+'/users/'+params.userId+'/update_password', cache:true,
+            data : {'user' : params.user}}).
+        success(function(data){callback(data);});
+    }
+
+     service.updateAvatar = function(xhr,fd,id){
+        
         xhr.open("PUT", globals.server_url+"/users/"+id);
         console.log("session token : "+ SessionService.getToken())
         xhr.setRequestHeader('X-AUTH-TOKEN', SessionService.getToken());

@@ -3,15 +3,22 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.editWebappCtrl', []).
-controller('EditWebappCtrl', function($scope,$routeParams,$location,WebappService,CategoryService) {
+controller('EditWebappCtrl', function($scope,$routeParams,$location,$rootScope,WebappService,CategoryService) {
+
 
 	if(!$scope.isLogged){
 		$location.path('/');
+		$scope.openModalLogin();
+
 	}
 
-	// $('body').css('background-color','#eef2ea');
+	$('#progressBar').hide();
 	
-	$scope.webapp = WebappService.get({id:$routeParams.webAppId});
+	$scope.webapp = WebappService.get({id:$routeParams.webAppId}, function(){
+		if($scope.user.id != $scope.webapp.user_id){
+			// $location.path('alveoles/'+$routeParams.webAppId);
+		}	
+	});
 	$scope.categories=CategoryService.query();		
 
 	$scope.submit = function(webapp){
@@ -38,7 +45,17 @@ controller('EditWebappCtrl', function($scope,$routeParams,$location,WebappServic
 
 	$scope.updateImage = function(){
 		console.log("updateImage");
-		WebappService.updateImage($routeParams.webAppId,$scope.files);
+
+		$('#progressBar').show();
+
+        var fd = new FormData();
+        fd.append("webapp[photo]", $scope.files[0]);
+        var xhr = new XMLHttpRequest();
+		xhr.upload.onprogress = updateProgress;
+        xhr.addEventListener("load", callback, false);
+        xhr.addEventListener("error", function(){console.log("There was an error attempting to upload the file.");}, false);
+        xhr.addEventListener("abort", function(){console.log("The upload has been canceled by the user or the browser dropped the connection.");}, false);
+		WebappService.updateImage($routeParams.webAppId,xhr,fd);
 	}
 
 	//Drag'n'drop
@@ -86,6 +103,23 @@ controller('EditWebappCtrl', function($scope,$routeParams,$location,WebappServic
 			$scope.progressVisible = false
 		});
 	}
+
+
+	var updateProgress = function(e){
+		var progress = $('#progressBar .bar');
+		if (e.lengthComputable) 
+		{
+			var percentComplete = (e.loaded / e.total)*100;  
+			progress.css("width",percentComplete+'%');
+			progress.text( Math.round(percentComplete)+'%');
+		}
+	};
+
+	var callback = function(evt){
+		$scope.webapp = jQuery.parseJSON(evt.target.response);
+		$rootScope.$broadcast('onFileUpdate');
+		console.log($scope.webapp);
+	};
 
 
 });

@@ -3,7 +3,9 @@
 /* Controleur de la user page */
 
 angular.module('alveolus.userCtrl', []).
-controller('UserCtrl', function($scope, $routeParams, $location, UserService, SessionService, CategoryService) {
+controller('UserCtrl', function($scope, $routeParams, $location, $rootScope, UserService, SessionService, CategoryService) {
+
+	var alertNewComment = {type : 'success', msg : 'Votre profil a bien été mis à jour.'};
 
 	console.log('isLogged:'+$scope.isLogged+' user.id:'+$scope.user.id);
 
@@ -11,23 +13,41 @@ controller('UserCtrl', function($scope, $routeParams, $location, UserService, Se
 		$scope.user=UserService.get({id: $scope.user.id});
 	}
 	else $scope.openModalLogin();
+
+	$('#progressBar').hide();
 	
 	
-	$scope.onSubmit=function(user){
-		console.log('$scope.onSubmit');
+	$scope.submitEditInfos=function(user){
+		console.log('$scope.submitEditInfos');
 		UserService.updateUser({userId : user.id, user : user}, function(data){
 			$scope.user=data;
+			$scope.addAlert(alertNewComment);
 			console.log('callback '.data);
+		});	
+	}
+
+	$scope.submitEditPassword=function(){
+		console.log("pass:"+$scope.password.password);
+		UserService.updatePassword({userId : $scope.user.id, user : $scope.password}, function(data){
+			console.log('callback '+data);
 		});	
 	}
 
 	$scope.updateAvatar = function(){
 		console.log("updateAVatar");
-		UserService.updateAvatar($scope.user.id,$scope.files,function(evt){
-			$scope.user = jQuery.parseJSON(evt.target.response);
-			console.log($scope.user);
-			$scope.image = $scope.user.image_url
-		});
+
+		$('#progressBar').show();
+
+		var fd = new FormData();
+		fd.append("user[avatar]", $scope.files[0]);
+		var xhr = new XMLHttpRequest();
+		xhr.upload.onprogress = updateProgress;
+		xhr.addEventListener("load", callback, false);
+		xhr.addEventListener("error", function(){console.log("There was an error attempting to upload the file.");}, false);
+		xhr.addEventListener("abort", function(){console.log("he upload has been canceled by the user or the browser dropped the connection.");}, false);
+
+
+		UserService.updateAvatar(xhr,fd,$scope.user.id);
 	}
 
 
@@ -80,4 +100,22 @@ controller('UserCtrl', function($scope, $routeParams, $location, UserService, Se
 		console.log('changeView ' + url);
 		$location.path(url);
 	}
+
+
+	var updateProgress = function(e){
+		var progress = $('#progressBar .bar');
+		if (e.lengthComputable) 
+		{
+			var percentComplete = (e.loaded / e.total)*100;  
+			progress.css("width",percentComplete+'%');
+			progress.text( Math.round(percentComplete)+'%');
+		}
+	};
+
+	var callback = function(evt){
+		$scope.user = jQuery.parseJSON(evt.target.response);
+		$rootScope.$broadcast('onFileUpdate');
+		console.log($scope.user);
+		$scope.image = $scope.user.image_url
+	};
 });

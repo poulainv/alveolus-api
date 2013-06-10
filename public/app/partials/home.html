@@ -19,13 +19,13 @@
 			<div id="teamSelectionWrapper" class="span11">
 				<div id="teamSelection">
 					<div  class="row-fluid">
-						<h3 class="span7">{{catSelected.name}} - Sélection de l'équipe :</h3>
+						<h3 class="span7"><img src="img/icon-team-selection.svg"> Sélection de l'équipe - {{catSelected.name}} :</h3>
 						<button id="btnMore" class="btn btn-inverse span5" type="button" ng-click="changeView('alveoles')">{{catSelected.name}} : Voir toutes les alvéoles > </button>
 					</div>
 					<br>
 					<div id="appFeatured" class="row-fluid">
 						<div class="span4">
-							<img id="logoTeamSelection" class="rounded" src="{{appFeatured | image}}" title="Image du site ! En construction.." alt="Image du site !">
+							<a href="#/alveoles/{{appFeatured.id}}"><img id="logoTeamSelection" class="rounded" src="{{appFeatured | image}}" title="{{appFeatured.title}}" alt="{{appFeatured.title}}"></a>
 						</div>
 						<div id="appFeaturedDescWrapper" class="span8">
 							<div id="appFeaturedTitle">
@@ -35,11 +35,12 @@
 								</h4>
 							</div>
 							<div id="descFeaturedApp">
-								{{appFeatured.description | substring}}
+								{{appFeatured.description | truncate:500}}
 							</div>
 							<div id="tagListFeatured">
+								<img src="img/icon-tags.svg">
 								<span ng-repeat="tag in appFeatured.tags">
-									<a href="#/alveoles/search/{{tag.name}}" class="label">{{tag.name}}</a> 
+									<a href="#/alveoles/search/{{tag.name}}" class="tag">{{tag.name}}</a> 
 								</span>
 							</div>
 						</div>
@@ -54,36 +55,48 @@
 
 			<div class="container">
 				<div  id="popularApps" class="span11">
-					<h3><img src="img/star_small.png">  Alvéoles Populaires</h3>
+					<h3><img src="img/star_small.png">  Dernières alvéoles</h3>
 
-					<carousel id="popularCarousel">
-						<slide ng-repeat="row in rows" active="img.active">
-							<div class="alveoleWrap" ng-repeat="col in cols">
-								<div class="alveole">
-									<a href="#/alveoles/{{webapps[$parent.$index * numColumns + $index].id}}">
-										<img class="imgCarousel" ng-src="{{webapps[$parent.$index * numColumns + $index]  | image}}" >
-									</a>
-									<h2 class="alveoleName">
-										<a href="#/alveoles/{{webapps[$parent.$index * numColumns + $index].id}}">
-											<strong>{{webapps[$parent.$index * numColumns + $index].title}}</strong>
-										</a>
-									</h2>
-									<p class="alveoleDesc">
-										{{webapps[$parent.$index * numColumns + $index].caption}}
-									</p>
-									<div class="alveoleRating">
-										<i class="{{ {'rate':webapps[$parent.$parent.$index * numColumns + $parent.$index].average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i> 
-										- {{webapps[$parent.$index * numColumns + $index].comments.length}} avis
-									</div>
-									<div class="alveoleTagsWrapper">
-										<i class="icon-bookmark"></i>
-										<span ng-repeat="tag in webapps[$parent.$index * numColumns + $index].tags" ng-click="search(tag.name)" class="tag">{{tag.name}}, </span>
-									</div>
+					<carousel>
+						<slide ng-repeat="slide in slides" active="img.active" class="row-fluid">
+							<section class="span10 offset1">
+								<div class="row-fluid">	
+									<article class="alveole span3" ng-repeat="alveole in slide">
+										<header class="alveoleHeader">Note : {{alveole.average_rate|truncate:3:''}}/5
+											<span class="alveoleRatingWrapper">
+												<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+											</span>
+										</header>
+										<div class="alveoleContent">
+											<a href="#/alveoles/{{alveole.id}}">
+												<div class="cropedImg">
+													<img class="alveoleImg" ng-src="{{alveole | image}}"  alt="{{alveole.title}}">
+												</div>
+												<h4 class="alveoleName">
+													<strong>{{alveole.title}}</strong>
+												</h4>
+												<p class="alveoleDesc">
+													{{alveole.caption}}
+												</p>
+											</a>
+												<div class="alveoleTagsWrapper">
+													<img src="img/icon-tags.svg" ng-show="alveole.tags">
+													<span ng-repeat="tag in alveole.tags" ng-click="search(tag.name)" class="tag">
+														<a href="#/alveoles/search/{{tag.name}}" class="tag">{{tag.name}}</a>
+													</span>
+												</div>
+											
+										</div>
+									</article>
 								</div>
-							</div>
-
+							</section>
 						</slide>
 					</carousel>
+
+
+					
+
+
 				</div>
 			</div>
 		</div>

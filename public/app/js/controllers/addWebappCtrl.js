@@ -3,19 +3,20 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.addWebappCtrl', []).
-controller('AddWebappCtrl', function($scope,$routeParams,$location,$window,WebappService, SocialService, CategoryService, TagService) {
+controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,$window,WebappService, SocialService, CategoryService, TagService) {
 
 	if(!$scope.isLogged){
 		$location.path('/');
+		$scope.openModalLogin();
 	}
+	
+	$('#progressBar').hide();
 
 	// $('body').css('background-color','#eef2ea');
 
 	var nbTags = 0;
 
-	$scope.webapp=WebappService.new(function(){
-		$scope.webapp.tag_list = '';
-	});
+	$scope.webapp=WebappService.new();
 
 	$scope.categories=CategoryService.query();
 
@@ -31,12 +32,7 @@ controller('AddWebappCtrl', function($scope,$routeParams,$location,$window,Webap
 			source: tagNames,
 
 			updater:function (item) {
-				$scope.webapp.tag_list += item+', ';
-				if($('#tagList').text().length == 0){
-					var appendMe = "<span id=\"tag"+nbTags+"\">"+item+"</span>";		
-				} else {
-					var appendMe = "<span id=\"tag"+nbTags+"\">,"+item+"</span>";
-				}
+				var appendMe = "<span onClick=\"$(this).remove()\" class=\"tag\" id=\"tag"+nbTags+"\"> "+item+" </span>";
 				$('#tagList').append(appendMe);	
 				nbTags++;
 			}
@@ -44,17 +40,53 @@ controller('AddWebappCtrl', function($scope,$routeParams,$location,$window,Webap
 	});
 
 	$scope.submit=function(webapp){
+
 		console.log('submit');
+
+		$('#progressBar').show();
+
+		// concatenating tags into an array
+		var tagList = [];
+		for(var i = 0; i<nbTags;i++){
+			if( $("#tag"+i).text().length > 0 ){
+				tagList.push($("#tag"+i).text());
+			}
+		}
+
+		// uncomment this to add tags (waiting for confirmation)
+		// webapp.tags = tagList;
+		
 		$scope.webapp = webapp;
 		console.log($scope.webapp);
-		WebappService.addWebapp(webapp,$scope.files);
-	};
 
-	$scope.results = function(content, completed) {
-		if (completed && content.length > 0){
-			console.log(content);
-		}
-	}
+		var fd = new FormData();
+		fd.append("webapp[title]", webapp.title);
+		fd.append("webapp[url]", webapp.url);
+		fd.append("webapp[caption]", webapp.caption);
+		fd.append("webapp[description]", webapp.description);
+		fd.append("webapp[category_id]", webapp.category_id);
+		if(webapp.tag_list!=null && webapp.tag_list != undefined){
+            fd.append("webapp[tag_list]", webapp.tag_list.substr(0,webapp.tag_list.length-2)); // To remove ', ' at the end
+        } else {
+        	fd.append("webapp[tag_list]", "");
+        }
+        fd.append("webapp[twitter_id]", webapp.twitter_id);
+        fd.append("webapp[facebook_id]", webapp.facebook_id);
+        fd.append("webapp[gplus_id]", webapp.gplus_id);
+        fd.append("webapp[photo]", $scope.files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = updateProgress;
+        xhr.addEventListener("load", function(){$rootScope.$broadcast('onSuggestionSaved');}, false);
+        xhr.addEventListener("error", function(){alert("Erreur pendant le chargement du fichier")}, false);
+        xhr.addEventListener("abort", function(){ alert('Connexion perdue')}, false);
+        WebappService.addWebapp(xhr,fd);
+    };
+
+    $scope.results = function(content, completed) {
+    	if (completed && content.length > 0){
+    		console.log(content);
+    	}
+    }
 
 	//Drag'n'drop
 
@@ -89,6 +121,7 @@ controller('AddWebappCtrl', function($scope,$routeParams,$location,$window,Webap
 			$scope.$apply(function(){
 				$scope.files = []
 				$scope.files.push(file[0]);
+				$scope.fileReady=true;
 			})
 		}
 	}, false)
@@ -96,11 +129,21 @@ controller('AddWebappCtrl', function($scope,$routeParams,$location,$window,Webap
 	$scope.setFile = function(element){
 		$scope.$apply(function(scope) {
 			console.log('files:', element.files);
-			$scope.files = []
-			$scope.files.push(element.files[0])
-			$scope.progressVisible = false
+			$scope.files = [];
+			$scope.files.push(element.files[0]);
 		});
 	}
+
+	var updateProgress = function(e){
+		console.log('onprogress');
+		var progress = $('#progressBar .bar');
+		if (e.lengthComputable) 
+		{
+			var percentComplete = (e.loaded / e.total)*100;  
+			progress.css("width",percentComplete+'%');
+			progress.text( Math.round(percentComplete)+'%');
+		}
+	};
 
 
 });
