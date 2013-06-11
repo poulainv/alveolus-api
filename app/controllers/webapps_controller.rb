@@ -87,7 +87,7 @@
       if(@webapp.reputation_for(:votes)>@webapp.score_for_validation)
         @webapp.update_attribute("validate", "true")
       end
-      render :json => @webapp.to_json(:methods => %w(count_negative count_positive))
+      render :json => @webapp, :serializer => WebappVoteSerializer
     end
 
 
