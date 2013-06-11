@@ -126,7 +126,7 @@
     if params[:search]
       query = params[:search]
       if query.length < 3
-           render :json => {:errors => "search too short", :status => :unprocessable_entity}
+           render :json => {:errors => "Recherche trop courte", :status => :unprocessable_entity}
       else
         @webapps = Webapp.validated.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
         tags = Tag.where{(name =~ "%#{query}%")}
@@ -138,4 +138,20 @@
       end
     end
   end
+
+
+  def check_url
+    if params[:url]
+      query = params[:url]
+      if Webapp.where{url =~ "%#{query}%"}.length == 0
+         render :json => {:success => "URL not already used"}, :status => 200
+      else
+          render :json => {:errors => "URL already used"}, :status => :unprocessable_entity
+      end
+    else
+       render :json => {:errors => "I need params 'url'"} ,:status => :unprocessable_entity
+    end
+
+  end
+
 end

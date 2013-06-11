@@ -37,7 +37,9 @@ EnjoyTheWeb::Application.routes.draw do
     resources :bookmarks  
     resources :tags
     resources :comments
-    member { post :vote }    
+    member { post :vote }
+    collection { post :check_url }
+
   end
 
   resources :users, :except => :destroy do
