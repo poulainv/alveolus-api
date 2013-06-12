@@ -90,13 +90,6 @@ h1, h2, h3, h4, h5{
   /*background-color: rgb(57,181,74);*/
 }
 
-.alveoleDesc{
-  color: #75796f;
-  font-size: 12px;
-  line-height: 1.4;
-/*  text-align: justify;*/
-  /*height: 105px;*/
-}
 
 .alveoleRatingWrapper{
   display: block;
@@ -120,8 +113,11 @@ h1, h2, h3, h4, h5{
 .alveoleDesc{
   color: #75796f;
   font-size: 12px;
-  text-align: justify;
+  line-height: 1.4;
+/*  text-align: justify;*/
+  /*height: 105px;*/
 }
+
 .alveoleTagsWrapper{
   height: 38px;
   top:auto;
