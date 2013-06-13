@@ -101,9 +101,9 @@
       render :status => 200, :nothing => true
     end
 
-    ## Get webapp/trend/:type
+    ## Get webapp/trend/:type(/:n)
     def trend
-      n = 12
+      n = params[:n] ? params[:n].to_i : 12
       if params[:type]
        case params[:type]
        when "recent"
@@ -116,6 +116,8 @@
         @webapps = Webapp.best_shared(n)
       when "random"
         @webapps = Webapp.random(n)
+      when "popular"
+        @webapps = Webapp.popular(n)
       when "unvalidated"
         @webapps = Webapp.unvalidated
         render json: @webapps, :each_serializer => WebappVoteSerializer

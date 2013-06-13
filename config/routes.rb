@@ -8,7 +8,7 @@ EnjoyTheWeb::Application.routes.draw do
   resources :authentications
 
   ## Webapp/Alveoles
-  match "/webapps/trend/:type", :to => "webapps#trend"
+  match "/webapps/trend/:type(/:n)", :to => "webapps#trend"
   match "/webapps/search/:search", :to => "webapps#search"
 
   ## Categories

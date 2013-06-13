@@ -218,7 +218,7 @@ class Webapp < ActiveRecord::Base
     end
   end
 
-  def self.popularWebapps(n=4)
+  def self.popular(n=4)
     scores = Hash.new
     Webapp.all.each do |w|
       scores[w.id] = w.score
