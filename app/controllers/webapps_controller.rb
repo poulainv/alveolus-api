@@ -2,7 +2,7 @@
 
     class WebappsController < BaseController
 
-    before_filter :user_needed!, :only => [:create, :edit, :update ,:destroy, :vote]
+    before_filter :user_needed!, :only => [:create, :edit, :update ,:destroy, :vote, :new]
     caches_action :index, :trend
     cache_sweeper :webapp_sweeper
 
