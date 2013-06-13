@@ -4,7 +4,8 @@
 class TagsController < BaseController
 
   before_filter :user_needed!, :only => [:create]
-
+  caches_action :index, :tags_all_webapps
+  cache_sweeper :tag_sweeper
   def new
   end
 

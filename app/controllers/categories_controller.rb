@@ -1,5 +1,8 @@
 class CategoriesController < BaseController
-
+    
+    caches_action :categories_all_webapps, :categories_featured_webapps
+    cache_sweeper :category_sweeper
+    
     @@nb_webapp_featured = 3
 
 	# GET /categories

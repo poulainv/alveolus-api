@@ -1,10 +1,10 @@
 # encoding: utf-8
-
-
 class CommentsController < BaseController
 
   before_filter :user_needed! , :only => [:create, :update, :destroy]
-
+  caches_action :index
+  cache_sweeper :comment_sweeper
+    
   def index
       # GET Comment for user/webapp/
       if params[:webapp_id] and params[:user_id]

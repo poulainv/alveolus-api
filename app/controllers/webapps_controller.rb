@@ -3,6 +3,8 @@
     class WebappsController < BaseController
 
     before_filter :user_needed!, :only => [:create, :edit, :update ,:destroy, :vote]
+    caches_action :index, :trend
+    cache_sweeper :webapp_sweeper
 
     # GET /webapps OR /categories/:category_id/webapps
     def index
@@ -56,6 +58,7 @@
       # if current_user.try(:admin?) or (current_user.id == @webapp.user_id and @webapp.validate == false)
       
         if @webapp.update_attributes(params[:webapp])
+          expire_fragment %r{webapps*}
           render :json => @webapp, :status => :created
         else
          render :json => {:errors => @webapp.errors.full_messages } ,:status => :unprocessable_entity
@@ -82,7 +85,7 @@
       value = params[:type] == "up" ? 1 : -1
       @webapp = Webapp.find(params[:id])
       @webapp.add_or_update_evaluation(:votes, value, current_user)
-
+       expire_fragment %r{webapps/trend/unvalidated}
       ## Warning here there are some computation/behavior which should be in model
       if(@webapp.reputation_for(:votes)>@webapp.score_for_validation)
         @webapp.update_attribute("validate", "true")
