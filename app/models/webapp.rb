@@ -47,7 +47,7 @@ class Webapp < ActiveRecord::Base
   
   validates :title, :presence => true, :length => { :maximum => 25, :minimum => 2 }
   validates :caption, :presence => true, :length => { :maximum => 200, :minimum => 30 }
-  validates :description, :presence => true,:length => { :maximum => 600, :minimum => 100 }
+  validates :description, :presence => true,:length => { :maximum => 1010, :minimum => 100 }
   validates :url, :presence => true,
     :format => {:with => url_regex },
     :uniqueness => true
@@ -58,11 +58,11 @@ class Webapp < ActiveRecord::Base
   scope :promoted, lambda { where ("promoted = '1'")}
   scope :featured, lambda { where ("featured = '1'")}
   # return latest website inserted and validated
-  scope :recent, lambda { |n| order("created_at").reverse_order.limit(n) }
+  scope :recent, lambda { |n| validated.order("created_at").reverse_order.limit(n) }
   # return most consulted website
   scope :trend, lambda { |n| validated.order("nb_click_detail").reverse_order.limit(n) }
-  scope :most_commented, lambda { |n| joins(:comments).where("comments.body != ''").order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
-  scope :best_rated, lambda { |n| joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
+  scope :most_commented, lambda { |n| validated.joins(:comments).where("comments.body != ''").order("count(comments.id)").group('webapps.id').reverse_order.limit(n)}
+  scope :best_rated, lambda { |n| validated.joins(:comments).order("avg(comments.rating)").group('webapps.id').reverse_order.limit(n)}
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
 
@@ -182,7 +182,7 @@ class Webapp < ActiveRecord::Base
   def score
     score_click_detail = nb_click_detail * Webapp.score_weights['click_detail']
     score_comments = nb_comments * Webapp.score_weights['nb_comments']
-    score_click_shared = nb_click_shared * Webapp.score_weights['click_shared']
+    score_click_shared = nb_click_shared * Webapp.score_weights['click_shared'] 
     (score_click_detail + score_click_shared + score_comments) * average_rate
   end
 
