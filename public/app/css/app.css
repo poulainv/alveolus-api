@@ -58,7 +58,6 @@ h1, h2, h3, h4, h5{
 .alveole:hover .alveoleHeader{
   top:0;
 }
-<<<<<<< HEAD
 
 .alveoleName{
   /*color: rgb(57,181,74);*/
@@ -90,6 +89,13 @@ h1, h2, h3, h4, h5{
   /*background-color: rgb(57,181,74);*/
 }
 
+.alveoleDesc{
+  color: #75796f;
+  font-size: 12px;
+  line-height: 1.4;
+  /*  text-align: justify;*/
+  /*height: 105px;*/
+}
 
 .alveoleRatingWrapper{
   display: block;
@@ -113,11 +119,8 @@ h1, h2, h3, h4, h5{
 .alveoleDesc{
   color: #75796f;
   font-size: 12px;
-  line-height: 1.4;
-/*  text-align: justify;*/
-  /*height: 105px;*/
+  /*text-align: justify;*/
 }
-
 .alveoleTagsWrapper{
   height: 38px;
   top:auto;
@@ -228,7 +231,8 @@ h1, h2, h3, h4, h5{
 }
 
 .container-grey{
-  background-color: #eef2ea;
+  /*background-color: #eef2ea;*/
+  background-color: rgb(240,240,240);
   padding-bottom: 100px;
 }
 
@@ -452,6 +456,10 @@ h1, h2, h3, h4, h5{
   border-radius: 4px;
 }
 
+.warning-no-tags{
+  color: rgb(221, 155, 41)
+}
+
 #accountWrapper, #webappWrapper{
   min-height: 295px;
 }
@@ -649,7 +657,7 @@ h1, h2, h3, h4, h5{
 }
 
 #navbar-avatar-container{
-  width: 84px;
+  text-align: center;
 }
 
 #navbar-dropdown-arrow{
@@ -659,6 +667,11 @@ h1, h2, h3, h4, h5{
   border-top-color: #999;
   top: 3px;
   cursor: pointer;
+}
+
+#navbar-logo{
+  border-right: 3px solid black;
+  margin-top: 5px;
 }
 
 #navLinks{
