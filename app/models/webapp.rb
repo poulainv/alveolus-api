@@ -220,7 +220,7 @@ class Webapp < ActiveRecord::Base
 
   def self.popular(n=4)
     scores = Hash.new
-    Webapp.all.each do |w|
+    Webapp.validated.each do |w|
       scores[w.id] = w.score
     end
     # n % 4 must be 0
