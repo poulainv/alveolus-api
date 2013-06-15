@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.json
+  http_basic_authenticate_with :name => "admin", :password => "quenelle"
+  
   def index
     @admin_users = User.all
 

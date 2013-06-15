@@ -1,6 +1,8 @@
 class Admin::WebappsController < ApplicationController
   # GET /admin/webapps
   # GET /admin/webapps.json
+  http_basic_authenticate_with :name => "admin", :password => "quenelle"
+  
   def index
     @admin_webapps = Webapp.all
 
