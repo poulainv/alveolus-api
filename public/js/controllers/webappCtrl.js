@@ -172,7 +172,14 @@ $scope.goToEditWebappPage = function(){
 
 $scope.shareOnFb=function(){
 	// http://alveolus.fr/app/img/1.jpg
-	 FB.init({appId: "450339965057952", status: true, cookie: true});
+	 // FB.init({appId: "450339965057952", status: true, cookie: true});
+	 FB.init({
+          appId      : 450339965057952, // App ID
+          channelUrl : '//alveolus.fr/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true  // parse XFBML
+        });
 console.log("sa");
 	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
         var obj = {
