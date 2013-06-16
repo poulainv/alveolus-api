@@ -46,19 +46,20 @@ directive('facebook', function($http,globals) {
     };
 
     $scope.share = function(){
+      // console.log(angular.toJson($attrs.webapp));
 
-      // var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
+      var img=($attrs.image=="img/missing.png") ? "http://alveolus.fr/app/img/"+$attrs.id+".jpg" : $attrs.image;
         var obj = {
           method: 'feed',
-          link: 'http://alveolus.fr/app/index.html#/alveoles/',
-          picture: "img",
-          name: "$scope.webapp.title",
-          caption: "$scope.webapp.caption"
+          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$attrs.id,
+          picture: img,
+          name: $attrs.title,
+          caption: $attrs.caption
         };
 
         function callback(response) {
           if(response){
-            $scope.addAlert(alertPostedOnFacebook);
+            // $scope.addAlert(alertPostedOnFacebook);
           }
         }
 
