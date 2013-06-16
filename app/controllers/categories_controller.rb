@@ -1,8 +1,7 @@
 class CategoriesController < BaseController
     
     caches_action :categories_all_webapps, :categories_featured_webapps
-    cache_sweeper :category_sweeper
-    
+    # cache_sweeper :category_sweeper
     @@nb_webapp_featured = 3
 
 	# GET /categories
@@ -14,6 +13,7 @@ class CategoriesController < BaseController
  	# GET /categories/:id
  	def show
  		@category = Category.find(params[:id])
+        expire_fragment %r{categories*}
         render json: @category
  	end
 
