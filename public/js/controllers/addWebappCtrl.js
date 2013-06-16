@@ -3,7 +3,7 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.addWebappCtrl', []).
-controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,$window,WebappService, SocialService, CategoryService, TagService) {
+controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,WebappService, SocialService, CategoryService, TagService) {
 
 	if(!$scope.isLogged){
 		$location.path('/');
@@ -57,15 +57,14 @@ controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,$
 		$('#progressBar').show();
 
 		// concatenating tags into an array
-		var tagList = [];
+		var tagList = "";
 		for(var i = 0; i<$scope.nbTags;i++){
 			if( $("#tag"+i).text().length > 0 ){
-				tagList.push($("#tag"+i).text());
+				tagList+=($("#tag"+i).text()+",");
 			}
 		}
 
-		// uncomment this to add tags (waiting for confirmation)
-		// webapp.tags = tagList;
+		webapp.tag_list = tagList;
 		
 		$scope.webapp = webapp;
 		console.log($scope.webapp);
@@ -84,10 +83,11 @@ controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,$
         fd.append("webapp[twitter_id]", webapp.twitter_id);
         fd.append("webapp[facebook_id]", webapp.facebook_id);
         fd.append("webapp[gplus_id]", webapp.gplus_id);
+        fd.append("webapp[vimeo_id]", webapp.vimeo_id);
         fd.append("webapp[photo]", $scope.files[0]);
         var xhr = new XMLHttpRequest();
         xhr.upload.onprogress = updateProgress;
-        xhr.addEventListener("load", function(){$rootScope.$broadcast('onSuggestionSaved');}, false);
+        xhr.addEventListener("load", $scope.callbackUpload, false);
         xhr.addEventListener("error", function(){alert("Erreur pendant le chargement du fichier")}, false);
         xhr.addEventListener("abort", function(){ alert('Connexion perdue')}, false);
         WebappService.addWebapp(xhr,fd);
@@ -155,6 +155,16 @@ controller('AddWebappCtrl', function($scope,$routeParams,$rootScope, $location,$
 			progress.text( Math.round(percentComplete)+'%');
 		}
 	};
+
+	$scope.callbackUpload = function(){
+		console.log('upload OK');
+		$rootScope.$apply(function(){
+			$rootScope.$broadcast('onSuggestionSaved');
+			$('#progressBar .bar').css("width",'100%');
+			$('#progressBar .bar').text('100%');
+			$location.path('/vote');
+		});
+	}
 
 
 });

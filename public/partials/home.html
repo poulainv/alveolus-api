@@ -5,13 +5,13 @@
 	<div id="contentWrapper">
 		<div id="homeBody" class="container">
 			<div class="row-fluid">
-				<h3 class="span6 offset1"><img src="img/icon/icon-team-selection.svg"> Sélection de l'équipe - {{catSelected.name}} :</h3>
+				<h3 class="span6 offset1"><img src="img/picto/picto-selection-green.svg"> Sélection de l'équipe - {{catSelected.name}} :</h3>
 				<button id="btnMore" class="btn btn-inverse span4" type="button" ng-click="changeView('alveoles')">{{catSelected.name}} : Voir toutes les alvéoles > </button>
 			</div>
 			<div class="row-fluid">
 				<div class="span2 offset1">
 					<div id="catList">
-						<span ng-repeat="cat in categories" ng-mouseover="descCatSelected = cat.description" ng-click="changeCat(cat)" ng-class="itemClass(cat)" class="btnCat" tooltip-placement="left" tooltip="{{descCatSelected}}" tooltip-popup-delay='500' tooltip-trigger="mouseenter"> 
+						<span ng-repeat="cat in categories" ng-mouseover="descCatSelected = cat.description" ng-click="changeCat(cat)" ng-class="itemClass(cat)" class="btnCat" tooltip-placement="top" tooltip="{{descCatSelected}}" tooltip-popup-delay='300' tooltip-trigger="mouseenter"> 
 							{{cat.name}}
 						</span>
 					</div>
@@ -63,7 +63,7 @@
 
 				<div class="row-fluid">
 					<div class="span6 offset1">
-						<h3><img src="img/icon/icon-hot.svg">  Alvéoles populaires </h3>
+						<h3><img src="img/icon/icon-hot-green.svg">  Alvéoles populaires </h3>
 					</div>
 				</div>
 				<div class="row-fluid">
@@ -118,7 +118,7 @@
 
 				<div class="row-fluid">
 					<div class="span6 offset1">
-						<h3><img src="img/icon/icon-hot.svg">  Dernières alvéoles</h3>
+						<h3><img src="img/icon/icon-hot-green.svg">  Dernières alvéoles</h3>
 					</div>
 				</div>
 				<div class="row-fluid">

@@ -13,7 +13,10 @@ controller('UserCtrl', function($scope, $routeParams, $location, $rootScope, Use
 	if($scope.isLogged){
 		$scope.user=UserService.get({id: $scope.user.id});
 	}
-	else $scope.openModalLogin();
+	else{
+		$location.path('/');
+		$scope.openModalLogin();
+	} 
 
 	$('#progressBar').hide();
 	
@@ -120,8 +123,11 @@ controller('UserCtrl', function($scope, $routeParams, $location, $rootScope, Use
 
 	var callback = function(evt){
 		$scope.user = jQuery.parseJSON(evt.target.response);
-		$rootScope.$broadcast('onFileUpdate');
-		console.log($scope.user);
-		$scope.image = $scope.user.image_url
+		$rootScope.$apply(function(){
+			$rootScope.$broadcast('onFileUpdate');
+			$('#progressBar .bar').css("width",'100%');
+			$('#progressBar .bar').text('100%');
+			$scope.image = $scope.user.image_url
+		});
 	};
 });
