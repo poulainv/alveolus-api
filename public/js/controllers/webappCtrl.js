@@ -176,7 +176,7 @@ $scope.shareOnFb=function(){
 	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
         var obj = {
           method: 'feed',
-          redirect_uri: 'http://alveolus.fr/',
+          // redirect_uri: 'http://alveolus.fr/',
           link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
           picture: img,
           name: $scope.webapp.title,
