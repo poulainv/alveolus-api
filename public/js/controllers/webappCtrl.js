@@ -172,11 +172,11 @@ $scope.goToEditWebappPage = function(){
 
 $scope.shareOnFb=function(){
 	// http://alveolus.fr/app/img/1.jpg
-	console.log("share fb");
+	 FB.init({appId: "450339965057952", status: true, cookie: true});
+console.log("sa");
 	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
         var obj = {
           method: 'feed',
-          // redirect_uri: 'http://alveolus.fr/',
           link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
           picture: img,
           name: $scope.webapp.title,
@@ -190,30 +190,5 @@ $scope.shareOnFb=function(){
         }
 
         FB.ui(obj, callback);
-	}
-$(document).ready(function() {
-  	$("#btn-share-fb").click(function(){
-												console.log("share fb");
-	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
-        var obj = {
-          method: 'feed',
-          // redirect_uri: 'http://alveolus.fr/',
-          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
-          picture: img,
-          name: $scope.webapp.title,
-          caption: $scope.webapp.caption
-        };
-
-        function callback(response) {
-          if(response){
-          	$scope.addAlert(alertPostedOnFacebook);
-          }
-        }
-
-        FB.ui(obj, callback);
-											});
-											console.log("d");
-});
-
-											
+}
 });
