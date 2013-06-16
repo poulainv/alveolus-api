@@ -65,20 +65,20 @@
 										<a ng-click="userAddTag=true" id="addTagLink" class="tag"><i class="icon-plus"></i> Ajoutez le premier tag</a>
 									</li>
 								</ul>
-								<span ng-show="userAddTag" class="input-append">
+								<span ng-show="userAddTag" class="input-append add-tag-form">
 									<input type="text" placeholder="Votre tag" ng-model="newTag.name" id="inputTextTag" class="span6">
 									<button class="btn" ng-click="submitTag(newTag)">Ok</button>
 									<button class="btn" ng-click="userAddTag=false"><i class="icon-remove" ></i></button>
 								</span>
 							</div>
-							<div class="span4">
+							<div class="span4" ng-show="facebook || twitter || webapp.gplus_id">
 								<h4>Réseaux sociaux</h4>
 								<ul class="social-networks-list">
 									<li ng-show='facebook' class="facebook">
 										<a href="{{facebook.link}}" target="_blank"><i class="icon-facebook icon-large icon-fixed-width facebook"></i> {{facebook.likes}} likes</a>
 									</li>
 									<li ng-show='twitter' class="twitter">
-										<a href="https://twitter.com/{{webapp.twitter_id}}" target="_blank"><i class="icon-twitter icon-large icon-fixed-width twitter"></i> {{twitter.followers_count}} followers</a>
+										<a href="https://twitter.com/{{webapp.twitter_id}}" target="_blank"><i class="icon-twitter icon-large icon-fixed-width twitter"></i> {{twitter}} followers</a>
 									</li>
 									<li ng-show='webapp.gplus_id' class="gplus">
 										<a href="https://plus.google.com/{{webapp.gplus_id}}" target="_blank"><i class="icon-google-plus icon-large icon-fixed-width gplus"></i> Google Plus</a>
@@ -89,22 +89,23 @@
 								<h4><img src="img/picto/picto-share-green.svg" alt="share-picto"> Partagez sur...</h4>
 								<ul class="share-list">
 									<li>
-										<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]={{webapp.url}}&amp;p[images][0]=https://cot-production-assets.s3.amazonaws.com/assets/happy-fingers-da11d5333af9a701244f3606686120a0.jpeg&amp;p[title]={{webapp.title}}&amp;p[summary]={{webapp.caption}}" ng-click="trackSharing()">
-										<img src="img/picto/picto-facebook-colored.svg" alt="facebook-picto">
-									</a>
+															<a data-share='450339965057952' data-id="{{webapp.id}}" data-caption="{{webapp.caption}}" data-image="{{webapp.image_url}}" data-title="{{webapp.title}}">
+
+
+											<img src="img/picto/picto-facebook-colored.svg" alt="facebook-picto" ng-click="share()">
+										</a>
 									</li>
-									<!-- <a facebook ng-click="shareOnFb()">
-										<i class="icon-facebook-sign icon-2x"></i>
-									</a> -->
 									<li>
-										<a target="_blank" href="https://twitter.com/intent/tweet?url={{webapp.url}}&amp;text={{webapp.caption}}">  <!-- via={{webapp.twitter_id}} ? -->
+										<a target="_blank" href="https://twitter.com/intent/tweet?url={{webapp.url}}&amp;text={{webapp.title}}">  <!-- via={{webapp.twitter_id}} ? -->
 										<img src="img/picto/picto-twitter-colored.svg" alt="twitter-picto">
 										</a>
 									</li>
 									<li>
 										<a target="_blank" href="https://plus.google.com/share?url={{webapp.url}}">
-										<img src="img/picto/picto-gplus-colored.svg" alt="gplus-picto">
+										
 										</a>
+										<a href="https://plus.google.com/share?url={{webapp.url}}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'); return false;"> <img src="img/picto/picto-gplus-colored.svg" alt="gplus-picto"></a>
 									</li>
 								</ul>
 							</div>

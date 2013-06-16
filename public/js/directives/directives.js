@@ -5,33 +5,34 @@
 
 angular.module('alveolus.directives', []).
 directive('facebook', function($http,globals) {
-	return {
-		restrict: 'A',
-		scope: true,
-		controller: function($scope, $attrs, SessionService) {
+  return {
+    restrict: 'A',
+    scope: true,
+    controller: function($scope, $attrs, SessionService) {
       // Load the SDK Asynchronously
       (function(d){
-      	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-      	if (d.getElementById(id)) {return;}
-      	js = d.createElement('script'); js.id = id; js.async = true;
-      	js.src = "//connect.facebook.net/en_US/all.js";
-      	ref.parentNode.insertBefore(js, ref);
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
       }(document));
 
       function login() {
-      	FB.login(function(response) {
-      		if (response.authResponse) {
-      			console.log('FB.login connected');
-      			fetch();
-      		} else {
-      			console.log('FB.login cancelled');
-      		}
-      	}, { scope: 'email,read_stream' }
-      	);
+        FB.login(function(response) {
+          if (response.authResponse) {
+            console.log('FB.login connected');
+            alert("Merci d'avoir accepté la demande d'autorisation, vous pouvez vous connecter en SSO");
+            location.reload();
+          } else {
+            console.log('FB.login cancelled');
+          }
+        }, { scope: 'email,read_stream' }
+        );
       };
 
       function fetch() {
-      	SessionService.fetchFacebook($scope.auth)
+        SessionService.fetchFacebook($scope.auth)
       }
 
       $scope.fetch = function() {
@@ -48,7 +49,7 @@ directive('facebook', function($http,globals) {
   link: function(scope, element, attrs, controller) {
       // Additional JS functions here
       window.fbAsyncInit = function() {
-      	FB.init({
+        FB.init({
           appId      : attrs.facebook, // App ID
           channelUrl : '//alveolus.fr/channel.html', // Channel File
           status     : true, // check login status
@@ -58,7 +59,7 @@ directive('facebook', function($http,globals) {
 
         // Additional init code here
         FB.getLoginStatus(function(response) {
-        	if (response.status === 'connected') {
+          if (response.status === 'connected') {
             // connected
             scope.auth = response.authResponse;
           } else if (response.status === 'not_authorized') {
@@ -74,3 +75,34 @@ directive('facebook', function($http,globals) {
   }
 });
 
+angular.module('alveolus.share', []).
+directive('share', function($http,globals,WebappService) {
+  return {
+    restrict: 'A',
+    scope: true,
+    controller: function($scope, $attrs, SessionService) {
+    $scope.share = function(){
+      WebappService.tracker({id:$attrs.id,type:"shared"});
+        console.log($attrs.title)
+        var img=($attrs.image=="img/missing.png") ? "http://alveolus.fr/app/img/"+$attrs.id+".jpg" : $attrs.image;
+        var obj = {
+          method: 'feed',
+          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$attrs.id,
+          picture: img,
+          name: $attrs.title,
+          caption: $attrs.caption
+        };
+
+        function callback(response) {
+          if(response){
+            // $scope.addAlert(alertPostedOnFacebook);
+          }
+        }
+
+        FB.ui(obj, callback);
+
+}
+      }
+
+    }
+  });

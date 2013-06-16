@@ -12,6 +12,8 @@ controller('WebappCtrl', function($scope,$location,$routeParams, WebappService, 
 	var alertErrorAlreadyTagged = {type : 'error', msg : "Vous avez déjà proposé ce tag pour cette alvéole ! Votre tag n'a pas été ajouté."};
 	var alertWebappBookmarked = {type : 'success', msg : "Cette alvéole a bien été ajoutée à vos favoris."};
 	var alertWebappUnbookmarked = {type : 'info', msg : "Cette alvéole a bien été supprimée de vos favoris."};
+	var alertPostedOnFacebook = {type : 'success', msg : "Merci d\'avoir partagé cette alvéole sur Facebook !"};
+
 	$scope.scrollbar = function(){
 		setTimeout(function(){
 			$(".nano").nanoScroller({ flash: true });
@@ -22,6 +24,10 @@ controller('WebappCtrl', function($scope,$location,$routeParams, WebappService, 
 
 	$scope.webAppId=$routeParams.webAppId;
 	$scope.webapp=WebappService.get({id: $routeParams.webAppId}, function(data){
+
+		if(!$scope.webapp.validate){
+			$location.path('/');
+		}
 
 		if($.isEmptyObject(data.comments)){
 			$scope.webappHaveComments=false;
@@ -71,23 +77,25 @@ controller('WebappCtrl', function($scope,$location,$routeParams, WebappService, 
 
 		if($scope.webapp.facebook_id){
 			SocialService.getFacebookData($scope.webapp.facebook_id,function(data){
-																		$scope.facebook=data;
-																	});
+				if($.isEmptyObject(data.error))
+					$scope.facebook=data;
+				else $scope.facebook=null;
+			});
 		} else {
 			$scope.facebook=null;
 		}
 		if($scope.webapp.twitter_id){
-			SocialService.getTwitterData($scope.webapp.twitter_id,function(data){
-																		$scope.twitter=data;
-																	});
+			var cb = new Codebird;
+			cb.setConsumerKey('f3PTTDXnjhHfT5rq7OPxUQ', '3z20DVbNIIDdMlui7ie4RTQEs7vxcseRviA3OyoL8');
+			cb.setToken('1420438962-5WiUKt9qGAnX2NTG7265zp6GmGPYScm0ksm2hwI', '8rJlsVD0eat52xP3SUH72EwSVOaOewm066ugeYwUnqk');
+			SocialService.getTwitterData(cb, $scope.webapp.twitter_id, function(data){
+				$scope.twitter=data.followers_count;
+			});
+			
 		} else {
 			$scope.twitter=null;
 		}
 
-		// A voir récupération données google+ ???
-		// if($scope.webapp.gplus_id)
-		// WebappTwitter.get($scope.webapp.gplus_id,function(data){$scope.twitter=data});
-		// else $scope.twitter=null;
 		$scope.scrollbar();
 	});
 
@@ -162,17 +170,4 @@ $scope.goToEditWebappPage = function(){
 	}
 };
 
-// ---------- Ne marche pas --------------
-// $scope.shareOnFb=function(){
-//   console.log("share");
-//   FB.ui({
-//           method: 'feed',
-//           name: "title",
-//           link:  "http://alveolus.fr",
-//           caption: "caption",
-//           message: "J'ai découvert ça sur EnjoyTheWeb, ça peut vous intéresser !"
-//       },function(response) {
-//       console.log("response:"+response);
-//     });
-// }
 });
