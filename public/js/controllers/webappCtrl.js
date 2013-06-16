@@ -170,24 +170,4 @@ $scope.goToEditWebappPage = function(){
 	}
 };
 
-$scope.shareOnFb=function(){
-	// http://alveolus
-
-	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
-        var obj = {
-          method: 'feed',
-          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
-          picture: img,
-          name: $scope.webapp.title,
-          caption: $scope.webapp.caption
-        };
-
-        function callback(response) {
-          if(response){
-          	$scope.addAlert(alertPostedOnFacebook);
-          }
-        }
-
-        FB.ui(obj, callback);
-}
 });
