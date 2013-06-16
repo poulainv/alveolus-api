@@ -171,23 +171,45 @@ $scope.goToEditWebappPage = function(){
 };
 
 $scope.shareOnFb=function(){
-	// http://alveolus.fr/app/img/1.jpg
-	var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
+	// var img=($scope.webapp.image_url=="img/missing.png") ? "http://alveolus.fr/app/img/"+$routeParams.webAppId+".jpg" : $scope.webapp.image_url;
+ //        var obj = {
+ //          method: 'feed',
+ //          // redirect_uri: 'http://alveolus.fr/',
+ //          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
+ //          picture: img,
+ //          name: $scope.webapp.title,
+ //          caption: $scope.webapp.caption
+ //        };
+
+ //        function callback(response) {
+ //          if(response){
+ //          	$scope.addAlert(alertPostedOnFacebook);
+ //          }
+ //        }
+
+ //        FB.ui(obj, callback);
+
+  FB.init({appId: "450339965057952", status: true, cookie: true});
+
+      function postToFeed() {
+
+        // calling the API ...
         var obj = {
           method: 'feed',
-          redirect_uri: 'http://alveolus.fr/',
-          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$routeParams.webAppId,
-          picture: img,
-          name: $scope.webapp.title,
-          caption: $scope.webapp.caption
+          // redirect_uri: 'YOUR URL HERE',
+          link: 'https://developers.facebook.com/docs/reference/dialogs/',
+          picture: 'http://fbrell.com/f8.jpg',
+          name: 'Facebook Dialogs',
+          caption: 'Reference Documentation',
+          description: 'Using Dialogs to interact with people.'
         };
 
         function callback(response) {
-          if(response){
-          	$scope.addAlert(alertPostedOnFacebook);
-          }
+          document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
         }
 
         FB.ui(obj, callback);
+      }
+
 }
 });
