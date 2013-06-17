@@ -84,10 +84,10 @@ directive('share', function($http,globals,WebappService) {
     $scope.share = function(){
       WebappService.tracker({id:$attrs.id,type:"shared"});
         console.log($attrs.title)
-        var img=($attrs.image=="img/missing.png") ? "http://alveolus.fr/app/img/"+$attrs.id+".jpg" : $attrs.image;
+        var img=($attrs.image=="img/missing.png") ? "http://alveolus.fr/img/"+$attrs.id+".jpg" : $attrs.image;
         var obj = {
           method: 'feed',
-          link: 'http://alveolus.fr/app/index.html#/alveoles/'+$attrs.id,
+          link: 'http://alveolus.fr/index.html#/alveoles/'+$attrs.id,
           picture: img,
           name: $attrs.title,
           caption: $attrs.caption
