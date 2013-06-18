@@ -119,6 +119,7 @@ GEM
     multi_xml (0.5.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
+    newrelic_rpm (3.5.5.38)
     nokogiri (1.5.5)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -257,6 +258,7 @@ DEPENDENCIES
   json
   json_spec
   mysql2
+  newrelic_rpm (~> 3.5.5.38)
   omniauth
   omniauth-facebook
   paperclip

@@ -12,6 +12,7 @@ gem 'inherited_resources'
 
 
 group :production do
+   gem "newrelic_rpm", "~> 3.5.5.38"
   gem 'thin'
   gem 'pg'
   gem 'paperclip'
@@ -42,6 +43,7 @@ group :assets do
 end
 
 group :development do
+  gem "newrelic_rpm", "~> 3.5.5.38"
   gem 'rspec-rails', '2.8.0'
   gem 'annotate'
   gem 'paperclip'
