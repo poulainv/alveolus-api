@@ -8,7 +8,7 @@
 
     # GET /webapps OR /categories/:category_id/webapps
     def index
-      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps : Webapp.includes(:category, :comments, :user).all
+      @webapps = (params[:category_id]) ? Category.find(params[:category_id]).webapps.validated : Webapp.includes(:category, :comments, :user).validated
       render json: @webapps, :each_serializer => WebappLazySerializer
     end
 
