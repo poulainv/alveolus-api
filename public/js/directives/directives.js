@@ -87,7 +87,7 @@ directive('share', function($http,globals,WebappService) {
         var img=($attrs.image=="img/missing.png") ? "http://alveolus.fr/img/"+$attrs.id+".jpg" : $attrs.image;
         var obj = {
           method: 'feed',
-          link: 'http://alveolus.fr/index.html#/alveoles/'+$attrs.id,
+          link: 'http://alveolus.fr/#/alveoles/'+$attrs.id,
           picture: img,
           name: $attrs.title,
           caption: $attrs.caption
