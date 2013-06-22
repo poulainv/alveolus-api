@@ -138,7 +138,7 @@ controller('MainCtrl', function($scope,$routeParams,$location,$window,$timeout,g
 
 
 	$scope.closeModalLogin = function () {
-		console.log("close mocal lodal");
+		// console.log("close mocal lodal");
 		$('#modalLogin').modal('hide');
 		$scope.closeModalAlert(0);
 	};
@@ -155,8 +155,11 @@ controller('MainCtrl', function($scope,$routeParams,$location,$window,$timeout,g
 	$scope.sendFeedback = function (content) {
 		$scope.closeModalFeedback();
 		content.page = $location.path() ;
-		content.email = $scope.user.email ; 
-		console.log("feedback"+content.comment);
+		// console.log(content.email);
+		if($scope.isLogged){
+			content.email = $scope.user.email;
+		} 
+		// console.log("feedback"+content.comment);
 		FeedbackService.sendFeedback(content,function(data){
 			console.log(data);
 			addAlert(alertFeebackSent);

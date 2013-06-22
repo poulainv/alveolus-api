@@ -8,7 +8,12 @@ class FeedbackController < BaseController
 
   def create
     @feedback = Feedback.new(params[:comment],params[:page])
-    @feedback.email = current_user.email if user_signed_in?
+    if user_signed_in?
+      @feedback.email = current_user.email 
+    else
+      @feedback.email = params[:email]
+    end
+    
     if @feedback.valid?
       FeedbackMailer.feedback(@feedback).deliver
       
