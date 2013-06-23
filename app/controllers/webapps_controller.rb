@@ -140,7 +140,7 @@
       @webapps = Webapp.validated.where{(title =~ "%#{query}%") |  (caption =~ "%#{query}%") }
       tags = Tag.where{(name =~ "%#{query}%")}
       tags.each do |tag|
-        @webapps += tag.webapps
+        @webapps += tag.webapps.validated
       end
       @webapps = @webapps.uniq
       render json: @webapps, :each_serializer => WebappLazySerializer
