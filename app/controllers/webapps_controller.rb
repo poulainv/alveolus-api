@@ -142,6 +142,13 @@
       tags.each do |tag|
         @webapps += tag.webapps.validated
       end
+
+      cats = Category.where{(name =~ "%#{query}%")}
+      cats.each do |cat|
+        @webapps += cat.webapps.validated
+      end
+
+
       @webapps = @webapps.uniq
       render json: @webapps, :each_serializer => WebappLazySerializer
     end
