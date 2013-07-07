@@ -1,5 +1,9 @@
+  # encoding: utf-8
+
 class Comment < ActiveRecord::Base
   attr_accessible :body, :rating, :user_id, :webapp_id, :user, :webapp
+
+  after_commit :notify_new_comment
 
   belongs_to :user
   belongs_to :webapp
@@ -18,8 +22,7 @@ class Comment < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => [:webapp_id]
   validates :rating, :presence => true, :inclusion => { :in => [1,2,3,4,5]}
 
-
-
+ 
   def update_website_add_rating
     @website = Webapp.find_by_id(self.webapp_id)
     if(@website.comments.length ==1)
@@ -42,4 +45,34 @@ class Comment < ActiveRecord::Base
       @website.save
     end
   end
+
+  
+  def notify_new_comment
+    users_notified = Hash.new
+    users_notified[user.id] = true
+    ## Notify all others commenters
+    self.webapp.comments.each do |c|
+      if !users_notified.has_key? c.user.id
+        @notifications = c.user.notifications.build(:text => "#{self.user.pseudo} a commenté la même alvéole que vous.",:path_action => "/alveoles/#{self.webapp.id}")
+        @notifications.save!
+        users_notified[c.user.id] = true ## Check syntax
+      end
+    end
+
+    ## Notify alveole owner
+    if !(users_notified.key? self.webapp.try(:user).try(:id)) && self.webapp.user
+        @notifications = self.webapp.user.notifications.build(:text => "#{self.user.pseudo} a commenté votre alvéole.",:path_action => "/alveoles/#{self.webapp.id}")
+        @notifications.save!
+        users_notified[self.webapp.user.id] = true
+    end
+
+     ## Notify alveolus' admin
+    User.all_admin.each do |u|
+      if !users_notified.key?  u.id
+          @notifications = u.notifications.build(:text => "#{self.user.pseudo} a commenté une alvéole.",:path_action => "/alveoles/#{self.webapp.id}")
+          @notifications.save!
+          users_notified[u.id] = true
+      end
+    end
+   end
 end

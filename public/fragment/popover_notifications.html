@@ -1,0 +1,23 @@
+<div id="notifications-content" class="hide">
+	<div ng-repeat="notification in notifications">
+		<div class="row-fluid">
+			<span class="label label-info">{{notification.created_at| date:'dd/MM'}} </span> :
+			<a ng-href="#{{notification.path_action}}"> <small>{{notification.text}} </small>	<small class="label label-success" ng-hide="notification.is_readed">Nouveau! </small> 
+				</a> 
+			
+		</div>
+		<div class="row-fluid">
+			
+		</div>
+		<hr> 
+	</div>
+
+	<div ng-hide="notifications.length">
+		<div class="row-fluid">
+			<small>Pas de nouvelles notifications</small></div>
+		
+	</div>
+	<div class="row-fluid">
+			<a class="btn btn-small btn-block" ng-href="#/user"> Voir les anciennes notifications </a> 
+		</div>
+</div>

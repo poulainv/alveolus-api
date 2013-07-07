@@ -54,7 +54,13 @@ EnjoyTheWeb::Application.routes.draw do
     }
   end
 
-
+resources :notifications, :expect => :destroy do
+    collection {
+      get :unread
+      get :last
+      put :reading
+    }
+  end
 
   namespace :admin do
     resources :users

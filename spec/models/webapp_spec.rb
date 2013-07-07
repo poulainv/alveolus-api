@@ -119,7 +119,6 @@ describe "virtual attribute" do
 
 
     it "method add_tags shall be add goods tags" do
-      print 'METHO QUI FAIT CHIER'
       @tags = ["test1","test2","test2"]
       @webapp.add_tags(@tags,FactoryGirl.create(:user))
       assert @webapp.tagged_by_tag?("test1")

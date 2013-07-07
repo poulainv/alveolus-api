@@ -5,6 +5,10 @@
 angular.module('alveolus.homeCtrl', []).
 controller('HomeCtrl', function($scope,$location,globals,CategoryService,WebappService,SessionService, UserService) {
 
+	// If we are logged, we request notification :)
+	if($scope.isLogged){
+		$scope.$parent.$broadcast('onGetNotification');
+	}
 
 	WebappService.getPopular(function(data){
 

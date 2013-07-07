@@ -681,6 +681,10 @@ padding: 110px 30px;
 border-bottom: 1px solid grey;*/
 }
 
+.popover {
+  width : 190%;
+}
+
 #popularCarousel{
   text-align: center;
 }

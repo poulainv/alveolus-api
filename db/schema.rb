@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519104306) do
+ActiveRecord::Schema.define(:version => 20130627193732) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(:version => 20130519104306) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "text"
+    t.boolean  "is_readed",    :default => false
+    t.time     "date_reading"
+    t.integer  "user_id"
+    t.string   "path_action"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "rs_evaluations", :force => true do |t|
@@ -164,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20130519104306) do
     t.datetime "photo_updated_at"
     t.boolean  "promoted"
     t.boolean  "featured"
-    t.integer  "nb_click_shared",    :default => 0
+    t.integer  "nb_click_shared"
     t.integer  "user_id"
     t.string   "vimeo_id"
     t.string   "facebook_id"

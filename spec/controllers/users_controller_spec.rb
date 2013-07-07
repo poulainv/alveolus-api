@@ -122,9 +122,9 @@ describe UsersController do
     context 'when logged in as user' do
       login_user
 
-      it "should not show another user" do
+      it "should  show another user" do
         get :show, id: User.first
-        response.response_code.should == 401
+        response.response_code.should == 200
       end
 
       # User.last is logged user

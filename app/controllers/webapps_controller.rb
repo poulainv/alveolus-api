@@ -76,9 +76,7 @@
       @webapp = Webapp.find(params[:id])
       if current_user.admin?
         @webapp.destroy
-        respond_to do |format|
-          format.html { redirect_to user_path current_user }
-        end
+        render json: { success: "ok"}, status: 200
       else
        render json: { error: "Permission denied"}, status: 401
       end
@@ -92,7 +90,7 @@
     expire_fragment %r{webapps/trend/unvalidated}
       ## Warning here there are some computation/behavior which should be in model
       if(@webapp.reputation_for(:votes)>@webapp.score_for_validation)
-        @webapp.update_attribute("validate", "true")
+        @webapp.validating
       end
       render :json => @webapp, :serializer => WebappVoteSerializer
     end

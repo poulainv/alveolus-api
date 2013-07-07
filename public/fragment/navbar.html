@@ -1,3 +1,6 @@
+
+<div ng-include src="'fragment/popover_notifications.html'"></div>
+
 <div class="navbar navbar-static-top navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -56,31 +59,36 @@
         </ul>
       </div>
       <div class="nav-collapse collapse pull-right">
-        <ul class="nav pull-right">    
-          <li ng-hide="isLogged">
-            <a class="navbar-link" ng-click="openModalLogin()" ng-init="connect = 'connect'" ng-mouseenter="connect = 'connect-green'" ng-mouseleave="connect='connect'">
-              <div class="navbar-picto-container"><img class="navbar-picto"  ng-src="img/picto/picto-{{connect}}.svg"></div>
-              <div class="navbar-link-text">CONNEXION</div>
-            </a>
-          </li>
-          <li class="dropdown" ng-show="isLogged" id="navbar-avatar-container">
-            <a class="dropdown-toggle">
-              <img id="navbar-avatar" ng-src="{{userInfo.image_url}}" class="img-circle"/>
-              <span id="navbar-dropdown-arrow"></span>
-              <div class="navbar-link navbar-link-text">MON COMPTE</div>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a ng-href="#/user">Mon compte</a>
-              </li>
-              <li>
-                <a ng-click="sign_out()">Deconnexion</a>
-              </li>
-            </ul>
-          </li>  
+        <ul class="nav pull-right">  
+         <li ng-show="isLogged">
+          <a ng-click="showNotifications($event)">
+              <div id="notifications" style="margin-top:120%" class="label label-{{nbUnreadNotifications && 'warning' || 'success'}}">{{nbUnreadNotifications}}</div>
+          </a>
+        </li>  
+        <li ng-hide="isLogged">
+          <a class="navbar-link" ng-click="openModalLogin()" ng-init="connect = 'connect'" ng-mouseenter="connect = 'connect-green'" ng-mouseleave="connect='connect'">
+            <div class="navbar-picto-container"><img class="navbar-picto"  ng-src="img/picto/picto-{{connect}}.svg"></div>
+            <div class="navbar-link-text">CONNEXION</div>
+          </a>
+        </li>
+        <li class="dropdown" ng-show="isLogged" id="navbar-avatar-container">
+          <a class="dropdown-toggle">
+            <img id="navbar-avatar" ng-src="{{userInfo.image_url}}" class="img-circle"/>
+            <span id="navbar-dropdown-arrow"></span>
+            <div class="navbar-link navbar-link-text">MON COMPTE</div>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-href="#/user">Mon compte</a>
+            </li>
+            <li>
+              <a ng-click="sign_out()">Deconnexion</a>
+            </li>
+          </ul>
+        </li>  
 
-        </ul>
-      </div>
+      </ul>
     </div>
   </div>
+</div>
 </div>

@@ -3,7 +3,7 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.webAppListCtrl', []).
-controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappService,CategoryService, TagService) {
+controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappService,CategoryService,$window,TagService) {
 
 
 	// $('#headerCarousel').hide();
@@ -14,8 +14,8 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	**/
 	$scope.changeCat = function(cat){
 
-		console.log("changeCat("+cat.name+")");
-
+		// console.log("changeCat("+cat.name+")");
+		$window._gaq.push(['_trackPageview', '/'+cat.name]);
 		$scope.subcats = [] ;
 		$scope.subTitle = cat.name;
 
@@ -33,8 +33,8 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	* On change de feature
 	**/
 	$scope.changeFeat = function(catFeat){
-		console.log("changeFeat("+catFeat.name+")");
-		
+		// console.log("changeFeat("+catFeat.name+")");
+		$window._gaq.push(['_trackPageview', '/'+catFeat.name]);
 		$scope.subTitle = catFeat.name;
 		$scope.subcats = [] ;
 		
@@ -92,7 +92,7 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	**/
 	function init(){
 
-		console.log("init()");
+		// console.log("init()");
 
 		$scope.subcats = [];
 		initSelectionCats();
@@ -122,7 +122,7 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	* On initialise la liste des sélections
 	**/
 	function initSelectionCats(){
-		console.log("setSelectionCats()");
+		// console.log("setSelectionCats()");
 		$scope.selectionCats = [
 		{
 			'name':'Sélection de l\'équipe',

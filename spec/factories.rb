@@ -73,6 +73,7 @@ FactoryGirl.define do
     rating 2
     association :user
     association :webapp
+    
   end
 end
 

@@ -10,6 +10,9 @@ class UsersController < BaseController
     if (current_user.try(:admin?))
       @users = User.all
       render json: @users, :each_serializer => UserLazySerializer
+       else
+      render json: { error: "Permission denied"}, status: 401
+    
      end
   end
 
@@ -19,7 +22,8 @@ class UsersController < BaseController
       @user = User.find(params[:id])
       render json: @user
     else
-      render json: { error: "Permission denied"}, status: 401
+      @user = User.find(params[:id])
+      render json: @user, :serializer => UserLazySerializer
     end
   end
 

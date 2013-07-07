@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :webapps
   has_many :bookmarks, :foreign_key => "user_id", :dependent => :destroy
   has_many :webapps_starred, :through => :bookmarks, :source => :webapp
+  has_many :notifications
+  scope :all_admin, lambda { where("admin = '1'")}
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?

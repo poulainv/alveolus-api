@@ -1,3 +1,5 @@
+  # encoding: utf-8  
+
    # == Schema Information
 #
 # Table name: webapps
@@ -41,7 +43,7 @@ class Webapp < ActiveRecord::Base
   accepts_nested_attributes_for :tags
 
   has_attached_file :photo, PAPERCLIP_STORAGE_WEBAPP ## This constant is defined in production.rb AND development.rb => be careful to change both ;)
-  validates_attachment_size :photo, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
+   validates_attachment_size :photo, :less_than => 1.megabytes,:content_type => { :content_type => "image/jpg" }
   #validates_attachment_presence :photo # Comment because test fail otherwise !
 
   
@@ -49,8 +51,8 @@ class Webapp < ActiveRecord::Base
   validates :caption, :presence => true, :length => { :maximum => 200, :minimum => 30 }
   validates :description, :presence => true,:length => { :maximum => 1010, :minimum => 100 }
   validates :url, :presence => true,
-    :format => {:with => url_regex },
-    :uniqueness => true
+  :format => {:with => url_regex },
+  :uniqueness => true
 
 
   scope :validated, lambda { where("validate = '1'")}
@@ -66,14 +68,19 @@ class Webapp < ActiveRecord::Base
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
 
-  @@score_for_validation = 5
+  @@score_for_validation = 9
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   def score_for_validation
     @@score_for_validation
   end
 
-  
+  def validating
+    self.validate = true
+    notify_validating
+    self.save
+  end
+
   ##################
   ## TAGS METHODS ##
   ##################
@@ -110,21 +117,21 @@ class Webapp < ActiveRecord::Base
     end
 
     if(!TagAppRelation.find_by_user_id_and_tag_id_and_webapp_id(user.id,tagToAdd.id,self.id))
-       TagAppRelation.create(:user_id=>user.id,:tag_id=>tagToAdd.id,:webapp_id => self.id).save
-    else
-      return nil
-    end
+     TagAppRelation.create(:user_id=>user.id,:tag_id=>tagToAdd.id,:webapp_id => self.id).save
+   else
+    return nil
   end
+end
 
-  def tag_list=(names)
-    self.tags = names.split(",").map do |n|
-      Tag.where(name: n.strip).first_or_create!
-    end
+def tag_list=(names)
+  self.tags = names.split(",").map do |n|
+    Tag.where(name: n.strip).first_or_create!
   end
+end
 
-  def self.tagged_with(name)
-    Tag.find_by_name!(name).webapps.validated
-  end
+def self.tagged_with(name)
+  Tag.find_by_name!(name).webapps.validated
+end
 
   ## Best tag for this web app
   def n_best_tags(n)
@@ -140,9 +147,9 @@ class Webapp < ActiveRecord::Base
     self.evaluations.where{(value == "1") }.length
   end
 
-    def image_url(type)
-        photo.url(type)
-    end
+  def image_url(type)
+    photo.url(type)
+  end
 
   def count_negative
     self.evaluations.where{(value == "-1") }.length
@@ -178,7 +185,7 @@ class Webapp < ActiveRecord::Base
   def nb_comments
     comments.commented.count
   end
- 
+
   def score
     score_click_detail = nb_click_detail * Webapp.score_weights['click_detail']
     score_comments = nb_comments * Webapp.score_weights['nb_comments']
@@ -191,11 +198,11 @@ class Webapp < ActiveRecord::Base
   #######################
 
   def self.score_weights
-      {
-        'click_detail' => 2,
-        'click_shared' => 10,
-        'nb_comments' => 5
-      }
+    {
+      'click_detail' => 2,
+      'click_shared' => 10,
+      'nb_comments' => 5
+    }
   end
 
   # return three most comment
@@ -207,14 +214,14 @@ class Webapp < ActiveRecord::Base
   ## To increment nb_click_<element>
   def increment_nb_click(hash)
     case hash[:element]
-      when "detail"
-        self.increment(:nb_click_detail).save
-      when "preview"
-        self.increment(:nb_click_preview).save
-      when "url"
-        self.increment(:nb_click_url).save
-      when "shared"
-        self.increment(:nb_click_shared).save
+    when "detail"
+      self.increment(:nb_click_detail).save
+    when "preview"
+      self.increment(:nb_click_preview).save
+    when "url"
+      self.increment(:nb_click_url).save
+    when "shared"
+      self.increment(:nb_click_shared).save
     end
   end
 
@@ -229,8 +236,8 @@ class Webapp < ActiveRecord::Base
     # Construct new Hash with best n webapps
     best_apps = Hash[scores.sort_by { |key, value| value }.reverse[0..n-1]]
     best_apps.each do |k,v| puts "#{k} => #{v}" end
-    Webapp.where(:id => [best_apps.keys])
-  end
+      Webapp.where(:id => [best_apps.keys])
+    end
 
   ##############
   # Validation #
@@ -250,6 +257,30 @@ class Webapp < ActiveRecord::Base
 #
 #    return self.url
 
+end
+
+  ## Notifications
+
+  private
+  def notify_validating
+       puts "oui oui #{validate_changed?} #{validate} #{new_record?} "
+    if validate_changed? &&  validate == true && !new_record?
+      puts "oui oui"
+      users_notified = Hash.new
+    ## Notify all alveole owner
+    @notifications = user.notifications.build(:text => "L'alvéole #{self.title} a été validée.",:path_action => "/alveoles/#{self.id}")
+    @notifications.save!
+    users_notified[user.id] = true ## Check syntax
+
+    ## Notify administrator
+    User.all_admin.each do |u|
+      if !users_notified.key?  u.id
+        @notifications = u.notifications.build(:text => "L'alvéole #{self.title} a été validée.",:path_action => "/alveoles/#{self.id}")
+        @notifications.save!
+        users_notified[u.id] = true
+      end
+    end
   end
+end
 
 end
