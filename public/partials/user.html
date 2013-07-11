@@ -3,6 +3,8 @@
 		<div id="contentWrapper">
 			<div class="row container-white">
 				<div class="span10 offset1">
+					<h2> Mon compte </h2>
+					<hr>
 					<div class="tabbable" > 
 						<ul class="nav nav-pills">
 							<li class="active"><a href="#infos" data-toggle="tab">Mes informations</a></li>
@@ -101,7 +103,7 @@
 								</div>
 								<div ng-hide="user.bookmarks.length">
 									<p>Vous n'avez aucune alvéole favorite...</p>
-									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">N'attendez plus pour découvrir toutes nos alvéoles !</button>
+									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez toutes les alvéoles !</button>
 
 								</div>
 							</div>
@@ -169,7 +171,7 @@
 
 								<div ng-hide="user.webapps.length">
 									<p>Vous n'avez pas proposé d'alvéole.</p>
-									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggerant un site web</button>
+									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggérant un site web</button>
 								</div>
 							</div>
 
