@@ -50,9 +50,11 @@ config(
         var $http;
         var interceptor = ['$location', '$q','$rootScope','$injector', function ($location, $q, $rootScope, $injector ) {
             return function (promise) {
-                $('#contentWrapper').hide();
-                $('#navbar-avatar-container').css("visibility","hidden");
-                $('#loading').show();
+                if($('#contentWrapper').length>0){
+                    $('#contentWrapper').hide();
+                    $('#navbar-avatar-container').css("visibility","hidden");
+                    $('#loading').show();
+                }
 
                 var success = function(response){
                     $http = $http || $injector.get('$http');
