@@ -47,11 +47,15 @@ controller('NotificationCtrl', function($scope,$routeParams,SessionService,Notif
 
     $scope.hideNotifications = function(){
         $("#notifications").popover("hide");
+        popoverNotifDisplayed = false;
     }
 
     $scope.showNotifications = function($event){
+        if(popoverNotifDisplayed){
+            $scope.hideNotifications();
+            return;
+        }
         $('#notifications').popover('destroy');
-
         $('#notifications').popover({
             html : true,
             placement : "bottom",
@@ -72,8 +76,8 @@ controller('NotificationCtrl', function($scope,$routeParams,SessionService,Notif
         if(popoverNotifDisplayed){
             reading();
         }
-        $("#notifications").popover("hide");
-        popoverNotifDisplayed = false;
+        $scope.hideNotifications();
+       
         
     });
 });
