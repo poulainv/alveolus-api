@@ -1,5 +1,5 @@
 class WebappSerializer < ActiveModel::Serializer
-  attributes :id,:caption,:title,:description, :featured, :created_at, :average_rate,:image_url,:category_id,:nb_click_preview, :facebook_id,:twitter_id, :gplus_id,:vimeo_id,:user_id, :nb_click_url,:nb_click_detail,:url, :validate, :category_id
+  attributes :id,:caption,:title,:description, :featured, :created_at, :average_rate,:nb_click_shared, :nb_bookmarks, :image_url,:category_id,:nb_click_preview, :facebook_id,:twitter_id, :gplus_id,:vimeo_id,:user_id, :nb_click_url,:nb_click_detail,:url, :validate, :category_id
   attribute :bookmarked
   has_many :comments, :serializer => CommentSerializer
   attribute :tags,  :serializer => TagSerializer

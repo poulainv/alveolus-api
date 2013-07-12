@@ -22,6 +22,7 @@ a, a:link, a:visited, a:hover, a:active {
   cursor: pointer;
 }
 
+
 body{
   margin : 81px 0 0 0;
   color: black;
@@ -615,6 +616,10 @@ padding: 110px 30px;
 #loginSubmit{
   position: absolute; 
   left: -9999px
+}
+
+.link-alveole{
+   text-decoration:underline !important;; 
 }
 
 #logoNavbar{

@@ -31,7 +31,7 @@
 								</div>
 								<div class="span5">
 									<i class="{{ {'rate':appFeatured.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
-									({{appFeatured.comments.length}} avis)
+									({{appFeatured.nb_comments}} avis)
 								</div>
 
 							</div>
@@ -74,9 +74,9 @@
 									<section class="span10 offset1">
 										<div class="row-fluid">	
 											<article class="alveole span3" ng-repeat="alveole in slide">
-												<header class="alveoleHeader">Note : {{alveole.average_rate|truncate:3:''}}/5
+												<header class="alveoleHeader">Vu : {{alveole.nb_click_detail}} fois
 													<span class="alveoleRatingWrapper">
-														<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+														<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i> ({{alveole.nb_comments}})
 													</span>
 												</header>
 												<div class="alveoleContent">
@@ -84,6 +84,7 @@
 														<div class="cropedImg">
 															<img class="alveoleImg" ng-src="{{alveole | image}}"  alt="{{alveole.title}}">
 														</div>
+														<hr/>
 														<h4 class="alveoleName">
 															<strong>{{alveole.title}}</strong>
 														</h4>
@@ -129,9 +130,9 @@
 									<section class="span10 offset1">
 										<div class="row-fluid">	
 											<article class="alveole span3" ng-repeat="alveole in slide">
-												<header class="alveoleHeader">Note : {{alveole.average_rate|truncate:3:''}}/5
+												<header class="alveoleHeader">Vu : {{alveole.nb_click_detail}} fois
 													<span class="alveoleRatingWrapper">
-														<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+														<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i> ({{alveole.nb_comments}})
 													</span>
 												</header>
 												<div class="alveoleContent">
@@ -139,6 +140,7 @@
 														<div class="cropedImg">
 															<img class="alveoleImg" ng-src="{{alveole | image}}"  alt="{{alveole.title}}">
 														</div>
+														<hr/>
 														<h4 class="alveoleName">
 															<strong>{{alveole.title}}</strong>
 														</h4>

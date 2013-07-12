@@ -43,12 +43,27 @@
 						</header>
 						<div class="row-fluid">
 							<p class="span12 caption">{{webapp.caption}}</p>
-							<ul class="info-list">
-								<li><a ng-href="{{webapp.url}}" target="_blank"><img src="img/picto/picto-link-green.svg" alt="link-picto"> {{webapp.url}}</a></li>
-								<li><i class="icon-eye-open icon-large"></i> Vu {{webapp.nb_click_preview + webapp.nb_click_detail}} fois</li>
-								<li ng-show="canEdit"><a ng-href="#/alveoles/{{webapp.id}}/edit"><i class="icon-pencil icon-large"></i> Editer</a></li>
-								<li ng-hide="canEdit"><i class="icon-pencil icon-large"></i> Proposé par : {{webapp.user.pseudo}}</li>
-							</ul>
+							<div class="row-fluid">
+							<div class="span8">
+								<ul class="info-list">
+									<li><img src="img/picto/picto-link-green.svg" alt="link-picto"><a class="link-alveole" ng-href="{{webapp.url}}" target="_blank">{{webapp.url}}</a></li>
+									<li ng-show="canEdit"><a ng-href="#/alveoles/{{webapp.id}}/edit"><i class="icon-pencil icon-large"></i> Editer</a></li>
+									<li ng-hide="canEdit"><i class="icon-pencil icon-large"></i> Proposé par : {{webapp.user.pseudo}}</li>
+									<li ng-hide="canEdit"><a ng-href="{{webapp.url}}" target="_blank"><i class="icon-time icon-large"></i> Le : {{webapp.created_at| date:'d/M/yyyy'}}</li>
+								</ul>
+							</div>
+							<div class="span4" style="background-color : #eef2ea;  padding : 3px 3px 3px 3px">
+								<ul class="info-list">
+									
+									<li><i class="icon-eye-open icon-large"></i> Activités  </li>
+									<li> Vu : {{webapp.nb_click_preview + webapp.nb_click_detail}} fois</li>
+									<li> Partagé : {{webapp.nb_click_shared}} fois</li>
+									<li> Aimé : {{webapp.nb_bookmarks}} fois</li>
+									<!-- <li>Consulté {{webapp.nb_click_detail}} fois</li> -->
+
+								</ul>
+							</div>
+							
 						</div>
 						<!-- ./Caption -->
 						<footer class="row-fluid">

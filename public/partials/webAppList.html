@@ -21,9 +21,9 @@
 				<div ng-repeat="subcat in subcats" class="row-fluid"> 
 					<h3>{{subcat.name}}</h3>
 					<article class="alveole span3" ng-repeat="alveole in subcat.alveoles">
-						<header class="alveoleHeader">Note : {{alveole.average_rate|truncate:3:''}}/5
+						<header class="alveoleHeader">Vu : {{alveole.nb_click_detail}} fois
 							<span class="alveoleRatingWrapper">
-								<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+								<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i> ({{alveole.nb_comments}})
 							</span>
 						</header>
 						<div class="alveoleContent">
