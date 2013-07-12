@@ -199,23 +199,51 @@
 						<div ng-show="webappHaveComments" class="row-fluid">
 							<h4>Commentaires des autres utilisateurs</h4>
 							<div ng-repeat="comment in webapp.comments" ng-hide="comment.user.id==user.id" class="row-fluid comment-item">
-								<aside class="span2">
-									<div class="text-center">
-										<a ng-href="/#/user/{{comment.user.id}}"><img class="img-circle" ng-src="{{comment.user.image_url}}"/></a>
-										<a ng-href="/#/user/{{comment.user.id}}">{{comment.user.pseudo}}</a>
+								
+								<div ng-show="comment.body==null">
+									<span class="span1">
+										<img class="img-circle" ng-src="{{comment.user.image_url}}"/></a>
+									</span>
+									<span class="span5">
+										<a ng-href="/#/user/{{comment.user.id}}">{{comment.user.pseudo}} a noté {{webapp.title}} :</a>
+									</span>
+									<span class="span2">
 										<div class="starsRatingShow">
 											<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
 										</div>
-									</div>
-								</aside>
-								<section class="span9">
-									<div class="row-fluid">
-										<span class="pull-right comment-time">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
-									</div>
-									<div class="row-fluid">
-										<p>{{comment.body}}</p>
-									</div>
-								</section>
+									</span>
+
+
+									
+									<section class="span3">
+										<div class="row-fluid">
+											<span class="pull-right comment-time">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
+										</div>
+										
+									</section>
+								</div>
+
+								<div ng-show="comment.body!=null">
+									<aside class="span2">
+										<div class="text-center">
+											<a ng-href="/#/user/{{comment.user.id}}"><img class="img-circle" ng-src="{{comment.user.image_url}}"/></a>
+											<a ng-href="/#/user/{{comment.user.id}}">{{comment.user.pseudo}}</a>
+											<div class="starsRatingShow">
+												<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+											</div>
+										</div>
+									</aside>
+									<section class="span9">
+										<div class="row-fluid">
+											<span class="pull-right comment-time">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
+										</div>
+										<div class="row-fluid">
+											<p>{{comment.body}}</p>
+										</div>
+									</section>
+								</div>
+								
+
 							</div>
 						</div>
 					</div> <!-- ./content -->

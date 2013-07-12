@@ -4,8 +4,7 @@
 			<div class="row container-white">
 				<div class="span10 offset1">
 					<div class="row-fluid">
-						<div class="span9"><h2> <img ng-src="{{user.image_url}}" class="span1 img-rounded img-circle"/>
-							{{user.pseudo}} </h2></div>
+						<div class="span9"><h2> <img ng-src="{{user.image_url}}" class="span1 img-rounded img-circle"/> {user.pseudo}} </h2></div>
 							<div class="span3">
 								Membre depuis le {{user.created_at| date:'d/M/yyyy'}}
 							</div>
@@ -36,7 +35,7 @@
 										</div>
 									</div>
 									<div ng-hide="user.bookmarks.length">
-										<p>Vous n'avez aucune alvéole favorite...</p>
+										<p>Aucune alvéole favorite...</p>
 										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez toutes les alvéoles !</button>
 
 									</div>
@@ -71,7 +70,7 @@
 									</div>
 
 									<div ng-hide="user.comments.length">
-										<p>Vous n'avez posté aucun commentaire :(</p>
+										<p>Aucun commentaire :(</p>
 									</div>
 								</div>
 
@@ -102,7 +101,7 @@
 									</div>
 
 									<div ng-hide="user.webapps.length">
-										<p>Vous n'avez pas proposé d'alvéole.</p>
+										<p>Pas de proposition d'alvéole.</p>
 										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggérant un site web</button>
 									</div>
 								</div>
