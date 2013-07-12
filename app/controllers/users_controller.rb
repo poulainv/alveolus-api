@@ -3,7 +3,7 @@
 
 class UsersController < BaseController
 
-  before_filter :user_needed!, :only => [:show, :edit, :update, :update_password]
+  before_filter :user_needed!, :only => [:edit, :update, :update_password]
 
   # GET /users
   def index

@@ -48,7 +48,7 @@
 										<ul class="info-list">
 											<li><img src="img/picto/picto-link-green.svg" alt="link-picto"><a class="link-alveole" ng-href="{{webapp.url}}" target="_blank">{{webapp.url}}</a></li>
 											<li ng-show="canEdit"><a ng-href="#/alveoles/{{webapp.id}}/edit"><i class="icon-pencil icon-large"></i> Editer</a></li>
-											<li ng-hide="canEdit"><i class="icon-pencil icon-large"></i> Proposé par : {{webapp.user.pseudo}}</li>
+											<li ng-hide="canEdit"><i class="icon-pencil icon-large"></i><a ng-href="/#/user/{{webapp.user.id}}"> Proposé par : {{webapp.user.pseudo}}</a></li>
 											<li ng-hide="canEdit"><i class="icon-time icon-large"></i> Le : {{webapp.created_at| date:'d/M/yyyy'}}</li>
 										</ul>
 									</div>
