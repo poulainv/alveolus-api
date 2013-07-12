@@ -13,8 +13,6 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	* On change de catégorie
 	**/
 	$scope.changeCat = function(cat){
-
-		// console.log("changeCat("+cat.name+")");
 		$window._gaq.push(['_trackPageview', '/'+cat.name]);
 		$scope.subcats = [] ;
 		$scope.subTitle = cat.name;
@@ -33,7 +31,6 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	* On change de feature
 	**/
 	$scope.changeFeat = function(catFeat){
-		// console.log("changeFeat("+catFeat.name+")");
 		$window._gaq.push(['_trackPageview', '/'+catFeat.name]);
 		$scope.subTitle = catFeat.name;
 		$scope.subcats = [] ;
