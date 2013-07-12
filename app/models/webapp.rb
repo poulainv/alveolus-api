@@ -186,6 +186,10 @@ end
     comments.commented.count
   end
 
+  def nb_bookmarks
+    bookmarks.count
+  end
+  
   def score
     score_click_detail = nb_click_detail * Webapp.score_weights['click_detail']
     score_comments = nb_comments * Webapp.score_weights['nb_comments']
