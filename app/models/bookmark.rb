@@ -7,4 +7,5 @@ class Bookmark < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :webapp_id, :presence => true
   validates_uniqueness_of :user_id, :scope => [:webapp_id]
+
 end

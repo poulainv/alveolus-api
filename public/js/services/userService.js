@@ -32,6 +32,11 @@ factory('UserService', function($http,$resource,globals, SessionService) {
         success(function(data){callback(data);});
     }
 
+    service.editUser = function(params,callback){
+        $http({method:'GET', url: globals.server_url+'/users/'+params.userId+'/edit'}).
+        success(function(data){callback(data);});
+    }
+
     service.updatePassword = function(params,success,error){
         $http({method:'PUT', url: globals.server_url+'/users/'+params.userId+'/update_password', cache:true,
             data : {'user' : params.user}})

@@ -201,8 +201,8 @@
 							<div ng-repeat="comment in webapp.comments" ng-hide="comment.user.id==user.id" class="row-fluid comment-item">
 								<aside class="span2">
 									<div class="text-center">
-										<img class="img-circle" ng-src="{{comment.user.image_url}}"/>
-										<p>{{comment.user.pseudo}}</p>
+										<a ng-href="/#/user/{{comment.user.id}}"><img class="img-circle" ng-src="{{comment.user.image_url}}"/></a>
+										<a ng-href="/#/user/{{comment.user.id}}">{{comment.user.pseudo}}</a>
 										<div class="starsRatingShow">
 											<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
 										</div>

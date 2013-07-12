@@ -24,6 +24,7 @@ angular.module('alveolus',
     'alveolus.addWebappCtrl',
     'alveolus.editWebappCtrl',
     'alveolus.userCtrl',
+    'alveolus.editUserCtrl',
     'alveolus.addUserCtrl',
     'alveolus.webAppListCtrl',
     'alveolus.voteCtrl',
@@ -32,7 +33,7 @@ angular.module('alveolus',
 config(
     ['$routeProvider','$httpProvider', function($routeProvider, $httpProvider, $injector ) {
         $routeProvider.
-        when('/user',                       {templateUrl: 'partials/user.html',             controller: 'UserCtrl'}).
+      
         when('',                            {templateUrl: 'partials/home.html',             controller: 'HomeCtrl'}).
         when('/alveoles/new',               {templateUrl: 'partials/addWebapp.html',        controller: 'AddWebappCtrl'}).
         when('/alveoles/search/:content',   {templateUrl: 'partials/webAppList.html',       controller: 'WebAppListCtrl'}).
@@ -40,6 +41,7 @@ config(
         when('/alveoles/:webAppId/edit',    {templateUrl: 'partials/editWebapp.html',       controller: 'EditWebappCtrl'}).
         when('/webappModal/:webAppId',      {templateUrl: 'partials/webAppModal.html',      controller: 'WebappCtrl'}).
         when('/alveoles',                   {templateUrl: 'partials/webAppList.html',       controller: 'WebAppListCtrl'}).
+        when('/account',               {templateUrl: 'partials/editUser.html',             controller: 'EditUserCtrl'}).
         when('/user/:userId',               {templateUrl: 'partials/user.html',             controller: 'UserCtrl'}).
         when('/inscription',                {templateUrl: 'partials/addUser.html',          controller: 'AddUserCtrl'}).
         when('/vote',                       {templateUrl: 'partials/vote.html',             controller: 'VoteCtrl'}).

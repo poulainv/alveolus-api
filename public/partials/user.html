@@ -3,212 +3,110 @@
 		<div id="contentWrapper">
 			<div class="row container-white">
 				<div class="span10 offset1">
-					<h2> Mon compte </h2>
-					<hr>
-					<div class="tabbable" > 
-						<ul class="nav nav-pills">
-							<li class="active"><a href="#infos" data-toggle="tab">Mes informations</a></li>
-							<li><a href="#favoris" data-toggle="tab"><i class="icon-heart"></i> Mes alvéoles favorites</a></li>
-							<li><a href="#comments" data-toggle="tab"><i class="icon-comments-alt"></i> Mes commentaires</a></li>
-							<li><a href="#suggestions" data-toggle="tab"><i class="icon-plus"></i> Mes suggestions</a></li>
-							<li><a href="#avatar" data-toggle="tab"><i class="icon-user"></i> Mon avatar</a></li>
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="infos">
-								<form name="form" class="form-signin form-horizontal">
-									<div class="control-group">
-										<label class="control-label" for="inputPseudo">Pseudo</label>
-										<div class="controls">
-											<input type="text" id="inputPseudo" value="{{user.pseudo}}" ng-model="user.pseudo"> <button class="btn" ng-click="submitEditInfos(user);">Enregistrer</button>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputEmail">Email</label>
-										<div class="controls">
-											<input type="text" id="inputEmail" placeholder="Email" value="{{user.email}}" disabled>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputPassword">Mot de passe</label>
-										<div class="controls">
-											<button ng-hide="editPassword" class="btn btn-primary" ng-href="#modalEditPassword" data-toggle="modal">Modifier</button>
-										</div>
-									</div>
-
-								</form>
-
-
-
-								<!-- Modale edit password -->
-								<div id="modalEditPassword" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-								  <div class="modal-header">
-								    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								    <h3 id="ModalLabel">Modifier mon mot de passe</h3>
-								  </div>
-								  <div class="modal-body">
-								  	<form name="form" class="form-signin form-horizontal" novalidate ng-submit="submitEditPassword()">
-										<div class="control-group">
-											<label class="control-label" for="inputPassword">Mot de passe actuel<span class="red-star">*</span></label>
-											<div class="controls">
-												<input type="password" id="inputPassword" name="inputPassword" required ng-model="password.current_password">
-												<span class='help-inline' ng-show="form.inputPassword.$error.wrongPassword">
-				                                    Votre mot de passe est incorrect.
-				                                </span>
-											</div>
-										</div>
-				                        <div class='control-group' ng-class="{error: form.password.$error.minlenght, success: form.password.$valid}">
-				                            <label class="control-label" for='password'>Mot de passe<span class="red-star">*</span></label>
-				                            <div class='controls'>
-				                                <input type='password' id='password' name='password' required name='password' ng-model='user.password' ng-minlength="8">
-				                                <span class='help-inline' ng-show="form.password.$error.minlength">
-				                                    Votre mot de passe doit contenir au moins 8 caractères
-				                                </span>
-				                            </div>
-				                        </div>
-				                        <div class='control-group' ng-class="{error: form.password_confirmation.$error.sameAs, success: form.password_confirmation.$valid}">
-				                            <label class="control-label" for='password_confirmation'>Confirmation<span class="red-star">*</span></label>
-				                            <div class='controls'>
-				                                <input type='password' id='password_confirmation' name='password_confirmation' name='password_confirmation' same-as='user.password' ng-model='user.password_confirmation' required>
-				                                <span class='help-inline' ng-show='form.password_confirmation.$error.sameAs'>
-				                                    Les deux mots de passe ne sont pas identiques.
-				                                </span>
-				                            </div>
-				                        </div>  
-									</form>
-								    
-								  </div>
-								  <div class="modal-footer">
-								    <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-								    <input type="submit" value="Valider" class="btn btn-primary" ng-disabled="!form.$valid" ng-click="submitEditPassword()"/>
-								  </div>
-								</div>	
+					<div class="row-fluid">
+						<div class="span9"><h2> <img ng-src="{{user.image_url}}" class="span1 img-rounded img-circle"/>
+							{{user.pseudo}} </h2></div>
+							<div class="span3">
+								Membre depuis le {{user.created_at| date:'d/M/yyyy'}}
 							</div>
+						</div>
 
+						<hr>
+						<div class="tabbable" > 
+							<ul class="nav nav-pills">
+								<li class="active" ><a href="#favoris" data-toggle="tab"><i class="icon-heart"></i> Alvéoles favorites ({{user.bookmarks.length}})</a></li>
+								<li><a href="#comments" data-toggle="tab"><i class="icon-comments-alt"></i> Commentaires ({{user.comments.length}})</a></li>
+								<li><a href="#suggestions" data-toggle="tab"><i class="icon-plus"></i> Suggestions d'alvéole ({{user.webapps.length}})</a></li>
 
-
-							<div class="tab-pane" id="favoris">
-								<div ng-show="user.bookmarks">
-									<div class="light-separator"></div>
-									<div ng-repeat="bookmark in user.bookmarks">
-										<div class="row">
-											<a href="#alveoles/{{bookmark.id}}"><img class="span2" ng-src="{{bookmark.image_url}}"/></a>
-											<div class="span8">
-												<a href="#alveoles/{{bookmark.id}}"><h3>{{bookmark.title}}</h3></a>
-												<h4>{{bookmark.caption}}</h4>
-												<p>{{bookmark.description}}</p>
-											</div>
-										</div>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="favoris">
+									<div ng-show="user.bookmarks">
 										<div class="light-separator"></div>
+										<div ng-repeat="bookmark in user.bookmarks">
+											<div class="row">
+												<a href="#alveoles/{{bookmark.id}}"><img class="span2" ng-src="{{bookmark.image_url}}"/></a>
+												<div class="span8">
+													<a href="#alveoles/{{bookmark.id}}"><h3>{{bookmark.title}}</h3></a>
+													<h4>{{bookmark.caption}}</h4>
+													<p>{{bookmark.description}}</p>
+												</div>
+											</div>
+											<hr>
+										</div>
+									</div>
+									<div ng-hide="user.bookmarks.length">
+										<p>Vous n'avez aucune alvéole favorite...</p>
+										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez toutes les alvéoles !</button>
+
 									</div>
 								</div>
-								<div ng-hide="user.bookmarks.length">
-									<p>Vous n'avez aucune alvéole favorite...</p>
-									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez toutes les alvéoles !</button>
 
-								</div>
-							</div>
-
-							<div class="tab-pane" id="comments">
-								<div ng-show="user.comments.length">
-									<div class="light-separator"></div>
-									<div ng-repeat="comment in user.comments">
-										<div class="row">
-											<aside class="span2">
-												<div class="row">
-													<div class="span2 text-center">
-														<a href="#alveoles/{{comment.webapp_id}}">
-															<!-- <img ng-src="{{comment.webapp_image_url}}"/> -->
-															<img ng-src="{{comment | image_comment}}"/>
-															<h4 class="span2 text-center user-title-webapp-list">{{comment.webapp_title}}</h4>
-														</a>
+								<div class="tab-pane" id="comments">
+									<div ng-show="user.comments.length">
+										<div class="light-separator"></div>
+										<div ng-repeat="comment in user.comments">
+											<div class="row">
+												<aside class="span2">
+													<div class="row">
+														<div class="span2 text-center">
+															<a href="#alveoles/{{comment.webapp_id}}">
+																<!-- <img ng-src="{{comment.webapp_image_url}}"/> -->
+																<img ng-src="{{comment | image_comment}}"/>
+																<h4 class="span2 text-center user-title-webapp-list">{{comment.webapp_title}}</h4>
+															</a>
+														</div>
 													</div>
-												</div>
-											</aside>
-											<section class="span8">
-												<span class="label pull-right">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
-												<div class="starsRatingShow">
-													<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
-												</div>
-												<p>{{comment.body}}</p>
-											</section>
-										</div>
-										<div class="light-separator">
-										</div>
-									</div>
-								</div>
-
-								<div ng-hide="user.comments.length">
-									<p>Vous n'avez posté aucun commentaire :(</p>
-								</div>
-							</div>
-							
-
-							<div class="tab-pane" id="suggestions">
-
-								<div ng-show="user.webapps.length">
-									<div class="light-separator"></div>
-									<div ng-repeat="webapp in user.webapps">
-										<div class="row">
-											<a ng-show="webapp.validate" href="#alveoles/{{webapp.id}}"><img class="span2" ng-src="{{webapp.image_url}}"/></a>
-											<img ng-hide="webapp.validate" class="span2" ng-src="{{webapp.image_url}}"/>
-											<div class="span8">
-												<div class="pull-right">
-													Status : 
-													<span class="label" ng-hide="webapp.validate">Pas encore validée...</span>
-													<span class="label label-success" ng-show="webapp.validate">Validée ! </span>
-												</div>
-												<a ng-show="webapp.validate" href="#alveoles/{{webapp.id}}"><h3>{{webapp.title}}</h3></a>
-												<h3 ng-hide="webapp.validate">{{webapp.title}}</h3>
-												<h4>{{webapp.caption}}</h4>
-												<p>{{webapp.description}}</p>
-												<a class="btn btn-small" type="button" ng-show="webapp.validate" href="#alveoles/{{webapp.id}}">Voir la page</a>
+												</aside>
+												<section class="span8">
+													<span class="label pull-right">Le {{comment.created_at| date:'d/M/yyyy à HH:mm'}}</span>
+													<div class="starsRatingShow">
+														<i class="{{ {'rate':comment.rating, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i>
+													</div>
+													<p>{{comment.body}}</p>
+												</section>
 											</div>
+											<hr>
 										</div>
-										<div class="light-separator">
-										</div>
+									</div>
+
+									<div ng-hide="user.comments.length">
+										<p>Vous n'avez posté aucun commentaire :(</p>
 									</div>
 								</div>
 
-								<div ng-hide="user.webapps.length">
-									<p>Vous n'avez pas proposé d'alvéole.</p>
-									<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggérant un site web</button>
-								</div>
-							</div>
 
-							<div class="tab-pane" id="avatar">
-								<img ng-src="{{user.image_url}}" class="span1 img-rounded img-circle"/>
-								
-								<form class="form-horizontal">
-									<div class="control-group">
-										<div class="controls">
-											<input type="file" id="fileToUpload" onchange="angular.element(this).scope().setFile(this)"/>
-											<input type="button" value="Choisissez une image... (< 1mo)" class="block"  onclick="document.getElementById('fileToUpload').click();" />
-											<div ng-show="files.length">
-												<div ng-repeat="file in files.slice(0)">
-													<span>{{file.webkitRelativePath || file.name}}(</span>
-													<span ng-switch="file.size > 1024*1024">
-														<span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB)</span>
-														<span ng-switch-default>{{file.size / 1024 | number:2}} kB)</span>
-													</span>
+								<div class="tab-pane" id="suggestions">
+
+									<div ng-show="user.webapps.length">
+										<div class="light-separator"></div>
+										<div ng-repeat="webapp in user.webapps">
+											<div class="row">
+												<a ng-show="webapp.validate" href="#alveoles/{{webapp.id}}"><img class="span2" ng-src="{{webapp.image_url}}"/></a>
+												<img ng-hide="webapp.validate" class="span2" ng-src="{{webapp.image_url}}"/>
+												<div class="span8">
+													<div class="pull-right">
+														Status : 
+														<span class="label" ng-hide="webapp.validate">Pas encore validée...</span>
+														<span class="label label-success" ng-show="webapp.validate">Validée ! </span>
+													</div>
+													<a ng-show="webapp.validate" href="#alveoles/{{webapp.id}}"><h3>{{webapp.title}}</h3></a>
+													<h3 ng-hide="webapp.validate">{{webapp.title}}</h3>
+													<h4>{{webapp.caption}}</h4>
+													<p>{{webapp.description}}</p>
+													<a class="btn btn-small" type="button" ng-show="webapp.validate" href="#alveoles/{{webapp.id}}">Voir la page</a>
 												</div>
 											</div>
-											<br>
-											<div id="dropbox" class="dropbox span6" ng-class="dropClass"><h3>... ou déposez l'image</h3></div>
+											<hr>
 										</div>
 									</div>
-									
-									
-									<div class="control-group">
-										<div class="controls">
-											<button class="btn btn-info" ng-click="updateAvatar();">Mettre à jour</button>
-											<br>
-											<br>
-											<div id="progressBar" class="progress span6 progress-success progress-striped">
-												<div class="bar" style="width: 0%"></div>
-											</div>
-										</div>
+
+									<div ng-hide="user.webapps.length">
+										<p>Vous n'avez pas proposé d'alvéole.</p>
+										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggérant un site web</button>
 									</div>
-								</form>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -216,4 +114,3 @@
 			</div>
 		</div>
 	</div>
-</div>
