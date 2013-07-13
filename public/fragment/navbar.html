@@ -62,9 +62,12 @@
         <ul class="nav pull-right"> 
          <li>
           <ul class="unstyled">
+           <li>
+            <div class="fb-like" style="margin-top:5%" data-href="https://www.facebook.com/alveolusfr" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false" data-font="trebuchet ms"></div>
+          </li> 
            <li ng-show="isLogged">
             <a ng-click="showNotifications($event)">
-              <div id="notifications" style="margin-top:20%" class="{{nbUnreadNotifications && 'label-warning' || ''}}">Notifications ({{nbUnreadNotifications}})</div>
+              <div id="notifications" class="{{nbUnreadNotifications && 'label-warning' || ''}}">Notifications ({{nbUnreadNotifications}})</div>
             </a>
           </li> 
           <li ng-show="isLogged">
