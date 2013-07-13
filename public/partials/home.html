@@ -21,12 +21,15 @@
 					<br>
 					<div id="appFeatured" class="row-fluid">
 						<div class="span4">
-							<a href="#/alveoles/{{appFeatured.id}}"><img id="logoTeamSelection" class="rounded" ng-src="{{appFeatured | image}}" title="{{appFeatured.title}}" alt="{{appFeatured.title}}"></a>
+							
+							 <a href="#/alveoles/{{appFeatured.id}}"><img id="logoTeamSelection" class="rounded" ng-src="{{appFeatured | image}}" title="{{appFeatured.title}}" alt="{{appFeatured.title}}"></a>
 						</div>
 						<div id="appFeaturedDescWrapper" class="span8">
 
 							<div class="row-fluid">
-								<div class="span7">
+								<div class="span1" ng-show="(appFeatured.vimeo_id !=null && appFeatured.vimeo_id!='' && appFeatured.vimeo_id.length!=0)" style="margin-top:3%"> <a href="#/alveoles/{{appFeatured.id}}"><i class="icon-youtube-play icon-2x"></i></a>
+								</div>
+								<div class="span6">
 									<h2><a href="#/alveoles/{{appFeatured.id}}">{{appFeatured.title}}</a></h2>
 								</div>
 								<div class="span5">
