@@ -49,7 +49,7 @@ when "development"
   Webapp.create( :title =>'CupOfTeach',
     :category_id => 4,
     :caption => 'Cup of teach est la première université entre particuliers. Découvrez des ateliers uniques près de chez vous.',
-    :description => 'Cup of teach, cʼest avant tout lʼhistoire de deux amis qui avaient un grand projet : permettre à chacun d’entre nous d’apprendre toute sa vie durant. En partageant nos connaissances, en découvrant celles des autres, nous créons une véritable encyclopédie vivante et un nouveau chemin vers la découverte. Toutes les passions y tiennent la première place, surtout les vôtres !',
+    :description => 'Cup of teach, c\'est avant tout l\'histoire de deux amis qui avaient un grand projet : permettre à chacun d’entre nous d’apprendre toute sa vie durant. En partageant nos connaissances, en découvrant celles des autres, nous créons une véritable encyclopédie vivante et un nouveau chemin vers la découverte. Toutes les passions y tiennent la première place, surtout les vôtres !',
     :url => 'http://www.cupofteach.com/',
     :validate => true,
     :nb_click_preview => 29,
