@@ -68,7 +68,7 @@ class Webapp < ActiveRecord::Base
   scope :best_shared, lambda {|n| validated.order("nb_click_shared").reverse_order.limit(n) }
   scope :random, lambda {|n| validated.order("RANDOM()").limit(n) }
 
-  @@score_for_validation = 3
+  @@score_for_validation = 14
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   def score_for_validation
