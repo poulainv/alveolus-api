@@ -13,9 +13,9 @@
 						<hr>
 						<div class="tabbable" > 
 							<ul class="nav nav-pills">
-								<li class="active" ><a href="#favoris" data-toggle="tab"><i class="icon-heart"></i> Alvéoles favorites ({{user.bookmarks.length}})</a></li>
+								<li class="active" ><a href="#favoris" data-toggle="tab"><i class="icon-heart"></i> Projets favoris ({{user.bookmarks.length}})</a></li>
 								<li><a href="#comments" data-toggle="tab"><i class="icon-comments-alt"></i> Commentaires ({{user.comments.length}})</a></li>
-								<li><a href="#suggestions" data-toggle="tab"><i class="icon-plus"></i> Suggestions d'alvéole ({{user.webapps.length}})</a></li>
+								<li><a href="#suggestions" data-toggle="tab"><i class="icon-plus"></i> Suggestions de projet ({{user.webapps.length}})</a></li>
 
 							</ul>
 							<div class="tab-content">
@@ -35,8 +35,8 @@
 										</div>
 									</div>
 									<div ng-hide="user.bookmarks.length">
-										<p>Aucune alvéole favorite...</p>
-										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez toutes les alvéoles !</button>
+										<p>Aucun projet favoris...</p>
+										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles')">Découvrez tous les projets !</button>
 
 									</div>
 								</div>
@@ -101,7 +101,7 @@
 									</div>
 
 									<div ng-hide="user.webapps.length">
-										<p>Pas de proposition d'alvéole.</p>
+										<p>Pas de proposition de projet.</p>
 										<button class="btn btn-inverse pull-left" type="button" ng-click="changeView('alveoles/new')">Contribuer à AlveolUs en suggérant un site web</button>
 									</div>
 								</div>
