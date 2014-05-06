@@ -463,7 +463,6 @@ h1, h2, h3, h4, h5{
 }
 
 #alveolesList{
-  border-right: 1px solid #eef2ea;
   min-height: 1000px;
 }
 
@@ -676,7 +675,7 @@ padding: 110px 30px;
 }
 
 #navLinks{
-  padding-top: 10px;
+  padding-top: 60px;
 }
 
 

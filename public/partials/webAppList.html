@@ -2,14 +2,14 @@
 	<div class="container">
 		<div class="row-fluid container-white">
 			<aside id="navLinks" class="span3 pull-right">
-				<a href="#/graph" class="btn">Exploration graphique</a>
-				<h3><img src="img/picto/picto-selection-green.svg"> Sélection</h3>
-				<ul class="noStyleList">
-					<li ng-repeat="selectionCat in selectionCats"><span class="link" ng-click="changeFeat(selectionCat);">{{selectionCat.name}}</span></li>
-				</ul>
+				<a href="#/graph"><button class="btn btn-primary"> Exploration graphique</button></a>
 				<h3><img src="img/icon/icon-categories.svg"> Catégories</h3>
 				<ul class="noStyleList">
 					<li ng-repeat="cat in cats"><span class="link" ng-click="changeCat(cat)">{{cat.name}}</span></li>
+				</ul>
+				<h3><img src="img/picto/picto-selection-green.svg"> Sélection</h3>
+				<ul class="noStyleList">
+					<li ng-repeat="selectionCat in selectionCats"><span class="link" ng-click="changeFeat(selectionCat);">{{selectionCat.name}}</span></li>
 				</ul>
 			</aside>
 			<section id="alveolesList" class="span9">

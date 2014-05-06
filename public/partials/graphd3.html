@@ -1,13 +1,15 @@
 <div class="container-grey">
   <div id="graphContainer" class="container">
     <!-- <div id="contentWrapper"> -->
-      <div class="row  container-white">
+      <div class="row container-white">
         <h3 class="span12">Projets / Exploration</h3>
         <hr class="span12">
         <div class="span8">
           <div class="row-fluid"  id="graph"></div>
         </div>
         <div class="span3">
+          <a href="#/alveoles"> <button class="btn btn-primary"> Exploration classique </button></a>
+          <hr>
           <label class="radio inline">
             <input type="radio" name="optionsRadios" ng-click="explorationCat()" checked>
             Par catégories
@@ -19,13 +21,15 @@
           <hr>
           <div ng-show="detailViewed" class="box-desc" id="graphDesc">
            <h4>{{webappSelected.title}} </h4>
+           <div>
            <span ng-repeat="tag in webappSelected.tags">
-              <span class="label-color tagList"> {{tag.name}}</span>
+              <span class="label-color tag"> {{tag.name}}</span>
             </span>
+          </div>
             {{webappSelected.caption}}
            <div id="graphDescMore">
              <hr>
-             <a class="btn btn-success" ng-href="#/alveoles/{{webappSelected.id}}">En savoir plus !</a>
+           <a ng-href="#/alveoles/{{webappSelected.id}}">  <a class="btn btn-success">En savoir plus !</button></a>
            </div>
          </div>
 
