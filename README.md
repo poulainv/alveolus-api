@@ -1,4 +1,4 @@
 alveolus-api
 ============
 
-Server Rails API
+Server Rails API.
