@@ -20,6 +20,7 @@ controller('MainCtrl', function($scope,$routeParams,$location,$window,$timeout,g
 	$scope.user = SessionService.getUser();
 	$scope.tags=TagService.query();
 	$scope.isLogged = SessionService.authorized();
+	$scope.isAdmin = false
 	$scope.userInfo = $scope.isLogged ? UserService.get({id:$scope.user.id}): null;
 		// To receive broadcasts
 	$scope.$on('onLoggedSuccess', function() {
@@ -27,6 +28,7 @@ controller('MainCtrl', function($scope,$routeParams,$location,$window,$timeout,g
 		$scope.user = SessionService.getUser();
 		$scope.userInfo = UserService.get({id:$scope.user.id});
 		$scope.isLogged = SessionService.authorized();
+		$scope.isAdmin = $scope.userInfo.admin
 		$scope.isLogged ? addAlert(alertLogSuccess)  : addAlert(alertLogFail);
 		$scope.closeModalLogin();
 	});

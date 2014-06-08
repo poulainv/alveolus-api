@@ -69,7 +69,8 @@
                         </div>
                         <div class="span8">
                             <h3>{{alveole.title}}</h3>
-                            <a ng-href="/#/user/{{alveole.user.id}}"> proposée par {{alveole.user.pseudo}}</a>
+                            <p><a ng-href="/#/user/{{alveole.user.id}}"> proposée par {{alveole.user.pseudo}}</a></p>
+                            <p><a ng-show="isAdmin" ng-href="/#/alveoles/{{alveole.id}}"> Voir le projet </a></p>
                             <h4>Description :</h4>
                             <p class="alveoleCaption">
                                 {{alveole.caption}}
