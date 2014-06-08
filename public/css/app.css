@@ -844,10 +844,3 @@ border-bottom: 1px solid grey;*/
   -o-animation: spin 3s infinite linear;
   animation: spin 3s infinite linear;
 }
-
-/* Joyride plugin*/
-.joyride-tip-guide{
-  margin-top: -85px;
-  z-index: 1500;
-}
-
