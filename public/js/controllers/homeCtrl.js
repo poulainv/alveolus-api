@@ -34,7 +34,6 @@ controller('HomeCtrl', function($scope,$location,globals,CategoryService,WebappS
              if(i%4==3)
                  slideNumber++;
          }
-         joyride_tester('carousel');
 		});
 
 	CategoryService.getCategoriesWithFeaturedApps(function(data){
@@ -42,7 +41,6 @@ controller('HomeCtrl', function($scope,$location,globals,CategoryService,WebappS
 		$scope.catSelected = $scope.categories[Math.floor(Math.random() * $scope.categories.length)];
 		$scope.descCatSelected =  $scope.catSelected.description;
 		$scope.appFeatured = $scope.catSelected.webapps[Math.floor(Math.random() * $scope.catSelected.webapps.length)];
-		joyride_tester('categories');
 	});
 
 	$scope.changeCat = function(cat){
@@ -66,14 +64,5 @@ controller('HomeCtrl', function($scope,$location,globals,CategoryService,WebappS
 	$scope.search = function(content){
 		$location.path('/alveoles/search/'+content);
 	};
-	var joyride_validator = [];
-	var joyride_tester = function(type){
-		joyride_validator[type] = true;
-		if(joyride_validator['categories'] && joyride_validator['carousel'] && !globals.joyride){
-            $('#joyRideTipContent').joyride('init');
-            globals.joyride = true;
-		}
-
-	};
-
+	
 });
