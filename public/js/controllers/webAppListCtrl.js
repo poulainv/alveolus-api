@@ -9,6 +9,18 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 	// $('#headerCarousel').hide();
 	init();
 
+	//[Fix#2]
+	$scope.changeSubcat = function(subcat){
+		if(subcat.isCat === true){
+			var cat = {
+				id: subcat.alveoles[0].category_id,
+				webapps: subcat.alveoles,
+				name: subcat.name
+			};
+			$scope.changeCat(cat);
+		}
+	};
+
 	/**
 	* On change de catégorie
 	**/
@@ -18,11 +30,11 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 		$scope.subTitle = cat.name;
 
 		// Get featured app for category 'cat'
-		$scope.subcats.push({ name : 'Sélection de l\'équipe', alveoles : cat.webapps});
+		$scope.subcats.push({ isCat : false, name : 'Sélection de l\'équipe', alveoles : cat.webapps});
 
 		// Get all apps for category 'cat'
 		WebappService.getAppsFromCat({catId: cat.id}, function(data){
-			$scope.subcats.push({ name : 'Toutes les alvéoles', alveoles : data});
+			$scope.subcats.push({ isCat : false, name : 'Toutes les alvéoles', alveoles : data});
 		});
 	};
 
@@ -39,32 +51,32 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 			case 1:
 			//Sélection de l'équipe
 			for(var i in $scope.cats){
-				$scope.subcats.push({ name : $scope.cats[i].name, alveoles : $scope.cats[i].webapps});
+				$scope.subcats.push({ isCat : true, name : $scope.cats[i].name, alveoles : $scope.cats[i].webapps});
 			}
 			break;
 			case 2:
 			//Les plus commentéees
 			WebappService.getMostCommented(function(data){
-				$scope.subcats.push({ name : '', alveoles : data});
+				$scope.subcats.push({name : '', alveoles : data});
 
 			});
 			break;
 			case 3:
 			//Les mieux notées
 			WebappService.getBest(function(data){
-				$scope.subcats.push({ name : '', alveoles : data});
+				$scope.subcats.push({name : '', alveoles : data});
 			});
 			break;
 			case 4:
 			//Les plus récentes
 			WebappService.getMostRecent(function(data){
-				$scope.subcats.push({ name : '', alveoles : data});
+				$scope.subcats.push({name : '', alveoles : data});
 			});
 			break;
 			case 5:
 			//Les plus partagées
 			WebappService.getMostShared(function(data){
-				$scope.subcats.push({ name : '', alveoles : data});
+				$scope.subcats.push({name : '', alveoles : data});
 			});
 			break;
 			default:
