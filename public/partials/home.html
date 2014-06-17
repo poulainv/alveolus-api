@@ -1,6 +1,5 @@
 <div ng-include src="'fragment/header-carousel.html'"></div>
 <!-- mainWrapper has a static height, preventing the page to shrink when we hide the content -->
-<div id="mainWrapper">
 	<!-- contentWrapper can be hidden -->
 	<div id="contentWrapper">
 		<div id="homeBody" class="container">
@@ -60,64 +59,8 @@
 			</div>
 		</div>
 
-		<!-- <div class="separator span11"></div> -->
+
 		<div id="popularAppsWrapper">
-			<div class="container">
-
-				<div class="row-fluid">
-					<div class="span6 offset1">
-						<h3><img src="img/icon/icon-hot-green.svg"> Projets populaires </h3>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="row-fluid">
-							<carousel>
-								<slide ng-repeat="slide in slidesPopular" active="img.active" class="row-fluid">
-									<section class="span10 offset1">
-										<div class="row-fluid">	
-											<article class="alveole span3" ng-repeat="alveole in slide">
-												<header class="alveoleHeader">Vu : {{alveole.nb_click_detail}} fois
-													<span class="alveoleRatingWrapper">
-														<i class="{{ {'rate':alveole.average_rate, 'index':$index} | star}} icon-large"  ng-repeat="n in [] | range:5"></i> ({{alveole.nb_comments}})
-													</span>
-												</header>
-												<div class="alveoleContent">
-													<a href="#/alveoles/{{alveole.id}}">
-														<div class="cropedImg">
-															<img class="alveoleImg" ng-src="{{alveole | image}}"  alt="{{alveole.title}}">
-														</div>
-														<hr/>
-														<h4 class="alveoleName">
-															<strong>{{alveole.title}}</strong>
-														</h4>
-														<p class="alveoleDesc">
-															{{alveole.caption}}
-														</p>
-													</a>
-													<div class="alveoleTagsWrapper">
-														<img src="img/icon/icon-tags.svg" ng-show="alveole.tags">
-														<span ng-repeat="tag in alveole.tags" ng-click="search(tag.name)" class="tag">
-															<a href="#/alveoles/search/{{tag.name}}" class="tag">{{tag.name}}</a>
-														</span>
-													</div>
-
-												</div>
-											</article>
-										</div>
-									</section>
-								</slide>
-							</carousel>
-						</div>
-
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-
-		<div id="">
 			<div class="container">
 
 				<div class="row-fluid">
@@ -165,14 +108,10 @@
 								</slide>
 							</carousel>
 						</div>
-
 					</div>
-
-
 				</div>
 			</div>
 		</div>
 
 
-	</div>
 </div>
