@@ -36,34 +36,13 @@
                     <div class="row vote-alv">
                         <div class="span2">
                             <img ng-src="{{alveole | image}}" class="rounded" alt="{{alveole.title}}">
-                            <!-- Boutons si loggué -->
-                            <ul class="vote-buttons span2" ng-show="isLogged">
+                            <ul class="vote-buttons span2">
                                 <li class="up">
                                     <span ng-click="vote(alveole.id, $index, 'up')"><i class="icon-chevron-up rounded"></i></span>
                                 </li>
                                 <li class="counts-vote"><span>{{alveole.count_positive - alveole.count_negative}}</span></li>    
                                 <li class="down">
                                     <span ng-click="vote(alveole.id, $index, 'down')"><i class="icon-chevron-down rounded"></i></span>
-                                </li>
-                            </ul>
-                            <!-- Boutons si non loggué -->
-                            <ul ng-show="!isLogged" class="vote-buttons span2">
-                                <li class="dropdown up" down>
-                                    <a class="dropdown-toggle">
-                                        <i class="icon-chevron-up link rounded"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        Vous devez être connecté pour voter
-                                    </div>
-                                </li>
-                                <li class="counts-vote"><span>{{alveole.count_positive - alveole.count_negative}}</span></li>
-                                <li class="dropdown down">
-                                    <a class="dropdown-toggle">
-                                        <i class="icon-chevron-down link rounded"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        Vous devez être connecté pour voter
-                                    </div>
                                 </li>
                             </ul>
                         </div>

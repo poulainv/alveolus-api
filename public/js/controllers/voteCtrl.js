@@ -3,7 +3,7 @@
 /* Controleur de la home page */
 
 angular.module('alveolus.voteCtrl', []).
-controller('VoteCtrl', function($scope,$routeParams,WebappService) {
+controller('VoteCtrl', function($scope,$routeParams, $location, WebappService) {
     function loadList(){
         /**
         * Charge la liste des alvéoles non validées
@@ -26,11 +26,15 @@ controller('VoteCtrl', function($scope,$routeParams,WebappService) {
         * Prend en compte le vote de l'utilisateur
         * et met à jour le modèle
         **/
-        if($scope.isLogged)
+        if($scope.isLogged){
             WebappService.vote({id: webAppId, value: voteValue}, function(data){
                 $scope.alveoles[index] = data;
                 console.log($scope.alveoles[index]);
             });
+        }
+        else{
+            $location.path('/inscription');
+        }
     };
 
     $scope.isCollapsed = true;

@@ -138,19 +138,19 @@ controller('WebAppListCtrl', function($scope,$routeParams,$location,WebappServic
 			'id':1
 		},
 		{
-			'name':'Les plus commentées',
+			'name':'Les plus commentés',
 			'id':2
 		},
 		{
-			'name':'Les mieux notées',
+			'name':'Les mieux notés',
 			'id':3
 		},
 		{
-			'name':'Les plus récentes',
+			'name':'Les plus récents',
 			'id':4
 		},
 		{
-			'name':'Les plus partagées',
+			'name':'Les plus partagés',
 			'id':5
 		}
 		];

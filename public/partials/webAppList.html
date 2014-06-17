@@ -5,17 +5,17 @@
 				<a href="#/graph"><button class="btn btn-primary"> Exploration graphique</button></a>
 				<h3><img src="img/icon/icon-categories.svg"> Catégories</h3>
 				<ul class="noStyleList">
-					<li ng-repeat="cat in cats"><span class="link" ng-click="changeCat(cat)">{{cat.name}}</span></li>
+					<li ng-repeat="cat in cats"><div class="btnCat" style='float:none; width:40%' ng-click="changeCat(cat)">{{cat.name}}</div></li>
 				</ul>
 				<h3><img src="img/picto/picto-selection-green.svg"> Sélection</h3>
 				<ul class="noStyleList">
-					<li ng-repeat="selectionCat in selectionCats"><span class="link" ng-click="changeFeat(selectionCat);">{{selectionCat.name}}</span></li>
+					<li ng-repeat="selectionCat in selectionCats"><span style='float:none; width:60%' class="btnCat" ng-click="changeFeat(selectionCat);">{{selectionCat.name}}</span></li>
 				</ul>
 			</aside>
 			<section id="alveolesList" class="span9">
 				<h2><img src="img/icon/icon-team-selection.svg"> Les projets / {{subTitle}}</h2>
 				<div ng-repeat="subcat in subcats" class="row-fluid"> 
-					<h3 ng-class="{'link': subcat.isCat}" ng-click="changeSubcat(subcat)">{{subcat.name}}</h3>
+					<h3 ng-class="{'link': subcat.isCat} " ng-click="changeSubcat(subcat)">{{subcat.name}}</h3>
 					<article class="alveole span3" ng-repeat="alveole in subcat.alveoles">
 						<header class="alveoleHeader">Vu : {{alveole.nb_click_detail}} fois
 							<span class="alveoleRatingWrapper">
